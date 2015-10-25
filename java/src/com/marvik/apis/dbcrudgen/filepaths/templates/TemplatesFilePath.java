@@ -32,6 +32,11 @@ public class TemplatesFilePath {
 	public static final String PHP_DATABASE_UTILS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_database_utils.txt";
 	
 	/**
+	 * PHP CLASS_FILENAME_TEMPLATE_FILE_PATH
+	 */
+	public static final String PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_file_name.txt";
+	
+	/**
 	 * 	SQL ROUTINES_TEMPLATE_FILE_PATH
 	 */
 	public static final String SQL_ROUTINES_TEMPLATE_FILE_PATH = "res/templates/sql/template_sql_routines.txt";
@@ -40,6 +45,11 @@ public class TemplatesFilePath {
 	 * SQL TABLES_TEMPLATE_FILE_PATH
 	 */
 	public static final String SQL_TABLES_TEMPLATE_FILE_PATH = "res/templates/sql/template_sql_tables.txt";
+	
+	/**
+	 * SQL SQL_TABLES_FILE_NAME_TEMPLATE_FILE_PATH
+	 */
+	public static final String SQL_TABLES_FILE_NAME_TEMPLATE_FILE_PATH = "res/templates/sql/template_sql_table_file_name.txt";
 	
 	
 	
