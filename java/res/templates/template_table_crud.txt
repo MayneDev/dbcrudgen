@@ -1,0 +1,101 @@
+<?php
+
+	/*
+	* $TEMPLATE_INFO
+	*/
+	
+class $CLASS_NAME {
+
+	private $dbutils;
+	private $action;
+	private $client;
+	
+	public function __construct($action, $client) {
+	
+		require_once 'includes/dbapi/db_actions.php';
+		require_once 'includes/dbapi/db_utils.php';
+		
+		$this->dbutils = new db_utils ();
+		
+	}
+	public function init($execute = false) {
+		
+		$this->client = $_POST [POST_CLIENT];
+		$this->action = $_POST [POST_ACTION];
+		
+		if ($execute) {
+			
+			if ($this->get_action == ACTION_INSERT) {
+			
+			}
+			
+			if ($this->get_action == ACTION_UPDATE) {
+			
+			}
+			
+			if ($this->get_action == ACTION_QUERY) {
+			
+			}
+			
+			if ($this->get_action == ACTION_DELETE) {
+			
+			}
+		}
+	}
+	
+	
+	$TABLE_COLUMNS_CRUD_FUNCTIONS
+	
+	public static function get_table() {
+		return '$TABLE_NAME';
+	}
+	private function get_action() {
+		return $this->action;
+	}
+	private function get_client() {
+		return $this->client;
+	}
+	public function is_exists(Array $columns, Array $records, $printSQL = false) {
+		return $this->get_dbutils ()->is_exists ( $this->get_table (), $columns, $records, $printSQL );
+	}
+	public function insert_records_to_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
+		return $this->insert_records ( $this->get_table (), $columns, $records, $printSQL );
+	}
+	public function delete_record_from_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
+		return $this->delete_record ( $this->get_table (), $columns, $records, $printSQL );
+	}
+	public function update_record_in_$TABLE_NAME(Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
+		return $this->update_record ( $this->get_table (), $columns, $records, $where_columns, $where_records, $printSQL );
+	}
+	public function fetch_assoc_in_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
+		return $this->fetch_assoc ( $this->get_table (), $columns, $records, $printSQL );
+	}
+	public function query_from_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
+		return $this->query ( $this->get_table (), $columns, $records, $printSQL );
+	}
+	public function search_in_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
+		return $this->search ( $this->get_table (), $columns, $records, $printSQL );
+	}
+	public function get_dbutils() {
+		return $this->dbutils;
+	}
+	private function delete_record($table, Array $columns, Array $records, $printSQL = false) {
+		return $this->get_dbutils ()->delete_record ( $table, $columns, $records, $printSQL );
+	}
+	private function insert_records($table, Array $columns, Array $records, $printSQL = false) {
+		return $this->get_dbutils ()->insert_records ( $table, $columns, $records, $printSQL );
+	}
+	private function update_record($table, Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
+		return $this->get_dbutils ()->update_record ( $table, $columns, $records, $where_columns, $where_records, $printSQL );
+	}
+	private function fetch_assoc($table, Array $columns, Array $records, $printSQL = false) {
+		return $this->get_dbutils ()->fetch_assoc ( $table, $columns, $records, $printSQL );
+	}
+	public function query($table, Array $columns, Array $records, $printSQL = false) {
+		return $this->get_dbutils ()->query ( $table, $columns, $records, $printSQL );
+	}
+	private function search($table, Array $columns, Array $records, $printSQL = false) {
+		return $this->get_dbutils ()->search ( $table, $columns, $records, $printSQL );
+	}
+}
+?>
