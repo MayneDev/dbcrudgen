@@ -11,7 +11,7 @@ public final class FileStreamReader {
 	/*
 	 * Reads the contents of a file
 	 */
-	public final String readFile(File file) throws IOException {
+	public final String readFile(File file) throws IOException{
 		if (!file.exists()) {
 			throw new IOException("The file [" + file.getAbsolutePath() + "] does not exist");
 		}
@@ -35,6 +35,9 @@ public final class FileStreamReader {
 	 * Reads the contents of a file
 	 */
 	public final String readFile(String filePath) throws IOException {
+		if(filePath == null){
+			throw new NullPointerException("Template file path cannot be null");
+		}
 		return readFile(new File(filePath));
 	}
 	/*
