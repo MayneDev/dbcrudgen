@@ -2,31 +2,39 @@ package com.marvik.apis.dbcudgen.java.templates;
 
 import java.io.IOException;
 
-import com.marvik.apis.dbcrudgen.java.io.FileStreamReader;
+import com.marvik.apis.dbcudgen.java.filepaths.templates.TemplatesFilePath;
 
-public final class TablesTemplate {
+public final class TablesTemplate extends CrudTemplates {
 
-	private FileStreamReader fileStreamReader;
-	
-	
-	public TablesTemplate(){
-		fileStreamReader = new FileStreamReader();
+	public TablesTemplate() {
+
 	}
+
 	/*
 	 * Returns the tables template
 	 */
-	private String openTablesTemplate(FileStreamReader fileStreamReader) throws IOException{
-		return fileStreamReader.readFile("res/templates/template_tables.txt");
+	@Override
+	public String openTemplate(String templateFilePath) throws IOException {
+		// TODO Auto-generated method stub
+		return super.openTemplate(templateFilePath);
 	}
+
 	/*
 	 * Returns the tables template
 	 */
-	public final String getTablesTemplate(){
-		try {
-			return openTablesTemplate(fileStreamReader);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+	@Override
+	public String getTemplate() throws IOException {
+		// TODO Auto-generated method stub
+		return super.getTemplate();
 	}
+
+	/*
+	 * Returns the tables template file path
+	 */
+	@Override
+	public String getTemplateFilePath() {
+		// TODO Auto-generated method stub
+		return TemplatesFilePath.TABLES_TEMPLATE_FILE_PATH;
+	}
+
 }
