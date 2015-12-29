@@ -1,0 +1,6 @@
+public function get_$COLUMN_NAME($KEY) {
+	$columns = array ('$COLUMN_NAME');
+	$records = array ($KEY);
+	$COLUMN_NAME_PLURAL = $this->query_from_$TABLE_NAME ( $columns, $records );
+	return $COLUMN_NAME_PLURAL [0] ['$COLUMN_NAME'];
+}
