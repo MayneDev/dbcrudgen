@@ -37,13 +37,27 @@ public class SQLParser {
 	 */
 	public Database getDatabaseSchemas(String sql) {
 		Table[] tables = getDatabaseTables(sql);
-		return null;
+		return new Database(getDatabaseName(sql), tables);
 
+	}
+
+	private String getDatabaseName(String sql) {
+		// TODO Auto-generated method stub
+
+		String databaseName = null;
+
+		if (sql.contains("-- Database: ")) {
+			int startOfDatabaseName = sql.indexOf("-- Database: `");
+			int endOfDatabaseName = sql.indexOf("`", startOfDatabaseName);
+			databaseName = sql.substring(startOfDatabaseName, endOfDatabaseName);
+		}
+
+		return databaseName;
 	}
 
 	private Table[] getDatabaseTables(String sql) {
 		String[] sqlStatements = sql.split(";");
-		List<Table>tables = new ArrayList<Table>();
+		List<Table> tables = new ArrayList<Table>();
 
 		for (String sqlStatement : sqlStatements) {
 
@@ -52,9 +66,7 @@ public class SQLParser {
 			// create table statements
 			if (sqlStatement.startsWith(new String("CREATE TABLE"))) {
 
-				Table _table = new Table(
-						getTableName(sqlStatement),
-						getTableColumns(sqlStatement),
+				Table _table = new Table(getTableName(sqlStatement), getTableColumns(sqlStatement),
 						getTableSQL(sqlStatement));
 				tables.add(_table);
 			}
@@ -64,11 +76,11 @@ public class SQLParser {
 
 			}
 		}
-		
-		Table [] table = new Table[tables.size()];
-		
-		for(int i = 0; i < tables.size();i++){
-			table[i] = tables.get(i); 
+
+		Table[] table = new Table[tables.size()];
+
+		for (int i = 0; i < tables.size(); i++) {
+			table[i] = tables.get(i);
 		}
 		return table;
 	}
@@ -84,7 +96,10 @@ public class SQLParser {
 
 	private String getTableName(String sqlStatement) {
 		// TODO Auto-generated method stub
-		return null;
+
+		int startOfTableName = sqlStatement.indexOf("`");
+		int endOfTableName = sqlStatement.indexOf("`", startOfTableName);
+		return sqlStatement.substring(startOfTableName, endOfTableName);
 	}
 
 }
