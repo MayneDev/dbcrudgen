@@ -37,21 +37,24 @@ public class Table {
 	}
 
 	/**
-	 * @param tableSql the tableSql to set
+	 * @param tableSql
+	 *            the tableSql to set
 	 */
 	public void setTableSql(String tableSql) {
 		this.tableSql = tableSql;
 	}
 
 	/**
-	 * @param tableName the tableName to set
+	 * @param tableName
+	 *            the tableName to set
 	 */
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
 
 	/**
-	 * @param columns the columns to set
+	 * @param columns
+	 *            the columns to set
 	 */
 	public void setColumns(Columns[] columns) {
 		this.columns = columns;
