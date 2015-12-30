@@ -27,6 +27,9 @@ public class Database {
 		return tables;
 	}
 
+	/*
+	 * Create Database SQL schemas from a database object 
+	 */
 	public String createSQL() {
 		// TODO Auto-generated method stub
 		
