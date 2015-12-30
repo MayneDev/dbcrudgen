@@ -2,8 +2,8 @@ package com.marvik.apis.dbcudgen.java.templates.php;
 
 import java.io.IOException;
 
-import com.marvik.apis.dbcrudgen.java.io.FileStreamReader;
-import com.marvik.apis.dbcudgen.java.filepaths.templates.TemplatesFilePath;
+import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
+import com.marvik.apis.dbcrudgen.io.FileStreamReader;
 import com.marvik.apis.dbcudgen.java.templates.CrudTemplates;
 
 public class PHPColumnsCrudTemplate extends CrudTemplates {

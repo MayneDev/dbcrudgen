@@ -2,7 +2,7 @@ package com.marvik.apis.dbcudgen.java.templates.sql;
 
 import java.io.IOException;
 
-import com.marvik.apis.dbcudgen.java.filepaths.templates.TemplatesFilePath;
+import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcudgen.java.templates.CrudTemplates;
 
 public final class SQLTablesTemplate extends CrudTemplates {

@@ -2,7 +2,7 @@ package com.marvik.apis.dbcudgen.java.templates;
 
 import java.io.IOException;
 
-import com.marvik.apis.dbcrudgen.java.io.FileStreamReader;
+import com.marvik.apis.dbcrudgen.io.FileStreamReader;
 
 public abstract class CrudTemplates {
 

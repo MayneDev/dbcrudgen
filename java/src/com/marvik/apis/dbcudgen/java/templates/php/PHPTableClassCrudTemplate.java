@@ -2,7 +2,7 @@ package com.marvik.apis.dbcudgen.java.templates.php;
 
 import java.io.IOException;
 
-import com.marvik.apis.dbcudgen.java.filepaths.templates.TemplatesFilePath;
+import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcudgen.java.templates.CrudTemplates;
 
 public class PHPTableClassCrudTemplate extends CrudTemplates {
@@ -24,9 +24,15 @@ public class PHPTableClassCrudTemplate extends CrudTemplates {
 	 * Returns the table class CRUD template
 	 */
 	@Override
-	public String getTemplate() throws IOException {
+	public String getTemplate() {
 		// TODO Auto-generated method stub
-		return super.getTemplate();
+		try {
+			return super.getTemplate();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/*
