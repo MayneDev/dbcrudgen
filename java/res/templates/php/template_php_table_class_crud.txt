@@ -4,7 +4,7 @@
 	* $TEMPLATE_INFO
 	*/
 	
-class $CLASS_NAME {
+class CLASS_NAME {
 
 	private $dbutils;
 	private $action;
@@ -43,6 +43,9 @@ class $CLASS_NAME {
 		}
 	}
 	
+	$TABLE_COLUMNS_ACCESSOR_FUNCTIONS
+	
+	$TABLE_PRIMARY_KEY_CRUD_FUNCTIONS
 	
 	$TABLE_COLUMNS_CRUD_FUNCTIONS
 	
