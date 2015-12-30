@@ -1,5 +1,6 @@
 package com.marvik.apis.dbcrudgen.java.creator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,37 +9,50 @@ import com.marvik.apis.dbcrudgen.java.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.java.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.java.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.java.schemamodels.tables.Table;
+import com.marvik.apis.dbcrudgen.java.sql.parser.SQLParser;
+import com.marvik.apis.dbcrudgen.java.sql.reader.SQLReader;
+import com.marvik.apis.dbcudgen.java.filepaths.templates.TestRes;
+import com.marvik.apis.dbcudgen.java.templates.CrudTemplates;
+import com.marvik.apis.dbcudgen.java.templates.php.PHPColumnsCrudTemplate;
+import com.marvik.apis.dbcudgen.java.templates.sql.SQLTablesTemplate;
 
-public class CrudCreator {
+public abstract class CrudCreator {
 
+	public abstract CrudTemplates getCrudTemplate();
+	
 	public static void main(String[] args) {
 
-		/*
-		 * TablesTemplate tablesTemplate = new TablesTemplate(); try {
-		 * System.out.println(tablesTemplate.getTemplate()); } catch
-		 * (IOException e1) { // TODO Auto-generated catch block
-		 * e1.printStackTrace(); }
-		 * 
-		 * ColumnsCrudTemplate columnsCrudTemplate = new ColumnsCrudTemplate();
-		 * try { System.out.println(columnsCrudTemplate.getTemplate()); } catch
-		 * (IOException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 * 
-		 * SQLParser sqlParser = new SQLParser(); try { Database database =
-		 * sqlParser.getDatabaseSchemas(new SQLReader(),TestRes.TEST_SQL_FILE);
-		 * System.out.println(database.getDatabaseName()); for(Table table :
-		 * database.getTables()){ System.out.println(table.getTableName());
-		 * System.out.println(table.getTableSql()); }
-		 * 
-		 * } catch (IOException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 */
+		SQLTablesTemplate sQLTablesTemplate = new SQLTablesTemplate();
+		try {
+			System.out.println(sQLTablesTemplate.getTemplate());
+		} catch (IOException e1) { // TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		PHPColumnsCrudTemplate columnsCrudTemplate = new PHPColumnsCrudTemplate();
+		System.out.println(columnsCrudTemplate.getTemplate());
+		
+
+		SQLParser sqlParser = new SQLParser();
+		try {
+			Database database = sqlParser.getDatabaseSchemas(new SQLReader(), TestRes.TEST_SQL_FILE);
+			System.out.println(database.getDatabaseName());
+			for (Table table : database.getTables()) {
+				System.out.println(table.getTableName());
+				System.out.println(table.getTableSql());
+			}
+
+		} catch (IOException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		List<Table> tablesList = new ArrayList<Table>();
 
 		List<Columns> firstAidColumnList = new ArrayList<Columns>();
-		firstAidColumnList.add(new Columns("id_firstaid", new DataType("int", new Constraints("integer primary key auto_increment"))));
-		firstAidColumnList.add(new Columns("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+		firstAidColumnList.add(
+				new Columns("id_firstaid", new DataType("int", new Constraints("integer primary key auto_increment"))));
+		firstAidColumnList
+				.add(new Columns("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
 		firstAidColumnList.add(new Columns("ailment_information", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailment_causes", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailement_prevention", new DataType("text", new Constraints())));
@@ -50,7 +64,6 @@ public class CrudCreator {
 		firstAidColumnList.add(new Columns("ailment_treatmeant_precautions", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailment_treatment_position", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailment_short_notes", new DataType("text", new Constraints())));
-
 
 		Columns[] firstAidColumns = new Columns[firstAidColumnList.size()];
 		for (int i = 0; i < firstAidColumnList.size(); i++) {
@@ -66,15 +79,16 @@ public class CrudCreator {
 		tablesList.add(new Table("firstaids", firstAidColumns, tableSql));
 
 		Table[] tables = new Table[tablesList.size()];
-		for(int i = 0; i<tablesList.size(); i++){
+		for (int i = 0; i < tablesList.size(); i++) {
 			tables[i] = tablesList.get(i);
 		}
 		Database database = new Database("where_there_is_no_doc", tables);
 		String databaseSqlStatement = database.createSQL();
-		
+
 		print(databaseSqlStatement);
 	}
-	private static void print (String string){
+
+	private static void print(String string) {
 		System.err.println(string);
 	}
 }
