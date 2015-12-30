@@ -27,4 +27,18 @@ public class Database {
 		return tables;
 	}
 
+	public String createSQL() {
+		// TODO Auto-generated method stub
+		
+		String databaseCreateSQL = "CREATE DATABASE IF NOT EXISTS `"+getDatabaseName()+"`;";
+		
+		String tablesCreateSQL = "";
+		
+		for(Table table : getTables()){
+			String tableCreateSQL = table.getTableSql();
+			tablesCreateSQL += tableCreateSQL;
+		}
+		return databaseCreateSQL + tablesCreateSQL;
+	}
+
 }
