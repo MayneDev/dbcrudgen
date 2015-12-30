@@ -1,0 +1,6 @@
+public function get_QUERIED_COLUMN($COLUMN_VALUE) {
+	$columns = array ('$INDEX_COLUMN');
+	$records = array ($COLUMN_VALUE);
+	$QUERIED_COLUMN_PLURAL = $this->query_from_TABLE_NAME ( $columns, $records );
+	return $QUERIED_COLUMN_PLURAL [0] ['$QUERIED_COLUMN'];
+}

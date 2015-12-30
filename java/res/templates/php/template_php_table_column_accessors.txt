@@ -1,0 +1,7 @@
+private $COLUMN_NAME;
+public function get_COLUMN_NAME() {
+	return $this->COLUMN_NAME;
+}
+public function set_COLUMN_NAME($COLUMN_NAME) {
+	$this->COLUMN_NAME = $COLUMN_NAME;
+}
