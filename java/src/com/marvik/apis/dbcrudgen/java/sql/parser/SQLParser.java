@@ -46,8 +46,16 @@ public class SQLParser {
 
 		String databaseName = null;
 
-		if (sql.contains("-- Database: ")) {
-			int startOfDatabaseName = sql.indexOf("-- Database: `");
+		String sqlDatabaseNameComment = "-- Database: `";
+		
+		if (sql.contains(sqlDatabaseNameComment)) {
+			int startOfDatabaseName = sql.indexOf(sqlDatabaseNameComment) + sqlDatabaseNameComment.length();
+			int endOfDatabaseName = sql.indexOf("`", startOfDatabaseName);
+			databaseName = sql.substring(startOfDatabaseName, endOfDatabaseName);
+		}
+		String sqlDatabaseCreateSQL = "CREATE DATABASE IF NOT EXISTS `";
+		if (sql.contains(sqlDatabaseCreateSQL )) {
+			int startOfDatabaseName = sql.indexOf(sqlDatabaseCreateSQL) + sqlDatabaseCreateSQL.length();
 			int endOfDatabaseName = sql.indexOf("`", startOfDatabaseName);
 			databaseName = sql.substring(startOfDatabaseName, endOfDatabaseName);
 		}
@@ -60,11 +68,12 @@ public class SQLParser {
 		List<Table> tables = new ArrayList<Table>();
 
 		for (String sqlStatement : sqlStatements) {
-
+			
+			
 			sqlStatement.toUpperCase();
 
 			// create table statements
-			if (sqlStatement.startsWith(new String("CREATE TABLE"))) {
+			if (sqlStatement.contains(new String("CREATE TABLE IF NOT EXISTS `"))) {
 
 				Table _table = new Table(getTableName(sqlStatement), getTableColumns(sqlStatement),
 						getTableSQL(sqlStatement));
@@ -72,7 +81,7 @@ public class SQLParser {
 			}
 
 			// table insert statements
-			if (sqlStatement.startsWith(new String("INSERT INTO"))) {
+			if (sqlStatement.contains(new String("INSERT INTO `"))) {
 
 			}
 		}
@@ -97,9 +106,14 @@ public class SQLParser {
 	private String getTableName(String sqlStatement) {
 		// TODO Auto-generated method stub
 
+		
 		int startOfTableName = sqlStatement.indexOf("`");
-		int endOfTableName = sqlStatement.indexOf("`", startOfTableName);
+		int endOfTableName = sqlStatement.indexOf("`", startOfTableName+1);
+		print(sqlStatement.substring(startOfTableName, endOfTableName));
 		return sqlStatement.substring(startOfTableName, endOfTableName);
 	}
 
+	private void print (String string){
+		System.err.println(string);
+	}
 }
