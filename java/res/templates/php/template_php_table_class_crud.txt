@@ -44,9 +44,7 @@ class CLASS_NAME {
 	}
 	
 	$TABLE_COLUMNS_ACCESSOR_FUNCTIONS
-	
-	$TABLE_PRIMARY_KEY_CRUD_FUNCTIONS
-	
+		
 	$TABLE_COLUMNS_CRUD_FUNCTIONS
 	
 	public static function get_table() {
