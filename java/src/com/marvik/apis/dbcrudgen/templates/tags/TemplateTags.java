@@ -32,11 +32,11 @@ public class TemplateTags {
 		/*
 		 * PRIMARY_KEYS_COLUMN_PARAMS TAG
 		 */
-		public static final String FUNCTION_PARAMS_KEYS = "FUNCTION_PARAMS_KEYS";
+		public static final String PRIMARY_KEYS_COLUMN_PARAMS = "PRIMARY_KEYS_COLUMN_PARAMS";
 		/*
 		 * PRIMARY_KEYS_PARAM_VALUES TAG
 		 */
-		public static final String FUNCTION_PARAMS_VALUES = "FUNCTION_PARAMS_VALUES";
+		public static final String PRIMARY_KEYS_PARAM_VALUES = "PRIMARY_KEYS_PARAM_VALUES";
 		/*
 		 * TABLE_COLUMNS_ACCESSOR_FUNCTIONS TAG
 		 */
