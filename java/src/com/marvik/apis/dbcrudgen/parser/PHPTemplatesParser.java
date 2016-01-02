@@ -242,6 +242,9 @@ public class PHPTemplatesParser {
 		if (columnKeys == null) {
 			return "";
 		}
+		/*SWAP THE COLUMNKEY AND THE COLUMNS, AND PASS THEM TO THIS METHOD
+		*generateColumnCrudFunctions(ColumnKeys columnKeys, Columns columns);
+		*/
 		String columnKeysCrudFunctions = "";
 		for (String columnKey : columnKeys.getColumnKeys()) {
 			columnKeysCrudFunctions += generateColumnKeysCrudFunction(columnKey, columns);
@@ -249,6 +252,9 @@ public class PHPTemplatesParser {
 		return columnKeysCrudFunctions;
 	}
 
+	/*
+	 * Generates crud functions for columns that hold keys for the database table
+	 */
 	private String generateColumnKeysCrudFunction(String columnKey, Columns[] columns) {
 		String columnKeysCrudFunction = "";
 		for (Columns column : columns) {
