@@ -177,6 +177,22 @@ public class PHPTemplatesParser {
 	private String generateColumnsCrudFunctions(Table table, Columns[] columns) {
 		String columnsCrudFunction = "";
 
+		//Generate crud functions for table columns that hold special keys
+		columnsCrudFunction += generateTableKeysColumnsCrudFunctions(table, columns);
+		
+		//Generate crud functions for table columns that do not hold special keys
+		columnsCrudFunction += generateNonTableKeysColumnsCrudFunctions(table, columns);
+		
+		return columnsCrudFunction;
+	}
+
+	/*
+	 * Generate crud functions for table columns that hold special keys
+	 */
+
+	private String generateTableKeysColumnsCrudFunctions(Table table, Columns[] columns) {
+		String columnsCrudFunction = "";
+
 		// Generate crud functions for primary key columns
 		columnsCrudFunction += generatePrimaryKeysCrudFunctions(table.getPrimaryKeys(), columns);
 
@@ -185,6 +201,14 @@ public class PHPTemplatesParser {
 
 		// Generate crud functions for unique key columns
 		columnsCrudFunction += generateUniqueKeysCrudFunctions(table.getUniqueKeys(), columns);
+		return columnsCrudFunction;
+	}
+	/*
+	 * Generate crud functions for table columns that do not hold special keys
+	 */
+
+	private String generateNonTableKeysColumnsCrudFunctions(Table table, Columns[] columns) {
+		String columnsCrudFunction = "";
 
 		// Generate crud functions for other database columns
 		for (Columns column : columns) {
@@ -215,16 +239,19 @@ public class PHPTemplatesParser {
 	}
 
 	private String generateColumnKeysCrudFunctions(ColumnKeys columnKeys, Columns[] columns) {
+		if (columnKeys == null) {
+			return "";
+		}
 		String columnKeysCrudFunctions = "";
-		for(String columnKey : columnKeys.getColumnKeys()){
-			columnKeysCrudFunctions += generateColumnKeysCrudFunction(columnKey,columns);
+		for (String columnKey : columnKeys.getColumnKeys()) {
+			columnKeysCrudFunctions += generateColumnKeysCrudFunction(columnKey, columns);
 		}
 		return columnKeysCrudFunctions;
 	}
 
 	private String generateColumnKeysCrudFunction(String columnKey, Columns[] columns) {
 		String columnKeysCrudFunction = "";
-		for(Columns column : columns){
+		for (Columns column : columns) {
 			columnKeysCrudFunction += "";
 		}
 		return columnKeysCrudFunction;
@@ -233,39 +260,39 @@ public class PHPTemplatesParser {
 	/*
 	 * Generates column crud functions from a template
 	 */
-	private String generateColumnCrudFunctions(PrimaryKeys primaryKeys, Columns columns) {
+	private String generateColumnCrudFunctions(ColumnKeys columnKeys, Columns columns) {
 		String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
 		String columnName = columns.getColumnName();
 
-		String[] mPrimaryKeys = primaryKeys.getPrimaryKeys();
+		String[] mColumnKeys = columnKeys.getColumnKeys();
 
-		String primaryKeyParams = "";
-		String primaryKeyParamsValues = "";
+		String keyParams = "";
+		String keyParamsValues = "";
 
-		for (int i = 0; i < mPrimaryKeys.length; i++) {
+		for (int i = 0; i < mColumnKeys.length; i++) {
 
-			primaryKeyParams += "'" + mPrimaryKeys[i] + "'";
-			primaryKeyParamsValues += "$" + mPrimaryKeys[i];
+			keyParams += "'" + mColumnKeys[i] + "'";
+			keyParamsValues += "$" + mColumnKeys[i];
 
-			if (i < mPrimaryKeys.length - 1) {
-				primaryKeyParams += ",";
-				primaryKeyParamsValues += ",";
+			if (i < mColumnKeys.length - 1) {
+				keyParams += ",";
+				keyParamsValues += ",";
 			}
 		}
-		return parseColumnQueryFunction(columnName, primaryKeyParams, primaryKeyParamsValues, columnsCrudTemplate);
+		return parseColumnQueryFunction(columnName, keyParams, keyParamsValues, columnsCrudTemplate);
 	}
 	/*
-	 * Takes a column name,the table PRIMARY_KEYS_COLUMN_PARAMS and replaces it
-	 * with the PRIMARY_KEYS_COLUMN_PARAMS, PRIMARY_KEYS_PARAM_VALUES
+	 * Takes a column name,the table FUNCTION_PARAMS_KEYS and replaces it with
+	 * the FUNCTION_PARAMS_VALUES, FUNCTION_PARAMS_KEYS
 	 * 
 	 * @Return the data found in the column
 	 */
 
-	private String parseColumnQueryFunction(String columnName, String primaryKeyParams, String primaryKeyParamsValues,
+	private String parseColumnQueryFunction(String columnName, String functionParams, String functionParamsValues,
 			String template) {
 		return template.replace(TemplateTags.PHP.QUERIED_COLUMN, columnName)
 				.replace(TemplateTags.PHP.QUERY_RESULTS, columnName + "_")
-				.replace(TemplateTags.PHP.PRIMARY_KEYS_COLUMN_PARAMS, primaryKeyParams)
-				.replace(TemplateTags.PHP.PRIMARY_KEYS_PARAM_VALUES, primaryKeyParamsValues);
+				.replace(TemplateTags.PHP.FUNCTION_PARAMS_KEYS, functionParams)
+				.replace(TemplateTags.PHP.FUNCTION_PARAMS_VALUES, functionParamsValues);
 	}
 }
