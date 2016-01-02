@@ -1,10 +1,10 @@
 	/*
 	* Performs a database query and returns the value of QUERIED_COLUMN 
-	* based on the value of PRIMARY_KEYS_PARAM_VALUES passed to the function
+	* based on the value of FUNCTION_PARAMS_VALUES passed to the function
 	*/
-	public function get_QUERIED_COLUMN(PRIMARY_KEYS_PARAM_VALUES) {
-		$columns = array (PRIMARY_KEYS_COLUMN_PARAMS);
-		$records = array (PRIMARY_KEYS_PARAM_VALUES);
+	public function get_QUERIED_COLUMN(FUNCTION_PARAMS_VALUES) {
+		$columns = array (FUNCTION_PARAMS_KEYS);
+		$records = array (FUNCTION_PARAMS_VALUES);
 		$QUERY_RESULTS = $this->query_from_TABLE_NAME ( $columns, $records );
 		return $QUERY_RESULTS [0] ['QUERIED_COLUMN'];
 	}
