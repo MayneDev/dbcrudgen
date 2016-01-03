@@ -1,12 +1,32 @@
 <?php
+
+/**
+* DatabaseException - Thrown whenever an Exception occurs
+*/
 class DatabaseException extends Exception {
 }
+
+/**
+* NullabilityException - Thrown whenever a non null parameter is passed as null
+*/
 class NullabilityException extends DatabaseException {
 }
+
+/**
+* NullabilityException - Thrown whenever table invalid number of table columns and records is passed
+*/
 class InvalidColumnValueMatchException extends DatabaseException {
 }
+
+/**
+* NullabilityException - Thrown whenever table invalid pair number of table columns and records is passed
+*/
 class InvalidColumnValuePairMatchException extends DatabaseException {
 }
+
+/**
+* Database Utilities  - Contains the various utility functions
+*/
 class DatabaseUtils {
 	
 	private $database_handle;
@@ -92,7 +112,7 @@ class DatabaseUtils {
 	}
 	
 	/**
-	 * Deletes the specified record in a relation
+	 * Deletes the specified record(s) in a relation
 	 * 
 	 * @param
 	 *        	string Table name
@@ -283,6 +303,22 @@ class DatabaseUtils {
 		}
 		return $this->database_handle->query ( $query );
 	}
+	
+	/**
+	 * Updates the specified record(s) in a relation
+	 * 
+	 * @param
+	 *        	string Table name
+	 * @param
+	 *        	new array columns
+	 * @param
+	 *        	new array records
+	 * @param
+	 *        	old array columns
+	 * @param
+	 *        	old array records
+	 * @return integer 1 if success, 0 if failed
+	 */
 	public function update_record($table, Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0 || count ( $where_columns ) == 0 || count ( $where_records ) == 0) {
 			if (empty ( $table )) {
@@ -325,7 +361,7 @@ class DatabaseUtils {
 	}
 	
 	/**
-	 * Retrurns an associative array of the query
+	 * Returns an associative array of the query
 	 * 
 	 * @param
 	 *        	string Table name
@@ -333,7 +369,7 @@ class DatabaseUtils {
 	 *        	array columns
 	 * @param
 	 *        	array records
-	 * @return mysqli_object
+	 * @return associative array
 	 */
 	public function fetch_assoc($table, Array $columns, Array $records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
@@ -383,9 +419,33 @@ class DatabaseUtils {
 		
 		return null;
 	}
+	
+	/**
+	 * Returns an associative array of the query
+	 * 
+	 * @param
+	 *        	string Table name
+	 * @param
+	 *        	array columns
+	 * @param
+	 *        	array records
+	 * @return associative array
+	 */
 	public function query($table, Array $columns, Array $records, $printSQL = false) {
 		return $this->fetch_assoc ( $table, $columns, $records, $printSQL );
 	}
+	
+	/**
+	 * Returns an associative array of the query
+	 * 
+	 * @param
+	 *        	string Table name
+	 * @param
+	 *        	array columns
+	 * @param
+	 *        	array records
+	 * @return associative array
+	 */
 	public function search($table, Array $columns, Array $records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
