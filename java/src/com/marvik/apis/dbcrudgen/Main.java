@@ -35,10 +35,7 @@ public class Main {
 		List<Table> tablesList = new ArrayList<Table>();
 
 		List<Columns> firstAidColumnList = new ArrayList<Columns>();
-		firstAidColumnList.add(
-				new Columns("id_firstaid", new DataType("int", new Constraints("integer primary key auto_increment"))));
-		firstAidColumnList
-				.add(new Columns("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+		firstAidColumnList.add(new Columns("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
 		firstAidColumnList.add(new Columns("ailment_information", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailment_causes", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailement_prevention", new DataType("text", new Constraints())));
@@ -62,9 +59,9 @@ public class Main {
 				+ "`ailment_treatmeant` text,`ailment_treatmeant_precautions` text,"
 				+ "`ailment_treatment_position` text, `ailment_short_notes` text,"
 				+ "`id_firstaid` integer primary key auto_increment);";
-		
-		PrimaryKeys primaryKeys = new PrimaryKeys(new String[] { "id_firstaid" ,"ailment_medication","ailment_treatmeant_precautions"});
-		
+
+		PrimaryKeys primaryKeys = new PrimaryKeys(new String[] { "id_firstaid", });
+
 		tablesList.add(new Table("firstaids", firstAidColumns, tableSql, primaryKeys, null, null));
 
 		Table[] tables = new Table[tablesList.size()];
