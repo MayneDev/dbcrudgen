@@ -1,4 +1,4 @@
-	/*
+	/**
 	* Performs a database query and returns the value of QUERIED_COLUMN 
 	* based on the value of FUNCTION_PARAMS_VALUES passed to the function
 	*/
