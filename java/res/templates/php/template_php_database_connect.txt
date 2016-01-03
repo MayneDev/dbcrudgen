@@ -1,19 +1,93 @@
 <?php
+
+/**
+* DatabaseConnection class used to open a database connection to the server
+*
+*/
 class DatabaseConnection {
-	private $host;
-	private $user;
-	private $password;
-	private $database;
-	public function __construct($host, $user, $password, $database) {
-		$this->host = $host;
-		$this->user = $user;
-		$this->password = $password;
-		$this->database = $database;
+	
+	private $database_host;
+	private $database_user;
+	private $user_password;
+	private $database_name;
+	
+	/**
+	* Initializes everything
+	*/
+	public function __construct($database_host, $database_user, $user_password, $database_name) {
+		$this->set_database_host($database_host);
+		$this->set_database_user ($database_user);
+		$this->set_user_password ( $user_password);
+		$this->set_database_name ( $database_name);
 	}
+	
+	/**
+	* Open a database connection to the server
+	*/
 	public function open_database_connection() {
-		return new mysqli ( $this->host, $this->user, $this->password, $this->database );
+		return new mysqli ( 
+				$this->get_database_host(),
+				$this->set_database_user(),
+				$this->get_user_password(),
+				$this->get_database_name() 
+		);
 	}
+	
+	
+	/**
+	* @returns database host
+	*/	
+	public function get_database_host(){ return $this->database_host;}
+	
+	/**
+	* @param database host
+	* sets the database host 
+	* @returns null
+	*/
+	public function set_database_host($host){
+		$this->database_host = $database_host;
+	}
+	
+	/**
+	* @returns database user
+	*/
+	public function get_database_user(){return $this->database_user;}
+	
+	/**
+	* @param database user
+	* sets the database user 
+	* @returns null
+	*/
+	public function set_database_user($database_user){$this->database_user = $database_user;}
+	
+	/**
+	* @returns user password
+	*/
+	public function get_user_password(){return $this->user_password;}
+	
+	/**
+	* @param user password
+	* sets the user password
+	* @returns null
+	*/
+	public function set_user_password($user_password){$this->user_password = $user_password;}
+	
+	
+	/**
+	* 
+	* @return the database name
+	*/
+	public function get_database_name(){return $this->database_name;}
+	
+	/**
+	* @param database name 
+	* sets the database name
+	* @returns null
+	*/
+	public function set_database_name($host){$this->database_name = $database_name;}
+	
 	public function __destruct() {
+	
 	}
 }
 
