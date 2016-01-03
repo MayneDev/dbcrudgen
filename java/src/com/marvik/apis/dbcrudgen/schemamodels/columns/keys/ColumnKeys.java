@@ -1,12 +1,15 @@
 package com.marvik.apis.dbcrudgen.schemamodels.columns.keys;
 
-public class ColumnKeys {
+import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
+
+public class ColumnKeys extends Columns{
 	private String[] columnKeys;
 
 	/*
 	 * Initializes a string array of the table column keys
 	 */
 	public ColumnKeys(String[] columnKeys) {
+		super(columnKeys);
 		this.columnKeys = columnKeys;
 	}
 
