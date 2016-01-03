@@ -6,6 +6,6 @@
 		$columns = array (FUNCTION_PARAMS_KEYS);
 		$records = array (FUNCTION_PARAMS_VALUES);
 		$QUERY_RESULTS = $this->query_from_TABLE_NAME ( $columns, $records );
-		return $QUERY_RESULTS [0] ['QUERIED_COLUMN'];
+		return count($QUERY_RESULTS)>0 ? $QUERY_RESULTS [0] ['QUERIED_COLUMN'] : null;
 	}
 	
