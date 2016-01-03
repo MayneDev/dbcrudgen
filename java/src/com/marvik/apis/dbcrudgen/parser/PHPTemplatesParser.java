@@ -7,7 +7,9 @@ import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ColumnKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ForeignKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.UniqueKeys;
+import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
+import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcudgen.java.templates.php.PHPColumnAccessorsTemplate;
@@ -69,7 +71,7 @@ public class PHPTemplatesParser {
 		tableCrudSQL = addColumnsQueryFunctions(tableCrudSQL, columnsCrud);
 
 		// Replace table name tag with the actual table name
-		tableCrudSQL = addTableName(tableCrudSQL, table.getTableName());
+		tableCrudSQL = addTableName(tableCrudSQL, tableName);
 
 		// Replace the class name tag with the actual class name which is
 		// derived from the table name
@@ -175,6 +177,7 @@ public class PHPTemplatesParser {
 	}
 
 	private String generateColumnsCrudFunctions(Table table, Columns[] columns) {
+		
 		String columnsCrudFunction = "";
 
 		//Generate crud functions for table columns that hold special keys
@@ -201,6 +204,7 @@ public class PHPTemplatesParser {
 
 		// Generate crud functions for unique key columns
 		columnsCrudFunction += generateUniqueKeysCrudFunctions(table.getUniqueKeys(), columns);
+		
 		return columnsCrudFunction;
 	}
 	/*
@@ -256,11 +260,16 @@ public class PHPTemplatesParser {
 	 * Generates crud functions for columns that hold keys for the database table
 	 */
 	private String generateColumnKeysCrudFunction(String columnKey, Columns[] columns) {
-		String columnKeysCrudFunction = "";
-		for (Columns column : columns) {
-			columnKeysCrudFunction += "";
+		
+		String [] columnKeys = new String [columns.length] ;
+		
+		for (int i = 0; i < columns.length; i++) {
+			columnKeys[i] = columns[i].getColumnName();
 		}
-		return columnKeysCrudFunction;
+		
+		
+		return generateColumnCrudFunctions(new ColumnKeys(columnKeys),
+				new Columns(columnKey,new DataType(columnKey, new Constraints(null))));
 	}
 
 	/*
