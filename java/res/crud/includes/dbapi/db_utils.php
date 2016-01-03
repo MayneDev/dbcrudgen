@@ -12,7 +12,7 @@ class db_utils {
 	private $db;
 	public function __destruct() {
 	}
-	public function __construct($host = "localhost", $user = "DATABASE_USER", $password = "USER_PASSWORD", $database = "YOUR_DATABASE") {
+	public function __construct($host = "SERVER_HOST", $user = "DATABASE_USER", $password = "USER_PASSWORD", $database = "DATABASE_NAME") {
 		require_once 'db_connect.php';
 		
 		$DEBUG_DEMO = true;
