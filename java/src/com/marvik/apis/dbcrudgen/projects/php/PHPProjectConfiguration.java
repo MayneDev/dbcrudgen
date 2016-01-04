@@ -23,7 +23,7 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 	 * @param crudScriptsStorageDirectory
 	 */
 	public void setProjectCRUDScriptsStorageDirectory(String crudScriptsStorageDirectory) {
-
+		this.crudScriptsStorageDirectory = crudScriptsStorageDirectory;
 	}
 
 	/**
@@ -33,12 +33,14 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 	 * @param phpDatabaseAPIScriptsStorageDirectory
 	 */
 	public void setProjectPHPDatabaseAPIScriptsStorageDirectory(String phpDatabaseAPIScriptsStorageDirectory) {
-
+		this.phpDatabaseAPIScriptsStorageDirectory = phpDatabaseAPIScriptsStorageDirectory;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.marvik.apis.dbcrudgen.projects.ProjectConfiguration#setProjectStorageDirectory(java.lang.String)
+	 * 
+	 * @see com.marvik.apis.dbcrudgen.projects.ProjectConfiguration#
+	 * setProjectStorageDirectory(java.lang.String)
 	 */
 	@Override
 	public void setProjectStorageDirectory(String projectStorageDirectory) {
@@ -47,7 +49,9 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.marvik.apis.dbcrudgen.projects.ProjectConfiguration#getProjectStorageDirectory()
+	 * 
+	 * @see com.marvik.apis.dbcrudgen.projects.ProjectConfiguration#
+	 * getProjectStorageDirectory()
 	 */
 	@Override
 	public String getProjectStorageDirectory() {
