@@ -1,20 +1,12 @@
 package com.marvik.apis.dbcrudgen.projects;
 
-import java.io.File;
-
-import com.marvik.apis.dbcrudgen.io.FileStreamWriter;
-
 public abstract class ProjectConfiguration {
 
-	/**
-	 * FileStreamWriter used for writing file to disk
-	 */
-	private FileStreamWriter fileStreamWriter;
 	
 	/**
 	 * Project Storage Directory
 	 */
-	private String projectStorageDirectory;
+	protected String projectStorageDirectory;
 
 	/**
 	 * Name of the project
@@ -45,11 +37,10 @@ public abstract class ProjectConfiguration {
 
 	/**
 	 * 
-	 * @param file
-	 * @param scriptSourceCode
-	 * writes project scripts to file
+	 * @return Project Name
 	 */
-	public void writeProjectScript(File file, String scriptSourceCode) {
-
+	public String getProjectName() {
+		return projectName;
 	}
+	
 }
