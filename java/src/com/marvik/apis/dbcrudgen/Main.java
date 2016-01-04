@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
+import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
+import com.marvik.apis.dbcrudgen.projects.php.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
@@ -11,12 +13,21 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.sql.parser.SQLParser;
+import com.marvik.apis.dbcrudgen.views.windows.MainWindow;
 import com.marvik.apis.dbcudgen.java.templates.php.PHPColumnsCrudTemplate;
 import com.marvik.apis.dbcudgen.java.templates.sql.SQLTablesTemplate;
+
+import javafx.application.Application;
 
 public class Main {
 	public static void main(String[] args) {
 
+		testPHPCrudGenerator();
+
+	}
+
+	private static void testPHPCrudGenerator() {
+		// TODO Auto-generated method stub
 		SQLTablesTemplate sQLTablesTemplate = new SQLTablesTemplate();
 		// System.out.println(sQLTablesTemplate.getTemplate());
 
@@ -35,7 +46,8 @@ public class Main {
 		List<Table> tablesList = new ArrayList<Table>();
 
 		List<Columns> firstAidColumnList = new ArrayList<Columns>();
-		firstAidColumnList.add(new Columns("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+		firstAidColumnList
+				.add(new Columns("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
 		firstAidColumnList.add(new Columns("ailment_information", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailment_causes", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new Columns("ailement_prevention", new DataType("text", new Constraints())));
@@ -69,14 +81,27 @@ public class Main {
 			tables[i] = tablesList.get(i);
 		}
 
+		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration("where_there_is_no_doc");
+		phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\where_there_is_no_doc");
+		phpProjectConfiguration.setProjectCRUDScriptsStorageDirectory("C:\\xampp\\htdocs\\where_there_is_no_doc\\scripts\\php\\database\\crud");
+		phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory("C:\\xampp\\htdocs\\where_there_is_no_doc\\scripts\\php\\database\\core-apis");
+		
+		
 		Database database = new Database("where_there_is_no_doc", tables);
 		PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
+		phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
+		
 
 		for (Table table : database.getTables()) {
-			String tablsesCrud = phpCrudCreator.getTableCrud(table);
-			print(tablsesCrud);
+			String tablesCrud = phpCrudCreator.getTableCrud(table);
+			print(tablesCrud);
 		}
-
+		
+		ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = 
+				new ProjectDatabaseConnectionProperties("localhost","root","","where_there_is_no_doc");
+		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
+		
+		phpCrudCreator.createProject();
 	}
 
 	private static void print(String string) {
