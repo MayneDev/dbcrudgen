@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 public final class FileStreamReader {
 
-	/*
+	/**
 	 * Reads the contents of a file
 	 */
 	public final String readFile(File file) throws IOException{
@@ -30,7 +30,7 @@ public final class FileStreamReader {
 		fileInputStream.close();
 		return stringBuilder.toString();
 	}
-	/*
+	/**
 	 * Reads the contents of a file
 	 */
 	public final String readFile(String filePath) throws IOException {
@@ -39,7 +39,7 @@ public final class FileStreamReader {
 		}
 		return readFile(new File(filePath));
 	}
-	/*
+	/**
 	 * Creates a file if the file does not exist
 	 */
 	public final File createFile(String filePath) throws IOException {
@@ -51,7 +51,7 @@ public final class FileStreamReader {
 
 		return file;
 	}
-	/*
+	/**
 	 * Deletes a file if the file exists
 	 */
 	public final boolean deleteFile(String filePath) {
