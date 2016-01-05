@@ -1,24 +1,30 @@
 <?php
 
-	/*
-	* $TEMPLATE_INFO
-	*/
+	$CRUD_GENERATOR_TEMPLATE
 	
 class CLASS_NAME {
 
-	private $dbutils;
+	private $databaseUtils;
 	private $action;
 	private $client;
 	
 	public function __construct($action, $client) {
 	
-		require_once 'includes/dbapi/db_actions.php';
-		require_once 'includes/dbapi/db_utils.php';
+		//Data Actions script file - It contains all the various data actions that can be performed on data.
+		require_once '$DATA_ACTIONS_FILE_PATH';
 		
-		$this->dbutils = new db_utils ();
+		//Database Utils Script - It contains all the MYSQL API's for performing CRUD transactions
+		require_once '$DATABASE_UTILS_FILE_PATH';
+		
+		$this->init(false);
 		
 	}
+	
+	//Initializes
 	public function init($execute = false) {
+		
+		//Init
+		$this->databaseUtils = new DatabaseUtils ();
 		
 		$this->client = $_POST [POST_CLIENT];
 		$this->action = $_POST [POST_ACTION];
@@ -47,56 +53,158 @@ class CLASS_NAME {
 		
 	$TABLE_COLUMNS_CRUD_FUNCTIONS
 	
+	/**
+	* Returns the table name. This is the owner of these crud functions.
+	* The various crud functions directly affect this table
+	* @return Table Name [$TABLE_NAME] 
+	*/
 	public static function get_table() {
 		return '$TABLE_NAME';
 	}
+	
+	/**
+	* This action represents the intended database transaction
+	*
+	* @return the set action.
+	*/
 	private function get_action() {
 		return $this->action;
 	}
+	
+	/**
+	* Returns the client doing transactions
+	*
+	* @return the client
+	*/
 	private function get_client() {
 		return $this->client;
 	}
+	
+	/**
+	* Used  to calculate the number of times a record exists in the table [$TABLE_NAME]
+	*
+	* @return the number of times a record exists exists in the table [$TABLE_NAME]
+	*/
 	public function is_exists(Array $columns, Array $records, $printSQL = false) {
-		return $this->get_dbutils ()->is_exists ( $this->get_table (), $columns, $records, $printSQL );
+		return $this->get_database_utils ()->is_exists ( $this->get_table (), $columns, $records, $printSQL );
 	}
+	
+	/**
+	* Inserts data into the table[$TABLE_NAME]
+	*
+	* @return 1 if data was inserted,0 otherwise
+	*/
 	public function insert_records_to_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
 		return $this->insert_records ( $this->get_table (), $columns, $records, $printSQL );
 	}
+	
+	/**
+	* Deletes all the records that meets the passed criteria from the table [$TABLE_NAME]
+	*  
+	* @return number of deleted rows
+	*/
 	public function delete_record_from_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
 		return $this->delete_record ( $this->get_table (), $columns, $records, $printSQL );
 	}
+	
+	/**
+	* updates all the records that meets the passed criteria from the table [$TABLE_NAME]
+	*  
+	* @return number of updated rows
+	*/
 	public function update_record_in_$TABLE_NAME(Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
 		return $this->update_record ( $this->get_table (), $columns, $records, $where_columns, $where_records, $printSQL );
 	}
+	
+	/**
+	* Gets an Associative array of the records in the table [$TABLE_NAME] that meets the passed criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
 	public function fetch_assoc_in_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
 		return $this->fetch_assoc ( $this->get_table (), $columns, $records, $printSQL );
 	}
+	
+	/**
+	* Gets an Associative array of the records in the table [$TABLE_NAME] that meets the passed criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
 	public function query_from_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
 		return $this->query ( $this->get_table (), $columns, $records, $printSQL );
 	}
+	
+	/**
+	* Gets an Associative array of the records in the table [$TABLE_NAME] that meets the passed criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
 	public function search_in_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
 		return $this->search ( $this->get_table (), $columns, $records, $printSQL );
 	}
-	public function get_dbutils() {
-		return $this->dbutils;
+	
+	/**
+	* Get Database Utils
+	*  
+	* @return an object of database utils
+	*/
+	public function get_database_utils() {
+		return $this->databaseUtils;
 	}
+	
+	/**
+	* Deletes all the records that meets the passed criteria from the table [$TABLE_NAME]
+	*  
+	* @return number of deleted rows
+	*/
 	private function delete_record($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_dbutils ()->delete_record ( $table, $columns, $records, $printSQL );
+		return $this->get_database_utils ()->delete_record ( $table, $columns, $records, $printSQL );
 	}
+	
+	
+	/**
+	* Inserts data into the table[$TABLE_NAME]
+	*
+	* @return 1 if data was inserted,0 otherwise
+	*/
 	private function insert_records($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_dbutils ()->insert_records ( $table, $columns, $records, $printSQL );
+		return $this->get_database_utils ()->insert_records ( $table, $columns, $records, $printSQL );
 	}
+	
+	/**
+	* updates all the records that meets the passed criteria from the table [$TABLE_NAME]
+	*  
+	* @return number of updated rows
+	*/
 	private function update_record($table, Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
-		return $this->get_dbutils ()->update_record ( $table, $columns, $records, $where_columns, $where_records, $printSQL );
+		return $this->get_database_utils ()->update_record ( $table, $columns, $records, $where_columns, $where_records, $printSQL );
 	}
+	
+	/**
+	* Gets an Associative array of the records in the table [$TABLE_NAME] that meets the passed criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
 	private function fetch_assoc($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_dbutils ()->fetch_assoc ( $table, $columns, $records, $printSQL );
+		return $this->get_database_utils ()->fetch_assoc ( $table, $columns, $records, $printSQL );
 	}
+	
+	/**
+	* Gets an Associative array of the records in the table [$TABLE_NAME] that meets the passed criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
 	public function query($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_dbutils ()->query ( $table, $columns, $records, $printSQL );
+		return $this->get_database_utils ()->query ( $table, $columns, $records, $printSQL );
 	}
+	
+	/**
+	* Gets an Associative array of the records in the table [$TABLE_NAME] that meets the passed criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
 	private function search($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_dbutils ()->search ( $table, $columns, $records, $printSQL );
+		return $this->get_database_utils ()->search ( $table, $columns, $records, $printSQL );
 	}
 }
 ?>
