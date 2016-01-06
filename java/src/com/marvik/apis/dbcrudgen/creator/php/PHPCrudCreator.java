@@ -2,20 +2,21 @@ package com.marvik.apis.dbcrudgen.creator.php;
 
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
-import com.marvik.apis.dbcrudgen.io.FileStreamWriter;
+import com.marvik.apis.dbcrudgen.io.FilesHandler;
 import com.marvik.apis.dbcrudgen.parser.PHPTemplatesParser;
-import com.marvik.apis.dbcrudgen.projects.php.PHPProjectConfiguration;
+import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
+import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
-import com.marvik.apis.dbcudgen.java.templates.CrudTemplates;
-import com.marvik.apis.dbcudgen.java.templates.php.PHPTableClassCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.php.PHPTableClassCrudTemplate;
 
 public class PHPCrudCreator extends CrudCreator {
 
 	/**
-	 * File Stream Writer
+	 * Files Handler
 	 */
-	private FileStreamWriter fileStreamWriter;
+	private FilesHandler filesHandler;
 
 	/**
 	 * PHP Table Class Crud Template
@@ -44,7 +45,7 @@ public class PHPCrudCreator extends CrudCreator {
 		phpTableClassCrudTemplate = new PHPTableClassCrudTemplate();
 		phpTemplatesParser = new PHPTemplatesParser();
 
-		fileStreamWriter = new FileStreamWriter();
+		filesHandler = new FilesHandler();
 
 	}
 
@@ -57,20 +58,30 @@ public class PHPCrudCreator extends CrudCreator {
 	}
 
 	/**
+	 * PHPTemplatesParser getPhpTemplatesParser
+	 * 
+	 * @return PHPTemplatesParser
+	 */
+	public PHPTemplatesParser getPHPTemplatesParser() {
+		return phpTemplatesParser;
+	}
+
+	/**
 	 * 
 	 * @param table
 	 * @return the generated crud for the passed table
 	 */
 	public String getTableCrud(Table table) {
-		return phpTemplatesParser.getTableCrud(table);
+		return getPHPTemplatesParser().getTableCrud(phpProjectConfiguration, projectDatabaseConnectionProperties,
+				table);
 	}
 
 	/**
 	 * 
-	 * @return File Stream Writer
+	 * @return File Handler
 	 */
-	public FileStreamWriter getFileStreamWriter() {
-		return fileStreamWriter;
+	public FilesHandler getFilesHandler() {
+		return filesHandler;
 	}
 
 	/**
@@ -111,8 +122,8 @@ public class PHPCrudCreator extends CrudCreator {
 	}
 
 	/**
-	 * Creates A Project Create Core Database Scripts Create table specific CRUD
-	 * Script
+	 * 1. Creates A Project and all the relevant directories 2. Creates Core
+	 * Database Scripts 3. Creates table specific CRUD Script
 	 */
 	public void createProject(Database database) {
 
@@ -122,8 +133,152 @@ public class PHPCrudCreator extends CrudCreator {
 		if (getPhpProjectConfiguration() == null) {
 			throw new NullPointerException("Php Project Configuration Cannot be null");
 		}
-		
-		// Create Database Connection Scripts
+
+		// Creates all the scripts storage directories.
+		createSciptsDirectories();
+
+		// create all the project (required and generated) scripts
+		createAllProjectScripts(database);
+
+	}
+
+	/**
+	 * Create all the project scripts
+	 */
+	private void createAllProjectScripts(Database database) {
+
+		// Create all the core required scripts
+
+		// Create the data action script
+		createDataActionsSciptFile();
+
+		// Create the database connection script
+		createDatabaseConnectionScriptFile();
+
+		// create the database utils script file
+		createDatabaseUtilsScriptFile();
+
+		/*
+		 * Create all the generated scripts -> Create all table crud -> create
+		 * all table sql
+		 * 
+		 */
+
+		// Create Table CRUD
+		for (Table table : database.getTables()) {
+			writeTableScriptsToDisk(table);
+		}
+	}
+
+	/**
+	 * Create Database Utils Script File
+	 */
+	private void createDatabaseUtilsScriptFile() {
+
+		String databaseConnectionScriptFilePath = getDatabaseConnectionScriptAbsoluteFilename();
+
+		String databaseUtilsScript = getPHPTemplatesParser().parseDatabaseUtilsScriptTemplate(
+				getProjectDatabaseConnectionProperties(), databaseConnectionScriptFilePath);
+
+		String databaseUtilsScriptsStorageDirectory = getPhpProjectConfiguration()
+				.getPhpDatabaseAPIScriptsStorageDirectory();
+		String databaseUtilsScriptsFile = databaseUtilsScriptsStorageDirectory
+				+ PHPProjectFileNames.DATABASE_UTILS_SCRIPT_FILENAME;
+
+		if (!getFilesHandler().createByteWeighedFile(databaseUtilsScriptsFile, databaseUtilsScript)) {
+			System.out.println("Could not create File[" + databaseUtilsScriptsFile + "]");
+		} else {
+			System.out.println("File Successfully created [" + databaseUtilsScriptsFile + "]");
+		}
+
+	}
+
+	/**
+	 * Create Database Connection Script File
+	 */
+	private void createDatabaseConnectionScriptFile() {
+
+		String template = getPHPTemplatesParser().getPhpDatabaseConnectionTemplate().getTemplate();
+
+		String databaseConnectionScriptFile = getDatabaseConnectionScriptAbsoluteFilename();
+
+		if (!getFilesHandler().createByteWeighedFile(databaseConnectionScriptFile, template)) {
+			System.out.println("Could not create File[" + databaseConnectionScriptFile + "]");
+		} else {
+			System.out.println("File Successfully created [" + databaseConnectionScriptFile + "]");
+		}
+	}
+
+	/**
+	 * Get
+	 * 
+	 * @return Database Connection Script Absolute Filename
+	 */
+	private String getDatabaseConnectionScriptAbsoluteFilename() {
+		String databaseConnectionScriptStorageDirectory = getPhpProjectConfiguration()
+				.getPhpDatabaseAPIScriptsStorageDirectory();
+		return databaseConnectionScriptStorageDirectory + PHPProjectFileNames.DATABASE_CONNECTION_SCRIPT_FILENAME;
+	}
+
+	/**
+	 * Create Data Actions SciptFile
+	 */
+	private void createDataActionsSciptFile() {
+
+		String template = getPHPTemplatesParser().createDataActionsTemplate();
+		String dataActionsFilename = getPhpProjectConfiguration().getPhpDatabaseAPIScriptsStorageDirectory()
+				+ PHPProjectFileNames.DATA_ACTIONS_SCRIPT_FILENAME;
+
+		if (!getFilesHandler().createByteWeighedFile(dataActionsFilename, template)) {
+			System.out.println("Could not create File[" + dataActionsFilename + "]");
+		} else {
+			System.out.println("File Successfully created [" + dataActionsFilename + "]");
+
+		}
+
+	}
+
+	/**
+	 * Writes all the table scripts to disk
+	 * 
+	 * @param table
+	 */
+	private void writeTableScriptsToDisk(Table table) {
+
+		String tablesCrudScriptsStorageDirectory = getPhpProjectConfiguration().getCrudScriptsStorageDirectory();
+		String tablesSQLScriptsStorageDirectory = getPhpProjectConfiguration().getProjectSQLScriptsStorageDirectory();
+
+		String tableName = table.getTableName();
+		String tableSQL = table.getTableSql();
+		String tablesCrud = getTableCrud(table);
+
+		String className = getPHPTemplatesParser().parseJavaBeansClassName(tableName);
+		String phpClassFileName = getPHPTemplatesParser().parsePHPClassFileName(tablesCrudScriptsStorageDirectory,
+				className);
+
+		String sqlTableFileName = getPHPTemplatesParser().parseSQLFileName(tablesSQLScriptsStorageDirectory, tableName);
+
+		if (!getFilesHandler().createByteWeighedFile(phpClassFileName, tablesCrud)) {
+			System.out.println("Could not create File[" + phpClassFileName + "]");
+		} else {
+			System.out.println("File Successfully created [" + phpClassFileName + "]");
+		}
+
+		if (!getFilesHandler().createByteWeighedFile(sqlTableFileName, tableSQL)) {
+			System.out.println("Could not create File[" + sqlTableFileName + "]");
+		} else {
+
+			System.out.println("File Successfully created [" + sqlTableFileName + "]");
+
+		}
+
+	}
+
+	/**
+	 * Create directories for saving all the required/generated scripts
+	 */
+	private void createSciptsDirectories() {
+		// Create Database Connection Scripts Storage Directory
 		createDatabaseConnectionScriptsDirectory(
 				getPhpProjectConfiguration().getPhpDatabaseAPIScriptsStorageDirectory());
 
@@ -133,17 +288,15 @@ public class PHPCrudCreator extends CrudCreator {
 		// Create Project CRUD Scripts Storage Directory
 		createProjectCRUDScriptsStorageDirectory(getPhpProjectConfiguration().getCrudScriptsStorageDirectory());
 
-		// Create Database Data Actions Scripts
+		// Create Database Data Actions Scripts Storage Directory
 		createProjectDatabasesActionsDirectory(getPhpProjectConfiguration().getPhpDatabaseAPIScriptsStorageDirectory());
 
-		// Create Database Utilities Script
+		// Create SQL Scripts Storage Directory
+		createProjectDatabasesActionsDirectory(getPhpProjectConfiguration().getProjectSQLScriptsStorageDirectory());
+
+		// Create Database Utilities Script Storage Directory
 		createProjectPHPDatabaseAPIScriptsStorageDirectory(
 				getPhpProjectConfiguration().getPhpDatabaseAPIScriptsStorageDirectory());
-
-		// Create Table CRUD
-		for (Table table : database.getTables()) {
-			String tablesCrud = getTableCrud(table);
-		}
 	}
 
 	/**
@@ -153,7 +306,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 * @return PHP Database Connection Scripts Directory
 	 */
 	private String createDatabaseConnectionScriptsDirectory(String phpDatabaseAPIScriptsStorageDirectory) {
-		getFileStreamWriter().createDirectories(phpDatabaseAPIScriptsStorageDirectory);
+		getFilesHandler().createDirectories(phpDatabaseAPIScriptsStorageDirectory);
 		return phpDatabaseAPIScriptsStorageDirectory;
 
 	}
@@ -165,7 +318,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 * @return Project Storage Directory
 	 */
 	private String createProjectStorageDirectory(String projectStorageDirectory) {
-		getFileStreamWriter().createDirectories(projectStorageDirectory);
+		getFilesHandler().createDirectories(projectStorageDirectory);
 		return projectStorageDirectory;
 	}
 
@@ -176,7 +329,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 * @return Project CRUD Scripts Storage Directory
 	 */
 	private String createProjectCRUDScriptsStorageDirectory(String crudScriptsStorageDirectory) {
-		getFileStreamWriter().createDirectories(crudScriptsStorageDirectory);
+		getFilesHandler().createDirectories(crudScriptsStorageDirectory);
 		return crudScriptsStorageDirectory;
 	}
 
@@ -187,7 +340,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 * @return Project Databases Actions Directory
 	 */
 	private String createProjectDatabasesActionsDirectory(String phpDatabaseAPIScriptsStorageDirectory) {
-		getFileStreamWriter().createDirectories(phpDatabaseAPIScriptsStorageDirectory);
+		getFilesHandler().createDirectories(phpDatabaseAPIScriptsStorageDirectory);
 		return phpDatabaseAPIScriptsStorageDirectory;
 	}
 
@@ -198,7 +351,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 * @return Project PHP Database API Scripts Storage Directory
 	 */
 	private String createProjectPHPDatabaseAPIScriptsStorageDirectory(String phpDatabaseAPIScriptsStorageDirectory) {
-		getFileStreamWriter().createDirectories(phpDatabaseAPIScriptsStorageDirectory);
+		getFilesHandler().createDirectories(phpDatabaseAPIScriptsStorageDirectory);
 		return phpDatabaseAPIScriptsStorageDirectory;
 	}
 }
