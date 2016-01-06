@@ -3,21 +3,29 @@ package com.marvik.apis.dbcrudgen.sql.reader;
 import java.io.File;
 import java.io.IOException;
 
-import com.marvik.apis.dbcrudgen.io.FileStreamReader;
+import com.marvik.apis.dbcrudgen.io.FilesHandler;
+
 
 public class SQLReader {
 
-	private FileStreamReader fileStreamReader;
+	private FilesHandler fileHandler;
 
 	public SQLReader() {
-		fileStreamReader = new FileStreamReader();
+		fileHandler= new FilesHandler();
 	}
 
+	/**
+	 * getFileHandler
+	 * @return FileHandler
+	 */
+	public FilesHandler getFileHandler() {
+		return fileHandler;
+	}
 	/*
 	 * Returns all the contents of an SQL file as a string
 	 */
 	public String getSQL(String filePath) throws IOException {
-		return fileStreamReader.readFile(filePath);
+		return getFileHandler().readFile(filePath);
 	}
 
 	/*
