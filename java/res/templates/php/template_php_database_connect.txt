@@ -27,7 +27,7 @@ class DatabaseConnection {
 	public function open_database_connection() {
 		return new mysqli ( 
 				$this->get_database_host(),
-				$this->set_database_user(),
+				$this->get_database_user(),
 				$this->get_user_password(),
 				$this->get_database_name() 
 		);
@@ -44,7 +44,7 @@ class DatabaseConnection {
 	* sets the database host 
 	* @returns null
 	*/
-	public function set_database_host($host){
+	public function set_database_host($database_host){
 		$this->database_host = $database_host;
 	}
 	
@@ -84,7 +84,7 @@ class DatabaseConnection {
 	* sets the database name
 	* @returns null
 	*/
-	public function set_database_name($host){$this->database_name = $database_name;}
+	public function set_database_name($database_name){$this->database_name = $database_name;}
 	
 	public function __destruct() {
 	
