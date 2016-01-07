@@ -16,7 +16,7 @@ class CLASS_NAME {
 		//Database Utils Script - It contains all the MYSQL API's for performing CRUD transactions
 		require_once '$DATABASE_UTILS_FILE_PATH';
 		
-		$this->init(false);
+		$this->init(true);
 		
 	}
 	
@@ -26,24 +26,33 @@ class CLASS_NAME {
 		//Init
 		$this->databaseUtils = new DatabaseUtils ();
 		
-		$this->client = $_POST [POST_CLIENT];
-		$this->action = $_POST [POST_ACTION];
+		//Ensure that the POST_CLIENT was posted before trying to get it
+		if(!empty($_POST [POST_CLIENT])){
+			$this->client = $_POST [POST_CLIENT];
+		}
+		
+		//Ensure that the POST_ACTION was posted before trying to get it
+		if(!empty($_POST [POST_ACTION])){
+			$this->action = $_POST [POST_ACTION];
+		}
+		
+		
 		
 		if ($execute) {
 			
-			if ($this->get_action == ACTION_INSERT) {
+			if ($this->get_action() == ACTION_INSERT) {
 			
 			}
 			
-			if ($this->get_action == ACTION_UPDATE) {
+			if ($this->get_action() == ACTION_UPDATE) {
 			
 			}
 			
-			if ($this->get_action == ACTION_QUERY) {
+			if ($this->get_action() == ACTION_QUERY) {
 			
 			}
 			
-			if ($this->get_action == ACTION_DELETE) {
+			if ($this->get_action() == ACTION_DELETE) {
 			
 			}
 		}
