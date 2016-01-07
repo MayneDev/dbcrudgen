@@ -11,6 +11,10 @@ public class FilesHandler {
 	private FileStreamReader fileStreamReader;
 	private FileStreamWriter fileStreamWriter;
 
+	/**
+	 * Perform various I/O functions 
+	 * 
+	 */
 	public FilesHandler() {
 		fileStreamReader = new FileStreamReader();
 		fileStreamWriter = new FileStreamWriter();
