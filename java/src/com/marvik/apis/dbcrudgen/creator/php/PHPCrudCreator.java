@@ -3,7 +3,7 @@ package com.marvik.apis.dbcrudgen.creator.php;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
 import com.marvik.apis.dbcrudgen.io.FilesHandler;
-import com.marvik.apis.dbcrudgen.parser.PHPTemplatesParser;
+import com.marvik.apis.dbcrudgen.parser.php.PHPTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;

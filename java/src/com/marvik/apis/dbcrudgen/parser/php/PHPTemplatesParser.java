@@ -1,4 +1,4 @@
-package com.marvik.apis.dbcrudgen.parser;
+package com.marvik.apis.dbcrudgen.parser.php;
 
 import java.util.Locale;
 
@@ -6,6 +6,7 @@ import com.marvik.apis.dbcrudgen.core.templates.DbCrudGeneratorNativeTemplates;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
+import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
@@ -28,7 +29,7 @@ import com.marvik.apis.dbcrudgen.templates.sql.SQLTableFilenameTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags.DatabaseConnection;
 
-public class PHPTemplatesParser {
+public class PHPTemplatesParser extends TemplatesParser {
 
 	private PHPTableClassCrudTemplate phpTableClassCrudTemplate;
 	private PHPColumnsCrudTemplate phpColumnsCrudTemplate;
