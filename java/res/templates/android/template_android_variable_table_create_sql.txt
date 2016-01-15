@@ -1,0 +1,4 @@
+public static final String SQL = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME
+	+ " (" 
+		$TABLE_COLUMNS
+    +");";
