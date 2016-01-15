@@ -15,22 +15,22 @@ public abstract class CrudTemplates {
 	public FilesHandler getFilesHandler() {
 		return fileHandler;
 	}
-	/*
-	 * Returns the tables template
+	/**
+	 * Returns the template
 	 */
 	public String openTemplate(String templateFilePath) throws IOException {
 		return getFilesHandler().readFile(templateFilePath);
 	}
 
-	/*
-	 * Returns the tables template
+	/**
+	 * Returns the template
 	 */
 	public String getTemplate() throws IOException {
 		return openTemplate(getTemplateFilePath());
 
 	}
 
-	/*
+	/**
 	 * Returns the template file path
 	 */
 	public abstract String getTemplateFilePath();

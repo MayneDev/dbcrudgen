@@ -56,4 +56,118 @@ public class TemplatesFilePath {
 		public static final String SQL_TABLES_FILE_NAME_TEMPLATE_FILE_PATH = "res/templates/sql/template_sql_table_file_name.txt";
 
 	}
+
+	public class AndroidTemplatesFilePaths {
+
+		/**
+		 * ANDROID ANDROID_CLASS_CONTENT_PROVIDER_FILE_PATH
+		 */
+		public static final String ANDROID_CLASS_CONTENT_PROVIDER_TEMPLATE_FILE_PATH = "res/templates/android/template_android_class_content_provider.txt";
+
+		/**
+		 * ANDROID ANDROID_CLASS_DATABASE_TABLES_FILE_PATH
+		 */
+		public static final String ANDROID_CLASS_DATABASE_TABLES_TEMPLATE_FILE_PATH = "res/templates/android/template_android_class_database_tables.txt";
+
+		/**
+		 * ANDROID ANDROID_CLASS_SQLITE_OPEN_HELPER_FILE_PATH
+		 */
+		public static final String ANDROID_CLASS_SQLITE_OPEN_HELPER_TEMPLATE_FILE_PATH = "res/templates/android/template_android_class_sqlite_open_helper.txt";
+
+		/**
+		 * ANDROID ANDROID_CLASS_SQL_TABLE_FILE_PATH
+		 */
+		public static final String ANDROID_CLASS_SQL_TABLE_TEMPLATE_FILE_PATH = "res/templates/android/template_android_class_sql_table.txt";
+
+		/**
+		 * ANDROID ANDROID_CLASS_TABLE_CRUD_FILE_PATH
+		 */
+		public static final String ANDROID_CLASS_TABLE_CRUD_TEMPLATE_FILE_PATH = "res/templates/android/template_android_class_table_crud.txt";
+
+		/**
+		 * ANDROID ANDROID_INTERFACE_CRUD_OPERATIONS_FILE_PATH
+		 */
+		public static final String ANDROID_INTERFACE_CRUD_OPERATIONS_TEMPLATE_FILE_PATH = "res/templates/android/template_android_interface_crud_operations.txt";
+
+		/**
+		 * ANDROID ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_FLOAT_FILE_PATH
+		 */
+		public static final String ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_FLOAT_TEMPLATE_FILE_PATH = "res/templates/android/template_android_method_columns_crud_datatype_float.txt";
+
+		/**
+		 * ANDROID ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_GENERIC_FILE_PATH
+		 */
+		public static final String ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_GENERIC_TEMPLATE_FILE_PATH = "res/templates/android/template_android_method_columns_crud_datatype_generic.txt";
+
+		/**
+		 * ANDROID ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_INT_FILE_PATH
+		 */
+		public static final String ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_INT_TEMPLATE_FILE_PATH = "res/templates/android/template_android_method_columns_crud_datatype_int.txt";
+
+		/**
+		 * ANDROID ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_LONG_FILE_PATH
+		 */
+		public static final String ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_LONG_TEMPLATE_FILE_PATH = "res/templates/android/template_android_method_columns_crud_datatype_long.txt";
+
+		/**
+		 * ANDROID ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_STRING_FILE_PATH
+		 */
+		public static final String ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_STRING_TEMPLATE_FILE_PATH = "res/templates/android/template_android_method_columns_crud_datatype_string.txt";
+
+		/**
+		 * ANDROID ANDROID_METHOD_COLUMNS_CRUD_DEFAULT_FILE_PATH
+		 */
+		public static final String ANDROID_METHOD_COLUMNS_CRUD_DEFAULT_TEMPLATE_FILE_PATH = "res/templates/android/template_android_method_columns_crud_default.txt";
+
+		/**
+		 * ANDROID ANDROID_STATEMENT_ADD_URI_MATCHER_FILE_PATH
+		 */
+		public static final String ANDROID_STATEMENT_ADD_URI_MATCHER_TEMPLATE_FILE_PATH = "res/templates/android/template_android_statement_add_uri_matcher.txt";
+
+		/**
+		 * ANDROID ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_DELETE_FILE_PATH
+		 */
+		public static final String ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_DELETE_TEMPLATE_FILE_PATH = "res/templates/android/template_android_statement_content_provider_sql_delete.txt";
+
+		/**
+		 * ANDROID ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_INSERT_FILE_PATH
+		 */
+		public static final String ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_INSERT_TEMPLATE_FILE_PATH = "res/templates/android/template_android_statement_content_provider_sql_insert.txt";
+
+		/**
+		 * ANDROID ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_QUERY_FILE_PATH
+		 */
+		public static final String ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_QUERY_TEMPLATE_FILE_PATH = "res/templates/android/template_android_statement_content_provider_sql_query.txt";
+
+		/**
+		 * ANDROID ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_UPDATE_FILE_PATH
+		 */
+		public static final String ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_UPDATE_TEMPLATE_FILE_PATH = "res/templates/android/template_android_statement_content_provider_sql_update.txt";
+
+		/**
+		 * ANDROID ANDROID_STATEMENT_CONTENT_VALUES_PUT_FILE_PATH
+		 */
+		public static final String ANDROID_STATEMENT_CONTENT_VALUES_PUT_TEMPLATE_FILE_PATH = "res/templates/android/template_android_statement_content_values_put.txt";
+
+		/**
+		 * ANDROID ANDROID_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_FILE_PATH
+		 */
+		public static final String ANDROID_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_TEMPLATE_FILE_PATH = "res/templates/android/template_android_statement_sql_table_column_statement.txt";
+
+		/**
+		 * ANDROID ANDROID_VARIABLE_SQL_TABLE_COLUMN_FILE_PATH
+		 */
+		public static final String ANDROID_VARIABLE_SQL_TABLE_COLUMN_TEMPLATE_FILE_PATH = "res/templates/android/template_android_variable_sql_table_column.txt";
+
+		/**
+		 * ANDROID ANDROID_VARIABLE_TABLE_CREATE_SQL_FILE_PATH
+		 */
+		public static final String ANDROID_VARIABLE_TABLE_CREATE_SQL_TEMPLATE_FILE_PATH = "res/templates/android/template_android_variable_table_create_sql.txt";
+
+		/**
+		 * ANDROID ANDROID_VARIABLE_URI_MATCHER_CODE_FILE_PATH
+		 */
+		public static final String ANDROID_VARIABLE_URI_MATCHER_CODE_TEMPLATE_FILE_PATH = "res/templates/android/template_android_variable_uri_matcher_code.txt";
+
+	}
 }
