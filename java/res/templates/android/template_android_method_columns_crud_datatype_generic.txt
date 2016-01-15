@@ -1,0 +1,11 @@
+    /**
+	* Performs a database query and returns the value of QUERIED_COLUMN 
+	* based on the value of FUNCTION_PARAMS_VALUES passed to the function
+	*/
+	public <T> T get$QUERIED_COLUMN(FUNCTION_PARAMS_VALUES) {
+            return (T) getUtils().getDatabaseUtilities().getColumnsValues(
+                    getUri(),
+                    new String[]{FUNCTION_PARAMS_KEYS},
+                    new String[]{FUNCTION_PARAMS_VALUES}, $QUERIED_TABLE_COLUMN_REFERENCE
+            );
+     }
