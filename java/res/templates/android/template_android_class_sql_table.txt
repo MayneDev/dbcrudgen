@@ -2,7 +2,7 @@
 
         public static final String TABLE_NAME = "$TABLE_NAME";
 
-        public static final Uri CONTENT_URI = Uri.parse("content://"+$CONTENT_PROVIDER_CLASS.AUTHORITY + "/" + TABLE_NAME);
+        public static final Uri CONTENT_URI = Uri.parse("content://"+$CONTENT_PROVIDER_PACKAGE.$CONTENT_PROVIDER_CLASS.AUTHORITY + "/" + TABLE_NAME);
 
         $TABLE_COLUMNS
         
