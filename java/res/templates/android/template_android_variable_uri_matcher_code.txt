@@ -1,0 +1,1 @@
+private static final int $TABLE_NAME_URI_MATCHER_CODE = $MATCH_CODE;
