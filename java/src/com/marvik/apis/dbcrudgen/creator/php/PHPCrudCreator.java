@@ -52,6 +52,7 @@ public class PHPCrudCreator extends CrudCreator {
 	/**
 	 * Returns the Crud Template
 	 */
+	@Deprecated
 	@Override
 	public CrudTemplates getCrudTemplate() {
 		return phpTableClassCrudTemplate;
