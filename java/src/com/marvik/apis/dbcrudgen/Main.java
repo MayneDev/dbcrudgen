@@ -19,11 +19,16 @@ import com.marvik.apis.dbcrudgen.templates.sql.SQLTablesTemplate;
 public class Main {
 	public static void main(String[] args) {
 
-		testPHPCrudGenerator();
+		testAndroidCrudGenerator();
+	}
+
+	private static void testAndroidCrudGenerator() {
+		
+		
 	}
 
 	private static void testPHPCrudGenerator() {
-		// TODO Auto-generated method stub
+		
 		SQLTablesTemplate sQLTablesTemplate = new SQLTablesTemplate();
 		// System.out.println(sQLTablesTemplate.getTemplate());
 
