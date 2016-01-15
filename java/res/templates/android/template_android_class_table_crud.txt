@@ -1,0 +1,44 @@
+    public class $DATABASE_TABLE_CLASS implements DatabaseCRUDOperations {
+
+
+        @Override
+        public Context getContext() {
+            return context;
+        }
+
+        @Override
+        public Uri getUri() {
+            return $TABLE_ARTIFACTS_LINK.CONTENT_URI;
+        }
+
+        @Override
+        public Uri insert(ContentValues values) {
+          return  Uri.parse(getUri().toString() + String.format("%d",getContext().getContentResolver().insert(getUri(), values)));
+        }
+
+        @Override
+        public Cursor query(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+            return getContext().getContentResolver().query(getUri(), projection, selection, selectionArgs, sortOrder);
+        }
+
+        @Override
+        public int update(ContentValues values, String selection, String[] selectionArgs) {
+            return getContext().getContentResolver().update(getUri(), values, selection, selectionArgs);
+        }
+
+        @Override
+        public int delete(String selection, String[] selectionArgs) {
+            return getContext().getContentResolver().delete(getUri(), selection, selectionArgs);
+        }
+
+        public Uri insert$DATABASE_TABLE_CLASS($DATABASE_TABLE_INFO_CLASS $TABLE_INFO_DATATYPE_VARIABLE) {
+
+            ContentValues values = new ContentValues();
+            
+            $CONTENT_VALUES_PUT_STATEMENTS
+            
+            return insert(values);
+        }
+
+        $COLUMN_SPECIFIC_QUERY_METHODS
+    }
