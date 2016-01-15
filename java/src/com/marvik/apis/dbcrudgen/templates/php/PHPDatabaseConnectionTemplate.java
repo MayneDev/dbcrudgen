@@ -44,6 +44,6 @@ public class PHPDatabaseConnectionTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.PHP_DATABASE_CONNECTION_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_DATABASE_CONNECTION_TEMPLATE_FILE_PATH;
 	}
 }

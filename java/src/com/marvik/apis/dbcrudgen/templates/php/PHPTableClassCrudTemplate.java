@@ -41,6 +41,6 @@ public class PHPTableClassCrudTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.PHP_TABLE_CLASS_CRUD_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_TABLE_CLASS_CRUD_TEMPLATE_FILE_PATH;
 	}
 }

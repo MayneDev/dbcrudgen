@@ -34,6 +34,6 @@ public class PHPClassFileNameTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplateFilePath() {
-		return TemplatesFilePath.PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH;
 	}
 }

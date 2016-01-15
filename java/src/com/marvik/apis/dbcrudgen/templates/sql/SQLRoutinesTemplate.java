@@ -39,6 +39,6 @@ public class SQLRoutinesTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.SQL_ROUTINES_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.SQLTemplatesFilePaths.SQL_ROUTINES_TEMPLATE_FILE_PATH;
 	}
 }

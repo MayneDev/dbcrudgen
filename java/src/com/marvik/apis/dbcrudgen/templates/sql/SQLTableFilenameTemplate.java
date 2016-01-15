@@ -37,7 +37,7 @@ public class SQLTableFilenameTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 
-		return TemplatesFilePath.SQL_TABLES_FILE_NAME_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.SQLTemplatesFilePaths.SQL_TABLES_FILE_NAME_TEMPLATE_FILE_PATH;
 	}
 
 }

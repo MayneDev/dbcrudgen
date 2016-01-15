@@ -41,7 +41,7 @@ public final class SQLTablesTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.SQL_TABLES_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.SQLTemplatesFilePaths.SQL_TABLES_TEMPLATE_FILE_PATH;
 	}
 
 }

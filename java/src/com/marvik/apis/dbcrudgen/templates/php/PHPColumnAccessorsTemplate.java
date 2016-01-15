@@ -41,6 +41,6 @@ public class PHPColumnAccessorsTemplate extends CrudTemplates{
 	@Override
 	public String getTemplateFilePath() {
 		
-		return TemplatesFilePath.PHP_COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH;
 	}
 }
