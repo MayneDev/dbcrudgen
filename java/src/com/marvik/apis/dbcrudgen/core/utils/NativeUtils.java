@@ -20,6 +20,10 @@ public final class NativeUtils {
 	}
 
 	public static CharSequence getFileSeparator() {
-		return getSystemProperty(File.separator);
+		return getSystemProperty("file.separator")!= null ? getSystemProperty("file.separator") :File.separator;
+	}
+
+	public static String toJavaBeans(String className) {
+		return className.substring(0, 1).toUpperCase() + className.substring(1, className.length());
 	}
 }
