@@ -40,7 +40,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 				androidContentProviderConfiguration.getAndroidDatabaseConfiguration());
 
 		// add tables schemas import
-		contentProvidersTemplate = parseTablesSchemasClass(contentProvidersTemplate,
+		contentProvidersTemplate = parseTablesSchemasClassImport(contentProvidersTemplate,
 				androidContentProviderConfiguration.getAndroidDatabaseConfiguration());
 
 		// add tables URI's
@@ -218,7 +218,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 	}
 
 	// add tables schemas import
-	private String parseTablesSchemasClass(String contentProvidersTemplate,
+	private String parseTablesSchemasClassImport(String contentProvidersTemplate,
 			AndroidDatabaseConfiguration androidDatabaseConfiguration) {
 		String tableSchemasPackage = androidDatabaseConfiguration.getTablesSchemasPackage();
 		tableSchemasPackage = parsePackageName(tableSchemasPackage);
