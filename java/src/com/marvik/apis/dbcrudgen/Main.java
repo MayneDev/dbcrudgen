@@ -38,14 +38,14 @@ public class Main {
 
 		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
 				database.getDatabaseName(), 1, "DatabaseManager",
-				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\database\\sqliteopenhelper",
-				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\database\\tables");
+				"database\\sqliteopenhelper",
+				"database\\tables");
 		AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
 				"DataProvider",
-				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\database\\contentprovider\\",
+				"database\\contentprovider",
 				androidDatabaseConfiguration);
 		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
-				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\",
+				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject",
 				androidContentProviderConfiguration);
 
 		AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
