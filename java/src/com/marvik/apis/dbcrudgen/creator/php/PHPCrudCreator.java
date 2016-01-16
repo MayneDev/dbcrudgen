@@ -14,11 +14,6 @@ import com.marvik.apis.dbcrudgen.templates.php.PHPTableClassCrudTemplate;
 public class PHPCrudCreator extends CrudCreator {
 
 	/**
-	 * Files Handler
-	 */
-	private FilesHandler filesHandler;
-
-	/**
 	 * PHP Table Class Crud Template
 	 */
 	private PHPTableClassCrudTemplate phpTableClassCrudTemplate;
@@ -42,11 +37,9 @@ public class PHPCrudCreator extends CrudCreator {
 	 * PHP Crud Template
 	 */
 	public PHPCrudCreator() {
+		super();
 		phpTableClassCrudTemplate = new PHPTableClassCrudTemplate();
 		phpTemplatesParser = new PHPTemplatesParser();
-
-		filesHandler = new FilesHandler();
-
 	}
 
 	/**
@@ -75,14 +68,6 @@ public class PHPCrudCreator extends CrudCreator {
 	public String getTableCrud(Table table) {
 		return getPHPTemplatesParser().getTableCrud(phpProjectConfiguration, projectDatabaseConnectionProperties,
 				table);
-	}
-
-	/**
-	 * 
-	 * @return File Handler
-	 */
-	public FilesHandler getFilesHandler() {
-		return filesHandler;
 	}
 
 	/**
