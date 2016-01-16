@@ -14,4 +14,7 @@ public final class NativeUtils {
 		return new SimpleDateFormat(format, Locale.getDefault()).format(new Date(timeInMillis));
 	}
 
+	public static String getSystemProperty(String property) {
+		return System.getProperty(property);
+	}
 }
