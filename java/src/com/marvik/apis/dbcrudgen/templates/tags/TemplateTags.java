@@ -114,4 +114,36 @@ public class TemplateTags {
 		public static final String DATABASE_CONNECTION_INC_FILE = "$DATABASE_CONNECTION_INC_FILE";
 
 	}
+
+	public static class Android {
+		/**
+		 * TAG_TABLE_COLUMN_DEFINITION
+		 */
+		public static final CharSequence TAG_TABLE_COLUMN_DEFINITION = "$TABLE_COLUMN_DEFINITION";
+
+		/**
+		 * TAG_TABLE_COLUMN_REFERENCE
+		 */
+		public static final CharSequence TAG_TABLE_COLUMN_REFERENCE = "$TABLE_COLUMN_REFERENCE";
+		/**
+		 * TAG_TABLE_COLUMNS
+		 */
+		public static final CharSequence TABLE_COLUMNS = "$TABLE_COLUMNS";
+
+		/**
+		 * TAG TABLE NAME
+		 */
+		public static final CharSequence TABLE_NAME = "$TABLE_NAME";
+
+		/**
+		 * TAG CONTENT_PROVIDER_PACKAGE
+		 */
+		public static final String CONTENT_PROVIDER_PACKAGE = "$CONTENT_PROVIDER_PACKAGE";
+		/**
+		 * TAG CONTENT_PROVIDER_CLASS
+		 */
+		public static final String CONTENT_PROVIDER_CLASS = "$CONTENT_PROVIDER_CLASS";
+
+	}
+
 }
