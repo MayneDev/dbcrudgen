@@ -1,5 +1,6 @@
 package com.marvik.apis.dbcrudgen.core.utils;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -14,7 +15,11 @@ public final class NativeUtils {
 		return new SimpleDateFormat(format, Locale.getDefault()).format(new Date(timeInMillis));
 	}
 
-	public static String getSystemProperty(String property) {
+	private static String getSystemProperty(String property) {
 		return System.getProperty(property);
+	}
+
+	public static CharSequence getFileSeparator() {
+		return getSystemProperty(File.separator);
 	}
 }
