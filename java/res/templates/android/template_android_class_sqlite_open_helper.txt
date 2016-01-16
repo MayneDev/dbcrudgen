@@ -1,4 +1,4 @@
-package com.marvik.apps.wherethereisnodoc.database.sqliteopenhelper;
+package $PACKAGE_NAME;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
