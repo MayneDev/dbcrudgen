@@ -23,7 +23,15 @@ public final class NativeUtils {
 		return getSystemProperty("file.separator")!= null ? getSystemProperty("file.separator") :File.separator;
 	}
 
-	public static String toJavaBeans(String className) {
+	public static String toJavaBeansClass(String className) {
 		return className.substring(0, 1).toUpperCase() + className.substring(1, className.length());
+	}
+
+	public static String toJavaBeansVariable(String className) {
+		return className.substring(0, 1).toLowerCase() + className.substring(1, className.length());
+	}
+
+	public static String getString(int integer) {
+		return String.format("%d", integer);
 	}
 }
