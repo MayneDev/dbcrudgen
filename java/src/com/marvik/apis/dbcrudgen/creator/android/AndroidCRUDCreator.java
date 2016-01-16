@@ -123,7 +123,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		// Content provider class package
 		String contentProviderPackage = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
 				.getContentProviderPackage();
-		createDirectory(contentProviderPackage);
+		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + contentProviderPackage);
 
 		// Content provide class name
 		String contentProviderClass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
@@ -133,17 +133,17 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String sqliteOpenHelperSubclassPackage = getAndroidProjectConfiguration()
 				.getAndroidContentProviderConfiguration().getAndroidDatabaseConfiguration()
 				.getSqliteOpenHelperClassPackage();
-		createDirectory(sqliteOpenHelperSubclassPackage);
+		createDirectory(
+				projectStorageDir + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
 
-		// SQLite open helper class package
+		// SQLite open helper class
 		String sqliteOpenHelperSubclass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
 				.getAndroidDatabaseConfiguration().getSqliteOpenHelperClass();
-		createDirectory(sqliteOpenHelperSubclass);
 
 		// Database table package
 		String databaseTablesPackage = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
 				.getAndroidDatabaseConfiguration().getTablesSchemasPackage();
-		createDirectory(databaseTablesPackage);
+		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + databaseTablesPackage);
 
 		// Database name
 		String databaseName = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
@@ -154,11 +154,10 @@ public class AndroidCRUDCreator extends CrudCreator {
 				.getAndroidDatabaseConfiguration().getDatabaseVersion();
 
 		// Create table schemas
-		getAndroidTemplatesParser().createTablesSchemas(getAndroidProjectConfiguration(),database.getTables());
+		getAndroidTemplatesParser().createTablesSchemas(getAndroidProjectConfiguration(), database.getTables());
 
 	}
 
-	
 	/**
 	 * Creates a directory
 	 * 
