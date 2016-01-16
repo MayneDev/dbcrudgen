@@ -2,6 +2,16 @@ package com.marvik.apis.dbcrudgen.templates.tags;
 
 public class TemplateTags {
 
+	/**
+	 * TAG_EMPTY_STRING
+	 */
+	public static final String TAG_EMPTY_STRING = "";
+
+	/**
+	 * TAG_PRINTING_CHAR_COMMA
+	 */
+	public static final CharSequence TAG_PRINTING_CHAR_COMMA = ",";
+
 	public static class PHP {
 
 		/**
@@ -143,6 +153,29 @@ public class TemplateTags {
 		 * TAG CONTENT_PROVIDER_CLASS
 		 */
 		public static final String CONTENT_PROVIDER_CLASS = "$CONTENT_PROVIDER_CLASS";
+
+		/**
+		 * TAG TABLE_CREATE_SQL
+		 */
+		public static final CharSequence TABLE_CREATE_SQL = "$TABLE_CREATE_SQL";
+
+		/**
+		 * TAG TABLE_COLUMN_DEFINITION
+		 */
+		public static final String TABLE_COLUMN_DEFINITION = "$TABLE_COLUMN_DEFINITION";
+		/**
+		 * TAG TABLE_COLUMN_DATATYPE
+		 */
+		public static final String TABLE_COLUMN_DATATYPE = "$TABLE_COLUMN_DATATYPE";
+
+		/**
+		 * TAG TABLE_COLUMNS_COMMA_SEPARATOR
+		 */
+		public static final CharSequence TABLE_COLUMNS_COMMA_SEPARATOR = "$TABLE_COLUMNS_COMMA_SEPARATOR";
+		/**
+		 * TAG TABLE_JAVA_BEANS_CLASS_NAME
+		 */
+		public static final CharSequence TABLE_JAVA_BEANS_CLASS_NAME = "$TABLE_JAVA_BEANS_CLASS_NAME";
 
 	}
 
