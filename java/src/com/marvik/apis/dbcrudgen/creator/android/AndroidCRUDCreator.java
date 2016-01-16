@@ -1,6 +1,7 @@
 package com.marvik.apis.dbcrudgen.creator.android;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
@@ -33,6 +34,7 @@ import com.marvik.apis.dbcrudgen.templates.android.AndroidStatmentContentValuesP
 import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableColumnTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableCreateSQLTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableUriMatcherCodeTemplate;
+import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidCRUDCreator extends CrudCreator {
@@ -133,8 +135,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String sqliteOpenHelperSubclassPackage = getAndroidProjectConfiguration()
 				.getAndroidContentProviderConfiguration().getAndroidDatabaseConfiguration()
 				.getSqliteOpenHelperClassPackage();
-		createDirectory(
-				projectStorageDir + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
+		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
 
 		// SQLite open helper class
 		String sqliteOpenHelperSubclass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
@@ -153,9 +154,39 @@ public class AndroidCRUDCreator extends CrudCreator {
 		int databaseVersion = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
 				.getAndroidDatabaseConfiguration().getDatabaseVersion();
 
-		// Create table schemas
-		getAndroidTemplatesParser().createTablesSchemas(getAndroidProjectConfiguration(), database.getTables());
+		// Create table schemas source file and saves it on disk
+		createTablesSchemasSourceFile(database, projectStorageDir, databaseTablesPackage);
+	}
 
+	/**
+	 * AndroidCRUDCreator#createTablesSchemasSourceFile
+	 * 
+	 * Creates all the source code for all the tables schems and saves the source code to the disk.
+	 * @param database
+	 * @param projectStorageDir
+	 * @param databaseTablesPackage
+	 */
+	private void createTablesSchemasSourceFile(Database database, String projectStorageDir,
+			String databaseTablesPackage) {
+		String tablesSchemas = getAndroidTemplatesParser().createTablesSchemas(getAndroidProjectConfiguration(),
+				database.getTables());
+		String tablesSchemasAbsoluteSourceFile = projectStorageDir + NativeUtils.getFileSeparator() + databaseTablesPackage + NativeUtils.getFileSeparator()
+				+ FileNameTemplates.Android.TABLE_SCHEMAS_FILE_NAME;
+		boolean createTablesSchemasSourceFile = createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemas);
+
+		if (createTablesSchemasSourceFile) {
+			System.out.println("Created Tables Source File");
+		}
+	}
+
+	/**
+	 * Creates a source file
+	 * 
+	 * @param absoluteFileName
+	 * @param sourceCode
+	 */
+	private boolean createSourceFile(String absoluteFileName, String sourceCode) {
+		return getFilesHandler().createByteWeighedFile(absoluteFileName, sourceCode);
 	}
 
 	/**
