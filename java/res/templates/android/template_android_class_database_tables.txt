@@ -1,4 +1,4 @@
-package $TABLES_DEFINITION_PACKAGE;
+package $TABLES_PACKAGE_DEFINITION;
 
 import android.net.Uri;
 
