@@ -181,6 +181,12 @@ public class TemplateTags {
 		 * TAG TABLE_JAVA_BEANS_CLASS_NAME
 		 */
 		public static final CharSequence TABLE_JAVA_BEANS_CLASS_NAME = "$TABLE_JAVA_BEANS_CLASS_NAME";
+
+		/**
+		 * TAG JAVA_BEANS_CLASS_NAME
+		 */
+		public static final CharSequence JAVA_BEANS_CLASS_NAME = "$JAVA_BEANS_CLASS_NAME";
+
 		/**
 		 * TAG DATABASE_TABLES_SCHEMAS
 		 */
@@ -194,6 +200,10 @@ public class TemplateTags {
 		 * TAG TABLES_PACKAGE_DEFINITION
 		 */
 		public static final CharSequence TABLES_PACKAGE_DEFINITION = "$TABLES_PACKAGE_DEFINITION";
+		/**
+		 * TAG DATABASE_TABLES_SQL_VARIABLE
+		 */
+		public static final CharSequence DATABASE_TABLES_SQL_VARIABLE = "$TABLE_SQL";
 
 	}
 
