@@ -5,6 +5,11 @@ import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ForeignKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.UniqueKeys;
 
+/**
+ * Table -  Contains all the basic data of a typical MYSQL database table
+ * @author victor
+ *
+ */
 public class Table {
 
 	private String tableName;
