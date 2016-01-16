@@ -5,6 +5,7 @@ import java.io.File;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.parser.android.contentprovider.AndroidContentProvidersTemplatesParser;
+import com.marvik.apis.dbcrudgen.parser.android.sqliteopenhelper.AndroidSQLiteOpenHelperTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.tableschemas.AndroidTableSchemasTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
@@ -30,9 +31,14 @@ public class AndroidCRUDCreator extends CrudCreator {
 	private AndroidClassTableCrudTemplate androidClassTableCrudTemplate;
 
 	/**
-	 * 
+	 * AndroidContentProvidersTemplatesParser
 	 */
 	private AndroidContentProvidersTemplatesParser androidContentProvidersTemplatesParser;
+
+	/**
+	 * AndroidSQLiteOpenHelperTemplateParser
+	 */
+	private AndroidSQLiteOpenHelperTemplateParser androidSQLiteOpenHelperTemplateParser;
 
 	/**
 	 * Android CRUD Generator - Generates the full CRUD for android databases
@@ -41,6 +47,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		androidClassTableCrudTemplate = new AndroidClassTableCrudTemplate();
 		androidTableSchemasTemplatesParser = new AndroidTableSchemasTemplatesParser();
 		androidContentProvidersTemplatesParser = new AndroidContentProvidersTemplatesParser();
+		androidSQLiteOpenHelperTemplateParser = new AndroidSQLiteOpenHelperTemplateParser();
 	}
 
 	@Deprecated
@@ -97,6 +104,15 @@ public class AndroidCRUDCreator extends CrudCreator {
 	}
 
 	/**
+	 * AndroidCRUDCreator#getAndroidSQLiteOpenHelperTemplateParser
+	 * 
+	 * @return AndroidSQLiteOpenHelperTemplateParser
+	 */
+	public AndroidSQLiteOpenHelperTemplateParser getAndroidSQLiteOpenHelperTemplateParser() {
+		return androidSQLiteOpenHelperTemplateParser;
+	}
+
+	/**
 	 * Creates the android database crud source code
 	 * {@link AndroidCRUDCreator#createProject(Database)}
 	 * 
@@ -117,40 +133,60 @@ public class AndroidCRUDCreator extends CrudCreator {
 				.getContentProviderPackage();
 		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + contentProviderPackage);
 
-		// Content provide class name
-		String contentProviderClass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
-				.getContentProviderClass();
-
 		// SQLite open helper class package
 		String sqliteOpenHelperSubclassPackage = getAndroidProjectConfiguration()
 				.getAndroidContentProviderConfiguration().getAndroidDatabaseConfiguration()
 				.getSqliteOpenHelperClassPackage();
 		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
 
-		// SQLite open helper class
-		String sqliteOpenHelperSubclass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
-				.getAndroidDatabaseConfiguration().getSqliteOpenHelperClass();
-
 		// Database table package
 		String databaseTablesPackage = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
 				.getAndroidDatabaseConfiguration().getTablesSchemasPackage();
 		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + databaseTablesPackage);
-
-		// Database name
-		String databaseName = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
-				.getAndroidDatabaseConfiguration().getDatabaseName();
-
-		// Database version
-		int databaseVersion = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
-				.getAndroidDatabaseConfiguration().getDatabaseVersion();
 
 		// Create table schemas source file and saves it on disk
 		createTablesSchemasSourceFile(database, projectStorageDir, databaseTablesPackage);
 
 		// Create the database content provider file and saves it on disk
 		createContentProviderSourceFile(androidProjectConfiguration, database);
+
+		// create SQLiteOpenHelper Subclass
+		createSQLiteOpenHelperSourceFile(getAndroidProjectConfiguration());
 	}
 
+	// create SQLiteOpenHelper Subclass
+	private void createSQLiteOpenHelperSourceFile(AndroidProjectConfiguration androidProjectConfiguration) {
+
+		// Project storage directory
+		String projectStorageDir = getAndroidProjectConfiguration().getProjectStorageDir();
+
+		// SQLite open helper class package
+		String sqliteOpenHelperSubclassPackage = getAndroidProjectConfiguration()
+				.getAndroidContentProviderConfiguration().getAndroidDatabaseConfiguration()
+				.getSqliteOpenHelperClassPackage();
+
+		// SQLite open helper class
+		String sqliteOpenHelperSubclass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
+				.getAndroidDatabaseConfiguration().getSqliteOpenHelperClass();
+
+		// Create source code
+		String sqliteOpenHelperSubclassSourceCode = getAndroidSQLiteOpenHelperTemplateParser()
+				.createSQLiteOpenHelperSubclassSourceCode(androidProjectConfiguration);
+
+		// Create source code file absolute path
+		String sQLiteOpenHelperSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
+				+ sqliteOpenHelperSubclassPackage + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclass;
+
+		// write source code to disk
+		boolean createSQLiteOpenHelperSubclassSourceFile = createSourceFile(sQLiteOpenHelperSourceFile,
+				sqliteOpenHelperSubclassSourceCode);
+
+		if (createSQLiteOpenHelperSubclassSourceFile) {
+			System.out.println("Created SQLiteOpen Helper Source File");
+		}
+	}
+
+	// Create the database content provider file and saves it on disk
 	private void createContentProviderSourceFile(AndroidProjectConfiguration androidProjectConfiguration,
 			Database database) {
 		// Project storage directory
