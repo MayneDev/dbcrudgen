@@ -146,6 +146,11 @@ public class TemplateTags {
 		public static final CharSequence TABLE_COLUMNS = "$TABLE_COLUMNS";
 
 		/**
+		 * TABLE_NAME_TAG
+		 */
+		public static final String TABLE_NAME_TAG = "TABLE_NAME";
+
+		/**
 		 * TAG TABLE NAME
 		 */
 		public static final CharSequence TABLE_NAME = "$TABLE_NAME";
@@ -205,6 +210,82 @@ public class TemplateTags {
 		 */
 		public static final CharSequence DATABASE_TABLES_SQL_VARIABLE = "$TABLE_SQL";
 
+		/**
+		 * TAG PACKAGE_NAME
+		 */
+		public static final CharSequence PACKAGE_NAME = "$PACKAGE_NAME";
+		/**
+		 * TAG SQLITE_OPENHELPER_CLASS
+		 */
+		public static final CharSequence SQLITE_OPENHELPER_CLASS = "$SQLITE_OPENHELPER_CLASS";
+
+		/**
+		 * DATABASE_TABLES_CLASS
+		 */
+		public static final CharSequence DATABASE_TABLES_CLASS = "$DATABASE_TABLES_CLASS";
+
+		/**
+		 * MATCH_CODE
+		 */
+		public static final CharSequence MATCH_CODE = "$MATCH_CODE";
+
+		/**
+		 * URI_MATCHER_CODES
+		 */
+		public static final CharSequence URI_MATCHER_CODES = "$URI_MATCHER_CODES";
+
+		/**
+		 * INIT_URI_MATCHES
+		 */
+		public static final CharSequence INIT_URI_MATCHES = "$INIT_URI_MATCHES";
+
+		/**
+		 * TABLE_URI_MATCHER_CODE
+		 */
+		public static final CharSequence TABLE_URI_MATCHER_CODE = "$TABLE_URI_MATCHER_CODE";
+
+		/**
+		 * TABLE_DEFINITION_LINK
+		 */
+		public static final CharSequence TABLE_DEFINITION_LINK = "$TABLE_DEFINITION_LINK";
+
+		/**
+		 * $SQLITE_OPEN_HELPER_SUBCLASS
+		 */
+		public static final String SQLITE_OPEN_HELPER_SUBCLASS = "$SQLITE_OPEN_HELPER_SUBCLASS";
+		/**
+		 * SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE
+		 */
+		public static final String SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE = "$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE";
+
+		/**
+		 * DATABASE_NAME
+		 */
+		public static final CharSequence DATABASE_NAME = "$DATABASE_NAME";
+		/**
+		 * DATABASE_VERSION
+		 */
+		public static final CharSequence DATABASE_VERSION = "$DATABASE_VERSION";
+
+		/**
+		 * TABLES_ROWS_QUERY_STATEMENT
+		 */
+		public static final CharSequence TABLES_ROWS_QUERY_STATEMENTS = "$TABLES_ROWS_QUERY_STATEMENTS";
+
+		/**
+		 * TABLES_ROWS_INSERT_STATEMENT
+		 */
+		public static final CharSequence TABLES_ROWS_INSERT_STATEMENTS = "$TABLES_ROWS_INSERT_STATEMENTS";
+
+		/**
+		 * TABLES_ROWS_DELETE_STATEMENTS
+		 */
+		public static final CharSequence TABLES_ROWS_DELETE_STATEMENTS = "$TABLES_ROWS_DELETE_STATEMENTS";
+
+		/**
+		 * TABLES_ROWS_UPDATE_STATMENTS
+		 */
+		public static final CharSequence TABLES_ROWS_UPDATE_STATEMENTS = "$TABLES_ROWS_UPDATE_STATEMENTS";
 	}
 
 }
