@@ -2,6 +2,8 @@ package com.marvik.apis.dbcrudgen.parser.android;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
@@ -29,7 +31,7 @@ import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableCreate
 import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableUriMatcherCodeTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
-public class AndroidTemplatesParser extends TemplatesParser{
+public class AndroidTemplatesParser extends TemplatesParser {
 
 	/**
 	 * AndroidClassContentProviderTemplate
@@ -142,7 +144,8 @@ public class AndroidTemplatesParser extends TemplatesParser{
 	private AndroidVariableUriMatcherCodeTemplate androidVariableUriMatcherCodeTemplate;
 
 	/**
-	 * AndroidTemplatesParser - Class that parses templates into actual data/source code
+	 * AndroidTemplatesParser - Class that parses templates into actual
+	 * data/source code
 	 */
 	public AndroidTemplatesParser() {
 		androidClassContentProviderTemplate = new AndroidClassContentProviderTemplate();
@@ -169,6 +172,7 @@ public class AndroidTemplatesParser extends TemplatesParser{
 		androidVariableUriMatcherCodeTemplate = new AndroidVariableUriMatcherCodeTemplate();
 
 	}
+
 	/**
 	 * @return the androidClassContentProviderTemplate
 	 */
@@ -322,25 +326,58 @@ public class AndroidTemplatesParser extends TemplatesParser{
 	public AndroidVariableUriMatcherCodeTemplate getAndroidVariableUriMatcherCodeTemplate() {
 		return androidVariableUriMatcherCodeTemplate;
 	}
-	
+
 	/**
 	 * Creates the schemas of all the database tables
-	 * @param androidProjectConfiguration 
+	 * 
+	 * @param androidProjectConfiguration
 	 */
 	public void createTablesSchemas(AndroidProjectConfiguration androidProjectConfiguration, Table[] tables) {
+
+		AndroidContentProviderConfiguration androidContentProviderConfiguration = androidProjectConfiguration.getAndroidContentProviderConfiguration();
+		
+		AndroidDatabaseConfiguration androidDatabaseConfiguration = androidContentProviderConfiguration.getAndroidDatabaseConfiguration();
+		
+		
+		String databaseTablestemplate = getAndroidClassDatabaseTablesTemplate().getTemplate();
 
 		String tablesSchemas = "";
 
 		for (Table table : tables) {
-			tablesSchemas += createTableSchemas(androidProjectConfiguration,table);
+			tablesSchemas += createTableSchemas(androidProjectConfiguration, table);
 		}
 
-		System.out.println(tablesSchemas);
+		
+		//Add table package name
+		String tablesClassPackageName = androidDatabaseConfiguration.getTablesSchemasPackage();
+		databaseTablestemplate = parseTablesClassPackageName(databaseTablestemplate, tablesClassPackageName);
+		
+		//Add content provider import
+		
+		//Add all the tables SQL
+		databaseTablestemplate = addTablesSQLVariable(databaseTablestemplate, tablesSchemas);
+		
+		// Add all the the tables Schemas
+		databaseTablestemplate = parseTablesSchemasAll(databaseTablestemplate, tablesSchemas);
+
+		System.out.println(databaseTablestemplate);
+	}
+
+	//Adds a valid package name to the the tables class that holds all the schemas for the database tables
+	private String parseTablesClassPackageName(String databaseTablestemplate, String tablesClassPackageName) {
+		tablesClassPackageName = tablesClassPackageName.replace(NativeUtils.getFileSeparator(), TemplateTags.TAG_PRINTING_CHAR_DOT);
+		return databaseTablestemplate.replace(TemplateTags.Android.TABLES_PACKAGE_DEFINITION, tablesClassPackageName);
+	}
+
+	// Add all the the tables Schemas
+	private String parseTablesSchemasAll(String databaseTablestemplate, String tablesSchemas) {
+		return databaseTablestemplate.replace(TemplateTags.Android.DATABASE_TABLES_SCHEMAS, tablesSchemas);
 	}
 
 	/**
 	 * Creates the schemas of a database tables
-	 * @param androidProjectConfiguration 
+	 * 
+	 * @param androidProjectConfiguration
 	 */
 	private String createTableSchemas(AndroidProjectConfiguration androidProjectConfiguration, Table table) {
 
@@ -348,21 +385,79 @@ public class AndroidTemplatesParser extends TemplatesParser{
 		// with actual data
 		String tableSchema = getAndroidClassSQLTableTemplate().getTemplate();
 
-		String tableColumnsVariableTemplate = getAndroidVariableSQLTableColumnTemplate().getTemplate();
-
-		String tableColumnsVariables = createTableColumnsVariables(tableColumnsVariableTemplate, table);
+		// Add java beans class name
+		tableSchema = parseJavaBeansClassName(tableSchema, table.getTableName());
 
 		// Add Table name
 		tableSchema = parseTableName(tableSchema, table.getTableName());
 
+		// Add Content Uri
+		tableSchema = parseTableContentUri(androidProjectConfiguration, tableSchema);
+
 		// Add Table Columns
+		String tableColumnsVariableTemplate = getAndroidVariableSQLTableColumnTemplate().getTemplate();
+		String tableColumnsVariables = createTableColumnsVariables(tableColumnsVariableTemplate, table);
 		tableSchema = parseTableColumns(tableSchema, tableColumnsVariables);
 
-		// Add Content Uri
-		tableSchema = parseTableContentUri(androidProjectConfiguration,tableSchema);
+		// Add table SQL
+		String tableSQL = generateTableSQL(table);
+		tableSchema = parseTableSQL(tableSchema, tableSQL);
 
 		return tableSchema;
 
+	}
+
+	private String generateTableSQL(Table table) {
+		String tableSQLTemplate = getAndroidVariableSQLTableCreateSQLTemplate().getTemplate();
+
+		// Add table name
+		String tableName = table.getTableName();
+		tableSQLTemplate = parseTableName(tableSQLTemplate, tableName);
+
+		String tableColumns = "";
+
+		Columns[] columns = table.getColumns();
+		for (int i = 0; i < columns.length; i++) {
+			String columnName = columns[i].getColumnName();
+			String dataType = columns[i].getDataType().getDataType();
+			String tableColumnStatementTemplate = getAndroidStatementSQLTableColumnStatementTemplate().getTemplate();
+
+			boolean isLastColumn = (i == columns.length - 1);
+			tableColumnStatementTemplate = parseTableColumnsAndDataTypes(tableColumnStatementTemplate, columnName,
+					dataType, isLastColumn);
+
+			tableColumns += tableColumnStatementTemplate;
+
+		}
+
+		// Add table columns to the sql template
+		tableSQLTemplate = parseTableColumnsAndDataTypesAll(tableSQLTemplate, tableColumns);
+
+		return tableSQLTemplate;
+	}
+
+	private String parseTableColumnsAndDataTypesAll(String tableSQLTemplate, String tableColumns) {
+		return tableSQLTemplate.replace(TemplateTags.Android.TABLE_COLUMNS, tableColumns);
+	}
+
+	private String parseTableColumnsAndDataTypes(String tableColumnStatementTemplate, String columnName,
+			String dataType, boolean isLastColumn) {
+		if (isLastColumn) {
+			tableColumnStatementTemplate = tableColumnStatementTemplate
+					.replace(TemplateTags.Android.TABLE_COLUMNS_COMMA_SEPARATOR, TemplateTags.TAG_EMPTY_STRING);
+		} else {
+			tableColumnStatementTemplate = tableColumnStatementTemplate
+					.replace(TemplateTags.Android.TABLE_COLUMNS_COMMA_SEPARATOR, TemplateTags.TAG_PRINTING_CHAR_COMMA);
+		}
+		return tableColumnStatementTemplate
+				.replace(TemplateTags.Android.TABLE_COLUMN_DEFINITION, columnName.toUpperCase())
+				.replace(TemplateTags.Android.TABLE_COLUMN_DATATYPE, dataType);
+	}
+
+	// Add table sql
+	private String parseTableSQL(String tableSchema, String tableSQL) {
+
+		return tableSchema.replace(TemplateTags.Android.TABLE_CREATE_SQL, tableSQL);
 	}
 
 	// Add Content Uri
@@ -374,7 +469,7 @@ public class AndroidTemplatesParser extends TemplatesParser{
 				.getContentProviderClass();
 
 		// Remove back slashes to make a valid package name
-		contentProviderPackage = contentProviderPackage.replace(NativeUtils.getSystemProperty("file.separator"), ".");
+		contentProviderPackage = contentProviderPackage.replace(NativeUtils.getFileSeparator(), TemplateTags.TAG_PRINTING_CHAR_DOT);
 
 		return tableSchema.replace(TemplateTags.Android.CONTENT_PROVIDER_CLASS, contentProviderClass)
 				.replace(TemplateTags.Android.CONTENT_PROVIDER_PACKAGE, contentProviderPackage);
@@ -387,6 +482,15 @@ public class AndroidTemplatesParser extends TemplatesParser{
 
 	private String parseTableName(String tableSchema, String tableName) {
 		return tableSchema.replace(TemplateTags.Android.TABLE_NAME, tableName);
+	}
+
+	private String parseJavaBeansClassName(String tableSchema, String tableName) {
+		if (tableName.length() <= 1) {
+			return tableName.toUpperCase();
+		}
+		String javaBeansClassName = tableName.substring(0, 1).toUpperCase()
+				+ tableName.substring(1, tableName.length());
+		return tableSchema.replace(TemplateTags.Android.TABLE_JAVA_BEANS_CLASS_NAME, javaBeansClassName);
 	}
 
 	// Create Table Columns Variables
