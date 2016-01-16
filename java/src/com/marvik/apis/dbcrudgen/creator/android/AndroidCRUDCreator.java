@@ -1,41 +1,16 @@
 package com.marvik.apis.dbcrudgen.creator.android;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Properties;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
-import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
+import com.marvik.apis.dbcrudgen.parser.android.contentprovider.AndroidContentProvidersTemplatesParser;
+import com.marvik.apis.dbcrudgen.parser.android.tableschemas.AndroidTableSchemasTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
-import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassContentProviderTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassDatabaseTablesTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassSQLTableTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassSQLiteOpenHelperTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidClassTableCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidInterfaceCrudOperations;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeFloatTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeGenericTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeIntTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeLongTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeStringTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDefaultTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementAddUriMatcherTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLDeleteTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLInsertTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLQueryTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLUpdateTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementSQLTableColumnStatementTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatmentContentValuesPutTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableColumnTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableCreateSQLTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableUriMatcherCodeTemplate;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
-import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidCRUDCreator extends CrudCreator {
 
@@ -45,9 +20,9 @@ public class AndroidCRUDCreator extends CrudCreator {
 	private AndroidProjectConfiguration androidProjectConfiguration;
 
 	/**
-	 * AndroidTemplatesParser
+	 * AndroidTableSchemasTemplatesParser
 	 */
-	AndroidTemplatesParser androidTemplatesParser;
+	AndroidTableSchemasTemplatesParser androidTableSchemasTemplatesParser;
 
 	/**
 	 * AndroidClassTableCrudTemplate
@@ -55,11 +30,17 @@ public class AndroidCRUDCreator extends CrudCreator {
 	private AndroidClassTableCrudTemplate androidClassTableCrudTemplate;
 
 	/**
+	 * 
+	 */
+	private AndroidContentProvidersTemplatesParser androidContentProvidersTemplatesParser;
+
+	/**
 	 * Android CRUD Generator - Generates the full CRUD for android databases
 	 */
 	public AndroidCRUDCreator() {
 		androidClassTableCrudTemplate = new AndroidClassTableCrudTemplate();
-		androidTemplatesParser = new AndroidTemplatesParser();
+		androidTableSchemasTemplatesParser = new AndroidTableSchemasTemplatesParser();
+		androidContentProvidersTemplatesParser = new AndroidContentProvidersTemplatesParser();
 	}
 
 	@Deprecated
@@ -82,8 +63,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 	 * 
 	 * @return AndroidTemplatesParser
 	 */
-	public AndroidTemplatesParser getAndroidTemplatesParser() {
-		return androidTemplatesParser;
+	public AndroidTableSchemasTemplatesParser getAndroidTableSchemasTemplatesParser() {
+		return androidTableSchemasTemplatesParser;
 	}
 
 	/**
@@ -104,6 +85,15 @@ public class AndroidCRUDCreator extends CrudCreator {
 	 */
 	public void setAndroidProjectConfiguration(AndroidProjectConfiguration androidProjectConfiguration) {
 		this.androidProjectConfiguration = androidProjectConfiguration;
+	}
+
+	/**
+	 * AndroidCRUDCreator#getAndroidContentProvidersTemplatesParser
+	 * 
+	 * @return AndroidContentProvidersTemplatesParser
+	 */
+	public AndroidContentProvidersTemplatesParser getAndroidContentProvidersTemplatesParser() {
+		return androidContentProvidersTemplatesParser;
 	}
 
 	/**
@@ -156,21 +146,55 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		// Create table schemas source file and saves it on disk
 		createTablesSchemasSourceFile(database, projectStorageDir, databaseTablesPackage);
+
+		// Create the database content provider file and saves it on disk
+		createContentProviderSourceFile(androidProjectConfiguration, database);
+	}
+
+	private void createContentProviderSourceFile(AndroidProjectConfiguration androidProjectConfiguration,
+			Database database) {
+		// Project storage directory
+		String projectStorageDir = getAndroidProjectConfiguration().getProjectStorageDir();
+
+		// Content provider class package
+		String contentProviderPackage = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
+				.getContentProviderPackage();
+
+		// Content provide class name
+		String contentProviderClass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
+				.getContentProviderClass();
+
+		String contentProviderSourceCode = getAndroidContentProvidersTemplatesParser()
+				.createContentProviderSourceFile(getAndroidProjectConfiguration(), database.getTables());
+
+		String contentProviderSourceCodeFile = projectStorageDir + NativeUtils.getFileSeparator()
+				+ contentProviderPackage + NativeUtils.getFileSeparator() + contentProviderClass
+				+ FileNameTemplates.Android.JAVA_FILE_EXTENSION;
+
+		boolean createContentProvidersSourceFile = createSourceFile(contentProviderSourceCodeFile,
+				contentProviderSourceCode);
+
+		if (createContentProvidersSourceFile) {
+			System.out.println("Created Content providers Source File");
+		}
 	}
 
 	/**
 	 * AndroidCRUDCreator#createTablesSchemasSourceFile
 	 * 
-	 * Creates all the source code for all the tables schems and saves the source code to the disk.
+	 * Creates all the source code for all the tables schems and saves the
+	 * source code to the disk.
+	 * 
 	 * @param database
 	 * @param projectStorageDir
 	 * @param databaseTablesPackage
 	 */
 	private void createTablesSchemasSourceFile(Database database, String projectStorageDir,
 			String databaseTablesPackage) {
-		String tablesSchemas = getAndroidTemplatesParser().createTablesSchemas(getAndroidProjectConfiguration(),
-				database.getTables());
-		String tablesSchemasAbsoluteSourceFile = projectStorageDir + NativeUtils.getFileSeparator() + databaseTablesPackage + NativeUtils.getFileSeparator()
+		String tablesSchemas = getAndroidTableSchemasTemplatesParser()
+				.createTablesSchemas(getAndroidProjectConfiguration(), database.getTables());
+		String tablesSchemasAbsoluteSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
+				+ databaseTablesPackage + NativeUtils.getFileSeparator()
 				+ FileNameTemplates.Android.TABLE_SCHEMAS_FILE_NAME;
 		boolean createTablesSchemasSourceFile = createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemas);
 
