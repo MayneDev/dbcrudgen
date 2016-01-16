@@ -4,8 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.marvik.apis.dbcrudgen.creator.android.AndroidCRUDCreator;
 import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
 import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
+import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKeys;
@@ -23,14 +27,34 @@ public class Main {
 		testAndroidCrudGenerator();
 	}
 
-	private static void testAndroidCrudGenerator() {
-		
-		
+	private static CharSequence getClassVariable(String filename) {
+		filename = filename.replace(".java", "");
+		return filename.substring(0, 1).toLowerCase()+filename.substring(1, filename.length());
+	}
 
+	private static void testAndroidCrudGenerator() {
+
+		Database database = prepareDatabase();
+
+		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
+				database.getDatabaseName(), 1, "DatabaseManager",
+				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\database\\sqliteopenhelper",
+				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\database\\tables");
+		AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
+				"DataProvider",
+				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\database\\contentprovider\\",
+				androidDatabaseConfiguration);
+		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
+				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject\\",
+				androidContentProviderConfiguration);
+
+		AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
+		androidCRUDCreator.setAndroidProjectConfiguration(androidProjectConfiguration);
+		androidCRUDCreator.createProject(database);
 	}
 
 	private static void testPHPCrudGenerator() {
-		
+
 		SQLTablesTemplate sQLTablesTemplate = new SQLTablesTemplate();
 		// System.out.println(sQLTablesTemplate.getTemplate());
 
@@ -46,17 +70,7 @@ public class Main {
 		 * System.out.println(table.getTableSql()); }
 		 */
 
-		List<Table> tablesList = new ArrayList<Table>();
-
-		addTableFirstAids(tablesList);
-		addTableFirstAidsCategories(tablesList);
-
-		Table[] tables = new Table[tablesList.size()];
-		for (int i = 0; i < tablesList.size(); i++) {
-			tables[i] = tablesList.get(i);
-		}
-
-		Database database = new Database("where_there_is_no_doc", tables);
+		Database database = prepareDatabase();
 
 		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration("where_there_is_no_doc");
 		phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\where_there_is_no_doc\\");
@@ -75,6 +89,24 @@ public class Main {
 		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
 		phpCrudCreator.createProject(database);
 
+	}
+
+	/**
+	 * @return
+	 */
+	private static Database prepareDatabase() {
+		List<Table> tablesList = new ArrayList<Table>();
+
+		addTableFirstAids(tablesList);
+		addTableFirstAidsCategories(tablesList);
+
+		Table[] tables = new Table[tablesList.size()];
+		for (int i = 0; i < tablesList.size(); i++) {
+			tables[i] = tablesList.get(i);
+		}
+
+		Database database = new Database("where_there_is_no_doc", tables);
+		return database;
 	}
 
 	/**
@@ -118,10 +150,11 @@ public class Main {
 	 */
 	private static void addTableFirstAidsCategories(List<Table> tablesList) {
 		List<Columns> firstAidCategoriesColumnList = new ArrayList<Columns>();
-		firstAidCategoriesColumnList.add(new Columns("category_name", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
-		
+		firstAidCategoriesColumnList
+				.add(new Columns("category_name", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+
 		Columns[] firstAidColumns = new Columns[firstAidCategoriesColumnList.size()];
-		
+
 		for (int i = 0; i < firstAidCategoriesColumnList.size(); i++) {
 			firstAidColumns[i] = firstAidCategoriesColumnList.get(i);
 		}
