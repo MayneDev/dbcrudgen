@@ -15,6 +15,7 @@ public abstract class CrudTemplates {
 	public FilesHandler getFilesHandler() {
 		return fileHandler;
 	}
+
 	/**
 	 * Returns the template
 	 */
@@ -34,4 +35,20 @@ public abstract class CrudTemplates {
 	 * Returns the template file path
 	 */
 	public abstract String getTemplateFilePath();
+
+	/**
+	 * CrudTemplates#toString
+	 * 
+	 * @return getTemplate
+	 */
+	@Override
+	public String toString() {
+		try {
+			return getTemplate();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
