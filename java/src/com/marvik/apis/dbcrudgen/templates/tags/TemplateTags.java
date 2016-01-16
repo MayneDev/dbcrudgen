@@ -12,6 +12,11 @@ public class TemplateTags {
 	 */
 	public static final CharSequence TAG_PRINTING_CHAR_COMMA = ",";
 
+	/**
+	 * TAG_PRINTING_CHAR_DOT
+	 */
+	public static final CharSequence TAG_PRINTING_CHAR_DOT = ".";
+
 	public static class PHP {
 
 		/**
@@ -176,6 +181,19 @@ public class TemplateTags {
 		 * TAG TABLE_JAVA_BEANS_CLASS_NAME
 		 */
 		public static final CharSequence TABLE_JAVA_BEANS_CLASS_NAME = "$TABLE_JAVA_BEANS_CLASS_NAME";
+		/**
+		 * TAG DATABASE_TABLES_SCHEMAS
+		 */
+		public static final CharSequence DATABASE_TABLES_SCHEMAS = "$DATABASE_TABLES_SCHEMAS";
+		/**
+		 * TAG TABLES_DEFINITION_PACKAGE
+		 */
+		public static final CharSequence TABLES_DEFINITION_PACKAGE = "$TABLES_DEFINITION_PACKAGE";
+
+		/**
+		 * TAG TABLES_PACKAGE_DEFINITION
+		 */
+		public static final CharSequence TABLES_PACKAGE_DEFINITION = "$TABLES_PACKAGE_DEFINITION";
 
 	}
 
