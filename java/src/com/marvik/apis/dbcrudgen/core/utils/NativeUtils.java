@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
+
 public final class NativeUtils {
 
 	public static String getCurrentTime(String format, long timeInMillis) {
@@ -20,7 +22,7 @@ public final class NativeUtils {
 	}
 
 	public static CharSequence getFileSeparator() {
-		return getSystemProperty("file.separator")!= null ? getSystemProperty("file.separator") :File.separator;
+		return getSystemProperty("file.separator") != null ? getSystemProperty("file.separator") : File.separator;
 	}
 
 	public static String toJavaBeansClass(String className) {
@@ -33,5 +35,15 @@ public final class NativeUtils {
 
 	public static String getString(int integer) {
 		return String.format("%d", integer);
+	}
+
+	/**
+	 * NativeUtils#parsePackageName
+	 * Formats a file path into a java package url
+	 * @param packageFilePath
+	 * @return
+	 */
+	public static String parseJavaPackage(String packageFilePath) {
+		return packageFilePath.replace(NativeUtils.getFileSeparator(), TemplateTags.TAG_PRINTING_CHAR_DOT);
 	}
 }
