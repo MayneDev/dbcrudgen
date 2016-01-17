@@ -328,8 +328,8 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	 * @param packagePath
 	 * @return String Package Name
 	 */
-	public String parsePackageName(String packagePath){
-		return packagePath.replace(NativeUtils.getFileSeparator(),TemplateTags.TAG_PRINTING_CHAR_DOT);
+	public String parseJavaPackage(String packageFilePath){
+		return NativeUtils.parseJavaPackage(packageFilePath);
 	}
 
 }
