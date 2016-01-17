@@ -65,10 +65,16 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	private String generatePrimaryKeyColumnQueryMethod(Table table) {
 
 		PrimaryKey primaryKey = table.getPrimaryKey();
+		String primaryKeyColumn = primaryKey.getColumnName();
+		String primaryKeyDataType = primaryKey.getDataType().getDataType();
+	
+		String primaryKeyColumnReference = createTableColumnReference(
+				NativeUtils.toJavaBeansClass(table.getTableName()), primaryKeyColumn);
 
 		// Create variables for all the table columns
 		String tableColumnsVariable = "";
 		String tableColumnsReference = "";
+		String tableColumnsObjects = "";
 
 		TableColumn[] columns = table.getColumns();
 
@@ -82,70 +88,33 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 					columnName);
 			tableColumnsVariable += NativeUtils.createJavaVariable(dataType, objectName, javaDelimeter);
 
+			tableColumnsObjects += objectName;
+
 			if (i < columns.length - 1) {
 				javaDelimeter = JavaDelimiter.COMMA;
 				tableColumnsReference += ",";
+				tableColumnsObjects += ",";
 			}
 
 		}
 
-		System.out.println(tableColumnsVariable + "\n" + tableColumnsReference);
+		String template = getAndroidColumnQueryCrudTemplate(primaryKeyDataType).getTemplate();
 
-		return tableColumnsVariable;
+		return parseQueriedColumnQueryArtificats(template, primaryKeyColumn, primaryKeyColumnReference,
+				tableColumnsReference, tableColumnsVariable, tableColumnsObjects);
 	}
 
-	// generate the query method for the column hierarchy 
+	// generate the query method for the column hierarchy
 	private String generateColumnQueryMethod(TableColumn tableColumn, Table table) {
 		DataType dataType = tableColumn.getDataType();
 		MYSQLDataTypes mysqlDataType = Utils.parseMysqlDatatype(dataType.getDataType());
 		String mClass = Utils.generateJavaQueryMethodReturnType(mysqlDataType);
-		CrudTemplates crudTemplate = getColumnQueryCrudTemplate(mClass);
-		return prepareQueriedColumnQueryArtificats(crudTemplate.getTemplate().toString(),table,tableColumn);
-		
+		CrudTemplates crudTemplate = getAndroidColumnQueryCrudTemplate(mClass);
+		return prepareQueriedColumnQueryArtificats(crudTemplate.getTemplate().toString(), table, tableColumn);
+
 	}
 
-	// get column query template
-	public CrudTemplates getColumnQueryCrudTemplate(String columnDatatype) {
-		// Boolean
-		if (columnDatatype.equalsIgnoreCase("Boolean")) {
-			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
-		}
-		// Byte
-		if (columnDatatype.equalsIgnoreCase("Byte")) {
-			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
-		}
-		// Integer
-		if (columnDatatype.equalsIgnoreCase("Integer")) {
-			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
-		}
-		// Date
-		if (columnDatatype.equalsIgnoreCase("Date")) {
-			// TO DO ADD SOURCE CODE
-		}
-		// Double
-		if (columnDatatype.equalsIgnoreCase("Double")) {
-			return new AndroidMethodColumnsCrudDataTypeFloatTemplate();
-		}
-		// Float
-		if (columnDatatype.equalsIgnoreCase("Float")) {
-			return new AndroidMethodColumnsCrudDataTypeFloatTemplate();
-		}
-		// Long
-		if (columnDatatype.equalsIgnoreCase("Long")) {
-			return new AndroidMethodColumnsCrudDataTypeLongTemplate();
-		}
-		// String
-		if (columnDatatype.equalsIgnoreCase("String")) {
-			return new AndroidMethodColumnsCrudDataTypeStringTemplate();
-		}
-
-		if (columnDatatype.equalsIgnoreCase("Class")) {
-			return new AndroidMethodColumnsCrudDataTypeGenericTemplate();
-		}
-		return null;
-	}
-
-	private String prepareQueriedColumnQueryArtificats(String template ,Table table, TableColumn tableColumn) {
+	private String prepareQueriedColumnQueryArtificats(String template, Table table, TableColumn tableColumn) {
 
 		// Add queried column
 		String queriedColumn = tableColumn.getColumnName();
