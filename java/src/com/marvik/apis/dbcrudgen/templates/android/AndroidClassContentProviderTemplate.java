@@ -21,7 +21,7 @@ public class AndroidClassContentProviderTemplate extends CrudTemplates {
 	
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
-		// TODO Auto-generated method stub
+		
 		return super.openTemplate(templateFilePath);
 	}
 
@@ -30,7 +30,7 @@ public class AndroidClassContentProviderTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplate(){
-		// TODO Auto-generated method stub
+		
 		try {
 			return super.getTemplate();
 		} catch (IOException e) {
@@ -45,7 +45,7 @@ public class AndroidClassContentProviderTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplateFilePath() {
-		// TODO Auto-generated method stub
+		
 		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_CONTENT_PROVIDER_TEMPLATE_FILE_PATH;
 	}
 
