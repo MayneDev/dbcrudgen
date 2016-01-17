@@ -15,6 +15,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidClassTableCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
 
 public class AndroidCRUDCreator extends CrudCreator {
 
@@ -115,7 +116,21 @@ public class AndroidCRUDCreator extends CrudCreator {
 		AndroidTableCRUDTemplateParser androidTableCRUDTemplateParser = new AndroidTableCRUDTemplateParser();
 
 		for (Table table : database.getTables()) {
-			String tableCRUDSourceCode = androidTableCRUDTemplateParser.createSourceCode(table);
+
+			String packageFilePath = tablesCRUDPackage;
+
+			String tableCRUDSourceCode = androidTableCRUDTemplateParser.createSourceCode(packageFilePath, table);
+
+			String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
+
+			String tableCRUDSourceFile = projectStorageDir + NativeUtils.getFileSeparator() + tablesCRUDPackage
+					+ NativeUtils.getFileSeparator() + tableClassName + AndroidProjectFileNames.JAVA_FILE_EXTENSION;
+
+			boolean createTableCRUDSourceFile = createSourceFile(tableCRUDSourceFile, tableCRUDSourceCode);
+
+			if (createTableCRUDSourceFile) {
+				System.out.println("Created " + tableClassName + " CRUD Source File");
+			}
 		}
 
 	}
@@ -133,7 +148,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		// the table CRUD operations source file absolute path
 		String tablesAbstractCRUDOperationsSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
-				+ tablesCrudPackage + NativeUtils.getFileSeparator() + abstractCrudOperationsSourceFile;
+				+ tablesCrudPackage + NativeUtils.getFileSeparator() + abstractCrudOperationsSourceFile
+				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 		// write source code to disk
 		boolean createAbstractCRUDOperationsSourceFile = createSourceFile(tablesAbstractCRUDOperationsSourceFile,
