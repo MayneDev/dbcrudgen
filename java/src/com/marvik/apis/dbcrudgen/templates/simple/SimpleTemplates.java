@@ -41,21 +41,5 @@ public class SimpleTemplates {
 			public static final String SQL_TABLES_FILE_NAME_TEMPLATE = "$DIRECTORY$TABLENAME.table.sql";
 		}
 
-		public static final class Android {
-			/**
-			 * JAVA_FILE_EXTENSION
-			 */
-			public static final String JAVA_FILE_EXTENSION = ".java";
-
-			/**
-			 * TABLE_SCHEMAS_CLASS_NAME
-			 */
-			public static final String TABLE_SCHEMAS_CLASS_NAME = "Tables";
-
-			/**
-			 * TABLE_SCHEMAS_FILE_NAME
-			 */
-			public static final String TABLE_SCHEMAS_FILE_NAME = TABLE_SCHEMAS_CLASS_NAME + JAVA_FILE_EXTENSION;
-		}
 	}
 }

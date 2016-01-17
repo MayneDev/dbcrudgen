@@ -5,6 +5,7 @@ import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
+import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
@@ -204,7 +205,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 	 * @return table definition link
 	 */
 	private String parseTableDefinitionLink(String tableName) {
-		return FileNameTemplates.Android.TABLE_SCHEMAS_CLASS_NAME + TemplateTags.TAG_PRINTING_CHAR_DOT
+		return AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME + TemplateTags.TAG_PRINTING_CHAR_DOT
 				+ NativeUtils.toJavaBeansClass(tableName) + TemplateTags.TAG_PRINTING_CHAR_DOT
 				+ TemplateTags.Android.TABLE_NAME_TAG;
 	}
@@ -223,7 +224,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 		String tableSchemasPackage = androidDatabaseConfiguration.getTablesSchemasPackage();
 		tableSchemasPackage = parseJavaPackage(tableSchemasPackage);
 		String tableSchemasClass = tableSchemasPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
-				+ FileNameTemplates.Android.TABLE_SCHEMAS_CLASS_NAME;
+				+ AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME;
 		return contentProvidersTemplate.replace(TemplateTags.Android.DATABASE_TABLES_CLASS, tableSchemasClass);
 	}
 

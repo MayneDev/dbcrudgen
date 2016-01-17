@@ -10,6 +10,7 @@ import com.marvik.apis.dbcrudgen.parser.android.crudoperations.AndroidCrudOperat
 import com.marvik.apis.dbcrudgen.parser.android.sqliteopenhelper.AndroidSQLiteOpenHelperTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.tableschemas.AndroidTableSchemasTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
+import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidClassTableCrudTemplate;
@@ -185,7 +186,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		//Create the source code
 		String tablesAbstractCRUDOperationsSourceCode = getAndroidCrudOperationsTemplateParser().createSourceCode(tablesCrudPackage);
 		
-		String abstractCrudOperationsSourceFile = FileNameTemplates.Android.CRUD_OPERATIONS_INTERFACE_CLASS_NAME;
+		String abstractCrudOperationsSourceFile = AndroidProjectFileNames.CRUD_OPERATIONS_INTERFACE_CLASS_NAME;
 		
 		//the table CRUD operations source file absolute path
 		String tablesAbstractCRUDOperationsSourceFile =  projectStorageDir + NativeUtils.getFileSeparator()
@@ -237,7 +238,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		String contentProviderSourceCodeFile = projectStorageDir + NativeUtils.getFileSeparator()
 				+ contentProviderPackage + NativeUtils.getFileSeparator() + contentProviderClass
-				+ FileNameTemplates.Android.JAVA_FILE_EXTENSION;
+				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 		boolean createContentProvidersSourceFile = createSourceFile(contentProviderSourceCodeFile,
 				contentProviderSourceCode);
@@ -263,7 +264,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 				.createTablesSchemas(getAndroidProjectConfiguration(), database.getTables());
 		String tablesSchemasAbsoluteSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
 				+ databaseTablesPackage + NativeUtils.getFileSeparator()
-				+ FileNameTemplates.Android.TABLE_SCHEMAS_FILE_NAME;
+				+ AndroidProjectFileNames.TABLE_SCHEMAS_FILE_NAME;
 		boolean createTablesSchemasSourceFile = createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemasSourceCode);
 
 		if (createTablesSchemasSourceFile) {

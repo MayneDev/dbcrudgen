@@ -1,11 +1,10 @@
 package com.marvik.apis.dbcrudgen.parser.android.sqliteopenhelper;
 
-import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
-import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
+import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidSQLiteOpenHelperTemplateParser extends AndroidTemplatesParser {
@@ -61,7 +60,7 @@ public class AndroidSQLiteOpenHelperTemplateParser extends AndroidTemplatesParse
 		tableSchemasPackage = parseJavaPackage(tableSchemasPackage);
 
 		String tableSchemasClass = tableSchemasPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
-				+ FileNameTemplates.Android.TABLE_SCHEMAS_CLASS_NAME;
+				+ AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME;
 		return sqliteOpenHelperSubclassTemplate.replace(TemplateTags.Android.DATABASE_TABLES_CLASS, tableSchemasClass);
 	}
 
