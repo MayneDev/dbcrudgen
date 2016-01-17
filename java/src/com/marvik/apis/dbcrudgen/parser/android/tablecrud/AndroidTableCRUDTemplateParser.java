@@ -174,10 +174,16 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 				// Add primary key column reference
 				.replace(TemplateTags.Android.FUNCTION_PARAMS_KEYS, primaryKeyColumnReference)
 
+				// Add primary key column values comments
+				.replace(TemplateTags.Android.FUNCTION_PARAMS,primaryKeyParamObject)
+				
 				// Add primary key column parameters
 				.replace(TemplateTags.Android.FUNCTION_PARAMS_VALUES,
 						NativeUtils.parseStringDefaultParser(primaryKeyParamObject))
 
+				//Add queried column comment
+				.replace(TemplateTags.Android.QUERIED_TABLE_COLUMN, (queriedColumn))
+				
 				// Add queried column
 				.replace(TemplateTags.Android.QUERIED_COLUMN, NativeUtils.toJavaBeansClass(queriedColumn))
 

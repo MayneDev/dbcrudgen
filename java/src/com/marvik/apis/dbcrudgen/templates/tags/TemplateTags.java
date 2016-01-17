@@ -300,7 +300,10 @@ public class TemplateTags {
 		 * $COLUMN_SPECIFIC_QUERY_METHODS
 		 */
 		public static final CharSequence COLUMN_SPECIFIC_QUERY_METHODS = "$COLUMN_SPECIFIC_QUERY_METHODS";
-
+		/**
+		 * QUERIED_TABLE_COLUMN
+		 */
+		public static final CharSequence QUERIED_TABLE_COLUMN = "$QUERIED_TABLE_COLUMN";
 		/**
 		 * $QUERIED_COLUMN
 		 */
@@ -325,6 +328,12 @@ public class TemplateTags {
 		 * FUNCTION_PARAMS_VALUES
 		 */
 		public static final CharSequence FUNCTION_PARAMS_VALUES = "$FUNCTION_PARAMS_VALUES";
+
+		/**
+		 * FUNCTION_PARAMS
+		 */
+		public static final CharSequence FUNCTION_PARAMS = "$FUNCTION_PARAMS";
+
 	}
 
 }
