@@ -9,10 +9,10 @@ import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConn
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ColumnKeys;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.KeyColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ForeignKeys;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKeys;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.UniqueKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
@@ -155,11 +155,11 @@ public class PHPTemplatesParser extends TemplatesParser {
 	/**
 	 * getColumnName
 	 * 
-	 * @param columns
+	 * @param tableColumn
 	 * @return the column name
 	 */
-	public String getColumnName(Columns columns) {
-		return columns.getColumnName();
+	public String getColumnName(TableColumn tableColumn) {
+		return tableColumn.getColumnName();
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 		String tableCrudSQL = getPhpTableClassCrudTemplate().getTemplate();
 
 		String tableName = table.getTableName();
-		Columns[] columns = table.getColumns();
+		TableColumn[] columns = table.getColumns();
 
 		String columnsCrud = generateColumnsCrudFunctions(table, columns);
 		String columnsAccessor = generateColumnAccessorMethods(columns);
@@ -310,16 +310,16 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * @Return the new string
 	 */
 
-	public String createColumnsAccessorFunctions(Columns[] columns) {
+	public String createColumnsAccessorFunctions(TableColumn[] columns) {
 		String columnsAccessorFunctions = "";
-		for (Columns column : columns) {
-			columnsAccessorFunctions += generateColumnAccessorMethods(column);
+		for (TableColumn tableColumn : columns) {
+			columnsAccessorFunctions += generateColumnAccessorMethods(tableColumn);
 		}
 		return columnsAccessorFunctions;
 	}
 
 	/**
-	 * Parse Column Accessors -> Replaces the column name in the template with
+	 * Parse TableColumn Accessors -> Replaces the column name in the template with
 	 * the passed column name
 	 */
 	private String parseColumnAccesssors(String columnName, String template) {
@@ -329,10 +329,10 @@ public class PHPTemplatesParser extends TemplatesParser {
 	/**
 	 * generate the columns accessor methods
 	 */
-	public String generateColumnAccessorMethods(Columns[] columns) {
+	public String generateColumnAccessorMethods(TableColumn[] columns) {
 		String columnsAccessor = "";
-		for (Columns column : columns) {
-			String columnName = column.getColumnName();
+		for (TableColumn tableColumn : columns) {
+			String columnName = tableColumn.getColumnName();
 			columnsAccessor += parseColumnAccesssors(columnName, getPhpColumnAccessorsTemplate().getTemplate());
 		}
 		return columnsAccessor;
@@ -341,8 +341,8 @@ public class PHPTemplatesParser extends TemplatesParser {
 	/**
 	 * generate the columns accessor methods
 	 */
-	public String generateColumnAccessorMethods(Columns columns) {
-		return generateColumnGetters(columns.getColumnName()) + generateColumnSetters(columns.getColumnName());
+	public String generateColumnAccessorMethods(TableColumn tableColumn) {
+		return generateColumnGetters(tableColumn.getColumnName()) + generateColumnSetters(tableColumn.getColumnName());
 	}
 
 	/**
@@ -360,13 +360,13 @@ public class PHPTemplatesParser extends TemplatesParser {
 	}
 
 	/**
-	 * Generate Columns Crud Functions
+	 * Generate TableColumn Crud Functions
 	 * 
 	 * @param table
 	 * @param columns
 	 * @return
 	 */
-	private String generateColumnsCrudFunctions(Table table, Columns[] columns) {
+	private String generateColumnsCrudFunctions(Table table, TableColumn[] columns) {
 
 		String columnsCrudFunction = "";
 
@@ -384,11 +384,11 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * Generate crud functions for table columns that hold special keys
 	 */
 
-	private String generateTableKeysColumnsCrudFunctions(Table table, Columns[] columns) {
+	private String generateTableKeysColumnsCrudFunctions(Table table, TableColumn[] columns) {
 		String columnsCrudFunction = "";
 
 		// Generate crud functions for primary key columns
-		columnsCrudFunction += generatePrimaryKeysCrudFunctions(table.getPrimaryKeys(), columns);
+		columnsCrudFunction += generatePrimaryKeysCrudFunctions(table.getPrimaryKey(), columns);
 
 		// Generate crud functions for foreign key columns
 		columnsCrudFunction += generateForeignKeysCrudFunctions(table.getForeignKeys(), columns);
@@ -403,12 +403,12 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * Generate crud functions for table columns that do not hold special keys
 	 */
 
-	private String generateNonTableKeysColumnsCrudFunctions(Table table, Columns[] columns) {
+	private String generateNonTableKeysColumnsCrudFunctions(Table table, TableColumn[] columns) {
 		String columnsCrudFunction = "";
 
 		// Generate crud functions for other database columns
-		for (Columns column : columns) {
-			columnsCrudFunction += generateColumnCrudFunctions(table.getPrimaryKeys(), column);
+		for (TableColumn tableColumn : columns) {
+			columnsCrudFunction += generateColumnCrudFunctions(table.getPrimaryKey(), tableColumn);
 		}
 		return columnsCrudFunction;
 	}
@@ -416,34 +416,34 @@ public class PHPTemplatesParser extends TemplatesParser {
 	/**
 	 * Generate the crud to get the primary keys for the table
 	 */
-	private String generatePrimaryKeysCrudFunctions(PrimaryKeys primaryKeys, Columns[] columns) {
-		return generateColumnKeysCrudFunctions(primaryKeys, columns);
+	private String generatePrimaryKeysCrudFunctions(PrimaryKey primaryKey, TableColumn[] columns) {
+		return generateColumnKeysCrudFunctions(primaryKey, columns);
 	}
 
 	/**
 	 * Generate the crud to get the foreign keys for the table
 	 */
-	private String generateForeignKeysCrudFunctions(ForeignKeys foreignKeys, Columns[] columns) {
+	private String generateForeignKeysCrudFunctions(ForeignKeys foreignKeys, TableColumn[] columns) {
 		return generateColumnKeysCrudFunctions(foreignKeys, columns);
 	}
 
 	/**
 	 * Generate the crud to get the unique keys for the table
 	 */
-	private String generateUniqueKeysCrudFunctions(UniqueKeys uniqueKeys, Columns[] columns) {
+	private String generateUniqueKeysCrudFunctions(UniqueKeys uniqueKeys, TableColumn[] columns) {
 		return generateColumnKeysCrudFunctions(uniqueKeys, columns);
 	}
 
-	private String generateColumnKeysCrudFunctions(ColumnKeys columnKeys, Columns[] columns) {
-		if (columnKeys == null) {
+	private String generateColumnKeysCrudFunctions(KeyColumn keyColumn, TableColumn[] columns) {
+		if (keyColumn == null) {
 			return "";
 		}
 		/*
 		 * SWAP THE COLUMNKEY AND THE COLUMNS, AND PASS THEM TO THIS METHOD
-		 * generateColumnCrudFunctions(ColumnKeys columnKeys, Columns columns);
+		 * generateColumnCrudFunctions(KeyColumn columnKeys, TableColumn columns);
 		 */
 		String columnKeysCrudFunctions = "";
-		for (String columnKey : columnKeys.getColumnKeys()) {
+		for (String columnKey : keyColumn.getColumnKeys()) {
 			columnKeysCrudFunctions += generateColumnKeysCrudFunction(columnKey, columns);
 		}
 		return columnKeysCrudFunctions;
@@ -453,7 +453,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * Generates crud functions for columns that hold keys for the database
 	 * table
 	 */
-	private final String generateColumnKeysCrudFunction(String columnKey, Columns[] columns) {
+	private final String generateColumnKeysCrudFunction(String columnKey, TableColumn[] columns) {
 
 		String[] columnKeys = new String[columns.length];
 
@@ -461,18 +461,18 @@ public class PHPTemplatesParser extends TemplatesParser {
 			columnKeys[i] = columns[i].getColumnName();
 		}
 
-		return generateColumnCrudFunctions(new ColumnKeys(columnKeys),
-				new Columns(columnKey, new DataType(columnKey, new Constraints(null))));
+		return generateColumnCrudFunctions(new KeyColumn(columnKeys),
+				new TableColumn(columnKey, new DataType(columnKey, new Constraints(null))));
 	}
 
 	/**
 	 * Generates column crud functions from a template
 	 */
-	private String generateColumnCrudFunctions(ColumnKeys columnKeys, Columns columns) {
+	private String generateColumnCrudFunctions(KeyColumn keyColumn, TableColumn tableColumn) {
 		String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
-		String columnName = columns.getColumnName();
+		String columnName = tableColumn.getColumnName();
 
-		String[] mColumnKeys = columnKeys.getColumnKeys();
+		String[] mColumnKeys = keyColumn.getColumnKeys();
 
 		String keyParams = "";
 		String keyParamsValues = "";

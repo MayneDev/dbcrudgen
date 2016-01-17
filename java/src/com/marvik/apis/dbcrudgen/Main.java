@@ -10,8 +10,8 @@ import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentP
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKeys;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
 import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
@@ -19,7 +19,6 @@ import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 
 public class Main {
 	public static void main(String[] args) {
-
 		testAndroidCrudGenerator();
 	}
 
@@ -28,14 +27,10 @@ public class Main {
 		Database database = prepareDatabase();
 
 		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
-				database.getDatabaseName(), 1, "DatabaseManager",
-				"database\\sqliteopenhelper",
-				"database\\tables",
+				database.getDatabaseName(), 1, "DatabaseManager", "database\\sqliteopenhelper", "database\\tables",
 				"database\\tablescrud");
 		AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
-				"DataProvider",
-				"database\\contentprovider",
-				androidDatabaseConfiguration);
+				"DataProvider", "database\\contentprovider", androidDatabaseConfiguration);
 		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
 				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject",
 				androidContentProviderConfiguration);
@@ -90,22 +85,23 @@ public class Main {
 	 * @param tablesList
 	 */
 	private static void addTableFirstAids(List<Table> tablesList) {
-		List<Columns> firstAidColumnList = new ArrayList<Columns>();
+		List<TableColumn> firstAidColumnList = new ArrayList<TableColumn>();
 		firstAidColumnList
-				.add(new Columns("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
-		firstAidColumnList.add(new Columns("ailment_information", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_causes", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_prevention", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_signs", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_symptoms", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_cautions", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_medication", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_treatment", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_treatment_precautions", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_treatment_position", new DataType("text", new Constraints())));
-		firstAidColumnList.add(new Columns("ailment_short_notes", new DataType("text", new Constraints())));
+				.add(new TableColumn("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+		firstAidColumnList.add(new TableColumn("ailment_information", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_causes", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_prevention", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_signs", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_symptoms", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_cautions", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_medication", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_treatment", new DataType("text", new Constraints())));
+		firstAidColumnList
+				.add(new TableColumn("ailment_treatment_precautions", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_treatment_position", new DataType("text", new Constraints())));
+		firstAidColumnList.add(new TableColumn("ailment_short_notes", new DataType("text", new Constraints())));
 
-		Columns[] firstAidColumns = new Columns[firstAidColumnList.size()];
+		TableColumn[] firstAidColumns = new TableColumn[firstAidColumnList.size()];
 		for (int i = 0; i < firstAidColumnList.size(); i++) {
 			firstAidColumns[i] = firstAidColumnList.get(i);
 		}
@@ -117,20 +113,21 @@ public class Main {
 				+ "`ailment_treatment_position` text, `ailment_short_notes` text,"
 				+ "`id_firstaid` integer primary key auto_increment);";
 
-		PrimaryKeys primaryKeys = new PrimaryKeys(new String[] { "id_firstaid", });
+		PrimaryKey primaryKey = new PrimaryKey("id_firstaid",
+				new DataType("integer", new Constraints("primary key auto_increment")));
 
-		tablesList.add(new Table("firstaids", firstAidColumns, tableSql, primaryKeys, null, null));
+		tablesList.add(new Table("firstaids", firstAidColumns, tableSql, primaryKey, null, null));
 	}
 
 	/**
 	 * @param tablesList
 	 */
 	private static void addTableFirstAidsCategories(List<Table> tablesList) {
-		List<Columns> firstAidCategoriesColumnList = new ArrayList<Columns>();
-		firstAidCategoriesColumnList
-				.add(new Columns("category_name", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+		List<TableColumn> firstAidCategoriesColumnList = new ArrayList<TableColumn>();
+		firstAidCategoriesColumnList.add(
+				new TableColumn("category_name", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
 
-		Columns[] firstAidColumns = new Columns[firstAidCategoriesColumnList.size()];
+		TableColumn[] firstAidColumns = new TableColumn[firstAidCategoriesColumnList.size()];
 
 		for (int i = 0; i < firstAidCategoriesColumnList.size(); i++) {
 			firstAidColumns[i] = firstAidCategoriesColumnList.get(i);
@@ -138,9 +135,10 @@ public class Main {
 		String tableSql = "CREATE TABLE IF NOT EXISTS `firstaid_categories` ("
 				+ "`id_firstaid_category` int(11) NOT NULL," + " `category_name` varchar(128) NOT NULL)";
 
-		PrimaryKeys primaryKeys = new PrimaryKeys(new String[] { "id_firstaid_category", });
+		PrimaryKey primaryKey = new PrimaryKey("id_firstaid_category",
+				new DataType("integer", new Constraints("primary key auto_increment")));
 
-		tablesList.add(new Table("firstaid_categories", firstAidColumns, tableSql, primaryKeys, null, null));
+		tablesList.add(new Table("firstaid_categories", firstAidColumns, tableSql, primaryKey, null, null));
 	}
 
 	private static void print(String string) {

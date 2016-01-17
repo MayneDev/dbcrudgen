@@ -5,7 +5,7 @@ import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
@@ -121,7 +121,7 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		tableSchema = parseTableContentUri(androidProjectConfiguration.getAndroidContentProviderConfiguration(),
 				tableSchema);
 
-		// Add Table Columns
+		// Add Table TableColumn
 		String tableColumnsVariableTemplate = getAndroidVariableSQLTableColumnTemplate().getTemplate();
 		String tableColumnsVariables = createTableColumnsVariables(tableColumnsVariableTemplate, table);
 		tableSchema = parseTableColumns(tableSchema, tableColumnsVariables);
@@ -143,7 +143,7 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 
 		String tableColumns = "";
 
-		Columns[] columns = table.getColumns();
+		TableColumn[] columns = table.getColumns();
 		for (int i = 0; i < columns.length; i++) {
 			String columnName = columns[i].getColumnName();
 			String dataType = columns[i].getDataType().getDataType();
@@ -224,11 +224,11 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		return tableSchema.replace(TemplateTags.Android.TABLE_JAVA_BEANS_CLASS_NAME, javaBeansClassName);
 	}
 
-	// Create Table Columns Variables
+	// Create Table TableColumn Variables
 	private String createTableColumnsVariables(String tableColumnsVariableTemplate, Table table) {
 
 		String columnVariables = "";
-		Columns[] columns = table.getColumns();
+		TableColumn[] columns = table.getColumns();
 		for (int i = 0; i < columns.length; i++) {
 			String columnName = columns[i].getColumnName();
 			columnVariables += parseColumnVariables(tableColumnsVariableTemplate, columnName);

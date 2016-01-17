@@ -1,6 +1,6 @@
 package com.marvik.apis.dbcrudgen.schemamodels.database;
 
-import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 
 public class Database {

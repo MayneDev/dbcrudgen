@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.marvik.apis.dbcrudgen.schemamodels.columns.Columns;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.sql.reader.SQLReader;
@@ -97,7 +97,7 @@ public class SQLParser {
 		return sqlStatement;
 	}
 
-	private Columns[] getTableColumns(String sqlStatement) {
+	private TableColumn[] getTableColumns(String sqlStatement) {
 		// TODO Auto-generated method stub
 		return null;
 	}
