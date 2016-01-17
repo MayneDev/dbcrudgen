@@ -33,6 +33,11 @@ public final class NativeUtils {
 		return className.substring(0, 1).toLowerCase() + className.substring(1, className.length());
 	}
 
+	public static CharSequence getClassVariable(String filename) {
+		filename = filename.replace(".java", "");
+		return filename.substring(0, 1).toLowerCase()+filename.substring(1, filename.length());
+	}
+	
 	public static String getString(int integer) {
 		return String.format("%d", integer);
 	}
