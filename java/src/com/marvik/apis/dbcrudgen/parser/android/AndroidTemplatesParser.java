@@ -3,6 +3,7 @@ package com.marvik.apis.dbcrudgen.parser.android;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
+import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassContentProviderTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassDatabaseTablesTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassSQLTableTemplate;
@@ -376,5 +377,59 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	public String createTableColumnReference(String tableJavaBeansName, String columnName) {
 		return AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME + TemplateTags.TAG_PRINTING_CHAR_DOT
 				+ tableJavaBeansName + TemplateTags.TAG_PRINTING_CHAR_DOT + columnName.toUpperCase();
+	}
+
+	/**
+	 * AndroidTemplatesParser#getAndroidColumnQueryCrudTemplate
+	 * 
+	 * Return the right CRUD for a table column based on the data type of the
+	 * column
+	 * 
+	 * @param columnDatatype
+	 * @return CrudTemplates
+	 */
+	public CrudTemplates getAndroidColumnQueryCrudTemplate(String columnDatatype) {
+		
+		// Boolean
+		if (columnDatatype.equalsIgnoreCase("Boolean")) {
+			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
+		}
+		// Byte
+		if (columnDatatype.equalsIgnoreCase("Byte")) {
+			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
+		}
+		// Integer
+		if (columnDatatype.equalsIgnoreCase("Integer")) {
+			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
+		}
+		// Integer
+		if (columnDatatype.equalsIgnoreCase("Int")) {
+			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
+		}
+		// Date
+		if (columnDatatype.equalsIgnoreCase("Date")) {
+			// TO DO ADD SOURCE CODE
+		}
+		// Double
+		if (columnDatatype.equalsIgnoreCase("Double")) {
+			return new AndroidMethodColumnsCrudDataTypeFloatTemplate();
+		}
+		// Float
+		if (columnDatatype.equalsIgnoreCase("Float")) {
+			return new AndroidMethodColumnsCrudDataTypeFloatTemplate();
+		}
+		// Long
+		if (columnDatatype.equalsIgnoreCase("Long")) {
+			return new AndroidMethodColumnsCrudDataTypeLongTemplate();
+		}
+		// String
+		if (columnDatatype.equalsIgnoreCase("String")) {
+			return new AndroidMethodColumnsCrudDataTypeStringTemplate();
+		}
+
+		if (columnDatatype.equalsIgnoreCase("Class")) {
+			return new AndroidMethodColumnsCrudDataTypeGenericTemplate();
+		}
+		return null;
 	}
 }
