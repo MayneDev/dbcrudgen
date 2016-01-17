@@ -23,6 +23,11 @@ public class SimpleTemplates {
 		 */
 		public static final CharSequence STATEMENT_DELIMETER = ";";
 
+		/**
+		 * STRING_DEFAULT_PARSER
+		 */
+		public static final String STRING_DEFAULT_PARSER = "String.valueOf($OBJECT)";
+
 	}
 
 	public static class FileNameTemplates {
