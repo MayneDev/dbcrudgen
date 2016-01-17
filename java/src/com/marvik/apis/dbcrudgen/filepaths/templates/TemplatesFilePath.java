@@ -2,6 +2,12 @@ package com.marvik.apis.dbcrudgen.filepaths.templates;
 
 public class TemplatesFilePath {
 
+	/**
+	 * PHP Templates File Path
+	 * 
+	 * @author victor
+	 *
+	 */
 	public class PHPTemplatesFilePaths {
 		/**
 		 * PHP COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH
@@ -39,6 +45,9 @@ public class TemplatesFilePath {
 
 	}
 
+	/*
+	 * SQL Templates File Path
+	 */
 	public class SQLTemplatesFilePaths {
 		/**
 		 * SQL ROUTINES_TEMPLATE_FILE_PATH
@@ -57,6 +66,12 @@ public class TemplatesFilePath {
 
 	}
 
+	/**
+	 * Android Templates File Path
+	 * 
+	 * @author victor
+	 *
+	 */
 	public class AndroidTemplatesFilePaths {
 
 		/**
@@ -168,6 +183,20 @@ public class TemplatesFilePath {
 		 * ANDROID ANDROID_VARIABLE_URI_MATCHER_CODE_FILE_PATH
 		 */
 		public static final String ANDROID_VARIABLE_URI_MATCHER_CODE_TEMPLATE_FILE_PATH = "res/templates/android/template_android_variable_uri_matcher_code.txt";
+
+	}
+
+	/**
+	 * Java Templates File Paths
+	 * 
+	 * @author victor
+	 *
+	 */
+	public static class JavaTemplatesFilePath {
+		/**
+		 * JAVA_VARIABLE_GRAMMAR_TEMPLATE_FILEPATH
+		 */
+		public static final String JAVA_VARIABLE_GRAMMAR_TEMPLATE_FILEPATH = "res/templates/java/template_java_variable_declaration_grammar.txt";
 
 	}
 }
