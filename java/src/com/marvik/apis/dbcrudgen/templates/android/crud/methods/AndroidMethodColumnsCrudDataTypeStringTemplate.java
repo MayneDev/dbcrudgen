@@ -11,7 +11,6 @@ public class AndroidMethodColumnsCrudDataTypeStringTemplate extends AndroidCRUDT
 
 	}
 
-	
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
 		// TODO Auto-generated method stub
@@ -22,15 +21,8 @@ public class AndroidMethodColumnsCrudDataTypeStringTemplate extends AndroidCRUDT
 	 * Returns the columns CRUD template
 	 */
 	@Override
-	public String getTemplate(){
-		// TODO Auto-generated method stub
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+	public String getTemplate() {
+		return super.getTemplate();
 	}
 
 	/*

@@ -7,14 +7,13 @@ import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
 public class AndroidClassTableCrudTemplate extends AndroidCRUDTemplates {
 
-	public AndroidClassTableCrudTemplate()
-	{
+	public AndroidClassTableCrudTemplate() {
 
 	}
 
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
-		// TODO Auto-generated method stub
+
 		return super.openTemplate(templateFilePath);
 	}
 
@@ -23,14 +22,7 @@ public class AndroidClassTableCrudTemplate extends AndroidCRUDTemplates {
 	 */
 	@Override
 	public String getTemplate() {
-		// TODO Auto-generated method stub
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return super.getTemplate();
 	}
 
 	/*
@@ -38,7 +30,7 @@ public class AndroidClassTableCrudTemplate extends AndroidCRUDTemplates {
 	 */
 	@Override
 	public String getTemplateFilePath() {
-		// TODO Auto-generated method stub
+
 		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_TABLE_CRUD_TEMPLATE_FILE_PATH;
 	}
 

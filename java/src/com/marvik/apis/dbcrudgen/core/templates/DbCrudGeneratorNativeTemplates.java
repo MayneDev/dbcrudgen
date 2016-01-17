@@ -25,14 +25,7 @@ public class DbCrudGeneratorNativeTemplates extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplate() {
-
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return super.getTemplate();
 	}
 
 	/*

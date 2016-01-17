@@ -18,10 +18,9 @@ public class AndroidClassContentProviderTemplate extends AndroidCRUDTemplates {
 
 	}
 
-	
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
-		
+
 		return super.openTemplate(templateFilePath);
 	}
 
@@ -29,15 +28,8 @@ public class AndroidClassContentProviderTemplate extends AndroidCRUDTemplates {
 	 * Returns the columns CRUD template
 	 */
 	@Override
-	public String getTemplate(){
-		
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+	public String getTemplate() {
+		return super.getTemplate();
 	}
 
 	/*
@@ -45,7 +37,7 @@ public class AndroidClassContentProviderTemplate extends AndroidCRUDTemplates {
 	 */
 	@Override
 	public String getTemplateFilePath() {
-		
+
 		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_CONTENT_PROVIDER_TEMPLATE_FILE_PATH;
 	}
 

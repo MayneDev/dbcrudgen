@@ -14,8 +14,7 @@ import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
  */
 public class AndroidClassSQLiteOpenHelperTemplate extends AndroidCRUDTemplates {
 
-	public AndroidClassSQLiteOpenHelperTemplate()
-	{
+	public AndroidClassSQLiteOpenHelperTemplate() {
 
 	}
 
@@ -30,14 +29,7 @@ public class AndroidClassSQLiteOpenHelperTemplate extends AndroidCRUDTemplates {
 	 */
 	@Override
 	public String getTemplate() {
-		// TODO Auto-generated method stub
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return super.getTemplate();
 	}
 
 	/*

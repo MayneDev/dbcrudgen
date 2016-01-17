@@ -41,12 +41,7 @@ public class AndroidJavaVariableTemplate extends JavaVariableGrammarTemplate {
 	 */
 	@Override
 	public String getTemplate() {
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			e.initCause(new Throwable("Invalid Template Path [" + getTemplateFilePath() + "]"));
-		}
-		return null;
+		return super.getTemplate();
 	}
 
 	/*

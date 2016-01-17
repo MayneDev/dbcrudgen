@@ -31,12 +31,8 @@ public class JavaVariableGrammarTemplate extends CrudTemplates {
 	 * @see com.marvik.apis.dbcrudgen.templates.CrudTemplates#getTemplate()
 	 */
 	@Override
-	public String getTemplate() throws IOException {
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			throw new IOException("Invalid Template Path [" + getTemplateFilePath() + "]");
-		}
+	public String getTemplate() {
+		return super.getTemplate();
 	}
 
 	/*

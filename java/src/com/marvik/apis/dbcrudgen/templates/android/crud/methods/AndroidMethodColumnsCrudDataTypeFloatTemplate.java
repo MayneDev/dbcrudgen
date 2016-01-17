@@ -7,8 +7,7 @@ import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
 public class AndroidMethodColumnsCrudDataTypeFloatTemplate extends AndroidCRUDTemplates {
 
-	public AndroidMethodColumnsCrudDataTypeFloatTemplate()
-	{
+	public AndroidMethodColumnsCrudDataTypeFloatTemplate() {
 
 	}
 
@@ -23,14 +22,7 @@ public class AndroidMethodColumnsCrudDataTypeFloatTemplate extends AndroidCRUDTe
 	 */
 	@Override
 	public String getTemplate() {
-		// TODO Auto-generated method stub
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return super.getTemplate();
 	}
 
 	/*
