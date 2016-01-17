@@ -1,13 +1,13 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.classes;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-public class AndroidStatementSQLTableColumnStatementTemplate extends CrudTemplates {
+public class AndroidClassTableCrudTemplate extends AndroidCRUDTemplates {
 
-	public AndroidStatementSQLTableColumnStatementTemplate()
+	public AndroidClassTableCrudTemplate()
 	{
 
 	}
@@ -39,7 +39,7 @@ public class AndroidStatementSQLTableColumnStatementTemplate extends CrudTemplat
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_TABLE_CRUD_TEMPLATE_FILE_PATH;
 	}
 
 }

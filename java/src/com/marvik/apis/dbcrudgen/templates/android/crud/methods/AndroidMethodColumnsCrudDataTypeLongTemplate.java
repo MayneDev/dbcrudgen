@@ -1,13 +1,13 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.methods;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-public class AndroidVariableUriMatcherCodeTemplate extends CrudTemplates {
+public class AndroidMethodColumnsCrudDataTypeLongTemplate extends AndroidCRUDTemplates {
 
-	public AndroidVariableUriMatcherCodeTemplate()
+	public AndroidMethodColumnsCrudDataTypeLongTemplate()
 	{
 
 	}
@@ -39,7 +39,7 @@ public class AndroidVariableUriMatcherCodeTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_VARIABLE_URI_MATCHER_CODE_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_LONG_TEMPLATE_FILE_PATH;
 	}
 
 }

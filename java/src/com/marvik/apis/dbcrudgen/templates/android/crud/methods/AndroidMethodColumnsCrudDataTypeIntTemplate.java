@@ -1,13 +1,13 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.methods;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-public class AndroidMethodColumnsCrudDataTypeGenericTemplate extends CrudTemplates {
+public class AndroidMethodColumnsCrudDataTypeIntTemplate extends AndroidCRUDTemplates {
 
-	public AndroidMethodColumnsCrudDataTypeGenericTemplate()
+	public AndroidMethodColumnsCrudDataTypeIntTemplate()
 	{
 
 	}
@@ -39,7 +39,7 @@ public class AndroidMethodColumnsCrudDataTypeGenericTemplate extends CrudTemplat
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_GENERIC_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_METHOD_COLUMNS_CRUD_DATATYPE_INT_TEMPLATE_FILE_PATH;
 	}
 
 }

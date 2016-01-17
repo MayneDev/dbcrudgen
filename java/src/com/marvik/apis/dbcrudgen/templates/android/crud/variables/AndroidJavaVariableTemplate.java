@@ -1,4 +1,4 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.variables;
 
 import java.io.IOException;
 

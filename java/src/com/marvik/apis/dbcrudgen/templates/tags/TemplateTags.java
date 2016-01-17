@@ -303,7 +303,7 @@ public class TemplateTags {
 		/**
 		 * QUERIED_TABLE_COLUMN
 		 */
-		public static final CharSequence QUERIED_TABLE_COLUMN = "$QUERIED_TABLE_COLUMN";
+		public static final CharSequence QUERIED_TABLE_COLUMN_NAME = "$QUERIED_TABLE_COLUMN_NAME";
 		/**
 		 * $QUERIED_COLUMN
 		 */

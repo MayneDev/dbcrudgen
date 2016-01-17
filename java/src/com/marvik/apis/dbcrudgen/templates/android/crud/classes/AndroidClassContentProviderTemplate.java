@@ -1,20 +1,27 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+/**
+ * 
+ */
+package com.marvik.apis.dbcrudgen.templates.android.crud.classes;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-public class AndroidStatmentContentValuesPutTemplate extends CrudTemplates {
+/**
+ * @author victor
+ *
+ */
+public class AndroidClassContentProviderTemplate extends AndroidCRUDTemplates {
 
-	public AndroidStatmentContentValuesPutTemplate()
-	{
+	public AndroidClassContentProviderTemplate() {
 
 	}
 
+	
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
-		// TODO Auto-generated method stub
+		
 		return super.openTemplate(templateFilePath);
 	}
 
@@ -22,8 +29,8 @@ public class AndroidStatmentContentValuesPutTemplate extends CrudTemplates {
 	 * Returns the columns CRUD template
 	 */
 	@Override
-	public String getTemplate() {
-		// TODO Auto-generated method stub
+	public String getTemplate(){
+		
 		try {
 			return super.getTemplate();
 		} catch (IOException e) {
@@ -38,8 +45,8 @@ public class AndroidStatmentContentValuesPutTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplateFilePath() {
-		// TODO Auto-generated method stub
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_STATEMENT_CONTENT_VALUES_PUT_TEMPLATE_FILE_PATH;
+		
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_CONTENT_PROVIDER_TEMPLATE_FILE_PATH;
 	}
 
 }

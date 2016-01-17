@@ -1,13 +1,13 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.statements;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-public class AndroidStatementContentProviderSQLDeleteTemplate extends CrudTemplates {
+public class AndroidStatementSQLTableColumnStatementTemplate extends AndroidCRUDTemplates {
 
-	public AndroidStatementContentProviderSQLDeleteTemplate()
+	public AndroidStatementSQLTableColumnStatementTemplate()
 	{
 
 	}
@@ -39,7 +39,7 @@ public class AndroidStatementContentProviderSQLDeleteTemplate extends CrudTempla
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_DELETE_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_TEMPLATE_FILE_PATH;
 	}
 
 }

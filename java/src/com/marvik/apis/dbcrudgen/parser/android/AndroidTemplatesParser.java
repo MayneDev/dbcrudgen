@@ -2,29 +2,31 @@ package com.marvik.apis.dbcrudgen.parser.android;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassContentProviderTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassDatabaseTablesTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassSQLTableTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassSQLiteOpenHelperTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidClassTableCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidInterfaceCrudOperationsTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidJavaVariableTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeFloatTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeGenericTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeIntTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeLongTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeStringTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDefaultTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementAddUriMatcherTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLDeleteTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLInsertTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLQueryTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementContentProviderSQLUpdateTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatementSQLTableColumnStatementTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidStatmentContentValuesPutTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableColumnTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableCreateSQLTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableUriMatcherCodeTemplate;
+import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassContentProviderTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassDatabaseTablesTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassSQLTableTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassSQLiteOpenHelperTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.interfaces.AndroidInterfaceCrudOperationsTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeFloatTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeGenericTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeIntTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeLongTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeStringTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDefaultTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementAddUriMatcherTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementContentProviderSQLDeleteTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementContentProviderSQLInsertTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementContentProviderSQLQueryTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementContentProviderSQLUpdateTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementContentValuesPutTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementSQLTableColumnStatementTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidJavaVariableTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidVariableSQLTableColumnTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidVariableSQLTableCreateSQLTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidVariableUriMatcherCodeTemplate;
+import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidTemplatesParser extends TemplatesParser {
 
@@ -119,9 +121,9 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	private AndroidStatementSQLTableColumnStatementTemplate androidStatementSQLTableColumnStatementTemplate;
 
 	/**
-	 * AndroidStatmentContentValuesPutTemplate
+	 * AndroidStatementContentValuesPutTemplate
 	 */
-	private AndroidStatmentContentValuesPutTemplate androidStatmentContentValuesPutTemplate;
+	private AndroidStatementContentValuesPutTemplate androidStatementContentValuesPutTemplate;
 
 	/**
 	 * AndroidVariableSQLTableColumnTemplate
@@ -167,7 +169,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		androidStatementContentProviderSQLQueryTemplate = new AndroidStatementContentProviderSQLQueryTemplate();
 		androidStatementContentProviderSQLUpdateTemplate = new AndroidStatementContentProviderSQLUpdateTemplate();
 		androidStatementSQLTableColumnStatementTemplate = new AndroidStatementSQLTableColumnStatementTemplate();
-		androidStatmentContentValuesPutTemplate = new AndroidStatmentContentValuesPutTemplate();
+		androidStatementContentValuesPutTemplate = new AndroidStatementContentValuesPutTemplate();
 		androidVariableSQLTableColumnTemplate = new AndroidVariableSQLTableColumnTemplate();
 		androidVariableSQLTableCreateSQLTemplate = new AndroidVariableSQLTableCreateSQLTemplate();
 		androidVariableUriMatcherCodeTemplate = new AndroidVariableUriMatcherCodeTemplate();
@@ -301,10 +303,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	}
 
 	/**
-	 * @return the androidStatmentContentValuesPutTemplate
+	 * @return the androidStatementContentValuesPutTemplate
 	 */
-	public AndroidStatmentContentValuesPutTemplate getAndroidStatmentContentValuesPutTemplate() {
-		return androidStatmentContentValuesPutTemplate;
+	public AndroidStatementContentValuesPutTemplate getAndroidStatmentContentValuesPutTemplate() {
+		return androidStatementContentValuesPutTemplate;
 	}
 
 	/**
@@ -363,4 +365,16 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		return NativeUtils.parseJavaPackage(packageFilePath);
 	}
 
+	/**
+	 * AndroidTemplatesParser#createTableColumnReference - Creates a reference
+	 * to the table column
+	 * 
+	 * @param tableJavaBeansName
+	 * @param columnName
+	 * @return
+	 */
+	public String createTableColumnReference(String tableJavaBeansName, String columnName) {
+		return AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME + TemplateTags.TAG_PRINTING_CHAR_DOT
+				+ tableJavaBeansName + TemplateTags.TAG_PRINTING_CHAR_DOT + columnName.toUpperCase();
+	}
 }

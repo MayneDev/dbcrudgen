@@ -1,13 +1,13 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.variables;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-public class AndroidVariableSQLTableCreateSQLTemplate extends CrudTemplates {
+public class AndroidVariableUriMatcherCodeTemplate extends AndroidCRUDTemplates {
 
-	public AndroidVariableSQLTableCreateSQLTemplate()
+	public AndroidVariableUriMatcherCodeTemplate()
 	{
 
 	}
@@ -39,7 +39,7 @@ public class AndroidVariableSQLTableCreateSQLTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_VARIABLE_TABLE_CREATE_SQL_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_VARIABLE_URI_MATCHER_CODE_TEMPLATE_FILE_PATH;
 	}
 
 }

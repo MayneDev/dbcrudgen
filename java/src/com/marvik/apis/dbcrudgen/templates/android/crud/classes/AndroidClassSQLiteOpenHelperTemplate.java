@@ -1,27 +1,27 @@
 /**
  * 
  */
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.classes;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
 /**
  * @author victor
  *
  */
-public class AndroidClassContentProviderTemplate extends CrudTemplates {
+public class AndroidClassSQLiteOpenHelperTemplate extends AndroidCRUDTemplates {
 
-	public AndroidClassContentProviderTemplate() {
+	public AndroidClassSQLiteOpenHelperTemplate()
+	{
 
 	}
 
-	
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
-		
+		// TODO Auto-generated method stub
 		return super.openTemplate(templateFilePath);
 	}
 
@@ -29,8 +29,8 @@ public class AndroidClassContentProviderTemplate extends CrudTemplates {
 	 * Returns the columns CRUD template
 	 */
 	@Override
-	public String getTemplate(){
-		
+	public String getTemplate() {
+		// TODO Auto-generated method stub
 		try {
 			return super.getTemplate();
 		} catch (IOException e) {
@@ -45,8 +45,8 @@ public class AndroidClassContentProviderTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplateFilePath() {
-		
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_CONTENT_PROVIDER_TEMPLATE_FILE_PATH;
+		// TODO Auto-generated method stub
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_SQLITE_OPEN_HELPER_TEMPLATE_FILE_PATH;
 	}
 
 }

@@ -1,11 +1,11 @@
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.variables;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-public class AndroidVariableSQLTableColumnTemplate extends CrudTemplates {
+public class AndroidVariableSQLTableColumnTemplate extends AndroidCRUDTemplates {
 
 	public AndroidVariableSQLTableColumnTemplate()
 	{

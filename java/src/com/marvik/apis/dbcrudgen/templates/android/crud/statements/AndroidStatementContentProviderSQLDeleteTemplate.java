@@ -1,20 +1,13 @@
-/**
- * 
- */
-package com.marvik.apis.dbcrudgen.templates.android;
+package com.marvik.apis.dbcrudgen.templates.android.crud.statements;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.AndroidCRUDTemplates;
 
-/**
- * @author victor
- *
- */
-public class AndroidClassSQLiteOpenHelperTemplate extends CrudTemplates {
+public class AndroidStatementContentProviderSQLDeleteTemplate extends AndroidCRUDTemplates {
 
-	public AndroidClassSQLiteOpenHelperTemplate()
+	public AndroidStatementContentProviderSQLDeleteTemplate()
 	{
 
 	}
@@ -46,7 +39,7 @@ public class AndroidClassSQLiteOpenHelperTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		// TODO Auto-generated method stub
-		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_CLASS_SQLITE_OPEN_HELPER_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.AndroidTemplatesFilePaths.ANDROID_STATEMENT_CONTENT_PROVIDER_SQL_DELETE_TEMPLATE_FILE_PATH;
 	}
 
 }
