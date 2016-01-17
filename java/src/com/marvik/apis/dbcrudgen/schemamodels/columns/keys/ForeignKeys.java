@@ -1,18 +1,20 @@
 package com.marvik.apis.dbcrudgen.schemamodels.columns.keys;
 
-public class ForeignKeys extends ColumnKeys {
+import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 
-	/*
-	 * Initializes a string array of the table foreign keys
+public class ForeignKeys extends KeyColumn {
+
+	/**
+	 * Sets table foreign key column
 	 */
-	public ForeignKeys(String[] foreignKeys) {
-		super(foreignKeys);
+	public ForeignKeys(String foreignKey, DataType dataType) {
+		super(foreignKey, dataType);
 	}
 
-	/*
-	 * Return the set foreign keys
+	/**
+	 * Return the set foreign key
 	 */
-	public String[] getForeignKeys() {
-		return getColumnKeys();
+	public String getForeignKey() {
+		return getColumnName();
 	}
 }

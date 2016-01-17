@@ -1,18 +1,20 @@
 package com.marvik.apis.dbcrudgen.schemamodels.columns.keys;
 
-public class UniqueKeys extends ColumnKeys {
-	
-	/*
-	 * Initializes a string array of the table unique keys
+import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
+
+public class UniqueKeys extends KeyColumn {
+
+	/**
+	 * Defines a unique key column
 	 */
-	public UniqueKeys(String[] uniqueKeys) {
-		super(uniqueKeys);
+	public UniqueKeys(String uniqueKey, DataType dataType) {
+		super(uniqueKey, dataType);
 	}
 
-	/*
-	 * Return the set unique keys
+	/**
+	 * Return the unique key column
 	 */
-	public String[] getUniqueKeys() {
-		return getColumnKeys();
+	public String getUniqueKey() {
+		return getColumnName();
 	}
 }
