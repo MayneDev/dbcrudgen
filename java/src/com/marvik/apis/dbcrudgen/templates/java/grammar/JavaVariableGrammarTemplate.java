@@ -1,11 +1,11 @@
-package com.marvik.apis.dbcrudgen.templates.java;
+package com.marvik.apis.dbcrudgen.templates.java.grammar;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.java.JavaTemplates;
 
-public class JavaVariableGrammarTemplate extends CrudTemplates {
+public class JavaVariableGrammarTemplate extends JavaTemplates {
 
 	@Override
 	public String getTemplateFilePath() {

@@ -2,7 +2,7 @@ package com.marvik.apis.dbcrudgen.templates.android.crud.variables;
 
 import java.io.IOException;
 
-import com.marvik.apis.dbcrudgen.templates.java.JavaVariableGrammarTemplate;
+import com.marvik.apis.dbcrudgen.templates.java.grammar.JavaVariableGrammarTemplate;
 
 public class AndroidJavaVariableTemplate extends JavaVariableGrammarTemplate {
 
