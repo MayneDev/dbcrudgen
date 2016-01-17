@@ -4,17 +4,17 @@ import java.io.File;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
-import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcrudgen.parser.android.contentprovider.AndroidContentProvidersTemplatesParser;
 import com.marvik.apis.dbcrudgen.parser.android.crudoperations.AndroidCrudOperationsTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.sqliteopenhelper.AndroidSQLiteOpenHelperTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.android.tablecrud.AndroidTableCRUDTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.tableschemas.AndroidTableSchemasTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
+import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidClassTableCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
 
 public class AndroidCRUDCreator extends CrudCreator {
 
@@ -24,63 +24,16 @@ public class AndroidCRUDCreator extends CrudCreator {
 	private AndroidProjectConfiguration androidProjectConfiguration;
 
 	/**
-	 * AndroidTableSchemasTemplatesParser
-	 */
-	AndroidTableSchemasTemplatesParser androidTableSchemasTemplatesParser;
-
-	/**
-	 * AndroidClassTableCrudTemplate
-	 */
-	private AndroidClassTableCrudTemplate androidClassTableCrudTemplate;
-
-	/**
-	 * AndroidContentProvidersTemplatesParser
-	 */
-	private AndroidContentProvidersTemplatesParser androidContentProvidersTemplatesParser;
-
-	/**
-	 * AndroidSQLiteOpenHelperTemplateParser
-	 */
-	private AndroidSQLiteOpenHelperTemplateParser androidSQLiteOpenHelperTemplateParser;
-
-	/**
-	 * AndroidCrudOperationsTemplateParser
-	 */
-	private AndroidCrudOperationsTemplateParser androidCrudOperationsTemplateParser;
-
-	/**
 	 * Android CRUD Generator - Generates the full CRUD for android databases
 	 */
 	public AndroidCRUDCreator() {
-		androidClassTableCrudTemplate = new AndroidClassTableCrudTemplate();
-		androidTableSchemasTemplatesParser = new AndroidTableSchemasTemplatesParser();
-		androidContentProvidersTemplatesParser = new AndroidContentProvidersTemplatesParser();
-		androidSQLiteOpenHelperTemplateParser = new AndroidSQLiteOpenHelperTemplateParser();
-		androidCrudOperationsTemplateParser = new AndroidCrudOperationsTemplateParser();
+
 	}
 
 	@Deprecated
 	@Override
 	public CrudTemplates getCrudTemplate() {
-		return getAndroidClassTableCrudTemplate();
-	}
-
-	/**
-	 * AndroidCRUDCreator#getAndroidClassTableCrudTemplate
-	 * 
-	 * @return AndroidClassTableCrudTemplate
-	 */
-	public AndroidClassTableCrudTemplate getAndroidClassTableCrudTemplate() {
-		return androidClassTableCrudTemplate;
-	}
-
-	/**
-	 * AndroidCRUDCreator#getAndroidTemplatesParser
-	 * 
-	 * @return AndroidTemplatesParser
-	 */
-	public AndroidTableSchemasTemplatesParser getAndroidTableSchemasTemplatesParser() {
-		return androidTableSchemasTemplatesParser;
+		return new AndroidClassTableCrudTemplate();
 	}
 
 	/**
@@ -101,33 +54,6 @@ public class AndroidCRUDCreator extends CrudCreator {
 	 */
 	public void setAndroidProjectConfiguration(AndroidProjectConfiguration androidProjectConfiguration) {
 		this.androidProjectConfiguration = androidProjectConfiguration;
-	}
-
-	/**
-	 * AndroidCRUDCreator#getAndroidContentProvidersTemplatesParser
-	 * 
-	 * @return AndroidContentProvidersTemplatesParser
-	 */
-	public AndroidContentProvidersTemplatesParser getAndroidContentProvidersTemplatesParser() {
-		return androidContentProvidersTemplatesParser;
-	}
-
-	/**
-	 * AndroidCRUDCreator#getAndroidSQLiteOpenHelperTemplateParser
-	 * 
-	 * @return AndroidSQLiteOpenHelperTemplateParser
-	 */
-	public AndroidSQLiteOpenHelperTemplateParser getAndroidSQLiteOpenHelperTemplateParser() {
-		return androidSQLiteOpenHelperTemplateParser;
-	}
-
-	/**
-	 * AndroidCRUDCreator#getAndroidCrudOperationsTemplateParser
-	 * 
-	 * @return AndroidCrudOperationsTemplateParser
-	 */
-	public AndroidCrudOperationsTemplateParser getAndroidCrudOperationsTemplateParser() {
-		return androidCrudOperationsTemplateParser;
 	}
 
 	/**
@@ -178,20 +104,37 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		// create CRUD Operations interface
 		createAbstractCRUDOperationsSourceFile(projectStorageDir, tablesCRUDPackage);
+
+		// create table custom CRUD class
+		createTableCRUDClassSourceFile(database, projectStorageDir, tablesCRUDPackage);
+	}
+
+	private void createTableCRUDClassSourceFile(Database database, String projectStorageDir, String tablesCRUDPackage) {
+		// create table custom CRUD class
+
+		AndroidTableCRUDTemplateParser androidTableCRUDTemplateParser = new AndroidTableCRUDTemplateParser();
+
+		for (Table table : database.getTables()) {
+			String tableCRUDSourceCode = androidTableCRUDTemplateParser.createSourceCode(table);
+		}
+
 	}
 
 	// create CRUD Operations interface
-	private void createAbstractCRUDOperationsSourceFile(String projectStorageDir,String tablesCrudPackage ) {
+	private void createAbstractCRUDOperationsSourceFile(String projectStorageDir, String tablesCrudPackage) {
 
-		//Create the source code
-		String tablesAbstractCRUDOperationsSourceCode = getAndroidCrudOperationsTemplateParser().createSourceCode(tablesCrudPackage);
-		
+		AndroidCrudOperationsTemplateParser androidCrudOperationsTemplateParser = new AndroidCrudOperationsTemplateParser();
+
+		// Create the source code
+		String tablesAbstractCRUDOperationsSourceCode = androidCrudOperationsTemplateParser
+				.createSourceCode(tablesCrudPackage);
+
 		String abstractCrudOperationsSourceFile = AndroidProjectFileNames.CRUD_OPERATIONS_INTERFACE_CLASS_NAME;
-		
-		//the table CRUD operations source file absolute path
-		String tablesAbstractCRUDOperationsSourceFile =  projectStorageDir + NativeUtils.getFileSeparator()
-		+ tablesCrudPackage + NativeUtils.getFileSeparator() + abstractCrudOperationsSourceFile;
-		
+
+		// the table CRUD operations source file absolute path
+		String tablesAbstractCRUDOperationsSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
+				+ tablesCrudPackage + NativeUtils.getFileSeparator() + abstractCrudOperationsSourceFile;
+
 		// write source code to disk
 		boolean createAbstractCRUDOperationsSourceFile = createSourceFile(tablesAbstractCRUDOperationsSourceFile,
 				tablesAbstractCRUDOperationsSourceCode);
@@ -202,14 +145,16 @@ public class AndroidCRUDCreator extends CrudCreator {
 	}
 
 	// create SQLiteOpenHelper Subclass
-	private void createSQLiteOpenHelperSourceFile(String projectStorageDir,String sqliteOpenHelperSubclassPackage) {
+	private void createSQLiteOpenHelperSourceFile(String projectStorageDir, String sqliteOpenHelperSubclassPackage) {
+
+		AndroidSQLiteOpenHelperTemplateParser androidSQLiteOpenHelperTemplateParser = new AndroidSQLiteOpenHelperTemplateParser();
 
 		// SQLite open helper class
 		String sqliteOpenHelperSubclass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
 				.getAndroidDatabaseConfiguration().getSqliteOpenHelperClass();
 
 		// Create source code
-		String sqliteOpenHelperSubclassSourceCode = getAndroidSQLiteOpenHelperTemplateParser()
+		String sqliteOpenHelperSubclassSourceCode = androidSQLiteOpenHelperTemplateParser
 				.createSQLiteOpenHelperSubclassSourceCode(androidProjectConfiguration);
 
 		// Create source code file absolute path
@@ -226,14 +171,16 @@ public class AndroidCRUDCreator extends CrudCreator {
 	}
 
 	// Create the database content provider file and saves it on disk
-	private void createContentProviderSourceFile(String projectStorageDir,String contentProviderPackage,
+	private void createContentProviderSourceFile(String projectStorageDir, String contentProviderPackage,
 			Database database) {
-		
+
+		AndroidContentProvidersTemplatesParser androidContentProvidersTemplatesParser = new AndroidContentProvidersTemplatesParser();
+
 		// Content provide class name
 		String contentProviderClass = getAndroidProjectConfiguration().getAndroidContentProviderConfiguration()
 				.getContentProviderClass();
 
-		String contentProviderSourceCode = getAndroidContentProvidersTemplatesParser()
+		String contentProviderSourceCode = androidContentProvidersTemplatesParser
 				.createContentProviderSourceFile(getAndroidProjectConfiguration(), database.getTables());
 
 		String contentProviderSourceCodeFile = projectStorageDir + NativeUtils.getFileSeparator()
@@ -260,12 +207,16 @@ public class AndroidCRUDCreator extends CrudCreator {
 	 */
 	private void createTablesSchemasSourceFile(Database database, String projectStorageDir,
 			String databaseTablesPackage) {
-		String tablesSchemasSourceCode = getAndroidTableSchemasTemplatesParser()
+
+		AndroidTableSchemasTemplatesParser androidTableSchemasTemplatesParser = new AndroidTableSchemasTemplatesParser();
+
+		String tablesSchemasSourceCode = androidTableSchemasTemplatesParser
 				.createTablesSchemas(getAndroidProjectConfiguration(), database.getTables());
 		String tablesSchemasAbsoluteSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
 				+ databaseTablesPackage + NativeUtils.getFileSeparator()
 				+ AndroidProjectFileNames.TABLE_SCHEMAS_FILE_NAME;
-		boolean createTablesSchemasSourceFile = createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemasSourceCode);
+		boolean createTablesSchemasSourceFile = createSourceFile(tablesSchemasAbsoluteSourceFile,
+				tablesSchemasSourceCode);
 
 		if (createTablesSchemasSourceFile) {
 			System.out.println("Created Tables Source File");
