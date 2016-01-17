@@ -286,6 +286,10 @@ public class TemplateTags {
 		 * TABLES_ROWS_UPDATE_STATMENTS
 		 */
 		public static final CharSequence TABLES_ROWS_UPDATE_STATEMENTS = "$TABLES_ROWS_UPDATE_STATEMENTS";
+		/**
+		 * CRUD_OPERATIONS_INTERFACE_PACKAGE
+		 */
+		public static final CharSequence CRUD_OPERATIONS_INTERFACE_PACKAGE = "$CRUD_OPERATIONS_INTERFACE_PACKAGE";
 	}
 
 }
