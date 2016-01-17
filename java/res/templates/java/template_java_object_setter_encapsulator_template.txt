@@ -1,0 +1,7 @@
+public $DATATYPE get$JAVA_BEANS_OBJECT (){
+	return $OBJECT;
+}
+
+public $DATATYPE set$JAVA_BEANS_OBJECT ($DATATYPE $OBJECT){
+	this.$OBJECT = $OBJECT;
+}
