@@ -7,7 +7,8 @@ import com.marvik.apis.dbcrudgen.templates.android.AndroidClassDatabaseTablesTem
 import com.marvik.apis.dbcrudgen.templates.android.AndroidClassSQLTableTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidClassSQLiteOpenHelperTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidClassTableCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.AndroidInterfaceCrudOperations;
+import com.marvik.apis.dbcrudgen.templates.android.AndroidInterfaceCrudOperationsTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.AndroidJavaVariableTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeFloatTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeGenericTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidMethodColumnsCrudDataTypeIntTemplate;
@@ -24,7 +25,6 @@ import com.marvik.apis.dbcrudgen.templates.android.AndroidStatmentContentValuesP
 import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableColumnTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableSQLTableCreateSQLTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.AndroidVariableUriMatcherCodeTemplate;
-import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidTemplatesParser extends TemplatesParser {
 
@@ -54,9 +54,9 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	private AndroidClassTableCrudTemplate androidClassTableCrudTemplate;
 
 	/**
-	 * AndroidInterfaceCrudOperations
+	 * AndroidInterfaceCrudOperationsTemplate
 	 */
-	private AndroidInterfaceCrudOperations androidInterfaceCrudOperations;
+	private AndroidInterfaceCrudOperationsTemplate androidInterfaceCrudOperationsTemplate;
 
 	/**
 	 * AndroidMethodColumnsCrudDataTypeFloatTemplate
@@ -139,16 +139,22 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	private AndroidVariableUriMatcherCodeTemplate androidVariableUriMatcherCodeTemplate;
 
 	/**
+	 * AndroidJavaVariableTemplate
+	 */
+	AndroidJavaVariableTemplate androidJavaVariableTemplate;
+
+	/**
 	 * AndroidTemplatesParser - Class that parses templates into actual
 	 * data/source code
 	 */
+
 	public AndroidTemplatesParser() {
 		androidClassContentProviderTemplate = new AndroidClassContentProviderTemplate();
 		androidClassDatabaseTablesTemplate = new AndroidClassDatabaseTablesTemplate();
 		androidClassSQLiteOpenHelperTemplate = new AndroidClassSQLiteOpenHelperTemplate();
 		androidClassSQLTableTemplate = new AndroidClassSQLTableTemplate();
 		androidClassTableCrudTemplate = new AndroidClassTableCrudTemplate();
-		androidInterfaceCrudOperations = new AndroidInterfaceCrudOperations();
+		androidInterfaceCrudOperationsTemplate = new AndroidInterfaceCrudOperationsTemplate();
 		androidMethodColumnsCrudDataTypeFloatTemplate = new AndroidMethodColumnsCrudDataTypeFloatTemplate();
 		androidMethodColumnsCrudDataTypeGenericTemplate = new AndroidMethodColumnsCrudDataTypeGenericTemplate();
 		androidMethodColumnsCrudDataTypeIntTemplate = new AndroidMethodColumnsCrudDataTypeIntTemplate();
@@ -165,7 +171,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		androidVariableSQLTableColumnTemplate = new AndroidVariableSQLTableColumnTemplate();
 		androidVariableSQLTableCreateSQLTemplate = new AndroidVariableSQLTableCreateSQLTemplate();
 		androidVariableUriMatcherCodeTemplate = new AndroidVariableUriMatcherCodeTemplate();
-
+		androidJavaVariableTemplate = new AndroidJavaVariableTemplate();
 	}
 
 	/**
@@ -204,10 +210,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	}
 
 	/**
-	 * @return the androidInterfaceCrudOperations
+	 * @return the androidInterfaceCrudOperationsTemplate
 	 */
-	public AndroidInterfaceCrudOperations getAndroidInterfaceCrudOperations() {
-		return androidInterfaceCrudOperations;
+	public AndroidInterfaceCrudOperationsTemplate getAndroidInterfaceCrudOperations() {
+		return androidInterfaceCrudOperationsTemplate;
 	}
 
 	/**
@@ -227,7 +233,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	/**
 	 * @return the androidMethodColumnsCrudDataTypeIntTemplate
 	 */
-	public AndroidMethodColumnsCrudDataTypeIntTemplate getAndroidMethodColumnsCrudDataTypeIntTemplate() {
+	public AndroidMethodColumnsCrudDataTypeIntTemplate getAndroidMethodColumnsCrudDataTypeIntegerTemplate() {
 		return androidMethodColumnsCrudDataTypeIntTemplate;
 	}
 
@@ -323,12 +329,37 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	}
 
 	/**
-	 * AndroidTemplatesParser#parsePackageName
-	 * Formats a package path to a valid package name
+	 * 
+	 * @return AndroidJavaVariableTemplate
+	 */
+	public AndroidJavaVariableTemplate getAndroidJavaVariableTemplate() {
+		return androidJavaVariableTemplate;
+	}
+
+	/**
+	 * 
+	 * @return AndroidInterfaceCrudOperationsTemplate
+	 */
+	public AndroidInterfaceCrudOperationsTemplate getAndroidInterfaceCrudOperationsTemplate() {
+		return androidInterfaceCrudOperationsTemplate;
+	}
+
+	/**
+	 * 
+	 * @return AndroidMethodColumnsCrudDataTypeIntTemplate
+	 */
+	public AndroidMethodColumnsCrudDataTypeIntTemplate getAndroidMethodColumnsCrudDataTypeIntTemplate() {
+		return androidMethodColumnsCrudDataTypeIntTemplate;
+	}
+
+	/**
+	 * AndroidTemplatesParser#parsePackageName Formats a package path to a valid
+	 * package name
+	 * 
 	 * @param packagePath
 	 * @return String Package Name
 	 */
-	public String parseJavaPackage(String packageFilePath){
+	public String parseJavaPackage(String packageFilePath) {
 		return NativeUtils.parseJavaPackage(packageFilePath);
 	}
 
