@@ -10,6 +10,8 @@ public class AndroidDatabaseConfiguration {
 
 	private String tablesSchemasPackage;
 
+	private String tablesCRUDPackage;
+
 	/**
 	 * AndroidDatabaseConfiguration - Android database configuration
 	 * 
@@ -18,14 +20,16 @@ public class AndroidDatabaseConfiguration {
 	 * @param sqliteOpenHelperClass
 	 * @param sqliteOpenHelperClassPackage
 	 * @param tablesSchemasPackage
+	 * @param tablesCRUDPackage
 	 */
 	public AndroidDatabaseConfiguration(String databaseName, int databaseVersion, String sqliteOpenHelperClass,
-			String sqliteOpenHelperClassPackage, String tablesSchemasPackage) {
+			String sqliteOpenHelperClassPackage, String tablesSchemasPackage, String tablesCRUDPackage) {
 		this.databaseName = databaseName;
 		this.databaseVersion = databaseVersion;
 		this.sqliteOpenHelperClass = sqliteOpenHelperClass;
 		this.sqliteOpenHelperClassPackage = sqliteOpenHelperClassPackage;
 		this.tablesSchemasPackage = tablesSchemasPackage;
+		this.tablesCRUDPackage = tablesCRUDPackage;
 	}
 
 	/**
@@ -123,4 +127,21 @@ public class AndroidDatabaseConfiguration {
 		this.tablesSchemasPackage = tablesSchemasPackage;
 	}
 
+	/**
+	 * AndroidDatabaseConfiguration#getTablesCRUDPackage
+	 * 
+	 * @return tablesCRUDPackage
+	 */
+	public String getTablesCRUDPackage() {
+		return tablesCRUDPackage;
+	}
+
+	/**
+	 * AndroidDatabaseConfiguration#setTablesCRUDPackage
+	 * 
+	 * @param tablesCRUDPackage
+	 */
+	public void setTablesCRUDPackage(String tablesCRUDPackage) {
+		this.tablesCRUDPackage = tablesCRUDPackage;
+	}
 }
