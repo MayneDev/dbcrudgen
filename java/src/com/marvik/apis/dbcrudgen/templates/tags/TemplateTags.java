@@ -290,6 +290,41 @@ public class TemplateTags {
 		 * CRUD_OPERATIONS_INTERFACE_PACKAGE
 		 */
 		public static final CharSequence CRUD_OPERATIONS_INTERFACE_PACKAGE = "$CRUD_OPERATIONS_INTERFACE_PACKAGE";
+
+		/**
+		 * DATABASE_TABLE_CLASS
+		 */
+		public static final CharSequence DATABASE_TABLE_CLASS = "$DATABASE_TABLE_CLASS";
+
+		/**
+		 * $COLUMN_SPECIFIC_QUERY_METHODS
+		 */
+		public static final CharSequence COLUMN_SPECIFIC_QUERY_METHODS = "$COLUMN_SPECIFIC_QUERY_METHODS";
+
+		/**
+		 * $QUERIED_COLUMN
+		 */
+		public static final CharSequence QUERIED_COLUMN = "$QUERIED_COLUMN";
+
+		/**
+		 * QUERIED_TABLE_COLUMN_REFERENCE
+		 */
+		public static final CharSequence QUERIED_TABLE_COLUMN_REFERENCE = "$QUERIED_TABLE_COLUMN_REFERENCE";
+
+		/**
+		 * FUNCTION_PARAMS_VARIABLES
+		 */
+		public static final CharSequence FUNCTION_PARAMS_VARIABLES = "$FUNCTION_PARAMS_VARIABLES";
+
+		/**
+		 * FUNCTION_PARAMS_KEYS
+		 */
+		public static final CharSequence FUNCTION_PARAMS_KEYS = "$FUNCTION_PARAMS_KEYS";
+
+		/**
+		 * FUNCTION_PARAMS_VALUES
+		 */
+		public static final CharSequence FUNCTION_PARAMS_VALUES = "$FUNCTION_PARAMS_VALUES";
 	}
 
 }
