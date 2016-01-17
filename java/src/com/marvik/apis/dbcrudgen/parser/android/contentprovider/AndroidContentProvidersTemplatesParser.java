@@ -221,7 +221,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 	private String parseTablesSchemasClassImport(String contentProvidersTemplate,
 			AndroidDatabaseConfiguration androidDatabaseConfiguration) {
 		String tableSchemasPackage = androidDatabaseConfiguration.getTablesSchemasPackage();
-		tableSchemasPackage = parsePackageName(tableSchemasPackage);
+		tableSchemasPackage = parseJavaPackage(tableSchemasPackage);
 		String tableSchemasClass = tableSchemasPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
 				+ FileNameTemplates.Android.TABLE_SCHEMAS_CLASS_NAME;
 		return contentProvidersTemplate.replace(TemplateTags.Android.DATABASE_TABLES_CLASS, tableSchemasClass);
@@ -231,7 +231,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 	private String parseSQLiteOpenHelperClassImport(String contentProvidersTemplate,
 			AndroidDatabaseConfiguration androidDatabaseConfiguration) {
 		String sqliteOpenHelperPackage = androidDatabaseConfiguration.getSqliteOpenHelperClassPackage();
-		sqliteOpenHelperPackage = parsePackageName(sqliteOpenHelperPackage);
+		sqliteOpenHelperPackage = parseJavaPackage(sqliteOpenHelperPackage);
 
 		String sqliteOpenHelperClass = androidDatabaseConfiguration.getSqliteOpenHelperClass();
 
@@ -249,7 +249,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 
 	// add content provider package name
 	private String parseContentProviderPackageName(String contentProvidersTemplate, String contentProviderPackage) {
-		contentProviderPackage = parsePackageName(contentProviderPackage);
+		contentProviderPackage = parseJavaPackage(contentProviderPackage);
 		return contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.PACKAGE_NAME,
 				contentProviderPackage);
 
