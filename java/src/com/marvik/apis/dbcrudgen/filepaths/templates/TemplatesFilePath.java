@@ -198,5 +198,20 @@ public class TemplatesFilePath {
 		 */
 		public static final String JAVA_VARIABLE_GRAMMAR_TEMPLATE_FILEPATH = "res/templates/java/template_java_variable_declaration_grammar.txt";
 
+		/**
+		 * JAVA_OBJECT_DEFAULT_TEMPLATE_FILEPATH
+		 */
+		public static final String JAVA_OBJECT_DEFAULT_TEMPLATE_FILEPATH = "res/templates/java/template_java_object_default_encapsulator_template.txt";
+
+		/**
+		 * JAVA_OBJECT_SETTER_TEMPLATE_FILEPATH
+		 */
+		public static final String JAVA_OBJECT_SETTER_TEMPLATE_FILEPATH = "res/templates/java/template_java_object_setter_encapsulator_template.txt";
+
+		/**
+		 * JAVA_OBJECT_GETTER_TEMPLATE_FILEPATH
+		 */
+		public static final String JAVA_OBJECT_GETTER_TEMPLATE_FILEPATH = "res/templates/java/template_java_object_getter_encapsulator_template.txt";
+
 	}
 }
