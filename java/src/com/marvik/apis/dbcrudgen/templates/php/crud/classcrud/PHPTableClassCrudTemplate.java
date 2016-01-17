@@ -1,4 +1,4 @@
-package com.marvik.apis.dbcrudgen.templates.php;
+package com.marvik.apis.dbcrudgen.templates.php.crud.classcrud;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class PHPTableClassCrudTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
-		// TODO Auto-generated method stub
+		
 		return super.openTemplate(templateFilePath);
 	}
 
@@ -25,14 +25,7 @@ public class PHPTableClassCrudTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplate() {
-		// TODO Auto-generated method stub
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return super.getTemplate();
 	}
 
 	/*
@@ -40,7 +33,7 @@ public class PHPTableClassCrudTemplate extends CrudTemplates {
 	 */
 	@Override
 	public String getTemplateFilePath() {
-		// TODO Auto-generated method stub
+		
 		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_TABLE_CLASS_CRUD_TEMPLATE_FILE_PATH;
 	}
 }

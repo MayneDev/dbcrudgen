@@ -1,11 +1,12 @@
-package com.marvik.apis.dbcrudgen.templates.php;
+package com.marvik.apis.dbcrudgen.templates.php.crud.columnaccessors;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.php.crud.PHPCrudTemplates;
 
-public class PHPColumnAccessorsTemplate extends CrudTemplates{
+public class PHPColumnAccessorsTemplate extends PHPCrudTemplates{
 	
 	public PHPColumnAccessorsTemplate() {
 
@@ -25,14 +26,7 @@ public class PHPColumnAccessorsTemplate extends CrudTemplates{
 	 */
 	@Override
 	public String getTemplate(){
-		
-		try {
-			return super.getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return super.getTemplate();
 	}
 
 	/*

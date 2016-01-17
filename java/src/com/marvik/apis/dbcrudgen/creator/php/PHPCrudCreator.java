@@ -9,7 +9,7 @@ import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
-import com.marvik.apis.dbcrudgen.templates.php.PHPTableClassCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPTableClassCrudTemplate;
 
 public class PHPCrudCreator extends CrudCreator {
 

@@ -1,4 +1,4 @@
-package com.marvik.apis.dbcrudgen.templates.php;
+package com.marvik.apis.dbcrudgen.templates.php.crud.classfilename;
 
 import java.io.IOException;
 

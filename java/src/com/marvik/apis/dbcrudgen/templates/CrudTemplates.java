@@ -26,9 +26,14 @@ public abstract class CrudTemplates {
 	/**
 	 * Returns the template
 	 */
-	public String getTemplate() throws IOException {
-		return openTemplate(getTemplateFilePath());
-
+	public String getTemplate() {
+		try {
+			return openTemplate(getTemplateFilePath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Invalid Template File Path [" + getTemplateFilePath() + "]");
+		}
+		return null;
 	}
 
 	/**
@@ -39,16 +44,10 @@ public abstract class CrudTemplates {
 	/**
 	 * CrudTemplates#toString
 	 * 
-	 * @return getTemplate
+	 * @return the associated template
 	 */
 	@Override
 	public String toString() {
-		try {
-			return getTemplate();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return getTemplate();
 	}
 }
