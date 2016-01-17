@@ -57,8 +57,9 @@ public final class NativeUtils {
 	}
 
 	public static String createJavaVariable(String dataType, String objectName, JavaDelimiter javaDelimeter) {
+		
 		String javaVariable = "";
-
+		
 		if (dataType.equalsIgnoreCase("INT")) {
 			dataType = "int";
 		}
