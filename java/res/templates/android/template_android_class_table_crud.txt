@@ -1,4 +1,11 @@
-    public class $DATABASE_TABLE_CLASS implements DatabaseCRUDOperations {
+package $PACKAGE_NAME;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+
+ public class $DATABASE_TABLE_CLASS implements DatabaseCRUDOperations {
 
 
         @Override
