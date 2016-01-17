@@ -28,7 +28,7 @@ public class Main {
 
 		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
 				database.getDatabaseName(), 1, "DatabaseManager", "database\\sqliteopenhelper", "database\\tables",
-				"database\\tablescrud");
+				"database\\tablescrud", "database\\tablesinfos");
 		AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
 				"DataProvider", "database\\contentprovider", androidDatabaseConfiguration);
 		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
