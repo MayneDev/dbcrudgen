@@ -2,12 +2,12 @@
 	* Performs a database query and returns the value of QUERIED_COLUMN 
 	* based on the value of FUNCTION_PARAMS_VALUES passed to the function
 	*/
-	public float get$QUERIED_COLUMN(FUNCTION_PARAMS_VALUES) {
+	public float get$QUERIED_COLUMN($FUNCTION_PARAMS_VARIABLES) {
 	
 		String _$QUERIED_COLUMN = getUtils().getDatabaseUtilities().getColumnsValues(
                     getUri(),
-                    new String[]{FUNCTION_PARAMS_KEYS},
-                    new String[]{FUNCTION_PARAMS_VALUES}, $QUERIED_TABLE_COLUMN_REFERENCE
+                    new String[]{$FUNCTION_PARAMS_KEYS},
+                    new String[]{$FUNCTION_PARAMS_VALUES}, $QUERIED_TABLE_COLUMN_REFERENCE
             );
             
         return _$QUERIED_COLUMN == null ? $DATATYPE_DEFAULT_INIT_VALUE : Float.valueOf(_$QUERIED_COLUMN);

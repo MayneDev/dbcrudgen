@@ -2,10 +2,10 @@
 	* Performs a database query and returns the value of QUERIED_COLUMN 
 	* based on the value of FUNCTION_PARAMS_VALUES passed to the function
 	*/
-	public String get$QUERIED_COLUMN(FUNCTION_PARAMS_VALUES) {
+	public String get$QUERIED_COLUMN($FUNCTION_PARAMS_VARIABLES) {
             return getUtils().getDatabaseUtilities().getColumnsValues(
                     getUri(),
-                    new String[]{FUNCTION_PARAMS_KEYS},
-                    new String[]{FUNCTION_PARAMS_VALUES}, $QUERIED_TABLE_COLUMN_REFERENCE
+                    new String[]{$FUNCTION_PARAMS_KEYS},
+                    new String[]{$FUNCTION_PARAMS_VALUES}, $QUERIED_TABLE_COLUMN_REFERENCE
             );
      }
