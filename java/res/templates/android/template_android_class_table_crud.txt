@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import $DATABASE_TABLES_CLASS;
+
  public class $DATABASE_TABLE_CLASS implements DatabaseCRUDOperations {
 
 
@@ -15,7 +17,7 @@ import android.net.Uri;
 
         @Override
         public Uri getUri() {
-            return $TABLE_ARTIFACTS_LINK.CONTENT_URI;
+            return $TABLE_DEFINITION_LINK.CONTENT_URI;
         }
 
         @Override
