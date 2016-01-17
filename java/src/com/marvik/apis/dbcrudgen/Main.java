@@ -1,6 +1,5 @@
 package com.marvik.apis.dbcrudgen;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +16,11 @@ import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
-import com.marvik.apis.dbcrudgen.sql.parser.SQLParser;
-import com.marvik.apis.dbcrudgen.templates.php.PHPColumnsCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.sql.SQLTablesTemplate;
 
 public class Main {
 	public static void main(String[] args) {
 
 		testAndroidCrudGenerator();
-	}
-
-	private static CharSequence getClassVariable(String filename) {
-		filename = filename.replace(".java", "");
-		return filename.substring(0, 1).toLowerCase()+filename.substring(1, filename.length());
 	}
 
 	private static void testAndroidCrudGenerator() {
@@ -55,21 +46,6 @@ public class Main {
 	}
 
 	private static void testPHPCrudGenerator() {
-
-		SQLTablesTemplate sQLTablesTemplate = new SQLTablesTemplate();
-		// System.out.println(sQLTablesTemplate.getTemplate());
-
-		PHPColumnsCrudTemplate columnsCrudTemplate = new PHPColumnsCrudTemplate();
-		// System.out.println(columnsCrudTemplate.getTemplate());
-
-		SQLParser sqlParser = new SQLParser();
-		/*
-		 * Database database = sqlParser.getDatabaseSchemas(new SQLReader(),
-		 * TestRes.TEST_SQL_FILE);
-		 * System.out.println(database.getDatabaseName()); for (Table table :
-		 * database.getTables()) { System.out.println(table.getTableName());
-		 * System.out.println(table.getTableSql()); }
-		 */
 
 		Database database = prepareDatabase();
 
