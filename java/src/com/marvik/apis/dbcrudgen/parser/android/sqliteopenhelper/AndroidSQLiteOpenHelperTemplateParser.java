@@ -58,7 +58,7 @@ public class AndroidSQLiteOpenHelperTemplateParser extends AndroidTemplatesParse
 				.getAndroidDatabaseConfiguration();
 
 		String tableSchemasPackage = androidDatabaseConfiguration.getTablesSchemasPackage();
-		tableSchemasPackage = parsePackageName(tableSchemasPackage);
+		tableSchemasPackage = parseJavaPackage(tableSchemasPackage);
 
 		String tableSchemasClass = tableSchemasPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
 				+ FileNameTemplates.Android.TABLE_SCHEMAS_CLASS_NAME;
@@ -67,7 +67,7 @@ public class AndroidSQLiteOpenHelperTemplateParser extends AndroidTemplatesParse
 
 	private String parseOpenHelperSubclassPackageName(String sqliteOpenHelperSubclassTemplate,
 			String sqliteOpenHelperSubclassPackage) {
-		String packageName = parsePackageName(sqliteOpenHelperSubclassPackage);
+		String packageName = parseJavaPackage(sqliteOpenHelperSubclassPackage);
 		return sqliteOpenHelperSubclassTemplate.replace(TemplateTags.Android.PACKAGE_NAME, packageName);
 	}
 
