@@ -64,7 +64,7 @@ public final class NativeUtils {
 
 		switch (javaAccessibility) {
 		case PRIVATE:
-			javaVariable += "private ";
+			javaVariable += " private ";
 			break;
 		case DEFAULT:
 			javaVariable += " ";
@@ -73,7 +73,7 @@ public final class NativeUtils {
 			javaVariable += " protected ";
 			break;
 		case PUBLIC:
-			javaVariable += "public ";
+			javaVariable += " public ";
 			break;
 		}
 
