@@ -28,6 +28,16 @@ public class SimpleTemplates {
 		 */
 		public static final String STRING_DEFAULT_PARSER = "String.valueOf($OBJECT)";
 
+		/**
+		 * JAVA_OBJECT_INIT_STATEMENT_TEMPLATE
+		 */
+		public static final String JAVA_OBJECT_INIT_STATEMENT_TEMPLATE = "$OBJECT = new $DATATYPE();";
+
+		/**
+		 * JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE
+		 */
+		public static final String JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE = "this.$OBJECT = $OBJECT;";
+
 	}
 
 	public static class FileNameTemplates {
