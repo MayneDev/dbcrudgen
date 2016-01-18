@@ -19,7 +19,6 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.javaobject.encapsulation.AndroidJavaObjectDefaultEncapsulationTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidCRUDCreator extends CrudCreator {
