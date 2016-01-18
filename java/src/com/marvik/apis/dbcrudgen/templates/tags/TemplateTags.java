@@ -334,6 +334,62 @@ public class TemplateTags {
 		 */
 		public static final CharSequence FUNCTION_PARAMS = "$FUNCTION_PARAMS";
 
+		/**
+		 * DATATYPE
+		 */
+		public static final CharSequence DATATYPE = Java.DATATYPE;
+
+		/**
+		 * OBJECT
+		 */
+		public static final CharSequence OBJECT = Java.OBJECT;
+
+		/**
+		 * JAVA_BEANS_OBJECT
+		 */
+		public static final CharSequence JAVA_BEANS_OBJECT = "$JAVA_BEANS_OBJECT";
+
+		/**
+		 * CLASS_NAME
+		 */
+		public static final String CLASS_NAME = "$CLASS_NAME";
+
+		/**
+		 * TABLE_COLUMN_CLASS_VARIABLES
+		 */
+		public static final CharSequence TABLE_COLUMN_CLASS_VARIABLES = "$TABLE_COLUMN_CLASS_VARIABLES";
+
+		/**
+		 * INIT_CONSTRUCTOR_PARAMS
+		 */
+		public static final String INIT_CONSTRUCTOR_PARAMS = "$INIT_CONSTRUCTOR_PARAMS";
+
+		/**
+		 * CLASS_VARIABLES_ENCAPSULATOR_METHODS
+		 */
+		public static final String CLASS_VARIABLES_ENCAPSULATOR_METHODS = "$CLASS_VARIABLES_ENCAPSULATOR_METHODS";
+
+		/**
+		 * CONSTRUCTOR_PARAMS
+		 */
+		public static final CharSequence CONSTRUCTOR_PARAMS = "$CONSTRUCTOR_PARAMS";
+
+		/**
+		 * INFO
+		 */
+		public static final String INFO = "Info";
+
 	}
 
+	public static class Java {
+		/**
+		 * OBJECT
+		 */
+		public static final CharSequence OBJECT = "$OBJECT";
+
+		/**
+		 * DATATYPE
+		 */
+		public static final CharSequence DATATYPE = "$DATATYPE";
+	}
 }
