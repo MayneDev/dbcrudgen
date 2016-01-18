@@ -40,6 +40,15 @@ import $DATABASE_TABLES_CLASS;
             return getContext().getContentResolver().delete(getUri(), selection, selectionArgs);
         }
 
+		$COLUMN_SPECIFIC_QUERY_METHODS
+
+		/**
+        * $DATABASE_TABLE_CLASS#insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
+        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and inserts the data 
+        * as a new row in the table -> $TABLE_DEFINITION_LINK
+        *
+        * @return Uri of the inserted item
+        */
         public Uri insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS $TABLE_MODEL_OBJECT) {
 
             ContentValues values = new ContentValues();
@@ -48,6 +57,47 @@ import $DATABASE_TABLES_CLASS;
             
             return insert(values);
         }
+        
+       /**
+        * $DATABASE_TABLE_CLASS#update$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
+        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and updates the data 
+        * in the table -> $TABLE_DEFINITION_LINK if the selection matches
+        *
+        * @return the number of updated rows
+        */
+ 		public int update$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS $TABLE_MODEL_OBJECT, String selection, String[] selectionArgs) {
 
-        $COLUMN_SPECIFIC_QUERY_METHODS
+            ContentValues values = new ContentValues();
+            
+            $CONTENT_VALUES_PUT_STATEMENTS
+            
+            return update(values,selection,selectionArgs);
+        }
+        
+        /**
+        * $DATABASE_TABLE_CLASS#delete$DATABASE_TABLE_CLASS
+        * uses the selection and deletes the data in the table -> $TABLE_DEFINITION_LINK
+        * if the selection matches
+        *
+        * @return the number of deleted rows
+        */
+        public int delete$DATABASE_TABLE_CLASS(String selection, String[] selectionArgs) {
+
+            ContentValues values = new ContentValues();
+            
+            $CONTENT_VALUES_PUT_STATEMENTS
+            
+            return delete(selection,selectionArgs);
+        }
+        
+        /**
+        * $DATABASE_TABLE_CLASS#query$DATABASE_TABLE_CLASS
+        * uses the selection projection,  selection,  selectionArgs,  sortOrder
+        * to query  the data in the table -> $TABLE_DEFINITION_LINK
+        * 
+        * @return an iteratable Cursor object of the table -> $TABLE_DEFINITION_LINK
+        */
+        public Cursor query$DATABASE_TABLE_CLASS(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+            return query(projection,  selection,  selectionArgs,  sortOrder);
+        }
     }
