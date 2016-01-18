@@ -40,7 +40,7 @@ import $DATABASE_TABLES_CLASS;
             return getContext().getContentResolver().delete(getUri(), selection, selectionArgs);
         }
 
-        public Uri insert$DATABASE_TABLE_CLASS($DATABASE_TABLE_INFO_CLASS $TABLE_INFO_DATATYPE_VARIABLE) {
+        public Uri insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS $TABLE_MODEL_OBJECT) {
 
             ContentValues values = new ContentValues();
             
