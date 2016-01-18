@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.JavaGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.delimeters.JavaDelimiter;
+import com.marvik.apis.dbcrudgen.core.platforms.java.object.accessibility.JavaObjectAccessibility;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
@@ -56,10 +57,26 @@ public final class NativeUtils {
 		return packageFilePath.replace(NativeUtils.getFileSeparator(), TemplateTags.TAG_PRINTING_CHAR_DOT);
 	}
 
-	public static String createJavaVariable(String dataType, String objectName, JavaDelimiter javaDelimeter) {
-		
+	public static String createJavaVariable(JavaObjectAccessibility javaAccessibility, String dataType,
+			String objectName, JavaDelimiter javaDelimeter) {
+
 		String javaVariable = "";
-		
+
+		switch (javaAccessibility) {
+		case PRIVATE:
+			javaVariable += "private ";
+			break;
+		case DEFAULT:
+			javaVariable += " ";
+			break;
+		case PROTECTED:
+			javaVariable += " protected ";
+			break;
+		case PUBLIC:
+			javaVariable += "public ";
+			break;
+		}
+
 		if (dataType.equalsIgnoreCase("INT")) {
 			dataType = "int";
 		}
@@ -85,7 +102,7 @@ public final class NativeUtils {
 			dataType = "byte";
 		}
 
-		javaVariable = dataType + JavaGrammar.SPACE + objectName;
+		javaVariable += dataType + JavaGrammar.SPACE + objectName;
 
 		switch (javaDelimeter) {
 		case COMMA:
@@ -109,5 +126,16 @@ public final class NativeUtils {
 	public static CharSequence parseStringDefaultParser(String variable) {
 		String stringParserTemplate = SimpleTemplates.Java.STRING_DEFAULT_PARSER;
 		return stringParserTemplate.replace(NativeTemplateTags.Java.JAVA_OBJECT_TAG, variable);
+	}
+
+	public static String createJavaVariableParameterLessInitStatement(String object, String datatype) {
+		String javaVariableParameterLessInitStatementTemplate = SimpleTemplates.Java.JAVA_OBJECT_INIT_STATEMENT_TEMPLATE;
+		return javaVariableParameterLessInitStatementTemplate.replace(TemplateTags.Java.OBJECT, object)
+				.replace(TemplateTags.Java.DATATYPE, datatype);
+	}
+
+	public static String createJavaClassVariableInitStatement(String object) {
+		String javaClassVariableInitStatementTemplate = SimpleTemplates.Java.JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE;
+		return javaClassVariableInitStatementTemplate.replace(TemplateTags.Java.OBJECT, object);
 	}
 }
