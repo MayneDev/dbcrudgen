@@ -6,7 +6,7 @@
 	public function get_QUERIED_COLUMN(FUNCTION_PARAMS_VALUES) {
 		$columns = array (FUNCTION_PARAMS_KEYS);
 		$records = array (FUNCTION_PARAMS_VALUES);
-		$QUERY_RESULTS = $this->query_from_TABLE_NAME ( $columns, $records );
+		$QUERY_RESULTS = $this->query_from_$TABLE_NAME ( $columns, $records );
 		return count($QUERY_RESULTS)>0 ? $QUERY_RESULTS [0] ['QUERIED_COLUMN'] : null;
 	}
 	
