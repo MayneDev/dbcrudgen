@@ -11,6 +11,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.MYSQLDataTypes;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementContentValuesPutTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcrudgen.utilities.Utils;
 
@@ -37,7 +38,61 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		// add column query methods
 		tableCrudTemplate = parseColumnsQueryMethods(tableCrudTemplate, table);
 
+		// add table custom insert method
+		tableCrudTemplate = parseTableCustomInsertMethod(tableCrudTemplate, table);
+
+		// add table custom update method
+
+		// add table custom query method
+
+		// add table custom delete method
+
 		return tableCrudTemplate;
+	}
+
+	// add table custom insert method
+	private String parseTableCustomInsertMethod(String tableCrudTemplate, Table table) {
+
+		String tableName = table.getTableName();
+		String tableModelInfoClass = NativeUtils.toJavaBeansClass(tableName) + TemplateTags.Android.INFO;
+		String tableModelInfoClassObject = NativeUtils.toJavaBeansVariable(tableModelInfoClass);
+		String tableColumnsContentValuesPutStatements = prepareTableColumnContentValuesPutStatements(table,
+				tableModelInfoClassObject);
+		return tableCrudTemplate.replace(TemplateTags.Android.TABLE_MODEL_INFO_CLASS, tableModelInfoClass)
+				.replace(TemplateTags.Android.CONTENT_VALUES_PUT_STATEMENTS, tableColumnsContentValuesPutStatements)
+				.replace(TemplateTags.Android.TABLE_MODEL_OBJECT, tableModelInfoClassObject);
+	}
+
+	// Prepare table column content values put statements
+	private String prepareTableColumnContentValuesPutStatements(Table table, String tableModelInfoClassObject) {
+
+		String tableName = table.getTableName();
+
+		String databaseTableReference = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME
+				+ TemplateTags.TAG_PRINTING_CHAR_DOT + NativeUtils.toJavaBeansClass(tableName);
+
+		String contentValuesPutStatements = "";
+
+		for (TableColumn tableColumn : table.getColumns()) {
+			String columnName = tableColumn.getColumnName();
+			String tableColumnReference = databaseTableReference + TemplateTags.TAG_PRINTING_CHAR_DOT
+					+ columnName.toUpperCase();
+			String tableColumnObject = tableModelInfoClassObject;
+
+			contentValuesPutStatements += parseTableColumnContentValuesPutStatements(tableColumnReference,
+					tableColumnObject, NativeUtils.toJavaBeansClass(columnName));
+		}
+		return contentValuesPutStatements;
+	}
+
+	private String parseTableColumnContentValuesPutStatements(String tableColumnReference, String tableModelObject,
+			String columnName) {
+
+		String template = new AndroidStatementContentValuesPutTemplate().getTemplate();
+
+		return template.replace(TemplateTags.Android.TABLE_COLUMN_DEFINITION, tableColumnReference)
+				.replace(TemplateTags.Android.TABLE_MODEL_OBJECT, tableModelObject)
+				.replace(TemplateTags.Android.COLUMN_NAME, columnName);
 	}
 
 	// add column query methods
