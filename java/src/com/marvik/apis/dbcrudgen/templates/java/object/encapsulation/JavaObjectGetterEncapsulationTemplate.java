@@ -1,4 +1,4 @@
-package com.marvik.apis.dbcrudgen.templates.java.encapsulation;
+package com.marvik.apis.dbcrudgen.templates.java.object.encapsulation;
 
 import java.io.IOException;
 
