@@ -379,6 +379,27 @@ public class TemplateTags {
 		 */
 		public static final String INFO = "Info";
 
+		/**
+		 * TABLE_MODEL_OBJECT
+		 */
+
+		public static final String TABLE_MODEL_OBJECT = "$TABLE_MODEL_OBJECT";
+
+		/**
+		 * TABLE_MODEL_INFO_CLASS
+		 */
+		public static final CharSequence TABLE_MODEL_INFO_CLASS = "$TABLE_MODEL_INFO_CLASS";
+
+		/**
+		 * CONTENT_VALUES_PUT_STATEMENTS
+		 */
+		public static final CharSequence CONTENT_VALUES_PUT_STATEMENTS = "$CONTENT_VALUES_PUT_STATEMENTS";
+
+		/**
+		 * COLUMN_NAME
+		 */
+		public static final CharSequence COLUMN_NAME = "$COLUMN_NAME";
+
 	}
 
 	public static class Java {
