@@ -184,6 +184,11 @@ public class TemplatesFilePath {
 		 */
 		public static final String ANDROID_VARIABLE_URI_MATCHER_CODE_TEMPLATE_FILE_PATH = "res/templates/android/template_android_variable_uri_matcher_code.txt";
 
+		/**
+		 * ANDROID ANDROID_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH
+		 */
+		public static final String ANDROID_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH = JavaTemplatesFilePath.JAVA_INFO_CLASS_MODEL_FILEPATH;
+
 	}
 
 	/**
@@ -212,6 +217,11 @@ public class TemplatesFilePath {
 		 * JAVA_OBJECT_GETTER_TEMPLATE_FILEPATH
 		 */
 		public static final String JAVA_OBJECT_GETTER_TEMPLATE_FILEPATH = "res/templates/java/template_java_object_getter_encapsulator_template.txt";
+
+		/**
+		 * JAVA_INFO_CLASS_MODEL_FILEPATH
+		 */
+		public static final String JAVA_INFO_CLASS_MODEL_FILEPATH = "res/templates/java/template_java_info_class_model.txt";
 
 	}
 }
