@@ -1,6 +1,7 @@
 package com.marvik.apis.dbcrudgen.parser.android.tablecrud;
 
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.delimeters.JavaDelimiter;
+import com.marvik.apis.dbcrudgen.core.platforms.java.object.accessibility.JavaObjectAccessibility;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
@@ -10,12 +11,6 @@ import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.MYSQLDataTypes;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassContentProviderTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeFloatTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeGenericTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeIntTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeLongTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeStringTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcrudgen.utilities.Utils;
 
@@ -67,7 +62,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		PrimaryKey primaryKey = table.getPrimaryKey();
 		String primaryKeyColumn = primaryKey.getColumnName();
 		String primaryKeyDataType = primaryKey.getDataType().getDataType();
-	
+
 		String primaryKeyColumnReference = createTableColumnReference(
 				NativeUtils.toJavaBeansClass(table.getTableName()), primaryKeyColumn);
 
@@ -86,7 +81,8 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
 			tableColumnsReference += createTableColumnReference(NativeUtils.toJavaBeansClass(table.getTableName()),
 					columnName);
-			tableColumnsVariable += NativeUtils.createJavaVariable(dataType, objectName, javaDelimeter);
+			tableColumnsVariable += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT, dataType,
+					objectName, javaDelimeter);
 
 			tableColumnsObjects += objectName;
 
@@ -135,7 +131,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		String primaryKeyColumnReference = createTableColumnReference(tableJavaBeansName, primaryKey.getPrimaryKey());
 
 		// Add primary key variable
-		String primaryKeyParamVariableDeclaration = NativeUtils.createJavaVariable(
+		String primaryKeyParamVariableDeclaration = NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT,
 				primaryKey.getDataType().getDataType(), primaryKey.getPrimaryKey(), JavaDelimiter.NONE);
 
 		return parseQueriedColumnQueryArtificats(template, queriedColumn, queriedColumnReference,
