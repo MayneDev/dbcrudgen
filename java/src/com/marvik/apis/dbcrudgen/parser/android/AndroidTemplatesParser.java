@@ -9,6 +9,7 @@ import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassData
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassSQLTableTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassSQLiteOpenHelperTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableModelTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.interfaces.AndroidInterfaceCrudOperationsTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeFloatTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeGenericTemplate;
@@ -27,6 +28,9 @@ import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidJavaVar
 import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidVariableSQLTableColumnTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidVariableSQLTableCreateSQLTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidVariableUriMatcherCodeTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.javaobject.encapsulation.AndroidJavaObjectDefaultEncapsulationTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.javaobject.encapsulation.AndroidJavaObjectGetterEncapsulationTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.javaobject.encapsulation.AndroidJavaObjectSetterEncapsulationTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidTemplatesParser extends TemplatesParser {
@@ -40,6 +44,11 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	 * AndroidClassDatabaseTablesTemplate
 	 */
 	private AndroidClassDatabaseTablesTemplate androidClassDatabaseTablesTemplate;
+
+	/**
+	 * AndroidClassTableModelTemplate
+	 */
+	private AndroidClassTableModelTemplate androidClassTableModelTemplate;
 
 	/**
 	 * AndroidClassSQLiteOpenHelperTemplate
@@ -147,6 +156,21 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	AndroidJavaVariableTemplate androidJavaVariableTemplate;
 
 	/**
+	 * AndroidJavaObjectDefaultEncapsulationTemplate
+	 */
+	AndroidJavaObjectDefaultEncapsulationTemplate androidJavaObjectDefaultEncapsulationTemplate;
+
+	/**
+	 * AndroidJavaObjectGetterEncapsulationTemplate
+	 */
+	AndroidJavaObjectGetterEncapsulationTemplate androidJavaObjectGetterEncapsulationTemplate;
+
+	/**
+	 * AndroidJavaObjectSetterEncapsulationTemplate
+	 */
+	AndroidJavaObjectSetterEncapsulationTemplate androidJavaObjectSetterEncapsulationTemplate;
+
+	/**
 	 * AndroidTemplatesParser - Class that parses templates into actual
 	 * data/source code
 	 */
@@ -157,6 +181,11 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		androidClassSQLiteOpenHelperTemplate = new AndroidClassSQLiteOpenHelperTemplate();
 		androidClassSQLTableTemplate = new AndroidClassSQLTableTemplate();
 		androidClassTableCrudTemplate = new AndroidClassTableCrudTemplate();
+		androidClassTableModelTemplate = new AndroidClassTableModelTemplate();
+		androidJavaObjectDefaultEncapsulationTemplate = new AndroidJavaObjectDefaultEncapsulationTemplate();
+		androidJavaObjectGetterEncapsulationTemplate = new AndroidJavaObjectGetterEncapsulationTemplate();
+		androidJavaObjectSetterEncapsulationTemplate = new AndroidJavaObjectSetterEncapsulationTemplate();
+		androidJavaVariableTemplate = new AndroidJavaVariableTemplate();
 		androidInterfaceCrudOperationsTemplate = new AndroidInterfaceCrudOperationsTemplate();
 		androidMethodColumnsCrudDataTypeFloatTemplate = new AndroidMethodColumnsCrudDataTypeFloatTemplate();
 		androidMethodColumnsCrudDataTypeGenericTemplate = new AndroidMethodColumnsCrudDataTypeGenericTemplate();
@@ -174,7 +203,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		androidVariableSQLTableColumnTemplate = new AndroidVariableSQLTableColumnTemplate();
 		androidVariableSQLTableCreateSQLTemplate = new AndroidVariableSQLTableCreateSQLTemplate();
 		androidVariableUriMatcherCodeTemplate = new AndroidVariableUriMatcherCodeTemplate();
-		androidJavaVariableTemplate = new AndroidJavaVariableTemplate();
+
 	}
 
 	/**
@@ -210,6 +239,14 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	 */
 	public AndroidClassTableCrudTemplate getAndroidClassTableCrudTemplate() {
 		return androidClassTableCrudTemplate;
+	}
+
+	/**
+	 * 
+	 * @return the AndroidClassTableModelTemplate
+	 */
+	public AndroidClassTableModelTemplate getAndroidClassTableModelTemplate() {
+		return androidClassTableModelTemplate;
 	}
 
 	/**
@@ -348,6 +385,34 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	}
 
 	/**
+	 * @return the androidStatementContentValuesPutTemplate
+	 */
+	public AndroidStatementContentValuesPutTemplate getAndroidStatementContentValuesPutTemplate() {
+		return androidStatementContentValuesPutTemplate;
+	}
+
+	/**
+	 * @return the androidJavaObjectDefaultEncapsulationTemplate
+	 */
+	public AndroidJavaObjectDefaultEncapsulationTemplate getAndroidJavaObjectDefaultEncapsulationTemplate() {
+		return androidJavaObjectDefaultEncapsulationTemplate;
+	}
+
+	/**
+	 * @return the androidJavaObjectGetterEncapsulationTemplate
+	 */
+	public AndroidJavaObjectGetterEncapsulationTemplate getAndroidJavaObjectGetterEncapsulationTemplate() {
+		return androidJavaObjectGetterEncapsulationTemplate;
+	}
+
+	/**
+	 * @return the androidJavaObjectSetterEncapsulationTemplate
+	 */
+	public AndroidJavaObjectSetterEncapsulationTemplate getAndroidJavaObjectSetterEncapsulationTemplate() {
+		return androidJavaObjectSetterEncapsulationTemplate;
+	}
+
+	/**
 	 * 
 	 * @return AndroidMethodColumnsCrudDataTypeIntTemplate
 	 */
@@ -389,7 +454,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	 * @return CrudTemplates
 	 */
 	public CrudTemplates getAndroidColumnQueryCrudTemplate(String columnDatatype) {
-		
+
 		// Boolean
 		if (columnDatatype.equalsIgnoreCase("Boolean")) {
 			return new AndroidMethodColumnsCrudDataTypeIntTemplate();
@@ -429,6 +494,65 @@ public class AndroidTemplatesParser extends TemplatesParser {
 
 		if (columnDatatype.equalsIgnoreCase("Class")) {
 			return new AndroidMethodColumnsCrudDataTypeGenericTemplate();
+		}
+		return null;
+	}
+
+	/**
+	 * AndroidTemplatesParser#getAndroidColumnQueryCrudTemplate
+	 * 
+	 * Return the right CRUD for a table column based on the data type of the
+	 * column
+	 * 
+	 * @param columnDatatype
+	 * @return CrudTemplates
+	 */
+	public String getAndroidObjectDataType(String columnDatatype) {
+
+		// Boolean
+		if (columnDatatype.equalsIgnoreCase("Boolean")) {
+			return "boolean";
+		}
+		// Byte
+		if (columnDatatype.equalsIgnoreCase("Byte")) {
+			return "byte";
+		}
+		// Integer
+		if (columnDatatype.equalsIgnoreCase("Integer")) {
+			return "int";
+		}
+		// Integer
+		if (columnDatatype.equalsIgnoreCase("Int")) {
+			return "int";
+
+		}
+		// Date
+		if (columnDatatype.equalsIgnoreCase("Date")) {
+			// TO DO ADD SOURCE CODE
+		}
+		// Double
+		if (columnDatatype.equalsIgnoreCase("Double")) {
+			return "double";
+		}
+		// Float
+		if (columnDatatype.equalsIgnoreCase("Float")) {
+			return "float";
+		}
+		// Long
+		if (columnDatatype.equalsIgnoreCase("Long")) {
+			return "long";
+		}
+		// String
+		if (columnDatatype.equalsIgnoreCase("String")) {
+			return "String";
+		}
+		// Varchar
+		if (columnDatatype.equalsIgnoreCase("varchar")) {
+			return "String";
+		}
+		// Text
+		if (columnDatatype.equalsIgnoreCase("text")) {
+			return "String";
 		}
 		return null;
 	}
