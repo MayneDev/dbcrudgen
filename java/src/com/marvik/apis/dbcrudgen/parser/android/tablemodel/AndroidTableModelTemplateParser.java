@@ -30,7 +30,7 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 		TableColumn[] tableColumn = table.getColumns();
 
 		for (int i = 0; i < tableColumn.length; i++) {
-
+			
 			String columnDatatype = tableColumn[i].getDataType().getDataType();
 			String objectName = tableColumn[i].getColumnName();
 			String androidDatatype = getAndroidObjectDataType(columnDatatype);
@@ -38,12 +38,14 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 			classVariables += NativeUtils.createJavaVariable(JavaObjectAccessibility.PRIVATE, androidDatatype,
 					objectName, JavaDelimiter.SEMICOLON);
 			
-			classConstructorVariables += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT,
-					androidDatatype, objectName, JavaDelimiter.COMMA);
-			if (i == (tableColumn.length - 1)) {
-				classConstructorVariables += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT,
-						androidDatatype, objectName, JavaDelimiter.NONE);
+			JavaDelimiter classConstructorVariablesJavaDelimeter = JavaDelimiter.COMMA;;
+			
+			if (i >= (tableColumn.length - 1)) {
+				classConstructorVariablesJavaDelimeter = JavaDelimiter.NONE; 
 			}
+			
+			classConstructorVariables += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT,
+					androidDatatype, objectName,classConstructorVariablesJavaDelimeter );
 			
 			classVariablesInit += NativeUtils.createJavaClassVariableInitStatement(objectName);
 
@@ -51,6 +53,8 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 					.createAndroidJavaObjectDefaultAccessorSourceCode(androidDatatype, objectName);
 		}
 
+		System.out.println(classConstructorVariables);
+		
 		return template.replace(TemplateTags.Android.PACKAGE_NAME, tableModelPackageName)
 				.replace(TemplateTags.Android.CLASS_NAME, tableClassName)
 				.replace(TemplateTags.Android.TABLE_COLUMN_CLASS_VARIABLES, classVariables)
