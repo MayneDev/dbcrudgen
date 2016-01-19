@@ -19,6 +19,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidCRUDCreator extends CrudCreator {
@@ -231,7 +232,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		// Create source code file absolute path
 		String sQLiteOpenHelperSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
-				+ sqliteOpenHelperSubclassPackage + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclass;
+				+ sqliteOpenHelperSubclassPackage + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclass +AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 		// write source code to disk
 		boolean createSQLiteOpenHelperSubclassSourceFile = createSourceFile(sQLiteOpenHelperSourceFile,
