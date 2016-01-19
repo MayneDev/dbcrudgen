@@ -72,6 +72,7 @@ public class Main {
 
 		addTableFirstAids(tablesList);
 		addTableFirstAidsCategories(tablesList);
+		addTableExaminingSickPerson(tablesList);
 
 		Table[] tables = new Table[tablesList.size()];
 		for (int i = 0; i < tablesList.size(); i++) {
@@ -80,6 +81,34 @@ public class Main {
 
 		Database database = new Database("where_there_is_no_doc", tables);
 		return database;
+	}
+
+	/**
+	 * 
+	 * @param tablesList
+	 */
+	private static void addTableExaminingSickPerson(List<Table> tablesList) {
+	
+		
+		List<TableColumn> examiningSickPersonColumnList = new ArrayList<TableColumn>();
+		examiningSickPersonColumnList.add(
+				new TableColumn("examination_title", new DataType("text", new Constraints("text not null"))));
+		examiningSickPersonColumnList.add(
+				new TableColumn("examination_description", new DataType("text", new Constraints("text not null"))));
+
+		TableColumn[] examiningSickPersonColumns = new TableColumn[examiningSickPersonColumnList.size()];
+
+		for (int i = 0; i < examiningSickPersonColumnList.size(); i++) {
+			examiningSickPersonColumns[i] = examiningSickPersonColumnList.get(i);
+		}
+		String tableSql = "create table examining_sick_person "
+		+"( id_examination integer primary key auto_increment,"
+		+" examination_title text not null,"
+		 +"examination_description text not null);";
+
+		PrimaryKey primaryKey = new PrimaryKey("id_examination",new DataType("integer", new Constraints("primary key auto_increment")));
+		tablesList.add(new Table("examining_sick_person", examiningSickPersonColumns, tableSql, primaryKey, null, null));
+		
 	}
 
 	/**
