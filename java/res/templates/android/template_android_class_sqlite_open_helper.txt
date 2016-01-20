@@ -22,7 +22,7 @@ public class $SQLITE_OPEN_HELPER_SUBCLASS extends SQLiteOpenHelper {
      *                {@link #onUpgrade} will be used to upgrade the database; if the database is
      *                newer, {@link #onDowngrade} will be used to downgrade the database
      */
-    public Database(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public $SQLITE_OPEN_HELPER_SUBCLASS(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
