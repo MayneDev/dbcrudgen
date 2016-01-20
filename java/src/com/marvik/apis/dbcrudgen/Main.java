@@ -20,7 +20,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 public class Main {
 	public static void main(String[] args) {
 		testAndroidCrudGenerator();
-		testPHPCrudGenerator();
+		//testPHPCrudGenerator();
 	}
 
 	private static void testAndroidCrudGenerator() {
@@ -33,7 +33,9 @@ public class Main {
 		AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
 				"DataProvider", "database\\contentprovider", androidDatabaseConfiguration);
 		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
-				"C:\\Users\\victor\\Desktop\\dbcrudgenerator\\outputs\\android\\sampleproject",
+				"G:\\MarvikApps2015\\Eclipse\\WTND",
+				"src",
+				"com.victor.wtnd",
 				androidContentProviderConfiguration);
 
 		AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
@@ -87,6 +89,7 @@ public class Main {
 		addTableFamilyProblems(tablesList);
 		addTableChildrenSickness(tablesList);
 		addTableOldAgeSickness(tablesList);
+		
 
 		Table[] tables = new Table[tablesList.size()];
 		for (int i = 0; i < tablesList.size(); i++) {
@@ -96,6 +99,8 @@ public class Main {
 		Database database = new Database("where_there_is_no_doc", tables);
 		return database;
 	}
+
+	
 
 	private static void addTableOldAgeSickness(List<Table> tablesList) {
 		
@@ -121,6 +126,7 @@ public class Main {
 
 		PrimaryKey primaryKey = new PrimaryKey("id_sickness",new DataType("integer", new Constraints("primary key auto_increment")));
 		tablesList.add(new Table("oldage_sickness", examiningSickPersonColumns, tableSql, primaryKey, null, null));
+	
 	}
 
 	private static void addTableChildrenSickness(List<Table> tablesList) {
