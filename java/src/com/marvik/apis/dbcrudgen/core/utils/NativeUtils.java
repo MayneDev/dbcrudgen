@@ -133,7 +133,7 @@ public final class NativeUtils {
 		return javaVariable;
 	}
 
-	public static CharSequence parseStringDefaultParser(String variable) {
+	public static String parseStringDefaultParser(String variable) {
 		String stringParserTemplate = SimpleTemplates.Java.STRING_DEFAULT_PARSER;
 		return stringParserTemplate.replace(NativeTemplateTags.Java.JAVA_OBJECT_TAG, variable);
 	}
