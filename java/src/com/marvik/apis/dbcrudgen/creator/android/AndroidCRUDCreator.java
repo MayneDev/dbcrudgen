@@ -95,46 +95,58 @@ public class AndroidCRUDCreator extends CrudCreator {
 		// Project storage directory
 		String projectStorageDir = getAndroidProjectConfiguration().getProjectStorageDir();
 		createDirectory(projectStorageDir);
+		
+		
+		
+		// Project java files storage directory
+		String javaSrcDir = getAndroidProjectConfiguration().getJavaSrcDir();
+		String projectFilesStorageDir = projectStorageDir + NativeUtils.getFileSeparator() + javaSrcDir;
+		createDirectory(projectFilesStorageDir);
 
+		//Project files default Storage Directory
+		String projectFilesDefaultStorageDirectory = getAndroidProjectConfiguration()._getProjectDefaultJavaFilesRootStorageLocation();
+		createDirectory(projectFilesDefaultStorageDirectory);
+			
+		
 		// Content provider class package
 		String contentProviderPackage = getAndroidContentProviderConfiguration().getContentProviderPackage();
-		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + contentProviderPackage);
-
+		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + contentProviderPackage);
+		
 		// SQLite open helper class package
 		String sqliteOpenHelperSubclassPackage = getAndroidDatabaseConfiguration().getSqliteOpenHelperClassPackage();
-		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
+		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
 
 		// Database table package
 		String databaseTablesPackage = getAndroidDatabaseConfiguration().getTablesSchemasPackage();
-		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + databaseTablesPackage);
+		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + databaseTablesPackage);
 
 		// table CRUD package
 		String tablesCRUDPackage = getAndroidDatabaseConfiguration().getTablesCRUDPackage();
-		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + tablesCRUDPackage);
+		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDPackage);
 
 		// Create table schemas source file and saves it on disk
-		createTablesSchemasSourceFile(database, projectStorageDir, databaseTablesPackage);
+		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, databaseTablesPackage);
 
 		// Create the database content provider file and saves it on disk
-		createContentProviderSourceFile(projectStorageDir, contentProviderPackage, database);
+		createContentProviderSourceFile(projectFilesDefaultStorageDirectory, contentProviderPackage, database);
 
 		// create SQLiteOpenHelper Subclass
-		createSQLiteOpenHelperSourceFile(projectStorageDir, sqliteOpenHelperSubclassPackage);
+		createSQLiteOpenHelperSourceFile(projectFilesDefaultStorageDirectory, sqliteOpenHelperSubclassPackage);
 
 		// create CRUD Operations interface
-		createAbstractCRUDOperationsSourceFile(projectStorageDir, tablesCRUDPackage);
+		createAbstractCRUDOperationsSourceFile(projectFilesDefaultStorageDirectory, tablesCRUDPackage);
 
 		// create table custom CRUD class
-		createTableCRUDClassSourceFile(database, projectStorageDir, tablesCRUDPackage);
+		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, tablesCRUDPackage);
 
 		// create tables model info classes
 		String columnsModelInfoPackage = getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage();
-		createDirectory(projectStorageDir + NativeUtils.getFileSeparator() + columnsModelInfoPackage);
-		createTableModelInfoClassesSourceFiles(database, projectStorageDir, columnsModelInfoPackage);
+		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + columnsModelInfoPackage);
+		createTableModelInfoClassesSourceFiles(database, projectFilesDefaultStorageDirectory, columnsModelInfoPackage);
 	}
 
 	// create tables model classes
-	private void createTableModelInfoClassesSourceFiles(Database database, String projectStorageDir,
+	private void createTableModelInfoClassesSourceFiles(Database database, String projectFilesDefaultStorageDirectory,
 			String tablesModelInfoPackage) {
 
 		AndroidTableModelTemplateParser androidTableModelTemplateParser = new AndroidTableModelTemplateParser();
@@ -149,7 +161,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 					+ tableClassName.toLowerCase();
 
 			// the table model source file
-			String tableModelSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
+			String tableModelSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
 					+ tableModelSourceFilePackageFilePath + NativeUtils.getFileSeparator() + tableClassName
 					+ TemplateTags.Android.INFO + AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
@@ -166,7 +178,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		}
 	}
 
-	private void createTableCRUDClassSourceFile(Database database, String projectStorageDir, String tablesCRUDPackage) {
+	private void createTableCRUDClassSourceFile(Database database, String projectFilesDefaultStorageDirectory, String tablesCRUDPackage) {
 
 		// create table custom CRUD class
 
@@ -180,7 +192,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 			String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
 
-			String tableCRUDSourceFile = projectStorageDir + NativeUtils.getFileSeparator() + tablesCRUDPackage
+			String tableCRUDSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDPackage
 					+ NativeUtils.getFileSeparator() + tableClassName + AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 			boolean createTableCRUDSourceFile = createSourceFile(tableCRUDSourceFile, tableCRUDSourceCode);
@@ -193,7 +205,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 	}
 
 	// create CRUD Operations interface
-	private void createAbstractCRUDOperationsSourceFile(String projectStorageDir, String tablesCrudPackage) {
+	private void createAbstractCRUDOperationsSourceFile(String projectFilesDefaultStorageDirectory, String tablesCrudPackage) {
 
 		AndroidCrudOperationsTemplateParser androidCrudOperationsTemplateParser = new AndroidCrudOperationsTemplateParser();
 
@@ -204,7 +216,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String abstractCrudOperationsSourceFile = AndroidProjectFileNames.CRUD_OPERATIONS_INTERFACE_CLASS_NAME;
 
 		// the table CRUD operations source file absolute path
-		String tablesAbstractCRUDOperationsSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
+		String tablesAbstractCRUDOperationsSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
 				+ tablesCrudPackage + NativeUtils.getFileSeparator() + abstractCrudOperationsSourceFile
 				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
@@ -218,7 +230,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 	}
 
 	// create SQLiteOpenHelper Subclass
-	private void createSQLiteOpenHelperSourceFile(String projectStorageDir, String sqliteOpenHelperSubclassPackage) {
+	private void createSQLiteOpenHelperSourceFile(String projectFilesDefaultStorageDirectory, String sqliteOpenHelperSubclassPackage) {
 
 		AndroidSQLiteOpenHelperTemplateParser androidSQLiteOpenHelperTemplateParser = new AndroidSQLiteOpenHelperTemplateParser();
 
@@ -231,7 +243,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 				.createSQLiteOpenHelperSubclassSourceCode(androidProjectConfiguration);
 
 		// Create source code file absolute path
-		String sQLiteOpenHelperSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
+		String sQLiteOpenHelperSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
 				+ sqliteOpenHelperSubclassPackage + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclass +AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 		// write source code to disk
@@ -244,7 +256,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 	}
 
 	// Create the database content provider file and saves it on disk
-	private void createContentProviderSourceFile(String projectStorageDir, String contentProviderPackage,
+	private void createContentProviderSourceFile(String projectFilesDefaultStorageDirectory, String contentProviderPackage,
 			Database database) {
 
 		AndroidContentProvidersTemplatesParser androidContentProvidersTemplatesParser = new AndroidContentProvidersTemplatesParser();
@@ -256,7 +268,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String contentProviderSourceCode = androidContentProvidersTemplatesParser
 				.createContentProviderSourceFile(getAndroidProjectConfiguration(), database.getTables());
 
-		String contentProviderSourceCodeFile = projectStorageDir + NativeUtils.getFileSeparator()
+		String contentProviderSourceCodeFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
 				+ contentProviderPackage + NativeUtils.getFileSeparator() + contentProviderClass
 				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
@@ -275,17 +287,17 @@ public class AndroidCRUDCreator extends CrudCreator {
 	 * source code to the disk.
 	 * 
 	 * @param database
-	 * @param projectStorageDir
+	 * @param projectFilesDefaultStorageDirectory
 	 * @param databaseTablesPackage
 	 */
-	private void createTablesSchemasSourceFile(Database database, String projectStorageDir,
+	private void createTablesSchemasSourceFile(Database database, String projectFilesDefaultStorageDirectory,
 			String databaseTablesPackage) {
 
 		AndroidTableSchemasTemplatesParser androidTableSchemasTemplatesParser = new AndroidTableSchemasTemplatesParser();
 
 		String tablesSchemasSourceCode = androidTableSchemasTemplatesParser
 				.createTablesSchemas(getAndroidProjectConfiguration(), database.getTables());
-		String tablesSchemasAbsoluteSourceFile = projectStorageDir + NativeUtils.getFileSeparator()
+		String tablesSchemasAbsoluteSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
 				+ databaseTablesPackage + NativeUtils.getFileSeparator()
 				+ AndroidProjectFileNames.TABLE_SCHEMAS_FILE_NAME;
 		boolean createTablesSchemasSourceFile = createSourceFile(tablesSchemasAbsoluteSourceFile,
