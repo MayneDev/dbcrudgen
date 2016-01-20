@@ -52,8 +52,6 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 			classVariablesAccessors += androidJavaObjectDefaultEncapsulationTemplateParser
 					.createAndroidJavaObjectDefaultAccessorSourceCode(androidDatatype, objectName);
 		}
-
-		System.out.println(classConstructorVariables);
 		
 		return template.replace(TemplateTags.Android.PACKAGE_NAME, tableModelPackageName)
 				.replace(TemplateTags.Android.CLASS_NAME, tableClassName)
