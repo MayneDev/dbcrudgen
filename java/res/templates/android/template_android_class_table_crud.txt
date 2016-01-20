@@ -7,9 +7,16 @@ import android.net.Uri;
 
 import $DATABASE_TABLES_CLASS;
 
- public class $DATABASE_TABLE_CLASS implements DatabaseCRUDOperations {
+import $TABLE_MODEL_CLASS;
 
+ public class $DATABASE_TABLE_CLASS extends DatabaseCRUDOperations {
 
+		private Context context;
+		
+		public $DATABASE_TABLE_CLASS(Context context){
+			super(context);
+			this.context = context ;
+		}
         @Override
         public Context getContext() {
             return context;
@@ -83,10 +90,6 @@ import $DATABASE_TABLES_CLASS;
         */
         public int delete$DATABASE_TABLE_CLASS(String selection, String[] selectionArgs) {
 
-            ContentValues values = new ContentValues();
-            
-            $CONTENT_VALUES_PUT_STATEMENTS
-            
             return delete(selection,selectionArgs);
         }
         
