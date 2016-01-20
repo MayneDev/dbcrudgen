@@ -57,6 +57,16 @@ public final class NativeUtils {
 		return packageFilePath.replace(NativeUtils.getFileSeparator(), TemplateTags.TAG_PRINTING_CHAR_DOT);
 	}
 
+	/**
+	 * NativeUtils#parsePackagePath Formats package name to a valid file path
+	 * 
+	 * @param packageName
+	 * @return
+	 */
+	public static String parsePackagePath(String packageName) {
+		return packageName.replace(NativeTemplateTags.DOT, NativeTemplateTags.FORWARD_SLASH);
+	}
+
 	public static String createJavaVariable(JavaObjectAccessibility javaAccessibility, String dataType,
 			String objectName, JavaDelimiter javaDelimeter) {
 
@@ -138,4 +148,5 @@ public final class NativeUtils {
 		String javaClassVariableInitStatementTemplate = SimpleTemplates.Java.JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE;
 		return javaClassVariableInitStatementTemplate.replace(TemplateTags.Java.OBJECT, object);
 	}
+
 }
