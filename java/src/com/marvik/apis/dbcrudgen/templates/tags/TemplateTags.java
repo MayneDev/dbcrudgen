@@ -1,5 +1,7 @@
 package com.marvik.apis.dbcrudgen.templates.tags;
 
+import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
+
 public class TemplateTags {
 
 	/**
@@ -15,7 +17,7 @@ public class TemplateTags {
 	/**
 	 * TAG_PRINTING_CHAR_DOT
 	 */
-	public static final CharSequence TAG_PRINTING_CHAR_DOT = ".";
+	public static final CharSequence TAG_PRINTING_CHAR_DOT = NativeTemplateTags.DOT;
 
 	public static class PHP {
 
