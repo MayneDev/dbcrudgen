@@ -17,7 +17,7 @@ import com.marvik.apis.dbcrudgen.utilities.Utils;
 
 public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
-	public String createSourceCode(String packageFilePath, Table table) {
+	public String createSourceCode(String packageFilePath, String tablesSchemasPackage,String tableModelsPackage, Table table) {
 
 		String tableName = table.getTableName();
 
@@ -27,7 +27,10 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		tableCrudTemplate = parsePackageName(tableCrudTemplate, packageFilePath);
 
 		// add tables schemas import
-		tableCrudTemplate = parseTablesSchemasClassImport(tableCrudTemplate, packageFilePath);
+		tableCrudTemplate = parseTablesSchemasClassImport(tableCrudTemplate, tablesSchemasPackage);
+		
+		// add tables model info class import
+		tableCrudTemplate = parseTableModelInfoClassImport(tableCrudTemplate, tableModelsPackage, table.getTableName());
 
 		// add database class name
 		tableCrudTemplate = parseTableClassName(tableCrudTemplate, tableName);
@@ -136,10 +139,9 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
 			tableColumnsReference += createTableColumnReference(NativeUtils.toJavaBeansClass(table.getTableName()),
 					columnName);
-			tableColumnsVariable += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT, dataType,
-					objectName, javaDelimeter);
 
-			tableColumnsObjects += objectName;
+			//Append the object in the String.valueOf(#Object) template 
+			tableColumnsObjects += NativeUtils.parseStringDefaultParser(objectName);
 
 			if (i < columns.length - 1) {
 				javaDelimeter = JavaDelimiter.COMMA;
@@ -147,8 +149,12 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 				tableColumnsObjects += ",";
 			}
 
+			// DO NOT MOVE THIS METHOD FROM HERE - -THE GENERATED CODE WILL NOT
+			// HAVE ANY JAVA DELIMETER - BECAUSE IT WILL USE THE
+			// JAVA_DELIMETER#NULL
+			tableColumnsVariable += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT, dataType,
+					objectName, javaDelimeter);
 		}
-
 		String template = getAndroidColumnQueryCrudTemplate(primaryKeyDataType).getTemplate();
 
 		return parseQueriedColumnQueryArtificats(template, primaryKeyColumn, primaryKeyColumnReference,
@@ -180,7 +186,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		PrimaryKey primaryKey = table.getPrimaryKey();
 
 		// Add primary key column parameters
-		String primaryKeyParamObject = primaryKey.getPrimaryKey();
+		String primaryKeyParamObject = NativeUtils.parseStringDefaultParser(primaryKey.getPrimaryKey());
 
 		// Add primary key column reference
 		String primaryKeyColumnReference = createTableColumnReference(tableJavaBeansName, primaryKey.getPrimaryKey());
@@ -202,7 +208,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 				.replace(TemplateTags.Android.FUNCTION_PARAMS_KEYS, indexedColumnReference)
 
 				.replace(TemplateTags.Android.FUNCTION_PARAMS_VALUES,
-						NativeUtils.parseStringDefaultParser(methodParamsObjects))
+						methodParamsObjects)
 
 				.replace(TemplateTags.Android.FUNCTION_PARAMS, methodParamsObjects)
 
@@ -218,7 +224,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
 	private String parseTableContentUri(String tableCrudTemplate, String tableName) {
 		String tableDefinitionLink = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME
-				+ TemplateTags.TAG_PRINTING_CHAR_DOT + tableName.toUpperCase();
+				+ TemplateTags.TAG_PRINTING_CHAR_DOT + NativeUtils.toJavaBeansClass(tableName);
 		return tableCrudTemplate.replace(TemplateTags.Android.TABLE_DEFINITION_LINK, tableDefinitionLink);
 	}
 
@@ -228,6 +234,13 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		return tableCrudTemplate.replace(TemplateTags.Android.DATABASE_TABLE_CLASS, javaBeansTableClass);
 	}
 
+	// add tables schemas import
+	private String parseTableModelInfoClassImport(String tableCrudTemplate, String tableModelInfoPackage, String tableName) {
+		tableModelInfoPackage = parseJavaPackage(tableModelInfoPackage);
+		String tableModelInfoClass = tableModelInfoPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
+				+ NativeUtils.toJavaBeansClass(tableName) +TemplateTags.Android.INFO;
+		return tableCrudTemplate.replace(TemplateTags.Android.TABLE_MODEL_CLASS, tableModelInfoClass);
+	}
 	// add tables schemas import
 	private String parseTablesSchemasClassImport(String tableCrudTemplate, String tableSchemasPackage) {
 		tableSchemasPackage = parseJavaPackage(tableSchemasPackage);

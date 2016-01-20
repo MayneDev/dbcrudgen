@@ -119,8 +119,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
 
 		// Database table package
-		String databaseTablesPackage = getAndroidDatabaseConfiguration().getTablesSchemasPackage();
-		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + databaseTablesPackage);
+		String tablesShemasStorageLocation = getAndroidDatabaseConfiguration().getTablesSchemasPackage();
+		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesShemasStorageLocation);
 
 		// table CRUD storage location and package name
 		String tablesCRUDStorageLocation = getAndroidDatabaseConfiguration().getTablesCRUDPackage();
@@ -128,7 +128,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDStorageLocation);
 
 		// Create table schemas source file and saves it on disk
-		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, databaseTablesPackage);
+		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, tablesShemasStorageLocation);
 
 		// Create the database content provider file and saves it on disk
 		createContentProviderSourceFile(projectFilesDefaultStorageDirectory, contentProviderPackage, database);
@@ -141,7 +141,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 		createAbstractCRUDOperationsSourceFile(projectFilesDefaultStorageDirectory, tablesCRUDStorageLocation);
 
 		// create table custom CRUD class
-		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, tablesCRUDStorageLocation);
+		String tablesSchemasPackage = packageName + NativeTemplateTags.DOT + NativeUtils.parseJavaPackage(tablesShemasStorageLocation);
+		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory,packageName,tablesSchemasPackage, tablesCRUDStorageLocation);
 
 		// create tables model info classes
 		String columnsModelInfoPackage = getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage();
@@ -185,7 +186,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 		}
 	}
 
-	private void createTableCRUDClassSourceFile(Database database, String projectFilesDefaultStorageDirectory,
+	private void createTableCRUDClassSourceFile(Database database, String projectFilesDefaultStorageDirectory,String packageName,
+			String tablesSchemasPackage,
 			String tableCRUDPackage) {
 
 		// create table custom CRUD class
@@ -194,9 +196,10 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		for (Table table : database.getTables()) {
 
-			String packageFilePath = tableCRUDPackage;
-
-			String tableCRUDSourceCode = androidTableCRUDTemplateParser.createSourceCode(packageFilePath, table);
+			String tableModelsPackage = packageName + NativeTemplateTags.DOT 
+					+getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage() + NativeTemplateTags.DOT +table.getTableName();
+			String tableCrudSourceFilePackage = packageName + NativeTemplateTags.DOT + tableCRUDPackage;
+			String tableCRUDSourceCode = androidTableCRUDTemplateParser.createSourceCode(tableCrudSourceFilePackage,tablesSchemasPackage,tableModelsPackage, table);
 
 			String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
 

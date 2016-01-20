@@ -242,6 +242,9 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 			String columnName = columns[i].getColumnName();
 			columnVariables += parseColumnVariables(tableColumnsVariableTemplate, columnName);
 		}
+		
+		//Dont forget to Add primary key column and other key columns
+		columnVariables += parseColumnVariables(tableColumnsVariableTemplate, table.getPrimaryKey().getColumnName());
 		return columnVariables;
 	}
 

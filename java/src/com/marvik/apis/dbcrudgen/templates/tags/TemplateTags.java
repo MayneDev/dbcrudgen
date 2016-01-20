@@ -402,6 +402,11 @@ public class TemplateTags {
 		 */
 		public static final CharSequence COLUMN_NAME = "$COLUMN_NAME";
 
+		/**
+		 * $TABLE_MODEL_CLASS
+		 */
+		public static final CharSequence TABLE_MODEL_CLASS = "$TABLE_MODEL_CLASS";
+
 	}
 
 	public static class Java {

@@ -131,7 +131,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 		// add uri matcher codes
 		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.URI_MATCHER_CODES,
 				tableUriMatchersVariables);
-		System.out.println(tableUriMatchersVariables);
+		
 		// Add uri matcher initializers
 		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.INIT_URI_MATCHES,
 				tableUriMatchersInitStatements);
@@ -233,9 +233,6 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 		tableUriMatcherTemplate = tableUriMatcherTemplate.replace(TemplateTags.Android.TABLE_NAME, tableName);
 		tableUriMatcherTemplate = tableUriMatcherTemplate.replace(TemplateTags.Android.MATCH_CODE,
 				String.format("%d", matchCode));
-
-		System.out.println(tableUriMatcherTemplate);
-
 		return tableUriMatcherTemplate;
 	}
 
