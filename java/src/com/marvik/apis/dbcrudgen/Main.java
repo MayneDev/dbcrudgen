@@ -20,7 +20,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 public class Main {
 	public static void main(String[] args) {
 		testAndroidCrudGenerator();
-		//testPHPCrudGenerator();
+		testPHPCrudGenerator();
 	}
 
 	private static void testAndroidCrudGenerator() {
