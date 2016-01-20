@@ -3,7 +3,9 @@
  */
 package com.marvik.apis.dbcrudgen.parser.android.crudoperations;
 
+import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
+import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 /**
@@ -14,14 +16,17 @@ import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
  */
 public class AndroidCrudOperationsTemplateParser extends AndroidTemplatesParser {
 
-	public String createSourceCode(String tablesCrudPackage) {
+	public String createSourceCode(AndroidProjectConfiguration androidProjectConfiguration) {
 
+		String packageName = androidProjectConfiguration.getPackageName();
+		String crudOperationsInterfaceStoragePackage = androidProjectConfiguration.getAndroidContentProviderConfiguration().getAndroidDatabaseConfiguration().getTablesCRUDPackage();
+		
 		String crudOperationsInterfaceTemplate = getAndroidInterfaceCrudOperations().getTemplate();
 
-		String crudOperationsInterfaceStoragePackage = parseJavaPackage(tablesCrudPackage);
+		crudOperationsInterfaceStoragePackage = parseJavaPackage(crudOperationsInterfaceStoragePackage);
 
 		crudOperationsInterfaceTemplate = parseTablesCrudStoragePackage(crudOperationsInterfaceTemplate,
-				crudOperationsInterfaceStoragePackage);
+				packageName + NativeTemplateTags.DOT + crudOperationsInterfaceStoragePackage);
 
 		return crudOperationsInterfaceTemplate;
 	}

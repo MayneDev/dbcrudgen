@@ -2,6 +2,7 @@ package com.marvik.apis.dbcrudgen.creator.android;
 
 import java.io.File;
 
+import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.parser.android.contentprovider.AndroidContentProvidersTemplatesParser;
@@ -120,9 +121,9 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String databaseTablesPackage = getAndroidDatabaseConfiguration().getTablesSchemasPackage();
 		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + databaseTablesPackage);
 
-		// table CRUD package
-		String tablesCRUDPackage = getAndroidDatabaseConfiguration().getTablesCRUDPackage();
-		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDPackage);
+		// table CRUD storage location and package name
+		String tablesCRUDStorageLocation = getAndroidDatabaseConfiguration().getTablesCRUDPackage();
+		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDStorageLocation);
 
 		// Create table schemas source file and saves it on disk
 		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, databaseTablesPackage);
@@ -134,10 +135,11 @@ public class AndroidCRUDCreator extends CrudCreator {
 		createSQLiteOpenHelperSourceFile(projectFilesDefaultStorageDirectory, sqliteOpenHelperSubclassPackage);
 
 		// create CRUD Operations interface
-		createAbstractCRUDOperationsSourceFile(projectFilesDefaultStorageDirectory, tablesCRUDPackage);
+		
+		createAbstractCRUDOperationsSourceFile(projectFilesDefaultStorageDirectory, tablesCRUDStorageLocation);
 
 		// create table custom CRUD class
-		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, tablesCRUDPackage);
+		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, tablesCRUDStorageLocation);
 
 		// create tables model info classes
 		String columnsModelInfoPackage = getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage();
@@ -178,7 +180,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		}
 	}
 
-	private void createTableCRUDClassSourceFile(Database database, String projectFilesDefaultStorageDirectory, String tablesCRUDPackage) {
+	private void createTableCRUDClassSourceFile(Database database, String projectFilesDefaultStorageDirectory, String tableCRUDPackage) {
 
 		// create table custom CRUD class
 
@@ -186,13 +188,13 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		for (Table table : database.getTables()) {
 
-			String packageFilePath = tablesCRUDPackage;
+			String packageFilePath = tableCRUDPackage;
 
 			String tableCRUDSourceCode = androidTableCRUDTemplateParser.createSourceCode(packageFilePath, table);
 
 			String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
 
-			String tableCRUDSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDPackage
+			String tableCRUDSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tableCRUDPackage
 					+ NativeUtils.getFileSeparator() + tableClassName + AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 			boolean createTableCRUDSourceFile = createSourceFile(tableCRUDSourceFile, tableCRUDSourceCode);
@@ -211,7 +213,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		// Create the source code
 		String tablesAbstractCRUDOperationsSourceCode = androidCrudOperationsTemplateParser
-				.createSourceCode(tablesCrudPackage);
+				.createSourceCode(getAndroidProjectConfiguration());
 
 		String abstractCrudOperationsSourceFile = AndroidProjectFileNames.CRUD_OPERATIONS_INTERFACE_CLASS_NAME;
 
