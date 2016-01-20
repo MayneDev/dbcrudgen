@@ -23,9 +23,9 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 
 	public String createContentProviderSourceFile(AndroidProjectConfiguration androidProjectConfiguration,
 			Table[] tables) {
-		
+
 		String packageName = androidProjectConfiguration.getPackageName();
-		
+
 		String contentProvidersTemplate = getAndroidClassContentProviderTemplate().toString();
 
 		AndroidContentProviderConfiguration androidContentProviderConfiguration = androidProjectConfiguration
@@ -34,20 +34,20 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 		// add content provider package name
 		String projectPackageName = androidProjectConfiguration.getPackageName();
 		String contentProviderStorageDirs = androidContentProviderConfiguration.getContentProviderPackage();
-		String contentProviderPackage = projectPackageName + TemplateTags.TAG_PRINTING_CHAR_DOT + parseJavaPackage(contentProviderStorageDirs);
-		contentProvidersTemplate = parseContentProviderPackageName(contentProvidersTemplate,
-				contentProviderPackage);
+		String contentProviderPackage = projectPackageName + TemplateTags.TAG_PRINTING_CHAR_DOT
+				+ parseJavaPackage(contentProviderStorageDirs);
+		contentProvidersTemplate = parseContentProviderPackageName(contentProvidersTemplate, contentProviderPackage);
 
 		// add content provider class name
 		contentProvidersTemplate = parseContentProviderClassName(contentProvidersTemplate,
 				androidContentProviderConfiguration.getContentProviderClass());
 
 		// add SQLite open helper class import
-		contentProvidersTemplate = parseSQLiteOpenHelperClassImport(contentProvidersTemplate,packageName,
+		contentProvidersTemplate = parseSQLiteOpenHelperClassImport(contentProvidersTemplate, packageName,
 				androidContentProviderConfiguration.getAndroidDatabaseConfiguration());
 
 		// add tables schemas import
-		contentProvidersTemplate = parseTablesSchemasClassImport(contentProvidersTemplate,packageName,
+		contentProvidersTemplate = parseTablesSchemasClassImport(contentProvidersTemplate, packageName,
 				androidContentProviderConfiguration.getAndroidDatabaseConfiguration());
 
 		// add tables URI's
@@ -92,6 +92,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 			AndroidDatabaseConfiguration androidDatabaseConfiguration, Table[] tables) {
 
 		String tableUriMatcherTemplate = getAndroidVariableUriMatcherCodeTemplate().getTemplate();
+
 		String tableUriMatchersVariables = "";
 
 		String tableUriMatcherInitTemplate = getAndroidStatementAddUriMatcherTemplate().getTemplate();
@@ -104,48 +105,53 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 		String tableUpdateStatement = "";
 
 		for (int i = 0; i < tables.length; i++) {
-			
+
 			int matchCode = i;
-			
+
 			String tableName = tables[i].getTableName();
-			
-			String tableUriMatchersVariable = parseTableUriMatcherVariables(tableUriMatcherTemplate, tableName.toUpperCase(),
-					matchCode);
-			
+
+			String tableUriMatchersVariable = parseTableUriMatcherVariables(tableUriMatcherTemplate,
+					tableName.toUpperCase(), matchCode);
+
 			tableUriMatchersVariables += tableUriMatchersVariable;
-			
+
 			tableUriMatchersInitStatements += parseTableUriMatcherInitStatements(tableUriMatcherInitTemplate, tableName,
 					matchCode);
 
 			// Create CRUD Bindings for inserting,querying,updating and deleting
 			// table rows
-			String tableUriMatcherVariable = parseTableUriMatcherVariable(tableUriMatchersVariable);
-			tableDeleteStatement += createTableDeleteStatements(tableName, tableUriMatchersVariable);
-			tableInsertStatement += createTableInsertStatements(tableName, tableUriMatchersVariable);
-			tableQueryStatement += createTableQueryStatements(tableName, tableUriMatchersVariable);
-			tableUpdateStatement += createTableUpdateStatements(tableName, tableUriMatchersVariable);
+			String tableUriMatcherObject = getTableUriMatcherObject(tableUriMatchersVariable);
+
+			tableDeleteStatement += createTableDeleteStatements(tableName, tableUriMatcherObject);
+			tableInsertStatement += createTableInsertStatements(tableName, tableUriMatcherObject);
+			tableQueryStatement += createTableQueryStatements(tableName, tableUriMatcherObject);
+			tableUpdateStatement += createTableUpdateStatements(tableName, tableUriMatcherObject);
 		}
 
 		// add uri matcher codes
 		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.URI_MATCHER_CODES,
 				tableUriMatchersVariables);
-
+		System.out.println(tableUriMatchersVariables);
 		// Add uri matcher initializers
 		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.INIT_URI_MATCHES,
 				tableUriMatchersInitStatements);
 
-		//Add Table delete CRUD Bindings
-		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_DELETE_STATEMENTS, tableDeleteStatement);
-		
-		//Add Table insert CRUD Bindings
-		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_INSERT_STATEMENTS, tableInsertStatement);
-		
-		//Add Table query CRUD Bindings
-		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_QUERY_STATEMENTS, tableQueryStatement);
-		
-		//Add Table update CRUD Bindings
-		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_UPDATE_STATEMENTS, tableUpdateStatement);
-		
+		// Add Table delete CRUD Bindings
+		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_DELETE_STATEMENTS,
+				tableDeleteStatement);
+
+		// Add Table insert CRUD Bindings
+		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_INSERT_STATEMENTS,
+				tableInsertStatement);
+
+		// Add Table query CRUD Bindings
+		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_QUERY_STATEMENTS,
+				tableQueryStatement);
+
+		// Add Table update CRUD Bindings
+		contentProvidersTemplate = contentProvidersTemplate.replace(TemplateTags.Android.TABLES_ROWS_UPDATE_STATEMENTS,
+				tableUpdateStatement);
+
 		return contentProvidersTemplate;
 	}
 
@@ -175,13 +181,6 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 		crudBindingTemplate = crudBindingTemplate.replace(TemplateTags.Android.TABLE_DEFINITION_LINK,
 				tableDefinitionLink);
 		return crudBindingTemplate;
-	}
-
-	// Get table uri matcher variable from variable declaration
-	private String parseTableUriMatcherVariable(String tableUriMatchersVariables) {
-		return tableUriMatchersVariables.replace(SimpleTemplates.Java.PRIVATE_STATIC_FINAL_INT_MODIFIER,
-				TemplateTags.TAG_EMPTY_STRING).replace(SimpleTemplates.Java.STATEMENT_DELIMETER,
-						TemplateTags.TAG_EMPTY_STRING);
 	}
 
 	// Init statements for uri matcher variables
@@ -216,34 +215,50 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 				+ TemplateTags.Android.TABLE_NAME_TAG;
 	}
 
+	/**
+	 * Returns the object name from the declarations
+	 * 
+	 * private static final int [*_URI_MATCHER_CODE] = 14;
+	 * 
+	 * @param uriMatcherVariable
+	 * @return
+	 */
+	@Deprecated
+	private String getTableUriMatcherObject(String uriMatcherVariable) {
+		return uriMatcherVariable.split(" ")[4];
+	}
+
 	// Creates uri matcher variables
 	private String parseTableUriMatcherVariables(String tableUriMatcherTemplate, String tableName, int matchCode) {
 		tableUriMatcherTemplate = tableUriMatcherTemplate.replace(TemplateTags.Android.TABLE_NAME, tableName);
 		tableUriMatcherTemplate = tableUriMatcherTemplate.replace(TemplateTags.Android.MATCH_CODE,
 				String.format("%d", matchCode));
+
+		System.out.println(tableUriMatcherTemplate);
+
 		return tableUriMatcherTemplate;
 	}
 
 	// add tables schemas import
-	private String parseTablesSchemasClassImport(String contentProvidersTemplate,
-			String packageName, AndroidDatabaseConfiguration androidDatabaseConfiguration) {
+	private String parseTablesSchemasClassImport(String contentProvidersTemplate, String packageName,
+			AndroidDatabaseConfiguration androidDatabaseConfiguration) {
 		String tableSchemasPackage = androidDatabaseConfiguration.getTablesSchemasPackage();
 		tableSchemasPackage = parseJavaPackage(tableSchemasPackage);
-		String tableSchemasClass = packageName +TemplateTags.TAG_PRINTING_CHAR_DOT + tableSchemasPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
-				+ AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME;
+		String tableSchemasClass = packageName + TemplateTags.TAG_PRINTING_CHAR_DOT + tableSchemasPackage
+				+ TemplateTags.TAG_PRINTING_CHAR_DOT + AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME;
 		return contentProvidersTemplate.replace(TemplateTags.Android.DATABASE_TABLES_CLASS, tableSchemasClass);
 	}
 
 	// add SQLite open helper class
-	private String parseSQLiteOpenHelperClassImport(String contentProvidersTemplate,String packageName,
+	private String parseSQLiteOpenHelperClassImport(String contentProvidersTemplate, String packageName,
 			AndroidDatabaseConfiguration androidDatabaseConfiguration) {
 		String sqliteOpenHelperPackage = androidDatabaseConfiguration.getSqliteOpenHelperClassPackage();
 		sqliteOpenHelperPackage = parseJavaPackage(sqliteOpenHelperPackage);
 
 		String sqliteOpenHelperClass = androidDatabaseConfiguration.getSqliteOpenHelperClass();
 
-		String sqliteOpenHelperClassImport = packageName +TemplateTags.TAG_PRINTING_CHAR_DOT +sqliteOpenHelperPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
-				+ sqliteOpenHelperClass;
+		String sqliteOpenHelperClassImport = packageName + TemplateTags.TAG_PRINTING_CHAR_DOT + sqliteOpenHelperPackage
+				+ TemplateTags.TAG_PRINTING_CHAR_DOT + sqliteOpenHelperClass;
 
 		return contentProvidersTemplate.replace(TemplateTags.Android.SQLITE_OPENHELPER_CLASS,
 				sqliteOpenHelperClassImport);
