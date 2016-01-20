@@ -2,6 +2,7 @@ package com.marvik.apis.dbcrudgen.parser.android.tableschemas;
 
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
+import com.marvik.apis.dbcrudgen.natives.Natives;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
@@ -160,7 +161,7 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 			tableColumnStatementTemplate = parseTableColumnsAndDataTypes(tableColumnStatementTemplate, columnName,
 					dataType, isLastColumn);
 
-			tableColumns += tableColumnStatementTemplate;
+			tableColumns += Natives.Math.ADD +tableColumnStatementTemplate;
 
 		}
 
