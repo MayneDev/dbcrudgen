@@ -1,0 +1,4 @@
+private $TABLE_CRUD_CLASS $CLASS_OBJECT;
+public  $TABLE_CRUD_CLASS get$TABLE_CRUD_CLASS(){
+	return $CLASS_OBJECT != null? $CLASS_OBJECT : $CLASS_OBJECT = new $TABLE_CRUD_CLASS(getContext());
+} 
