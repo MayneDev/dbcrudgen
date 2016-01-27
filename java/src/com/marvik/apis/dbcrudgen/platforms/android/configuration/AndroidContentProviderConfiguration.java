@@ -1,11 +1,17 @@
 package com.marvik.apis.dbcrudgen.platforms.android.configuration;
 
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.provider.ProviderConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.transactions.TransactionManagerConfiguration;
+
 public class AndroidContentProviderConfiguration {
 
-	private String contentProviderClass;
-	private String contentProviderPackage;
+
 	private AndroidDatabaseConfiguration androidDatabaseConfiguration;
 
+	private ProviderConfiguration providerConfiguration;
+	
+	private TransactionManagerConfiguration transactionManagerConfiguration;
 	/**
 	 * AndroidContentProviderConfiguration - Configuration for the android class
 	 * that extends ContentProvider
@@ -15,50 +21,30 @@ public class AndroidContentProviderConfiguration {
 	 * @param androidDatabaseConfiguration
 	 */
 
-	public AndroidContentProviderConfiguration(String contentProviderClass, String contentProviderPackage,
-			AndroidDatabaseConfiguration androidDatabaseConfiguration) {
-		this.contentProviderClass = contentProviderClass;
-		this.contentProviderPackage = contentProviderPackage;
+	public AndroidContentProviderConfiguration(ProviderConfiguration provideConfiguration,
+			TransactionManagerConfiguration transanctionManagerConfiguration, AndroidDatabaseConfiguration androidDatabaseConfiguration) {
+		
+		this.providerConfiguration = provideConfiguration;
+		this.transactionManagerConfiguration = transanctionManagerConfiguration;
 		this.androidDatabaseConfiguration = androidDatabaseConfiguration;
 	}
 
-	/**
-	 * AndroidContentProviderConfiguration#getContentProviderClass
-	 * 
-	 * @return contentProviderClass
-	 */
-	public String getContentProviderClass() {
-		return contentProviderClass;
-	}
 
 	/**
-	 * AndroidContentProviderConfiguration#getContentProviderPackage
-	 * 
-	 * @return contentProviderPackage
+	 * @return the providerConfiguration
 	 */
-	public String getContentProviderPackage() {
-		return contentProviderPackage;
+	public ProviderConfiguration getProviderConfiguration() {
+		return providerConfiguration;
 	}
 
-	/**
-	 * AndroidContentProviderConfiguration#setContentProviderClass Sets the
-	 * content provider class
-	 * 
-	 * @param contentProviderClass
-	 */
-	public void setContentProviderClass(String contentProviderClass) {
-		this.contentProviderClass = contentProviderClass;
-	}
 
 	/**
-	 * AndroidContentProviderConfiguration#setContentProviderPackage Sets the
-	 * content provider package
-	 * 
-	 * @param contentProviderPackage
+	 * @return the transactionManagerConfiguration
 	 */
-	public void setContentProviderPackage(String contentProviderPackage) {
-		this.contentProviderPackage = contentProviderPackage;
+	public TransactionManagerConfiguration getTransactionManagerConfiguration() {
+		return transactionManagerConfiguration;
 	}
+
 
 	/**
 	 * AndroidContentProviderConfiguration#getAndroidDatabaseConfiguration

@@ -1,4 +1,4 @@
-package com.marvik.apis.dbcrudgen.platforms.android.configuration;
+package com.marvik.apis.dbcrudgen.platforms.android.configuration.database;
 
 public class AndroidDatabaseConfiguration {
 

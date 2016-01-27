@@ -5,7 +5,7 @@ import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.natives.Natives;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
-import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
@@ -204,9 +204,9 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 	// Add a content provider class import
 	private String parseContentProviderClassImport(
 			AndroidContentProviderConfiguration androidContentProviderConfiguration,String packageName, String template) {
-		String contentProviderPackage = androidContentProviderConfiguration.getContentProviderPackage();
+		String contentProviderPackage = androidContentProviderConfiguration.getProviderConfiguration().getContentProviderPackage();
 		contentProviderPackage = packageName + NativeTemplateTags.DOT +contentProviderPackage;
-		String contentProviderClass = androidContentProviderConfiguration.getContentProviderClass();
+		String contentProviderClass = androidContentProviderConfiguration.getProviderConfiguration().getContentProviderClass();
 
 		// Remove back slashes to make a valid package name
 		contentProviderPackage = contentProviderPackage.replace(NativeUtils.getFileSeparator(),

@@ -3,7 +3,7 @@ package com.marvik.apis.dbcrudgen.parser.android.contentprovider;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
-import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
@@ -33,14 +33,14 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 
 		// add content provider package name
 		String projectPackageName = androidProjectConfiguration.getPackageName();
-		String contentProviderStorageDirs = androidContentProviderConfiguration.getContentProviderPackage();
+		String contentProviderStorageDirs = androidContentProviderConfiguration.getProviderConfiguration().getContentProviderPackage();
 		String contentProviderPackage = projectPackageName + TemplateTags.TAG_PRINTING_CHAR_DOT
 				+ parseJavaPackage(contentProviderStorageDirs);
 		contentProvidersTemplate = parseContentProviderPackageName(contentProvidersTemplate, contentProviderPackage);
 
 		// add content provider class name
 		contentProvidersTemplate = parseContentProviderClassName(contentProvidersTemplate,
-				androidContentProviderConfiguration.getContentProviderClass());
+				androidContentProviderConfiguration.getProviderConfiguration().getContentProviderClass());
 
 		// add SQLite open helper class import
 		contentProvidersTemplate = parseSQLiteOpenHelperClassImport(contentProvidersTemplate, packageName,

@@ -3,7 +3,7 @@ package com.marvik.apis.dbcrudgen.parser.android.sqliteopenhelper;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
-import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidDatabaseConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
