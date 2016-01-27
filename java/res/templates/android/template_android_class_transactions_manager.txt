@@ -1,6 +1,6 @@
 package $PACKAGE_NAME;
 
-import android.app.Context;
+import android.content.Context;
 
 $TABLES_CRUD_CLASSES_IMPORT
 
