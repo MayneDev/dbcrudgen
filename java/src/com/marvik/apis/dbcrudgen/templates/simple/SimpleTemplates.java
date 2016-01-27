@@ -10,9 +10,19 @@ public class SimpleTemplates {
 		 * ANDROID_DATABASE_TABLE_SQL_VARIABLE
 		 */
 		public static final String URI_MATCHER_CODE_SUFFIX = "_URI_MATCHER_CODE";
+		
+		/**
+		 * STATEMENT_CLASS_IMPORT
+		 */
+		public static final String STATEMENT_CLASS_IMPORT = Java.STATEMENT_CLASS_IMPORT;
 	}
 
 	public static final class Java {
+		/**
+		 * STATEMENT_CLASS_IMPORT
+		 */
+		public static final String STATEMENT_CLASS_IMPORT = "import $CLASS_PACKAGE.$CLASS_NAME;";
+
 		/**
 		 * PUBLIC_STATIC_FINAL_INT
 		 */
