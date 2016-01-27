@@ -1,0 +1,26 @@
+package $PACKAGE_NAME;
+
+import android.app.Context;
+
+$TABLES_CRUD_CLASSES_IMPORT
+
+public class $TRANSACTION_CLASS {
+
+	private Context context;
+	
+	public $TRANSACTION_CLASS(Context context){
+		this.context = context;
+	}
+	
+	/**
+	* $TRANSACTION_CLASS#getContext()
+	* 
+	* return Context
+	*/
+	public Context getContext(){
+		return this.context;
+	}
+	
+	$TABLES_CRUD_CLASSES_GETTERS
+
+}
