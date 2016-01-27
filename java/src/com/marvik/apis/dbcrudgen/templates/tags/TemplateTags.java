@@ -407,6 +407,36 @@ public class TemplateTags {
 		 */
 		public static final CharSequence TABLE_MODEL_CLASS = "$TABLE_MODEL_CLASS";
 
+		/**
+		 * CLASS_PACKAGE
+		 */
+		public static final CharSequence CLASS_PACKAGE = "$CLASS_PACKAGE";
+
+		/**
+		 * TABLE_CRUD_CLASS
+		 */
+		public static final CharSequence TABLE_CRUD_CLASS = "$TABLE_CRUD_CLASS";
+
+		/**
+		 * CLASS_OBJECT
+		 */
+		public static final CharSequence CLASS_OBJECT = "$CLASS_OBJECT";
+
+		/**
+		 * $TRANSACTION_CLASS
+		 */
+		public static final CharSequence TRANSACTION_CLASS = "$TRANSACTION_CLASS";
+
+		/**
+		 * TABLES_CRUD_CLASSES_IMPORT
+		 */
+		public static final CharSequence TABLES_CRUD_CLASSES_IMPORT = "$TABLES_CRUD_CLASSES_IMPORT";
+
+		/**
+		 * TABLES_CRUD_CLASSES_GETTERS
+		 */
+		public static final CharSequence TABLES_CRUD_CLASSES_GETTERS = "$TABLES_CRUD_CLASSES_GETTERS";
+
 	}
 
 	public static class Java {
