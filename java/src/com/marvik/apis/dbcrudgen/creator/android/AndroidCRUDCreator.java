@@ -2,11 +2,14 @@ package com.marvik.apis.dbcrudgen.creator.android;
 
 import java.io.File;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.parser.android.contentprovider.AndroidContentProvidersTemplatesParser;
 import com.marvik.apis.dbcrudgen.parser.android.crudoperations.AndroidCrudOperationsTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.android.database.transactions.AndroidDatabaseTransactionsParser;
 import com.marvik.apis.dbcrudgen.parser.android.javaobjects.AndroidJavaObjectDefaultEncapsulationTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.sqliteopenhelper.AndroidSQLiteOpenHelperTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.tablecrud.AndroidTableCRUDTemplateParser;
@@ -14,12 +17,14 @@ import com.marvik.apis.dbcrudgen.parser.android.tablemodel.AndroidTableModelTemp
 import com.marvik.apis.dbcrudgen.parser.android.tableschemas.AndroidTableSchemasTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.transactions.TransactionManagerConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTransactionsManagerTemplate;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
@@ -153,6 +158,45 @@ public class AndroidCRUDCreator extends CrudCreator {
 		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + columnsModelInfoPackage);
 		createTableModelInfoClassesSourceFiles(database, projectFilesDefaultStorageDirectory, packageName,
 				columnsModelInfoPackage);
+
+		// create transactions manager class
+		TransactionManagerConfiguration transactionManagerConfiguration = getAndroidContentProviderConfiguration()
+				.getTransactionManagerConfiguration();
+		createTransactionManagerClass(packageName,transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
+				tablesCRUDStorageLocation, database.getTables());
+	}
+
+	// create transactions manager class
+	private void createTransactionManagerClass(String packageName, TransactionManagerConfiguration transactionManagerConfiguration,
+			String projectStorageDirectory, String tablesCRUDStorageLocation, Table[] tables) {
+
+		String transactionManagerPackage = transactionManagerConfiguration.getTransactionManagerPackage();
+		String transactionManagerClass = transactionManagerConfiguration.getTransactionManagerClass();
+
+		String transactionManagerPackageLocation = projectStorageDirectory + NativeUtils.getFileSeparator()
+				+ transactionManagerPackage;
+		createDirectory(transactionManagerPackageLocation);
+
+		AndroidDatabaseTransactionsParser transactionsParser = new AndroidDatabaseTransactionsParser();
+		String transactionManagerSourceCode = transactionsParser.createSourceCode(packageName,transactionManagerPackage,
+				transactionManagerClass, tablesCRUDStorageLocation, tables);
+
+		String customTransactionManageClass = transactionManagerConfiguration.getTransactionManagerClass();
+		
+		String transactionManagerSourceFile = projectStorageDirectory + NativeUtils.getFileSeparator()
+				+ transactionManagerPackage + NativeUtils.getFileSeparator() + customTransactionManageClass
+				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
+		
+		System.out.println(transactionManagerSourceFile);
+		
+		boolean createTransactionManagerSourceFile = createSourceFile(transactionManagerSourceFile,
+				transactionManagerSourceCode);
+
+		if (createTransactionManagerSourceFile) {
+
+			System.out.println(
+					"Created Custom TransactinManager class [" + customTransactionManageClass + " ] Source File");
+		}
 	}
 
 	// create tables model classes
