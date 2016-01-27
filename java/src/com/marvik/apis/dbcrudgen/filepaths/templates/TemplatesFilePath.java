@@ -189,6 +189,11 @@ public class TemplatesFilePath {
 		 */
 		public static final String ANDROID_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH = JavaTemplatesFilePath.JAVA_INFO_CLASS_MODEL_FILEPATH;
 
+		/**
+		 * ANDROID_CLASS_TRANSACTIONS_MANAGER_TEMPLATE_FILE_PATH
+		 */
+		public static final String ANDROID_CLASS_TRANSACTIONS_MANAGER_TEMPLATE_FILE_PATH = "res/templates/android/template_android_class_transactions_manager.txt";
+
 	}
 
 	/**
