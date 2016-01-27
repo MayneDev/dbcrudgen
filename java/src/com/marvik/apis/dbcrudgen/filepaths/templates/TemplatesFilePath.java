@@ -194,6 +194,11 @@ public class TemplatesFilePath {
 		 */
 		public static final String ANDROID_CLASS_TRANSACTIONS_MANAGER_TEMPLATE_FILE_PATH = "res/templates/android/template_android_class_transactions_manager.txt";
 
+		/**
+		 * ANDROID_METHOD_TRANSACTIONS_TABLE_CRUD_CLASS_GETTER_TEMPLATE_FILE_PATH
+		 */
+		public static final String ANDROID_METHOD_TRANSACTIONS_TABLE_CRUD_CLASS_GETTER_TEMPLATE_FILE_PATH = "res/templates/android/template_android_method_table_crud_class_getter_template.txt";
+
 	}
 
 	/**
