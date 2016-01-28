@@ -437,6 +437,36 @@ public class TemplateTags {
 		 */
 		public static final CharSequence TABLES_CRUD_CLASSES_GETTERS = "$TABLES_CRUD_CLASSES_GETTERS";
 
+		/**
+		 * COLUMN_OBJECT
+		 */
+		public static final CharSequence COLUMN_OBJECT = "$COLUMN_OBJECT";
+
+		/**
+		 * TABLES_SCHEMAS_CLASS
+		 */
+		public static final CharSequence TABLES_SCHEMAS_CLASS = "$TABLES_SCHEMAS_CLASS";
+
+		/**
+		 * CURSOR_ITEMS_GETTER_METHODS
+		 */
+		public static final CharSequence CURSOR_ITEMS_GETTER_METHODS = "$CURSOR_ITEMS_GETTER_METHODS";
+
+		/**
+		 * ANDROID_SQL_SEARCH_SELECTION_STATEMENT
+		 */
+		public static final String ANDROID_SQL_SEARCH_SELECTION_STATEMENT = "$ANDROID_SQL_SEARCH_SELECTION_STATEMENT";
+
+		/**
+		 * CONTRUCTOR_PARAMS
+		 */
+		public static final String CONTRUCTOR_PARAMS = "$CONTRUCTOR_PARAMS";
+
+		/**
+		 * TABLE_INFO_CLASS
+		 */
+		public static final CharSequence TABLE_INFO_CLASS = "$TABLE_INFO_CLASS";
+
 	}
 
 	public static class Java {
