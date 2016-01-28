@@ -1,8 +1,15 @@
 package com.marvik.apis.dbcrudgen.parser.android;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
+import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassContentProviderTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassDatabaseTablesTemplate;
@@ -31,6 +38,7 @@ import com.marvik.apis.dbcrudgen.templates.android.crud.variables.AndroidVariabl
 import com.marvik.apis.dbcrudgen.templates.android.javaobject.encapsulation.AndroidJavaObjectDefaultEncapsulationTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.javaobject.encapsulation.AndroidJavaObjectGetterEncapsulationTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.javaobject.encapsulation.AndroidJavaObjectSetterEncapsulationTemplate;
+import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidTemplatesParser extends TemplatesParser {
@@ -453,7 +461,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	 * @param columnDatatype
 	 * @return CrudTemplates
 	 */
-	public CrudTemplates getAndroidColumnQueryCrudTemplate(String columnDatatype) {
+	protected CrudTemplates getAndroidColumnQueryCrudTemplate(String columnDatatype) {
 
 		// Boolean
 		if (columnDatatype.equalsIgnoreCase("Boolean")) {
@@ -507,7 +515,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	 * @param columnDatatype
 	 * @return CrudTemplates
 	 */
-	public String getAndroidObjectDataType(String columnDatatype) {
+	protected String getAndroidObjectDataType(String columnDatatype) {
 
 		// Boolean
 		if (columnDatatype.equalsIgnoreCase("Boolean")) {
@@ -555,5 +563,72 @@ public class AndroidTemplatesParser extends TemplatesParser {
 			return "String";
 		}
 		return null;
+	}
+
+	protected String getColumnsCursorItemsGetMethodTemplate(String dataType) {
+
+		if (dataType.equalsIgnoreCase("BOOLEAN")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_BOOLEAN;
+		}
+		if (dataType.equalsIgnoreCase("INT")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
+		}
+		if (dataType.equalsIgnoreCase("INTEGER")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
+		}
+		if (dataType.equalsIgnoreCase("LONG")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_LONG;
+		}
+		if (dataType.equalsIgnoreCase("STRING")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
+		}
+		if (dataType.equalsIgnoreCase("TEXT")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
+		}
+		if (dataType.equalsIgnoreCase("VARCHAR")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
+		}
+		if (dataType.equalsIgnoreCase("FLOAT")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
+		}
+		if (dataType.equalsIgnoreCase("DOUBLE")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
+		}
+		if (dataType.equalsIgnoreCase("BYTE")) {
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
+		}
+
+		return null;
+	}
+
+	/**
+	 * {@link AndroidTemplatesParser#getTableColumnsAll(Table)}
+	 * 
+	 * Returns an array of table columns
+	 * 
+	 * @return TableColumn[]
+	 */
+	protected TableColumn[] getTableColumnsAll(Table table) {
+
+		TableColumn[] tableColumns = table.getColumns();
+
+		List<TableColumn> allTableColumns = new ArrayList<>();
+		
+		// Add primary key column as the last
+		if (table.getPrimaryKey() != null) {
+			PrimaryKey primaryKey = table.getPrimaryKey();
+			allTableColumns.add(new TableColumn(primaryKey.getColumnName(), primaryKey.getDataType()));
+		}
+
+		for (TableColumn tableColumn : tableColumns) {
+			allTableColumns.add(tableColumn);
+		}
+
+		tableColumns = new TableColumn[allTableColumns.size()];
+
+		for (int i = 0; i < allTableColumns.size(); i++) {
+			tableColumns[i] = allTableColumns.get(i);
+		}
+		return tableColumns;
 	}
 }
