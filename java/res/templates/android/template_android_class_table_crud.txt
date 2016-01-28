@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import $DATABASE_TABLES_CLASS;
 
 import $TABLE_MODEL_CLASS;
@@ -102,5 +105,73 @@ import $TABLE_MODEL_CLASS;
         */
         public Cursor query$DATABASE_TABLE_CLASS(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
             return query(projection,  selection,  selectionArgs,  sortOrder);
+        }
+        
+        /**
+        * $DATABASE_TABLE_CLASS#get$TABLE_MODEL_INFO_CLASSAll
+        * Returns a list of all the items in the table
+        *
+        * @return List<$TABLE_MODEL_INFO_CLASS>
+        */
+        public List<$TABLE_MODEL_INFO_CLASS> get$TABLE_MODEL_INFO_CLASSAll() {
+        	
+        	Cursor cursor = query$DATABASE_TABLE_CLASS(null,null,null,null);
+        	
+        	int rowsCount = 0;
+        	
+        	if(cursor!= null){
+        		rowsCount = cursor.getCount();
+        	}
+			
+			List<$TABLE_MODEL_INFO_CLASS>$TABLE_MODEL_OBJECT = new ArrayList<$TABLE_MODEL_INFO_CLASS>(rowsCount);
+			
+			//if cursor does not have any items
+			if(rowsCount<1){
+				return $TABLE_MODEL_OBJECT;
+			}
+            
+            for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+            
+            	$CURSOR_ITEMS_GETTER_METHODS
+            	
+            	$TABLE_MODEL_OBJECT.add(new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS));
+            }
+            
+            return $TABLE_MODEL_OBJECT;
+        }
+        
+        /**
+        * $DATABASE_TABLE_CLASS#get$TABLE_MODEL_INFO_CLASSAll
+        * Returns a list of all the items in the table
+        *
+        * @return List<$TABLE_MODEL_INFO_CLASS>
+        */
+        public List<$TABLE_MODEL_INFO_CLASS> search$TABLE_MODEL_INFO_CLASS(String searchKey) {
+        	
+        	String selection = $ANDROID_SQL_SEARCH_SELECTION_STATEMENT;
+        	
+        	Cursor cursor = query$DATABASE_TABLE_CLASS(null,selection,null,null);
+        	
+        	int rowsCount = 0;
+        	
+        	if(cursor!= null){
+        		rowsCount = cursor.getCount();
+        	}
+			
+			List<$TABLE_MODEL_INFO_CLASS>$TABLE_MODEL_OBJECT = new ArrayList<$TABLE_MODEL_INFO_CLASS>(rowsCount);
+			
+			//if cursor does not have any items
+			if(rowsCount<1){
+				return $TABLE_MODEL_OBJECT;
+			}
+            
+            for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+            
+            	$CURSOR_ITEMS_GETTER_METHODS
+            	
+            	$TABLE_MODEL_OBJECT.add(new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS));
+            }
+            
+            return $TABLE_MODEL_OBJECT;
         }
     }
