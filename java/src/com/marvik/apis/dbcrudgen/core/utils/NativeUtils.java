@@ -93,6 +93,9 @@ public final class NativeUtils {
 		if (dataType.equalsIgnoreCase("INTEGER")) {
 			dataType = "int";
 		}
+		if (dataType.equalsIgnoreCase("LONG")) {
+			dataType = "long";
+		}
 		if (dataType.equalsIgnoreCase("STRING")) {
 			dataType = "String";
 		}
