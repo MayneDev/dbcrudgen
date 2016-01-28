@@ -27,7 +27,7 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 		String classVariablesAccessors = "";
 		String classConstructorVariables = "";
 
-		TableColumn[] tableColumn = table.getColumns();
+		TableColumn[] tableColumn = getTableColumnsAll(table);
 
 		for (int i = 0; i < tableColumn.length; i++) {
 			
