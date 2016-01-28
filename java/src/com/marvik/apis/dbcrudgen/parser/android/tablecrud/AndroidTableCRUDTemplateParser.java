@@ -2,7 +2,9 @@ package com.marvik.apis.dbcrudgen.parser.android.tablecrud;
 
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.delimeters.JavaDelimiter;
 import com.marvik.apis.dbcrudgen.core.platforms.java.object.accessibility.JavaObjectAccessibility;
+import com.marvik.apis.dbcrudgen.core.platforms.sql.grammar.SQLGrammar;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
+import com.marvik.apis.dbcrudgen.natives.syntax.Syntax;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
@@ -12,12 +14,14 @@ import com.marvik.apis.dbcrudgen.schemamodels.datatypes.MYSQLDataTypes;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.statements.AndroidStatementContentValuesPutTemplate;
+import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcrudgen.utilities.Utils;
 
 public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
-	public String createSourceCode(String packageFilePath, String tablesSchemasPackage,String tableModelsPackage, Table table) {
+	public String createSourceCode(String packageFilePath, String tablesSchemasPackage, String tableModelsPackage,
+			Table table) {
 
 		String tableName = table.getTableName();
 
@@ -28,7 +32,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
 		// add tables schemas import
 		tableCrudTemplate = parseTablesSchemasClassImport(tableCrudTemplate, tablesSchemasPackage);
-		
+
 		// add tables model info class import
 		tableCrudTemplate = parseTableModelInfoClassImport(tableCrudTemplate, tableModelsPackage, table.getTableName());
 
@@ -47,10 +51,119 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		// add table custom update method
 
 		// add table custom query method
+		tableCrudTemplate = prepareTableCustomQueryMethods(tableCrudTemplate, table);
+
+		// add table custom search method
+		tableCrudTemplate = prepareTableCustomSearchMethod(tableCrudTemplate, table);
 
 		// add table custom delete method
 
+		// add missing table model class statements in the query and the search
+		// methods-- > BY NOW THE TEMPLATE IS
+		// MISSING THIS --> POOR PROTOTYPE
+		tableCrudTemplate = prepareTableModelClassParametersInQueryAndSearchMethods(tableCrudTemplate, table);
+
 		return tableCrudTemplate;
+	}
+
+	private String prepareTableModelClassParametersInQueryAndSearchMethods(String tableCrudTemplate, Table table) {
+		String tableName = table.getTableName();
+		String tableModelClass = NativeUtils.toJavaBeansClass(tableName) + TemplateTags.Android.INFO;
+
+		TableColumn[] tableColumns = getTableColumnsAll(table);
+
+		String constructorParams = "";
+		for (int i = 0; i < tableColumns.length; i++) {
+			constructorParams += tableColumns[i].getColumnName();
+
+			if (i < tableColumns.length - 1) {
+				constructorParams += ",";
+			}
+		}
+		return tableCrudTemplate.replace(TemplateTags.Android.TABLE_INFO_CLASS, tableModelClass)
+				.replace(TemplateTags.Android.CONTRUCTOR_PARAMS, constructorParams);
+	}
+
+	// prepare table custom query method
+	private String prepareTableCustomQueryMethods(String tableCrudTemplate, Table table) {
+		return parseTableColumnCursorItemGetMethods(tableCrudTemplate, table);
+	}
+
+	// prepare table custom search method
+	private String prepareTableCustomSearchMethod(String tableCrudTemplate, Table table) {
+		String sqlSearchStatement = SimpleTemplates.Android.ANDROID_DATABASE_SQL_SEARCH_SELECTION_TEMPLATE;
+		String searchStatement = createAndroidSqlSelectionSearchStatement(sqlSearchStatement, table);
+		return tableCrudTemplate.replace(TemplateTags.Android.ANDROID_SQL_SEARCH_SELECTION_STATEMENT, searchStatement);
+	}
+
+	// Create android sql selection search statement
+	private String createAndroidSqlSelectionSearchStatement(String sqlSearchStatement, Table table) {
+		String sqlSearchSelection = "";
+
+		TableColumn[] tableColumns = getTableColumnsAll(table);
+
+		for (int i = 0; i < tableColumns.length; i++) {
+
+			String tablesSchemasClass = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME;
+			String tableName = NativeUtils.toJavaBeansClass(table.getTableName());
+			String columnName = tableColumns[i].getColumnName();
+
+			sqlSearchSelection += parseSQLSelectionStatement(sqlSearchStatement, tablesSchemasClass, tableName,
+					columnName);
+
+			if (i < tableColumns.length - 1) {
+				sqlSearchSelection += Syntax.ArithmeticChars.ADD + Syntax.PrintingChars.ESCAPED_DOUBLE_QUOTES
+						+ SQLGrammar.Keywords.OR + Syntax.PrintingChars.ESCAPED_DOUBLE_QUOTES
+						+ Syntax.ArithmeticChars.ADD;
+			}
+		}
+		return sqlSearchSelection;
+	}
+
+	// parse the sql selection statement to the template
+	private String parseSQLSelectionStatement(String sqlSearchStatement, String tablesSchemasClass, String tableName,
+			String columnName) {
+
+		return sqlSearchStatement.replace(TemplateTags.Android.TABLES_SCHEMAS_CLASS, tablesSchemasClass)
+				.replace(TemplateTags.Android.TABLE_NAME, tableName)
+				.replace(TemplateTags.Android.COLUMN_NAME, columnName.toUpperCase());
+	}
+
+	// parse table columns cursor item get methods to the template
+	private String parseTableColumnCursorItemGetMethods(String tableCrudTemplate, Table table) {
+		String columnsCursorItemGetMethods = createColumnsCursorItemsGetMethods(table);
+		return tableCrudTemplate.replace(TemplateTags.Android.CURSOR_ITEMS_GETTER_METHODS, columnsCursorItemGetMethods);
+	}
+
+	// Create Methods to read cursor items
+	private String createColumnsCursorItemsGetMethods(Table table) {
+
+		TableColumn[] tableColumns = getTableColumnsAll(table);
+
+		String tableColumnsCursorGetters = "";
+
+		for (TableColumn tableColumn : tableColumns) {
+			String tableName = table.getTableName();
+			String dataType = tableColumn.getDataType().getDataType();
+			String columnName = tableColumn.getColumnName();
+
+			tableColumnsCursorGetters += createColumnsCursorItemsGetMethod(tableName, dataType, columnName);
+		}
+		return tableColumnsCursorGetters;
+	}
+
+	// Create Method to read cursor items
+	private String createColumnsCursorItemsGetMethod(String tableName, String dataType, String columnName) {
+
+		String template = getColumnsCursorItemsGetMethodTemplate(dataType);
+		String tablesSchemasClass = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME;
+		String tableClassName = NativeUtils.toJavaBeansClass(tableName);
+		String columnObject = NativeUtils.toJavaBeansVariable(columnName);
+
+		return template.replace(TemplateTags.Android.COLUMN_OBJECT, columnObject)
+				.replace(TemplateTags.Android.TABLES_SCHEMAS_CLASS, tablesSchemasClass)
+				.replace(TemplateTags.Android.TABLE_NAME, tableClassName)
+				.replace(TemplateTags.Android.COLUMN_NAME, columnName.toUpperCase());
 	}
 
 	// add table custom insert method
@@ -140,7 +253,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 			tableColumnsReference += createTableColumnReference(NativeUtils.toJavaBeansClass(table.getTableName()),
 					columnName);
 
-			//Append the object in the String.valueOf(#Object) template 
+			// Append the object in the String.valueOf(#Object) template
 			tableColumnsObjects += NativeUtils.parseStringDefaultParser(objectName);
 
 			if (i < columns.length - 1) {
@@ -207,8 +320,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
 				.replace(TemplateTags.Android.FUNCTION_PARAMS_KEYS, indexedColumnReference)
 
-				.replace(TemplateTags.Android.FUNCTION_PARAMS_VALUES,
-						methodParamsObjects)
+				.replace(TemplateTags.Android.FUNCTION_PARAMS_VALUES, methodParamsObjects)
 
 				.replace(TemplateTags.Android.FUNCTION_PARAMS, methodParamsObjects)
 
@@ -235,12 +347,14 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	}
 
 	// add tables schemas import
-	private String parseTableModelInfoClassImport(String tableCrudTemplate, String tableModelInfoPackage, String tableName) {
+	private String parseTableModelInfoClassImport(String tableCrudTemplate, String tableModelInfoPackage,
+			String tableName) {
 		tableModelInfoPackage = parseJavaPackage(tableModelInfoPackage);
 		String tableModelInfoClass = tableModelInfoPackage + TemplateTags.TAG_PRINTING_CHAR_DOT
-				+ NativeUtils.toJavaBeansClass(tableName) +TemplateTags.Android.INFO;
+				+ NativeUtils.toJavaBeansClass(tableName) + TemplateTags.Android.INFO;
 		return tableCrudTemplate.replace(TemplateTags.Android.TABLE_MODEL_CLASS, tableModelInfoClass);
 	}
+
 	// add tables schemas import
 	private String parseTablesSchemasClassImport(String tableCrudTemplate, String tableSchemasPackage) {
 		tableSchemasPackage = parseJavaPackage(tableSchemasPackage);
