@@ -63,7 +63,7 @@
 		if($this->client == POST_CLIENT_DESKTOP){
 			return $this->export_query_html($queried_$TABLE_NAME);
 		}
-		if($this->client == POST_CLIENT_ANDROID){
+		if($this->client == POST_CLIENT_MOBILE_ANDROID){
 			return $this->export_query_json($queried_$TABLE_NAME);
 		}
 	}
@@ -71,20 +71,12 @@
 		if($this->client == POST_CLIENT_DESKTOP){
 			return $this->export_query_html($queried_$TABLE_NAME);
 		}
-		if($this->client == POST_CLIENT_ANDROID){
+		if($this->client == POST_CLIENT_MOBILE_ANDROID){
 			return $this->export_query_json($queried_$TABLE_NAME);
 		}
 	}
 	private function export_query_json($queried_$TABLE_NAME){
-		$query_json = "";
-
-		for($i=0;$i< count($queried_$TABLE_NAME);$i++ ) {
-			$query_json .= $queried_$TABLE_NAME[$i] ;
-			if($i< (count($queried_$TABLE_NAME) - 1 )){
-				$query_json .= ",";
-			}
-		}
-
+		$query_json = json_encode($queried_$TABLE_NAME);
 		return $query_json;
 	}
 	private function export_query_html($queried_$TABLE_NAME){
