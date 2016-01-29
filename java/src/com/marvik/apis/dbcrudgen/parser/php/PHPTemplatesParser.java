@@ -19,26 +19,26 @@ import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
-import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPTableClassCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.php.crud.classfilename.PHPClassFileNameTemplate;
-import com.marvik.apis.dbcrudgen.templates.php.crud.columnaccessors.PHPColumnAccessorsTemplate;
-import com.marvik.apis.dbcrudgen.templates.php.crud.columnscrud.PHPColumnsCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.php.crud.dbactions.PHPDatabaseActionsTemplate;
-import com.marvik.apis.dbcrudgen.templates.php.crud.dbconn.PHPDatabaseConnectionTemplate;
-import com.marvik.apis.dbcrudgen.templates.php.crud.dbutils.PHPDatabaseUtilsTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPClassDatabaseConnectionTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPClassDatabaseUtilsTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPLowLevelTableClassCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionColumnAccessorsTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionColumnsCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.statements.PHPStatementClassFileNameTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.variables.PHPVariablesDatabaseActionsTemplate;
 import com.marvik.apis.dbcrudgen.templates.sql.SQLTableFilenameTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags.DatabaseConnection;
 
 public class PHPTemplatesParser extends TemplatesParser {
 
-	private PHPTableClassCrudTemplate phpTableClassCrudTemplate;
-	private PHPColumnsCrudTemplate phpColumnsCrudTemplate;
-	private PHPColumnAccessorsTemplate phpColumnAccessorsTemplate;
-	private PHPClassFileNameTemplate phpClassFileNameTemplate;
-	private PHPDatabaseActionsTemplate phpDatabaseActionsTemplate;
-	private PHPDatabaseConnectionTemplate phpDatabaseConnectionTemplate;
-	private PHPDatabaseUtilsTemplate phpDatabaseUtilsTemplate;
+	private PHPLowLevelTableClassCrudTemplate phpTableClassCrudTemplate;
+	private PHPFunctionColumnsCrudTemplate phpColumnsCrudTemplate;
+	private PHPFunctionColumnAccessorsTemplate phpColumnAccessorsTemplate;
+	private PHPStatementClassFileNameTemplate phpClassFileNameTemplate;
+	private PHPVariablesDatabaseActionsTemplate phpDatabaseActionsTemplate;
+	private PHPClassDatabaseConnectionTemplate phpDatabaseConnectionTemplate;
+	private PHPClassDatabaseUtilsTemplate phpDatabaseUtilsTemplate;
 
 	private SQLTableFilenameTemplate sqlTableFilenameTemplate;
 
@@ -47,80 +47,80 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 */
 	public PHPTemplatesParser() {
 
-		phpTableClassCrudTemplate = new PHPTableClassCrudTemplate();
+		phpTableClassCrudTemplate = new PHPLowLevelTableClassCrudTemplate();
 
-		phpColumnsCrudTemplate = new PHPColumnsCrudTemplate();
+		phpColumnsCrudTemplate = new PHPFunctionColumnsCrudTemplate();
 
-		phpColumnAccessorsTemplate = new PHPColumnAccessorsTemplate();
+		phpColumnAccessorsTemplate = new PHPFunctionColumnAccessorsTemplate();
 
-		phpClassFileNameTemplate = new PHPClassFileNameTemplate();
+		phpClassFileNameTemplate = new PHPStatementClassFileNameTemplate();
 
-		phpDatabaseActionsTemplate = new PHPDatabaseActionsTemplate();
+		phpDatabaseActionsTemplate = new PHPVariablesDatabaseActionsTemplate();
 
-		phpDatabaseConnectionTemplate = new PHPDatabaseConnectionTemplate();
+		phpDatabaseConnectionTemplate = new PHPClassDatabaseConnectionTemplate();
 
-		phpDatabaseUtilsTemplate = new PHPDatabaseUtilsTemplate();
+		phpDatabaseUtilsTemplate = new PHPClassDatabaseUtilsTemplate();
 
 		sqlTableFilenameTemplate = new SQLTableFilenameTemplate();
 	}
 
 	/**
-	 * PHPColumnAccessorsTemplate
+	 * PHPFunctionColumnAccessorsTemplate
 	 * 
-	 * @return PHPColumnAccessorsTemplate
+	 * @return PHPFunctionColumnAccessorsTemplate
 	 */
-	public PHPColumnAccessorsTemplate getPhpColumnAccessorsTemplate() {
+	public PHPFunctionColumnAccessorsTemplate getPhpColumnAccessorsTemplate() {
 		return phpColumnAccessorsTemplate;
 	}
 
 	/**
 	 * 
-	 * @return PHPColumnsCrudTemplate
+	 * @return PHPFunctionColumnsCrudTemplate
 	 */
-	public PHPColumnsCrudTemplate getPhpColumnsCrudTemplate() {
+	public PHPFunctionColumnsCrudTemplate getPhpColumnsCrudTemplate() {
 		return phpColumnsCrudTemplate;
 	}
 
 	/**
 	 * 
-	 * @return PHPTableClassCrudTemplate
+	 * @return PHPLowLevelTableClassCrudTemplate
 	 */
-	public PHPTableClassCrudTemplate getPhpTableClassCrudTemplate() {
+	public PHPLowLevelTableClassCrudTemplate getPhpTableClassCrudTemplate() {
 		return phpTableClassCrudTemplate;
 	}
 
 	/**
 	 * 
-	 * @return PHPClassFileNameTemplate
+	 * @return PHPStatementClassFileNameTemplate
 	 */
-	public PHPClassFileNameTemplate getPhpClassFileNameTemplate() {
+	public PHPStatementClassFileNameTemplate getPhpClassFileNameTemplate() {
 		return phpClassFileNameTemplate;
 	}
 
 	/**
-	 * PHPDatabaseActionsTemplate getPhpDatabaseActionsTemplate()
+	 * PHPVariablesDatabaseActionsTemplate getPhpDatabaseActionsTemplate()
 	 * 
-	 * @return PHPDatabaseActionsTemplate
+	 * @return PHPVariablesDatabaseActionsTemplate
 	 */
-	public PHPDatabaseActionsTemplate getPhpDatabaseActionsTemplate() {
+	public PHPVariablesDatabaseActionsTemplate getPhpDatabaseActionsTemplate() {
 		return phpDatabaseActionsTemplate;
 	}
 
 	/**
-	 * PHPDatabaseConnectionTemplate getPhpDatabaseConnectionTemplate()
+	 * PHPClassDatabaseConnectionTemplate getPhpDatabaseConnectionTemplate()
 	 * 
 	 * @return phpDatabaseConnectionTemplate
 	 */
-	public PHPDatabaseConnectionTemplate getPhpDatabaseConnectionTemplate() {
+	public PHPClassDatabaseConnectionTemplate getPhpDatabaseConnectionTemplate() {
 		return phpDatabaseConnectionTemplate;
 	}
 
 	/**
-	 * PHPDatabaseUtilsTemplate getPhpDatabaseUtilsTemplate()
+	 * PHPClassDatabaseUtilsTemplate getPhpDatabaseUtilsTemplate()
 	 * 
 	 * @return phpDatabaseUtilsTemplate
 	 */
-	public PHPDatabaseUtilsTemplate getPhpDatabaseUtilsTemplate() {
+	public PHPClassDatabaseUtilsTemplate getPhpDatabaseUtilsTemplate() {
 		return phpDatabaseUtilsTemplate;
 	}
 

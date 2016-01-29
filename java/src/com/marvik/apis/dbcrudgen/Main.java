@@ -21,7 +21,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 
 public class Main {
 	public static void main(String[] args) {
-		testAndroidCrudGenerator();
+		//testAndroidCrudGenerator();
 		testPHPCrudGenerator();
 	}
 
@@ -100,7 +100,7 @@ public class Main {
 		addTableGenitalProblems(tablesList);
 		addTableFamilyProblems(tablesList);
 		addTableChildrenSickness(tablesList);
-		addTableOldAgeSickness(tablesList);
+		addTableOldAgeSickness(tablesList); 
 
 		Table[] tables = new Table[tablesList.size()];
 		for (int i = 0; i < tablesList.size(); i++) {
@@ -110,6 +110,8 @@ public class Main {
 		Database database = new Database("where_there_is_no_doc", tables);
 		return database;
 	}
+
+
 
 	private static void addTableOldAgeSickness(List<Table> tablesList) {
 
@@ -438,12 +440,12 @@ public class Main {
 		for (int i = 0; i < takingCareOfSickPersonColumnList.size(); i++) {
 			examiningSickPersonColumns[i] = takingCareOfSickPersonColumnList.get(i);
 		}
-		String tableSql = "create table health_problems_special_diets( id_health_problem integer primary  key auto_increment, health_problem text not null, health_problem_information not null, health_problem_signs text ,"
+		String tableSql = "create table special_diets( id_health_problem integer primary  key auto_increment, health_problem text not null, health_problem_information not null, health_problem_signs text ,"
 				+ " health_problem_signs_advanced text , health_problem_treatment text , health_problem_prevention text ,  health_problem_caution text , health_problem_note text, special_diet text not null );";
 
 		PrimaryKey primaryKey = new PrimaryKey("id_health_problem",
 				new DataType("integer", new Constraints("primary key auto_increment")));
-		tablesList.add(new Table("health_problems_special_diets", examiningSickPersonColumns, tableSql, primaryKey,
+		tablesList.add(new Table("special_diets", examiningSickPersonColumns, tableSql, primaryKey,
 				null, null));
 	}
 
@@ -460,11 +462,11 @@ public class Main {
 		for (int i = 0; i < takingCareOfSickPersonColumnList.size(); i++) {
 			examiningSickPersonColumns[i] = takingCareOfSickPersonColumnList.get(i);
 		}
-		String tableSql = "create table antibiotics_and_how_to_use_them ( id_item int primary key auto_increment, item_title text not null, item_description text not null  )";
+		String tableSql = "create table antibiotics ( id_item int primary key auto_increment, item_title text not null, item_description text not null  )";
 
 		PrimaryKey primaryKey = new PrimaryKey("id_item",
 				new DataType("integer", new Constraints("primary key auto_increment")));
-		tablesList.add(new Table("antibiotics_and_how_to_use_them", examiningSickPersonColumns, tableSql, primaryKey,
+		tablesList.add(new Table("antibiotics", examiningSickPersonColumns, tableSql, primaryKey,
 				null, null));
 	}
 

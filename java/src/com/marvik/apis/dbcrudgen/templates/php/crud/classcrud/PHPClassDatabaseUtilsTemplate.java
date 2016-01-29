@@ -1,16 +1,16 @@
-package com.marvik.apis.dbcrudgen.templates.php.crud.dbutils;
+package com.marvik.apis.dbcrudgen.templates.php.crud.classcrud;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 
-public class PHPDatabaseUtilsTemplate extends CrudTemplates {
+public class PHPClassDatabaseUtilsTemplate extends CrudTemplates {
 
 	/**
-	 * PHPDatabaseUtilsTemplate : The database utils template
+	 * PHPClassDatabaseUtilsTemplate : The database utils template
 	 */
-	public PHPDatabaseUtilsTemplate() {
+	public PHPClassDatabaseUtilsTemplate() {
 
 	}
 
@@ -37,6 +37,6 @@ public class PHPDatabaseUtilsTemplate extends CrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 
-		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_DATABASE_UTILS_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_CLASS_DATABASE_UTILS_TEMPLATE_FILE_PATH;
 	}
 }

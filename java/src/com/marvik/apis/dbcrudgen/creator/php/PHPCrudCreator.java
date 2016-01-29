@@ -9,14 +9,14 @@ import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
-import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPTableClassCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPLowLevelTableClassCrudTemplate;
 
 public class PHPCrudCreator extends CrudCreator {
 
 	/**
 	 * PHP Table Class Crud Template
 	 */
-	private PHPTableClassCrudTemplate phpTableClassCrudTemplate;
+	private PHPLowLevelTableClassCrudTemplate phpTableClassCrudTemplate;
 
 	/**
 	 * PHP Templates Parser
@@ -38,7 +38,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 */
 	public PHPCrudCreator() {
 		super();
-		phpTableClassCrudTemplate = new PHPTableClassCrudTemplate();
+		phpTableClassCrudTemplate = new PHPLowLevelTableClassCrudTemplate();
 		phpTemplatesParser = new PHPTemplatesParser();
 	}
 

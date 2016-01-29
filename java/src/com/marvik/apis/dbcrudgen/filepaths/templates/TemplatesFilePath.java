@@ -10,38 +10,48 @@ public class TemplatesFilePath {
 	 */
 	public class PHPTemplatesFilePaths {
 		/**
-		 * PHP COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH
+		 * PHP PHP_CLASS_DATABASE_CONNECTION_TEMPLATE_FILE_PATH
 		 */
-		public static final String PHP_COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_function_table_column_accessors.txt";
+		public static final String PHP_CLASS_DATABASE_CONNECTION_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_database_connect.txt";
 
 		/**
-		 * PHP COLUMNS_CRUD_TEMPLATE_FILE_PATH
+		 * PHP PHP_CLASS_DATABASE_UTILS_TEMPLATE_FILE_PATH
 		 */
-		public static final String PHP_TABLE_CLASS_CRUD_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_table_crud.txt";
-		/**
-		 * PHP COLUMNS_CRUD_TEMPLATE_FILE_PATH
-		 */
-		public static final String PHP_COLUMNS_CRUD_TEMPLATE_FILE_PATH = "res/templates/php/template_php_function_columns_crud.txt";
+		public static final String PHP_CLASS_DATABASE_UTILS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_database_utils.txt";
 
 		/**
-		 * PHP DATABASE_ACTIONS_TEMPLATE_FILE_PATH
-		 */
-		public static final String PHP_DATABASE_ACTIONS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_statements_database_actions.txt";
-
-		/**
-		 * PHP DATABASE_CONNECTION_TEMPLATE_FILE_PATH
-		 */
-		public static final String PHP_DATABASE_CONNECTION_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_database_connect.txt";
-
-		/**
-		 * PHP DATABASE_UTILS_TEMPLATE_FILE_PATH
-		 */
-		public static final String PHP_DATABASE_UTILS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_database_utils.txt";
-
-		/**
-		 * PHP CLASS_FILENAME_TEMPLATE_FILE_PATH
+		 * PHP PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH
 		 */
 		public static final String PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH = "res/templates/php/template_php_statement_class_file_name.txt";
+		/**
+		 * PHP_CLASS_TABLE_CRUD_HIGH_LEVEL_TEMPLATE_FILE_PATH
+		 */
+		public static final String PHP_CLASS_TABLE_CRUD_HIGH_LEVEL_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_table_crud_high_level.txt";
+
+		/**
+		 * PHP PHP_CLASS_TABLE_CRUD_LOW_LEVEL_TEMPLATE_FILE_PATH
+		 */
+		public static final String PHP_CLASS_TABLE_CRUD_LOW_LEVEL_TEMPLATE_FILE_PATH = "res/templates/php/template_php_class_table_crud_low_level.txt";
+
+		/**
+		 * PHP PHP_FUNCTION_COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH
+		 */
+		public static final String PHP_FUNCTION_COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_function_table_column_accessors.txt";
+
+		/**
+		 * PHP PHP_FUNCTION_COLUMNS_CRUD_TEMPLATE_FILE_PATH
+		 */
+		public static final String PHP_FUNCTION_COLUMNS_CRUD_TEMPLATE_FILE_PATH = "res/templates/php/template_php_function_columns_crud.txt";
+
+		/**
+		 * PHP_FUNCTION_HIGH_LEVEL_FETCH_ASSOC_DATA_GETTERS
+		 */
+		public static final String PHP_FUNCTION_HIGH_LEVEL_FETCH_ASSOC_DATA_GETTERS = "res/templates/php/template_php_function_high_level_fetch_assoc_data_getters.txt";
+
+		/**
+		 * PHP PHP_STATEMENTS_DATABASE_ACTIONS_TEMPLATE_FILE_PATH
+		 */
+		public static final String PHP_STATEMENTS_DATABASE_ACTIONS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_statements_database_actions.txt";
 
 	}
 

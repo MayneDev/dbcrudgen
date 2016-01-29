@@ -5,14 +5,14 @@ import java.io.IOException;
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 
-public class PHPTableClassCrudTemplate extends CrudTemplates {
+public class PHPLowLevelTableClassCrudTemplate extends CrudTemplates {
 
-	public PHPTableClassCrudTemplate() {
+	public PHPLowLevelTableClassCrudTemplate() {
 
 	}
 
 	/*
-	 * Returns the table class CRUD template
+	 * Returns the table class low level CRUD template
 	 */
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
@@ -21,7 +21,7 @@ public class PHPTableClassCrudTemplate extends CrudTemplates {
 	}
 
 	/*
-	 * Returns the table class CRUD template
+	 * Returns the table class low level CRUD template
 	 */
 	@Override
 	public String getTemplate() {
@@ -29,11 +29,11 @@ public class PHPTableClassCrudTemplate extends CrudTemplates {
 	}
 
 	/*
-	 * Returns the table class CRUD template file path
+	 * Returns the table class low level CRUD template file path
 	 */
 	@Override
 	public String getTemplateFilePath() {
 		
-		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_TABLE_CLASS_CRUD_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_CLASS_TABLE_CRUD_LOW_LEVEL_TEMPLATE_FILE_PATH;
 	}
 }

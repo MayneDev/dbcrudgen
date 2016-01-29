@@ -1,19 +1,18 @@
-package com.marvik.apis.dbcrudgen.templates.php.crud.columnaccessors;
+package com.marvik.apis.dbcrudgen.templates.php.crud.functions;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
-import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.php.crud.PHPCrudTemplates;
 
-public class PHPColumnAccessorsTemplate extends PHPCrudTemplates{
-	
-	public PHPColumnAccessorsTemplate() {
+public class PHPFunctionColumnsCrudTemplate extends PHPCrudTemplates {
+
+	public PHPFunctionColumnsCrudTemplate() {
 
 	}
 
 	/*
-	 * Returns the PHP columns access template
+	 * Returns the columns CRUD template
 	 */
 	@Override
 	public String openTemplate(String templateFilePath) throws IOException {
@@ -22,7 +21,7 @@ public class PHPColumnAccessorsTemplate extends PHPCrudTemplates{
 	}
 
 	/*
-	 * Returns the PHP columns access template
+	 * Returns the columns CRUD template
 	 */
 	@Override
 	public String getTemplate(){
@@ -30,11 +29,11 @@ public class PHPColumnAccessorsTemplate extends PHPCrudTemplates{
 	}
 
 	/*
-	 * Returns the PHP columns access template file path
+	 * Returns the columns CRUD template file path
 	 */
 	@Override
 	public String getTemplateFilePath() {
 		
-		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_COLUMNS_ACCESSORS_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_FUNCTION_COLUMNS_CRUD_TEMPLATE_FILE_PATH;
 	}
 }

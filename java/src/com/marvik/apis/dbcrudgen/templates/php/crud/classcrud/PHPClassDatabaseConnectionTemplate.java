@@ -1,16 +1,16 @@
-package com.marvik.apis.dbcrudgen.templates.php.crud.dbconn;
+package com.marvik.apis.dbcrudgen.templates.php.crud.classcrud;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcrudgen.templates.php.crud.PHPCrudTemplates;
 
-public class PHPDatabaseConnectionTemplate extends PHPCrudTemplates {
+public class PHPClassDatabaseConnectionTemplate extends PHPCrudTemplates {
 
 	/**
-	 * PHPDatabaseConnectionTemplate : The database connection template
+	 * PHPClassDatabaseConnectionTemplate : The database connection template
 	 */
-	public PHPDatabaseConnectionTemplate() {
+	public PHPClassDatabaseConnectionTemplate() {
 
 	}
 
@@ -37,6 +37,6 @@ public class PHPDatabaseConnectionTemplate extends PHPCrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 
-		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_DATABASE_CONNECTION_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_CLASS_DATABASE_CONNECTION_TEMPLATE_FILE_PATH;
 	}
 }

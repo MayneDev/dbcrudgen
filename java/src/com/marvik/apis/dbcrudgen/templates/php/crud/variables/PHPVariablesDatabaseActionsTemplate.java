@@ -1,16 +1,16 @@
-package com.marvik.apis.dbcrudgen.templates.php.crud.dbactions;
+package com.marvik.apis.dbcrudgen.templates.php.crud.variables;
 
 import java.io.IOException;
 
 import com.marvik.apis.dbcrudgen.filepaths.templates.TemplatesFilePath;
 import com.marvik.apis.dbcrudgen.templates.php.crud.PHPCrudTemplates;
 
-public class PHPDatabaseActionsTemplate  extends PHPCrudTemplates {
+public class PHPVariablesDatabaseActionsTemplate  extends PHPCrudTemplates {
 	
 	/**
-	 * PHPDatabaseActionsTemplate : The database actions template
+	 * PHPVariablesDatabaseActionsTemplate : The database actions template
 	 */
-	public PHPDatabaseActionsTemplate() {
+	public PHPVariablesDatabaseActionsTemplate() {
 
 	}
 
@@ -37,6 +37,6 @@ public class PHPDatabaseActionsTemplate  extends PHPCrudTemplates {
 	@Override
 	public String getTemplateFilePath() {
 		
-		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_DATABASE_ACTIONS_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_STATEMENTS_DATABASE_ACTIONS_TEMPLATE_FILE_PATH;
 	}
 }
