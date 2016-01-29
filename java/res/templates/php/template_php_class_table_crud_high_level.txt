@@ -1,12 +1,12 @@
-<?php class $TABLE_NAME$INFO{
+<?php class CLASS_NAME{
 
 	private $build;
 	private $client;
 	private $action;
 	private $$TABLE_NAME;
-
+	private $table = '$TABLE_NAME';
 	/**
-	 * $TABLE_NAME$INFO
+	 * $CLASS_NAME
 	 * 
 	 * Class to get all the $TABLE_NAME Information from the $TABLE_NAME table 
 	 * @param String $action
@@ -23,8 +23,9 @@
 		$this->action = $action;
 		$this->build = $build;
 
-		include '$TABLE_CRUD_FILE';
-		$this->$TABLE_NAME = new $TABLE_NAME( $action, $client );
+		include '$TABLE_LOW_LEVEL_CRUD_CLASS';
+		
+		$this->$TABLE_NAME = new $TABLE_CLASS( $action, $client );
 
 	}
 
@@ -88,14 +89,14 @@
 	}
 	private function export_query_html($queried_$TABLE_NAME){
 		$query_html = "";
-		foreach ( $queried_$TABLE_NAME as $TABLE_NAME_row_items ) {
-			$query_html .= $this->process_query_for_html_export ( $TABLE_NAME_row_items );
+		foreach ( $queried_$TABLE_NAME as $$TABLE_NAME_row_items ) {
+			$query_html .= $this->process_query_for_html_export ( $$TABLE_NAME_row_items );
 		}
 		return $query_html;
 	}
 
-	private function process_query_for_html_export ( $TABLE_NAME_row_items ){
-		$html_export ='<div style="padding:10px;margin:10px;border:2px solid black;"><h3>'  $TABLE_NAME  '</h3>';
+	private function process_query_for_html_export ( $$TABLE_NAME_row_items ){
+		$html_export ='<div style="padding:10px;margin:10px;border:2px solid black;"><h3>'  .$this->table.  '</h3>';
 		
 		$ROW_ITEMS_FETCH_ASSOC_VALUES_STATEMENTS
 		

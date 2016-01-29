@@ -4,7 +4,8 @@ import com.marvik.apis.dbcrudgen.projects.ProjectConfiguration;
 
 public class PHPProjectConfiguration extends ProjectConfiguration {
 
-	private String crudScriptsStorageDirectory;
+	private String lowLevelCrudScriptsStorageDirectory;
+	private String highLevelCrudScriptsStorageDirectory;
 	private String sqlScriptsStorageDirectory;
 
 	private String phpDatabaseAPIScriptsStorageDirectory;
@@ -18,6 +19,7 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 			String phpDatabaseAPIScriptsStorageDirectory) {
 		super(projectName);
 	}
+
 	/**
 	 * Project Configuration Properties
 	 * 
@@ -27,6 +29,7 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 	public PHPProjectConfiguration(String projectName, String sqlScriptsStorageDirectory) {
 		super(projectName);
 	}
+
 	/**
 	 * Project Configuration Properties
 	 * 
@@ -37,13 +40,13 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 	}
 
 	/**
-	 * Project PHP Database CRUD Scripts Storage Directory This is the folder
-	 * where the PHP Database CRUD Scripts will be saved
+	 * Project PHP Table Low Level CRUD Scripts Storage Directory This is the
+	 * folder where the PHP Database CRUD Scripts will be saved
 	 * 
-	 * @param crudScriptsStorageDirectory
+	 * @param lowLevelCrudScriptsStorageDirectory
 	 */
-	public void setProjectCRUDScriptsStorageDirectory(String crudScriptsStorageDirectory) {
-		this.crudScriptsStorageDirectory = crudScriptsStorageDirectory;
+	public void setProjectPHPTableCrudLowLevelScriptsStorageDirectory(String lowLevelCrudScriptsStorageDirectory) {
+		this.lowLevelCrudScriptsStorageDirectory = lowLevelCrudScriptsStorageDirectory;
 	}
 
 	/**
@@ -82,8 +85,8 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 	 * 
 	 * @return Project PHP Database CRUD Scripts Storage Directory
 	 */
-	public String getCrudScriptsStorageDirectory() {
-		return crudScriptsStorageDirectory;
+	public String getLowLevelCrudScriptsStorageDirectory() {
+		return lowLevelCrudScriptsStorageDirectory;
 	}
 
 	/**
@@ -107,5 +110,24 @@ public class PHPProjectConfiguration extends ProjectConfiguration {
 	 */
 	public void setProjectSQLScriptsStorageDirectory(String sqlScriptsStorageDirectory) {
 		this.sqlScriptsStorageDirectory = sqlScriptsStorageDirectory;
+	}
+
+	/**
+	 * Project PHP Table High Level CRUD Scripts Storage Directory This is the
+	 * folder where the PHP Database CRUD Scripts will be saved
+	 * 
+	 * @param highLevelCrudScriptsStorageDirectory
+	 */
+	public void setProjectPHPTableCrudHighLevelScriptsStorageDirectory(String highLevelCrudScriptsStorageDirectory) {
+		this.highLevelCrudScriptsStorageDirectory = highLevelCrudScriptsStorageDirectory;
+
+	}
+
+	/**
+	 * 
+	 * @return HighLevelCrudScriptsStorageDirectory
+	 */
+	public String getHighLevelCrudScriptsStorageDirectory() {
+		return highLevelCrudScriptsStorageDirectory;
 	}
 }

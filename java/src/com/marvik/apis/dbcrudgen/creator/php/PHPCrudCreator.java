@@ -1,15 +1,20 @@
 package com.marvik.apis.dbcrudgen.creator.php;
 
+import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
 import com.marvik.apis.dbcrudgen.io.FilesHandler;
 import com.marvik.apis.dbcrudgen.parser.php.PHPTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
+import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPHighLevelTableClassCrudTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPLowLevelTableClassCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionHighLevelFetchAssocGettersTemplate;
+import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class PHPCrudCreator extends CrudCreator {
 
@@ -65,7 +70,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 * @param table
 	 * @return the generated crud for the passed table
 	 */
-	public String getTableCrud(Table table) {
+	public String getTableLowLevelCrud(Table table) {
 		return getPHPTemplatesParser().getTableCrud(phpProjectConfiguration, projectDatabaseConnectionProperties,
 				table);
 	}
@@ -152,7 +157,11 @@ public class PHPCrudCreator extends CrudCreator {
 
 		// Create Table CRUD
 		for (Table table : database.getTables()) {
-			writeTableScriptsToDisk(table);
+			writeLowLevelTableScriptsToDisk(table);
+		}
+		// Create Table CRUD
+		for (Table table : database.getTables()) {
+			writeHighLevelTableScriptsToDisk(table);
 		}
 	}
 
@@ -225,22 +234,23 @@ public class PHPCrudCreator extends CrudCreator {
 	}
 
 	/**
-	 * Writes all the table scripts to disk
+	 * Writes all the low level table scripts to disk
 	 * 
 	 * @param table
 	 */
-	private void writeTableScriptsToDisk(Table table) {
+	private void writeLowLevelTableScriptsToDisk(Table table) {
 
-		String tablesCrudScriptsStorageDirectory = getPhpProjectConfiguration().getCrudScriptsStorageDirectory();
+		String tablesCrudLowLevelScriptsStorageDirectory = getPhpProjectConfiguration()
+				.getLowLevelCrudScriptsStorageDirectory();
 		String tablesSQLScriptsStorageDirectory = getPhpProjectConfiguration().getProjectSQLScriptsStorageDirectory();
 
 		String tableName = table.getTableName();
 		String tableSQL = table.getTableSql();
-		String tablesCrud = getTableCrud(table);
+		String tablesCrud = getTableLowLevelCrud(table);
 
-		String className = getPHPTemplatesParser().parseJavaBeansClassName(tableName);
-		String phpClassFileName = getPHPTemplatesParser().parsePHPClassFileName(tablesCrudScriptsStorageDirectory,
-				className);
+		String className = NativeUtils.toJavaBeansClass(tableName);
+		String phpClassFileName = getPHPTemplatesParser()
+				.parseTableCrudLowLevelScriptsFileName(tablesCrudLowLevelScriptsStorageDirectory, className);
 
 		String sqlTableFileName = getPHPTemplatesParser().parseSQLFileName(tablesSQLScriptsStorageDirectory, tableName);
 
@@ -261,6 +271,32 @@ public class PHPCrudCreator extends CrudCreator {
 	}
 
 	/**
+	 * Writes all the high level table scripts to disk
+	 * 
+	 * @param table
+	 */
+	private void writeHighLevelTableScriptsToDisk(Table table) {
+		
+		String tablesCrudHighLevelScriptsStorageDirectory = getPhpProjectConfiguration()
+				.getHighLevelCrudScriptsStorageDirectory();
+
+		String tableName = table.getTableName();
+		String tableHighLevelCrud = getPHPTemplatesParser().getTableHighLevelCrud(getPhpProjectConfiguration(),table);
+
+		String className = NativeUtils.toJavaBeansClass(tableName);
+		String phpClassFileName = getPHPTemplatesParser()
+				.parseTableCrudHighLevelScripts(tablesCrudHighLevelScriptsStorageDirectory, className);
+
+		if (!getFilesHandler().createByteWeighedFile(phpClassFileName, tableHighLevelCrud)) {
+			System.out.println("Could not create File[" + phpClassFileName + "]");
+		} else {
+			System.out.println("File Successfully created [" + phpClassFileName + "]");
+		}
+
+	}
+
+	
+	/**
 	 * Create directories for saving all the required/generated scripts
 	 */
 	private void createSciptsDirectories() {
@@ -271,8 +307,13 @@ public class PHPCrudCreator extends CrudCreator {
 		// Create Project Storage Directory
 		createProjectStorageDirectory(getPhpProjectConfiguration().getProjectStorageDirectory());
 
-		// Create Project CRUD Scripts Storage Directory
-		createProjectCRUDScriptsStorageDirectory(getPhpProjectConfiguration().getCrudScriptsStorageDirectory());
+		// Create Table CRUD Low level Scripts Storage Directory
+		createTableCrudLowLevelScriptsStorageDirectory(
+				getPhpProjectConfiguration().getLowLevelCrudScriptsStorageDirectory());
+
+		// Create Table CRUD high level Scripts Storage Directory
+		createTableCrudHighLevelScriptsStorageDirectory(
+				getPhpProjectConfiguration().getHighLevelCrudScriptsStorageDirectory());
 
 		// Create Database Data Actions Scripts Storage Directory
 		createProjectDatabasesActionsDirectory(getPhpProjectConfiguration().getPhpDatabaseAPIScriptsStorageDirectory());
@@ -309,12 +350,23 @@ public class PHPCrudCreator extends CrudCreator {
 	}
 
 	/**
-	 * Create Project CRUD Scripts Storage Directory
+	 * Create Table CRUD low level Scripts Storage Directory
 	 * 
 	 * @param crudScriptsStorageDirectory
-	 * @return Project CRUD Scripts Storage Directory
+	 * @return table low level scripts Storage Directory
 	 */
-	private String createProjectCRUDScriptsStorageDirectory(String crudScriptsStorageDirectory) {
+	private String createTableCrudLowLevelScriptsStorageDirectory(String crudScriptsStorageDirectory) {
+		getFilesHandler().createDirectories(crudScriptsStorageDirectory);
+		return crudScriptsStorageDirectory;
+	}
+
+	/**
+	 * Create Table CRUD high level Scripts Storage Directory
+	 * 
+	 * @param crudScriptsStorageDirectory
+	 * @return table high level Scripts Storage Directory
+	 */
+	private String createTableCrudHighLevelScriptsStorageDirectory(String crudScriptsStorageDirectory) {
 		getFilesHandler().createDirectories(crudScriptsStorageDirectory);
 		return crudScriptsStorageDirectory;
 	}

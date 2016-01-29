@@ -31,6 +31,10 @@ public class TemplateTags {
 		 */
 		public static final String TABLE_NAME = "$TABLE_NAME";
 		/**
+		 * TABLE_CLASS TAG
+		 */
+		public static final String TABLE_CLASS = "$TABLE_CLASS";
+		/**
 		 * CLASS_NAME TAG
 		 */
 		public static final String CLASS_NAME = "CLASS_NAME";
@@ -93,6 +97,26 @@ public class TemplateTags {
 		 * TABLE_COLUMNS_QUERY_FUNCTIONS TAG
 		 */
 		public static final String TABLE_COLUMNS_CRUD_FUNCTIONS = "$TABLE_COLUMNS_CRUD_FUNCTIONS";
+
+		/**
+		 * COLUMN_NAME TAG
+		 */
+		public static final CharSequence COLUMN_NAME = "$COLUMN_NAME";
+
+		/**
+		 * ROW_ITEMS_FETCH_ASSOC_VALUES_STATEMENTS
+		 */
+		public static final CharSequence ROW_ITEMS_FETCH_ASSOC_VALUES_STATEMENTS = "$ROW_ITEMS_FETCH_ASSOC_VALUES_STATEMENTS";
+
+		/**
+		 * CLASS_INFO
+		 */
+		public static final String CLASS_INFO = "Info";
+
+		/**
+		 * TABLE_LOW_LEVEL_CRUD_CLASS
+		 */
+		public static final CharSequence TABLE_LOW_LEVEL_CRUD_CLASS = "$TABLE_LOW_LEVEL_CRUD_CLASS";;
 
 	}
 

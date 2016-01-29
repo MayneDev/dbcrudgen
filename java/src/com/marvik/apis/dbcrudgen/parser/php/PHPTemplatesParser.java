@@ -1,29 +1,25 @@
 package com.marvik.apis.dbcrudgen.parser.php;
 
-import java.util.Locale;
-
 import com.marvik.apis.dbcrudgen.core.platforms.php.grammar.PHPGrammar;
 import com.marvik.apis.dbcrudgen.core.templates.DbCrudGeneratorNativeTemplates;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
+import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
 import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.filenames.PHPProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.KeyColumn;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ForeignKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.UniqueKeys;
-import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
-import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPClassDatabaseConnectionTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPClassDatabaseUtilsTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPHighLevelTableClassCrudTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPLowLevelTableClassCrudTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionColumnAccessorsTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionColumnsCrudTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionHighLevelFetchAssocGettersTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.statements.PHPStatementClassFileNameTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.variables.PHPVariablesDatabaseActionsTemplate;
 import com.marvik.apis.dbcrudgen.templates.sql.SQLTableFilenameTemplate;
@@ -262,26 +258,8 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * Replaces the class name tag with the actual class name
 	 */
 	private String addClassName(String tableCrudSQL, String tableName) {
-		String className = parseJavaBeansClassName(tableName);
+		String className = NativeUtils.toJavaBeansClass(tableName);
 		return tableCrudSQL.replace(TemplateTags.PHP.CLASS_NAME, className);
-	}
-
-	/**
-	 * Creates a java beans class name derived from the class name
-	 * 
-	 * @param tableName
-	 * @return
-	 */
-	public String parseJavaBeansClassName(String tableName) {
-		tableName = tableName.toLowerCase(Locale.getDefault());
-		if (tableName.length() <= 1) {
-			return tableName.toUpperCase(Locale.getDefault());
-		}
-		String firstChar = String.valueOf(tableName.charAt(0));
-		firstChar = firstChar.toUpperCase();
-
-		String otherChars = tableName.substring(1, tableName.length());
-		return firstChar + otherChars;
 	}
 
 	/**
@@ -289,6 +267,13 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 */
 	private String addTableName(String tableCrudSQL, String tableName) {
 		return tableCrudSQL.replace(TemplateTags.PHP.TABLE_NAME, tableName);
+	}
+
+	/**
+	 * Replaces the table name tag with the actual table name
+	 */
+	private String parseTableClassName(String template, String tableName) {
+		return template.replace(TemplateTags.PHP.TABLE_CLASS, tableName);
 	}
 
 	/**
@@ -429,9 +414,9 @@ public class PHPTemplatesParser extends TemplatesParser {
 	private String generatePrimaryKeyCrudFunctions(Table table) {
 
 		String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
-		
+
 		String primaryKeyColumnName = table.getPrimaryKey().getColumnName();
-		
+
 		String functionParams = "";
 		String functionParamsValues = "";
 		TableColumn[] tableColumns = table.getColumns();
@@ -446,7 +431,8 @@ public class PHPTemplatesParser extends TemplatesParser {
 				functionParamsValues += ",";
 			}
 		}
-		return parseColumnQueryFunction(primaryKeyColumnName, functionParams, functionParamsValues, columnsCrudTemplate);
+		return parseColumnQueryFunction(primaryKeyColumnName, functionParams, functionParamsValues,
+				columnsCrudTemplate);
 	}
 
 	/**
@@ -506,7 +492,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 	private String generateColumnCrudFunctions(PrimaryKey primaryKey, TableColumn tableColumn) {
 
 		String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
-		
+
 		String columnName = tableColumn.getColumnName();
 
 		String primaryKeyColumn = primaryKey.getColumnName();
@@ -543,7 +529,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * @param className
 	 * @return
 	 */
-	public String parsePHPClassFileName(String tablesCrudScriptsStorageDirectory, String className) {
+	public String parseTableCrudLowLevelScriptsFileName(String tablesCrudScriptsStorageDirectory, String className) {
 		String template = getPhpClassFileNameTemplate().getTemplate();
 		return parsePHPClassFileName(tablesCrudScriptsStorageDirectory, className, template);
 	}
@@ -614,4 +600,102 @@ public class PHPTemplatesParser extends TemplatesParser {
 				.replace(DatabaseConnection.DATABASE_NAME, projectDatabaseConnectionProperties.getDatabaseName())
 				.replace(DatabaseConnection.DATABASE_CONNECTION_INC_FILE, databaseConnectionScriptFilePath);
 	}
+
+	public String parseTableCrudHighLevelScripts(String tablesCrudHighLevelScriptsStorageDirectory, String className) {
+		String fileName = tablesCrudHighLevelScriptsStorageDirectory + className
+				+ PHPProjectFileNames.PHP_FILE_EXTENSION;
+		return fileName;
+	}
+
+	/**
+	 * Create table high level crud scripts
+	 * 
+	 * @param phpProjectConfiguration
+	 * 
+	 * @param table
+	 * @return high level crud script
+	 */
+	public String getTableHighLevelCrud(PHPProjectConfiguration phpProjectConfiguration, Table table) {
+
+		String tablesCrudLowLevelScriptsStorageDirectory = phpProjectConfiguration
+				.getLowLevelCrudScriptsStorageDirectory();
+
+		String tableName = table.getTableName();
+
+		String template = new PHPHighLevelTableClassCrudTemplate().getTemplate();
+
+		// add class name
+		String className = NativeUtils.toJavaBeansClass(tableName) + TemplateTags.PHP.CLASS_INFO;
+		template = parsePHPHighLevelTableClassName(template, className);
+
+		// Add low level table crud include statement
+		String lowLevelTableCrudFileName = NativeUtils.toJavaBeansClass(tableName)
+				+ PHPProjectFileNames.PHP_CLASS_EXTENSION;
+		String lowLevelClassPath = (tablesCrudLowLevelScriptsStorageDirectory + lowLevelTableCrudFileName);
+		template = parsePHPLowLevelTableClassInclude(template, lowLevelClassPath);
+
+		String columnFetchAssocFunctions = "";
+		for (TableColumn tableColumn : table.getColumns()) {
+			columnFetchAssocFunctions += createTableColumnHighLevelFetchAssocFunctions(tableColumn, tableName);
+		}
+
+		// Add the fetch assoc function to the template
+		template = parseColumnFetchAssocFunctions(template, columnFetchAssocFunctions);
+
+		// Add the table name to the
+		template = addTableName(template, tableName);
+
+		// Add table class name
+		template = parseTableClassName(template, NativeUtils.toJavaBeansClass(tableName));
+
+		return template;
+	}
+
+	/**
+	 * Add Low level table class include
+	 * 
+	 * @param template
+	 * @param lowLevelClassPath
+	 * @return
+	 */
+	private String parsePHPLowLevelTableClassInclude(String template, String lowLevelClassPath) {
+		return template.replace(TemplateTags.PHP.TABLE_LOW_LEVEL_CRUD_CLASS, lowLevelClassPath);
+	}
+
+	/**
+	 * {@link PHPCrudCreator#parsePHPHighLevelTableClassName} Parses the php
+	 * high level table class name
+	 * 
+	 * @param template
+	 * @param className
+	 * @return
+	 */
+	private String parsePHPHighLevelTableClassName(String template, String className) {
+		return template.replace(TemplateTags.PHP.CLASS_NAME, className);
+	}
+
+	/**
+	 * 
+	 * @param template
+	 * @param columnFetchAssocFunctions
+	 * @return Template with appended fetch assoc functions
+	 */
+	private String parseColumnFetchAssocFunctions(String template, String columnFetchAssocFunctions) {
+		return template.replace(TemplateTags.PHP.ROW_ITEMS_FETCH_ASSOC_VALUES_STATEMENTS, columnFetchAssocFunctions);
+	}
+
+	/**
+	 * Create table column high level fetch assoc functions
+	 * 
+	 * @param tableColumn
+	 * @param tableName
+	 * @return the table column high level fetch assoc funcions
+	 */
+	private String createTableColumnHighLevelFetchAssocFunctions(TableColumn tableColumn, String tableName) {
+		String template = new PHPFunctionHighLevelFetchAssocGettersTemplate().getTemplate();
+		String columnName = tableColumn.getColumnName().trim();
+		return template.replace(TemplateTags.PHP.TABLE_NAME, tableName).replace(TemplateTags.PHP.COLUMN_NAME,
+				columnName);
+	}
+
 }

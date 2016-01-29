@@ -61,8 +61,10 @@ public class Main {
 
 		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration("where_there_is_no_doc");
 		phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\where_there_is_no_doc\\");
-		phpProjectConfiguration.setProjectCRUDScriptsStorageDirectory(
+		phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
 				"C:\\xampp\\htdocs\\where_there_is_no_doc\\scripts\\php\\database\\crud\\");
+		phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
+				"C:\\xampp\\htdocs\\where_there_is_no_doc\\scripts\\php\\database\\modules\\");
 		phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
 				"C:\\xampp\\htdocs\\where_there_is_no_doc\\scripts\\php\\database\\core-apis\\");
 		phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(

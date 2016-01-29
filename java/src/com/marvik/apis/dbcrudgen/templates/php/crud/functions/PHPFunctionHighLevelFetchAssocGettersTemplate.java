@@ -38,6 +38,6 @@ public class PHPFunctionHighLevelFetchAssocGettersTemplate extends PHPCrudTempla
 	@Override
 	public String getTemplateFilePath() {
 
-		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_CLASS_TABLE_CRUD_LOW_LEVEL_TEMPLATE_FILE_PATH;
+		return TemplatesFilePath.PHPTemplatesFilePaths.PHP_FUNCTION_HIGH_LEVEL_FETCH_ASSOC_DATA_GETTERS;
 	}
 }
