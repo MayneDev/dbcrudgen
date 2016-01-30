@@ -1,2 +1,2 @@
 case $TABLE_URI_MATCHER_CODE:
-     return Uri.parse(uri.toString() + String.format("%f",getSqLiteDatabase().insert($TABLE_DEFINITION_LINK, null, values)));
+     return Uri.parse(uri.toString() + getSqLiteDatabase().insert($TABLE_DEFINITION_LINK, null, values));

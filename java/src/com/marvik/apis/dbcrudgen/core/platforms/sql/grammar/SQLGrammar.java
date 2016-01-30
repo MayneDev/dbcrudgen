@@ -30,5 +30,10 @@ public class SQLGrammar {
 		 * OR
 		 */
 		public static final String OR = " OR ";
+
+		/**
+		 * AUTO_INCREMENT
+		 */
+		public static final String AUTO_INCREMENT = " AUTO_INCREMENT " ;
 	}
 }

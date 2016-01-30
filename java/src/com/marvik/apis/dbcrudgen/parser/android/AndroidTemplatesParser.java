@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
+import com.marvik.apis.dbcrudgen.natives.syntax.Syntax.PrintingChars;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
@@ -617,7 +618,8 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		// Add primary key column as the last
 		if (table.getPrimaryKey() != null) {
 			PrimaryKey primaryKey = table.getPrimaryKey();
-			allTableColumns.add(new TableColumn(primaryKey.getColumnName(), primaryKey.getDataType()));
+			String primaryKeyColumn = primaryKey.getColumnName();
+			allTableColumns.add(new TableColumn( primaryKeyColumn, primaryKey.getDataType()));
 		}
 
 		for (TableColumn tableColumn : tableColumns) {

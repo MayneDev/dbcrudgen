@@ -1,13 +1,17 @@
 package com.marvik.apis.dbcrudgen.parser.android.tableschemas;
 
+import com.marvik.apis.dbcrudgen.core.platforms.sql.grammar.SQLGrammar;
+import com.marvik.apis.dbcrudgen.core.platforms.sqlite.grammar.SQLiteGrammar;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.natives.Natives;
+import com.marvik.apis.dbcrudgen.natives.syntax.Syntax.PrintingChars;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
+import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
@@ -50,7 +54,7 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		databaseTablesTemplate = parseTablesClassPackageName(databaseTablesTemplate, tablesClassPackageName);
 
 		// Add content provider import
-		databaseTablesTemplate = parseContentProviderImportStatements(androidContentProviderConfiguration,packageName,
+		databaseTablesTemplate = parseContentProviderImportStatements(androidContentProviderConfiguration, packageName,
 				databaseTablesTemplate);
 
 		// Add all the tables SQL
@@ -89,10 +93,11 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 
 	// Add content provider import
 	private String parseContentProviderImportStatements(
-			AndroidContentProviderConfiguration androidContentProviderConfiguration,
-			String packageName,String databaseTablestemplate) {
-		
-		return parseContentProviderClassImport(androidContentProviderConfiguration,packageName, databaseTablestemplate);
+			AndroidContentProviderConfiguration androidContentProviderConfiguration, String packageName,
+			String databaseTablestemplate) {
+
+		return parseContentProviderClassImport(androidContentProviderConfiguration, packageName,
+				databaseTablestemplate);
 	}
 
 	// Adds a valid package name to the the tables class that holds all the
@@ -126,8 +131,8 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		tableSchema = parseTableName(tableSchema, table.getTableName());
 
 		// Add Content Uri
-		tableSchema = parseTableContentUri(androidProjectConfiguration.getAndroidContentProviderConfiguration(),androidProjectConfiguration.getPackageName(),
-				tableSchema);
+		tableSchema = parseTableContentUri(androidProjectConfiguration.getAndroidContentProviderConfiguration(),
+				androidProjectConfiguration.getPackageName(), tableSchema);
 
 		// Add Table TableColumn
 		String tableColumnsVariableTemplate = getAndroidVariableSQLTableColumnTemplate().getTemplate();
@@ -138,8 +143,31 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		String tableSQL = generateTableSQL(table);
 		tableSchema = parseTableSQL(tableSchema, tableSQL);
 
+		// Fix Known Bugs:
+		tableSchema = parseAndroidNativeSQL(tableSchema);
+
 		return tableSchema;
 
+	}
+
+	/**
+	 * This method fixes known bugs in transforming native SQL into Android
+	 * Native SQL
+	 * 
+	 * @param tableSchema
+	 * @return android native sql
+	 */
+	private String parseAndroidNativeSQL(String tableSchema) {
+
+		String autoincrement = SQLiteGrammar.Keywords.AUTOINCREMENT;
+		String auto_increment = SQLGrammar.Keywords.AUTO_INCREMENT;
+		
+		// Replace AUTO_INCREMENT with AUTOINCREMENT;
+		
+		tableSchema = tableSchema.replace(auto_increment, autoincrement);
+		tableSchema = tableSchema.replace(auto_increment.toLowerCase(), autoincrement.toLowerCase());
+
+		return tableSchema;
 	}
 
 	private String generateTableSQL(Table table) {
@@ -151,17 +179,23 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 
 		String tableColumns = "";
 
-		TableColumn[] columns = table.getColumns();
+		TableColumn[] columns = getTableColumnsAll(table);
+
 		for (int i = 0; i < columns.length; i++) {
+
+			DataType dataType = columns[i].getDataType();
 			String columnName = columns[i].getColumnName();
-			String dataType = columns[i].getDataType().getDataType();
+			String _datatype = dataType.getDataType();
+			String constraints = dataType.getConstraints().getConstraint();
+			String qualifiedColumnName = _datatype + PrintingChars.SPACE + constraints;
+
 			String tableColumnStatementTemplate = getAndroidStatementSQLTableColumnStatementTemplate().getTemplate();
 
 			boolean isLastColumn = (i == columns.length - 1);
 			tableColumnStatementTemplate = parseTableColumnsAndDataTypes(tableColumnStatementTemplate, columnName,
-					dataType, isLastColumn);
+					qualifiedColumnName, isLastColumn);
 
-			tableColumns += Natives.Math.ADD +tableColumnStatementTemplate;
+			tableColumns += Natives.Math.ADD + tableColumnStatementTemplate;
 
 		}
 
@@ -196,17 +230,20 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 	}
 
 	// Add Content Uri
-	private String parseTableContentUri(AndroidContentProviderConfiguration androidContentProviderConfiguration,String packageName,
-			String tableSchema) {
-		return parseContentProviderClassImport(androidContentProviderConfiguration,packageName, tableSchema);
+	private String parseTableContentUri(AndroidContentProviderConfiguration androidContentProviderConfiguration,
+			String packageName, String tableSchema) {
+		return parseContentProviderClassImport(androidContentProviderConfiguration, packageName, tableSchema);
 	}
 
 	// Add a content provider class import
 	private String parseContentProviderClassImport(
-			AndroidContentProviderConfiguration androidContentProviderConfiguration,String packageName, String template) {
-		String contentProviderPackage = androidContentProviderConfiguration.getProviderConfiguration().getContentProviderPackage();
-		contentProviderPackage = packageName + NativeTemplateTags.DOT +contentProviderPackage;
-		String contentProviderClass = androidContentProviderConfiguration.getProviderConfiguration().getContentProviderClass();
+			AndroidContentProviderConfiguration androidContentProviderConfiguration, String packageName,
+			String template) {
+		String contentProviderPackage = androidContentProviderConfiguration.getProviderConfiguration()
+				.getContentProviderPackage();
+		contentProviderPackage = packageName + NativeTemplateTags.DOT + contentProviderPackage;
+		String contentProviderClass = androidContentProviderConfiguration.getProviderConfiguration()
+				.getContentProviderClass();
 
 		// Remove back slashes to make a valid package name
 		contentProviderPackage = contentProviderPackage.replace(NativeUtils.getFileSeparator(),
@@ -242,8 +279,8 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 			String columnName = columns[i].getColumnName();
 			columnVariables += parseColumnVariables(tableColumnsVariableTemplate, columnName);
 		}
-		
-		//Dont forget to Add primary key column and other key columns
+
+		// Dont forget to Add primary key column and other key columns
 		columnVariables += parseColumnVariables(tableColumnsVariableTemplate, table.getPrimaryKey().getColumnName());
 		return columnVariables;
 	}

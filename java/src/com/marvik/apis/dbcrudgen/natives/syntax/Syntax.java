@@ -25,6 +25,11 @@ public class Syntax {
 		 */
 		public static final String ESCAPED_DOUBLE_QUOTES = "\"";
 
+		/**
+		 * SPACE
+		 */
+		public static final String SPACE = " ";
+
 	}
 
 	/**

@@ -21,8 +21,8 @@ import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 
 public class Main {
 	public static void main(String[] args) {
-		//testAndroidCrudGenerator();
-		testPHPCrudGenerator();
+		testAndroidCrudGenerator();
+		//testPHPCrudGenerator();
 	}
 
 	private static void testAndroidCrudGenerator() {
@@ -119,23 +119,23 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("sickness", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_info", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_info", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_causes", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_causes", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_signs", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_signs", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_treatment_precautions", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_treatment_precautions", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_caution", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_caution", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_note", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_note", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -155,23 +155,23 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("sickness", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_info", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_info", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_causes", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_causes", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_signs", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_signs", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_treatment_precautions", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_treatment_precautions", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_caution", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_caution", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sickness_note", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("sickness_note", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -191,11 +191,11 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("family_planning_method", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("family_planning_method", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList.add(
-				new TableColumn("family_planning_method_information", new DataType("text", new Constraints("text "))));
+				new TableColumn("family_planning_method_information", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("method_precautions", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("method_precautions", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -215,19 +215,19 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("genital_problem", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("genital_problem", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("genital_problem_information", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("genital_problem_information", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("genital_problem_problems", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("genital_problem_problems", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("genital_problem_signs", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("genital_problem_signs", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("genital_problem_treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("genital_problem_treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("genital_problem_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("genital_problem_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("genital_problem_caution", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("genital_problem_caution", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -246,15 +246,15 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("problem", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("problem", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("problem_information", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("problem_information", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("problem_treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("problem_treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("problem_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("problem_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("problem_caution", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("problem_caution", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -274,17 +274,17 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("eye_problem", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("eye_problem", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("eye_problem_info", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("eye_problem_info", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("eye_problem_signs", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("eye_problem_signs", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("eye_problem_treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("eye_problem_treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("eye_problem_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("eye_problem_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("eye_problem_warning", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("eye_problem_warning", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -303,15 +303,15 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("skin_problem", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("skin_problem", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("skin_problem_information", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("skin_problem_information", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("skin_problem_caution", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("skin_problem_caution", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -330,25 +330,25 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("common_sickness", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_information", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_information", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_causes", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_causes", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_signs", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_signs", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_variants", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_variants", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_medicine", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_medicine", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_caution", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_caution", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("common_sickness_note", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("common_sickness_note", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -367,9 +367,9 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("immunization", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("immunization", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList.add(
-				new TableColumn("immunization_information", new DataType("text", new Constraints("text not null"))));
+				new TableColumn("immunization_information", new DataType("text", new Constraints("not null"))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -387,19 +387,19 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList.add(new TableColumn("worm_and_intestinal_parasite",
-				new DataType("text", new Constraints("text not null"))));
+				new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList.add(new TableColumn("worm_and_intestinal_parasite_information",
-				new DataType("text", new Constraints("text "))));
+				new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("infection_signs", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("infection_signs", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("transmission", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("transmission", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_effect", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("health_effect", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("treatment_and_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("treatment_and_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList.add(new TableColumn("worm_and_intestinal_parasite_caution",
-				new DataType("text", new Constraints("text "))));
+				new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -419,23 +419,23 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_problem", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("health_problem", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList.add(
-				new TableColumn("health_problem_information", new DataType("text", new Constraints("text not null"))));
+				new TableColumn("health_problem_information", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_problem_signs", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("health_problem_signs", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_problem_signs_advanced", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("health_problem_signs_advanced", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_problem_treatment", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("health_problem_treatment", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_problem_prevention", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("health_problem_prevention", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_problem_caution", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("health_problem_caution", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("health_problem_note", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("health_problem_note", new DataType("text", new Constraints(""))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("special_diet", new DataType("text", new Constraints("text "))));
+				.add(new TableColumn("special_diet", new DataType("text", new Constraints(""))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -455,9 +455,9 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("item_title", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("item_title", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("item_description", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("item_description", new DataType("text", new Constraints("not null"))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -476,9 +476,9 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("medicine", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("medicine", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("misuse", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("misuse", new DataType("text", new Constraints("not null"))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -498,11 +498,11 @@ public class Main {
 
 		List<TableColumn> takingCareOfSickPersonColumnList = new ArrayList<TableColumn>();
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("care_item", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("care_item", new DataType("text", new Constraints("not null"))));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("sick_person_care", new DataType("text", new Constraints("text"))));
+				.add(new TableColumn("sick_person_care", new DataType("text", new Constraints())));
 		takingCareOfSickPersonColumnList
-				.add(new TableColumn("very_sick_person_care", new DataType("text", new Constraints("text"))));
+				.add(new TableColumn("very_sick_person_care", new DataType("text", new Constraints())));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[takingCareOfSickPersonColumnList.size()];
 
@@ -526,9 +526,9 @@ public class Main {
 
 		List<TableColumn> examiningSickPersonColumnList = new ArrayList<TableColumn>();
 		examiningSickPersonColumnList
-				.add(new TableColumn("examination_title", new DataType("text", new Constraints("text not null"))));
+				.add(new TableColumn("examination_title", new DataType("text", new Constraints("not null"))));
 		examiningSickPersonColumnList.add(
-				new TableColumn("examination_description", new DataType("text", new Constraints("text not null"))));
+				new TableColumn("examination_description", new DataType("text", new Constraints("not null"))));
 
 		TableColumn[] examiningSickPersonColumns = new TableColumn[examiningSickPersonColumnList.size()];
 
@@ -551,7 +551,7 @@ public class Main {
 	private static void addTableFirstAids(List<Table> tablesList) {
 		List<TableColumn> firstAidColumnList = new ArrayList<TableColumn>();
 		firstAidColumnList
-				.add(new TableColumn("ailment", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+				.add(new TableColumn("ailment", new DataType("varchar", new Constraints(" (128) NOT NULL"))));
 		firstAidColumnList.add(new TableColumn("ailment_information", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new TableColumn("ailment_causes", new DataType("text", new Constraints())));
 		firstAidColumnList.add(new TableColumn("ailment_prevention", new DataType("text", new Constraints())));
@@ -589,7 +589,7 @@ public class Main {
 	private static void addTableFirstAidsCategories(List<Table> tablesList) {
 		List<TableColumn> firstAidCategoriesColumnList = new ArrayList<TableColumn>();
 		firstAidCategoriesColumnList.add(
-				new TableColumn("category_name", new DataType("varchar", new Constraints("varchar(128) NOT NULL"))));
+				new TableColumn("category_name", new DataType("varchar", new Constraints("(128) NOT NULL"))));
 
 		TableColumn[] firstAidColumns = new TableColumn[firstAidCategoriesColumnList.size()];
 

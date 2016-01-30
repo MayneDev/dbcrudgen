@@ -32,7 +32,7 @@ import $TABLE_MODEL_CLASS;
 
         @Override
         public Uri insert(ContentValues values) {
-          return  Uri.parse(getUri().toString() + String.format("%d",getContext().getContentResolver().insert(getUri(), values)));
+          return  getContext().getContentResolver().insert(getUri(), values);
         }
 
         @Override

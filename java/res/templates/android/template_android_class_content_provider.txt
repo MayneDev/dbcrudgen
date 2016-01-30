@@ -6,6 +6,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import $SQLITE_OPENHELPER_CLASS;
 import $DATABASE_TABLES_CLASS;
@@ -49,6 +50,8 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
         
         sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getReadableDatabase();
 
+		Log.i("QUERY",uri.toString());
+        
         switch (uriMatcher.match(uri)) {
         
          	$TABLES_ROWS_QUERY_STATEMENTS
@@ -70,6 +73,8 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
         
         sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getWritableDatabase();
         
+        Log.i("INSERT",uri.toString());
+        
         switch (uriMatcher.match(uri)) {
             
             $TABLES_ROWS_INSERT_STATEMENTS
@@ -81,7 +86,11 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
     
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        
         sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getWritableDatabase();
+        
+        Log.i("DELETE",uri.toString());
+        
         switch (uriMatcher.match(uri)) {
             
             $TABLES_ROWS_DELETE_STATEMENTS
@@ -94,6 +103,8 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         
         sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getWritableDatabase();
+        
+        Log.i("UPDATE",uri.toString());
         
         switch (uriMatcher.match(uri)) {
             
