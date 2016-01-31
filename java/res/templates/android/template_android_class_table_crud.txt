@@ -141,8 +141,8 @@ import $TABLE_MODEL_CLASS;
         }
         
         /**
-        * $DATABASE_TABLE_CLASS#get$TABLE_MODEL_INFO_CLASSAll
-        * Returns a list of all the items in the table
+        * $DATABASE_TABLE_CLASS#search$TABLE_MODEL_INFO_CLASS
+        * Returns a list of all the items in the table that match the query
         *
         * @return List<$TABLE_MODEL_INFO_CLASS>
         */
@@ -170,6 +170,41 @@ import $TABLE_MODEL_CLASS;
             	$CURSOR_ITEMS_GETTER_METHODS
             	
             	$TABLE_MODEL_OBJECT.add(new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS));
+            }
+            
+            return $TABLE_MODEL_OBJECT;
+        }
+                
+        /**
+        * $DATABASE_TABLE_CLASS#get$TABLE_MODEL_INFO_CLASS
+        * Returns an object of queried row in the table
+        *
+        * @return $TABLE_MODEL_INFO_CLASS
+        */
+        public $TABLE_MODEL_INFO_CLASS get$TABLE_MODEL_INFO_CLASS($PRIMARY_KEY_DATATYPE _$PRIMARY_KEY_OBJECT) {
+        	
+        	String selection = $COLUMN_REFERENCE +"='" +String.valueOf(_$PRIMARY_KEY_OBJECT) +"'";
+        	
+        	Cursor cursor = query$DATABASE_TABLE_CLASS(null,selection,null,null);
+        	
+        	int rowsCount = 0;
+        	
+        	if(cursor!= null){
+        		rowsCount = cursor.getCount();
+        	}
+			
+			$TABLE_MODEL_INFO_CLASS $TABLE_MODEL_OBJECT =  null;
+			
+			//if cursor does not have any items
+			if(rowsCount<1){
+				return $TABLE_MODEL_OBJECT;
+			}
+            
+            for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+            
+            	$CURSOR_ITEMS_GETTER_METHODS
+            	
+            	$TABLE_MODEL_OBJECT = new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS);
             }
             
             return $TABLE_MODEL_OBJECT;

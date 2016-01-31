@@ -5,6 +5,7 @@ import com.marvik.apis.dbcrudgen.core.platforms.java.object.accessibility.JavaOb
 import com.marvik.apis.dbcrudgen.core.platforms.sql.grammar.SQLGrammar;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.natives.syntax.Syntax;
+import com.marvik.apis.dbcrudgen.natives.syntax.Syntax.PrintingChars;
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
@@ -63,7 +64,61 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		// MISSING THIS --> POOR PROTOTYPE
 		tableCrudTemplate = prepareTableModelClassParametersInQueryAndSearchMethods(tableCrudTemplate, table);
 
+		// add table row query method
+		tableCrudTemplate = prepareTableRowQueryMethod(tableCrudTemplate, table);
+
 		return tableCrudTemplate;
+	}
+
+	/**
+	 * This method adds the method used to query a specific row from a table
+	 * using the rows primary key
+	 * 
+	 * @param tableCrudTemplate
+	 * @param table
+	 * @return
+	 */
+	private String prepareTableRowQueryMethod(String tableCrudTemplate, Table table) {
+
+		// Add primary key parameters in the query method
+		tableCrudTemplate = parsePrimaryKeyDatatypeAndParameters(tableCrudTemplate, table);
+
+		// Add primary key selection statement
+		tableCrudTemplate = parsePrimaryKeySelectionStatement(tableCrudTemplate, table);
+
+		return tableCrudTemplate;
+	}
+
+	/**
+	 * 
+	 * Add primary key selection statement
+	 * 
+	 * @param tableCrudTemplate
+	 * @param table
+	 * @return
+	 */
+	private String parsePrimaryKeySelectionStatement(String tableCrudTemplate, Table table) {
+		String primaryKeyReference = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME 
+				+PrintingChars.DOT + NativeUtils.toJavaBeansClass(table.getTableName()) 
+				+PrintingChars.DOT + table.getPrimaryKey().getColumnName().toUpperCase();
+		return tableCrudTemplate.replace(TemplateTags.Android.COLUMN_REFERENCE,
+				primaryKeyReference);
+	}
+
+	/**
+	 * Adds the primary key datatype and object to the method used to fetch a
+	 * row from the database
+	 * 
+	 * @param tableCrudTemplate
+	 * @param table
+	 * @return
+	 */
+	private String parsePrimaryKeyDatatypeAndParameters(String tableCrudTemplate, Table table) {
+		String primaryKeyObject = table.getPrimaryKey().getColumnName();
+		String primaryKeyDatatype = table.getPrimaryKey().getDataType().getDataType();
+		String primaryKeyJavaDatatype = getAndroidObjectDataType(primaryKeyDatatype);
+		return tableCrudTemplate.replace(TemplateTags.Android.PRIMARY_KEY_DATATYPE, primaryKeyJavaDatatype)
+				.replace(TemplateTags.Android.PRIMARY_KEY_OBJECT, primaryKeyObject);
 	}
 
 	private String prepareTableModelClassParametersInQueryAndSearchMethods(String tableCrudTemplate, Table table) {

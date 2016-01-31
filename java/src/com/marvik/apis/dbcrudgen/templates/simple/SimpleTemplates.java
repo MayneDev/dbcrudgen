@@ -40,11 +40,21 @@ public class SimpleTemplates {
 		 * ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT
 		 */
 		public static final String ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT = "float $COLUMN_OBJECT = cursor.getFloat(cursor.getColumnIndex($TABLES_SCHEMAS_CLASS.$TABLE_NAME.$COLUMN_NAME));";
-		
+
 		/**
 		 * ANDROID_DATABASE_SQL_SEARCH_SELECTION_TEMPLATE
 		 */
 		public static final String ANDROID_DATABASE_SQL_SEARCH_SELECTION_TEMPLATE = " $TABLES_SCHEMAS_CLASS.$TABLE_NAME.$COLUMN_NAME +\" LIKE '%\"+searchKey+\"%'\" ";
+
+		/**
+		 * PRIMARY_KEY_OBJECT
+		 */
+		public static final String PRIMARY_KEY_OBJECT = "_$PRIMARY_KEY_OBJECT";
+
+		/**
+		 * COLUMN_SELECTION_TEMPLATE
+		 */
+		public static final String COLUMN_SELECTION_TEMPLATE = "$COLUMN_REFERENCE +\"='\" +String.valueOf($PRIMARY_KEY_OBJECT) +\"'\" ";
 	}
 
 	public static final class Java {

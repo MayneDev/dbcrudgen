@@ -491,6 +491,26 @@ public class TemplateTags {
 		 */
 		public static final CharSequence TABLE_INFO_CLASS = "$TABLE_INFO_CLASS";
 
+		/**
+		 * PRIMARY_KEY_DATATYPE
+		 */
+		public static final CharSequence PRIMARY_KEY_DATATYPE = "$PRIMARY_KEY_DATATYPE";
+
+		/**
+		 * PRIMARY_KEY_OBJECT
+		 */
+		public static final CharSequence PRIMARY_KEY_OBJECT = "$PRIMARY_KEY_OBJECT";
+
+		/**
+		 * ANDROID_SQL_ROW_SELECTION_STATEMENT
+		 */
+		public static final CharSequence ANDROID_SQL_ROW_SELECTION_STATEMENT = "$ANDROID_SQL_ROW_SELECTION_STATEMENT";
+
+		/**
+		 * COLUMN_REFERENCE
+		 */
+		public static final CharSequence COLUMN_REFERENCE = "$COLUMN_REFERENCE";
+
 	}
 
 	public static class Java {

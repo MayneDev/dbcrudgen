@@ -30,6 +30,16 @@ public class Syntax {
 		 */
 		public static final String SPACE = " ";
 
+		/**
+		 * FULLSTOP
+		 */
+		public static final String FULLSTOP = ".";
+
+		/**
+		 * DOT
+		 */
+		public static final String DOT = FULLSTOP;
+
 	}
 
 	/**
