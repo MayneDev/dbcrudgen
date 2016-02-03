@@ -162,13 +162,14 @@ public class AndroidCRUDCreator extends CrudCreator {
 		// create transactions manager class
 		TransactionManagerConfiguration transactionManagerConfiguration = getAndroidContentProviderConfiguration()
 				.getTransactionManagerConfiguration();
-		createTransactionManagerClass(packageName,transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
+		createTransactionManagerClass(packageName, transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
 				tablesCRUDStorageLocation, database.getTables());
 	}
 
 	// create transactions manager class
-	private void createTransactionManagerClass(String packageName, TransactionManagerConfiguration transactionManagerConfiguration,
-			String projectStorageDirectory, String tablesCRUDStorageLocation, Table[] tables) {
+	private void createTransactionManagerClass(String packageName,
+			TransactionManagerConfiguration transactionManagerConfiguration, String projectStorageDirectory,
+			String tablesCRUDStorageLocation, Table[] tables) {
 
 		String transactionManagerPackage = transactionManagerConfiguration.getTransactionManagerPackage();
 		String transactionManagerClass = transactionManagerConfiguration.getTransactionManagerClass();
@@ -178,25 +179,16 @@ public class AndroidCRUDCreator extends CrudCreator {
 		createDirectory(transactionManagerPackageLocation);
 
 		AndroidDatabaseTransactionsParser transactionsParser = new AndroidDatabaseTransactionsParser();
-		String transactionManagerSourceCode = transactionsParser.createSourceCode(packageName,transactionManagerPackage,
-				transactionManagerClass, tablesCRUDStorageLocation, tables);
+		String transactionManagerSourceCode = transactionsParser.createSourceCode(packageName,
+				transactionManagerPackage, transactionManagerClass, tablesCRUDStorageLocation, tables);
 
 		String customTransactionManageClass = transactionManagerConfiguration.getTransactionManagerClass();
-		
+
 		String transactionManagerSourceFile = projectStorageDirectory + NativeUtils.getFileSeparator()
 				+ transactionManagerPackage + NativeUtils.getFileSeparator() + customTransactionManageClass
 				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
-		
-		System.out.println(transactionManagerSourceFile);
-		
-		boolean createTransactionManagerSourceFile = createSourceFile(transactionManagerSourceFile,
-				transactionManagerSourceCode);
 
-		if (createTransactionManagerSourceFile) {
-
-			System.out.println(
-					"Created Custom TransactinManager class [" + customTransactionManageClass + " ] Source File");
-		}
+		createSourceFile(transactionManagerSourceFile, transactionManagerSourceCode);
 	}
 
 	// create tables model classes
@@ -226,12 +218,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 																									// name
 					table);
 
-			boolean createTableCRUDSourceFile = createSourceFile(tableModelSourceFile, tableModelSourceCode);
+			createSourceFile(tableModelSourceFile, tableModelSourceCode);
 
-			if (createTableCRUDSourceFile) {
-
-				System.out.println("Created " + tableClassName + " Model Info Source File");
-			}
 		}
 	}
 
@@ -257,11 +245,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 					+ tableCRUDPackage + NativeUtils.getFileSeparator() + tableClassName
 					+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
-			boolean createTableCRUDSourceFile = createSourceFile(tableCRUDSourceFile, tableCRUDSourceCode);
+			createSourceFile(tableCRUDSourceFile, tableCRUDSourceCode);
 
-			if (createTableCRUDSourceFile) {
-				System.out.println("Created " + tableClassName + " CRUD Source File");
-			}
 		}
 
 	}
@@ -284,12 +269,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 				+ abstractCrudOperationsSourceFile + AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 		// write source code to disk
-		boolean createAbstractCRUDOperationsSourceFile = createSourceFile(tablesAbstractCRUDOperationsSourceFile,
-				tablesAbstractCRUDOperationsSourceCode);
-
-		if (createAbstractCRUDOperationsSourceFile) {
-			System.out.println("Created Abstract CRUD Operations Source File");
-		}
+		createSourceFile(tablesAbstractCRUDOperationsSourceFile, tablesAbstractCRUDOperationsSourceCode);
 	}
 
 	// create SQLiteOpenHelper Subclass
@@ -312,12 +292,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
 		// write source code to disk
-		boolean createSQLiteOpenHelperSubclassSourceFile = createSourceFile(sQLiteOpenHelperSourceFile,
-				sqliteOpenHelperSubclassSourceCode);
-
-		if (createSQLiteOpenHelperSubclassSourceFile) {
-			System.out.println("Created SQLiteOpen Helper Source File");
-		}
+		createSourceFile(sQLiteOpenHelperSourceFile, sqliteOpenHelperSubclassSourceCode);
 	}
 
 	// Create the database content provider file and saves it on disk
@@ -337,12 +312,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 				+ contentProviderPackage + NativeUtils.getFileSeparator() + contentProviderClass
 				+ AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
-		boolean createContentProvidersSourceFile = createSourceFile(contentProviderSourceCodeFile,
-				contentProviderSourceCode);
-
-		if (createContentProvidersSourceFile) {
-			System.out.println("Created Content providers Source File");
-		}
+		createSourceFile(contentProviderSourceCodeFile, contentProviderSourceCode);
 	}
 
 	/**
@@ -365,12 +335,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String tablesSchemasAbsoluteSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
 				+ databaseTablesPackage + NativeUtils.getFileSeparator()
 				+ AndroidProjectFileNames.TABLE_SCHEMAS_FILE_NAME;
-		boolean createTablesSchemasSourceFile = createSourceFile(tablesSchemasAbsoluteSourceFile,
-				tablesSchemasSourceCode);
-
-		if (createTablesSchemasSourceFile) {
-			System.out.println("Created Tables Source File");
-		}
+		createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemasSourceCode);
 	}
 
 	/**

@@ -604,8 +604,4 @@ public class Main {
 
 		tablesList.add(new Table("firstaid_categories", firstAidColumns, tableSql, primaryKey, null, null));
 	}
-
-	private static void print(String string) {
-		System.err.println(string);
-	}
 }

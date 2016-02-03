@@ -500,6 +500,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		if (columnDatatype.equalsIgnoreCase("String")) {
 			return new AndroidMethodColumnsCrudDataTypeStringTemplate();
 		}
+		// String
+		if (columnDatatype.equalsIgnoreCase("VARCHAR")) {
+			return new AndroidMethodColumnsCrudDataTypeStringTemplate();
+		}
 
 		if (columnDatatype.equalsIgnoreCase("Class")) {
 			return new AndroidMethodColumnsCrudDataTypeGenericTemplate();
@@ -614,12 +618,12 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		TableColumn[] tableColumns = table.getColumns();
 
 		List<TableColumn> allTableColumns = new ArrayList<>();
-		
+
 		// Add primary key column as the last
 		if (table.getPrimaryKey() != null) {
 			PrimaryKey primaryKey = table.getPrimaryKey();
 			String primaryKeyColumn = primaryKey.getColumnName();
-			allTableColumns.add(new TableColumn( primaryKeyColumn, primaryKey.getDataType()));
+			allTableColumns.add(new TableColumn(primaryKeyColumn, primaryKey.getDataType()));
 		}
 
 		for (TableColumn tableColumn : tableColumns) {

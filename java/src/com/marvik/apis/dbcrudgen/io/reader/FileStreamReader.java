@@ -35,6 +35,13 @@ public final class FileStreamReader {
 	}
 
 	/**
+	 * Reads the contents of a file line by line and appends the new lines
+	 */
+	public final String readFile(String filePath, boolean addNewLines) throws IOException {
+		return readFile(new File(filePath), true);
+	}
+
+	/**
 	 * Reads the contents of a file and automatically skips new lines
 	 */
 	public final String readFile(File file) throws IOException {

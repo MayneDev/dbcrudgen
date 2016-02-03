@@ -38,6 +38,8 @@ public class FileStreamWriter {
 		osw.flush();
 		osw.close();
 		fos.close();
+		
+		System.out.println("Created file [" + file.getAbsolutePath() + "]");
 	}
 
 	/**

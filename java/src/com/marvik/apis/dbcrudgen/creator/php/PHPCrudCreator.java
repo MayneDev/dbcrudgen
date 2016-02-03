@@ -180,11 +180,8 @@ public class PHPCrudCreator extends CrudCreator {
 		String databaseUtilsScriptsFile = databaseUtilsScriptsStorageDirectory
 				+ PHPProjectFileNames.DATABASE_UTILS_SCRIPT_FILENAME;
 
-		if (!getFilesHandler().createByteWeighedFile(databaseUtilsScriptsFile, databaseUtilsScript)) {
-			System.out.println("Could not create File[" + databaseUtilsScriptsFile + "]");
-		} else {
-			System.out.println("File Successfully created [" + databaseUtilsScriptsFile + "]");
-		}
+		getFilesHandler().createByteWeighedFile(databaseUtilsScriptsFile, databaseUtilsScript);
+		
 
 	}
 
@@ -197,11 +194,7 @@ public class PHPCrudCreator extends CrudCreator {
 
 		String databaseConnectionScriptFile = getDatabaseConnectionScriptAbsoluteFilename();
 
-		if (!getFilesHandler().createByteWeighedFile(databaseConnectionScriptFile, template)) {
-			System.out.println("Could not create File[" + databaseConnectionScriptFile + "]");
-		} else {
-			System.out.println("File Successfully created [" + databaseConnectionScriptFile + "]");
-		}
+		getFilesHandler().createByteWeighedFile(databaseConnectionScriptFile, template);
 	}
 
 	/**
@@ -224,12 +217,7 @@ public class PHPCrudCreator extends CrudCreator {
 		String dataActionsFilename = getPhpProjectConfiguration().getPhpDatabaseAPIScriptsStorageDirectory()
 				+ PHPProjectFileNames.DATA_ACTIONS_SCRIPT_FILENAME;
 
-		if (!getFilesHandler().createByteWeighedFile(dataActionsFilename, template)) {
-			System.out.println("Could not create File[" + dataActionsFilename + "]");
-		} else {
-			System.out.println("File Successfully created [" + dataActionsFilename + "]");
-
-		}
+		getFilesHandler().createByteWeighedFile(dataActionsFilename, template);
 
 	}
 
@@ -254,19 +242,9 @@ public class PHPCrudCreator extends CrudCreator {
 
 		String sqlTableFileName = getPHPTemplatesParser().parseSQLFileName(tablesSQLScriptsStorageDirectory, tableName);
 
-		if (!getFilesHandler().createByteWeighedFile(phpClassFileName, tablesCrud)) {
-			System.out.println("Could not create File[" + phpClassFileName + "]");
-		} else {
-			System.out.println("File Successfully created [" + phpClassFileName + "]");
-		}
+		getFilesHandler().createByteWeighedFile(phpClassFileName, tablesCrud);
 
-		if (!getFilesHandler().createByteWeighedFile(sqlTableFileName, tableSQL)) {
-			System.out.println("Could not create File[" + sqlTableFileName + "]");
-		} else {
-
-			System.out.println("File Successfully created [" + sqlTableFileName + "]");
-
-		}
+		getFilesHandler().createByteWeighedFile(sqlTableFileName, tableSQL);
 
 	}
 
@@ -287,11 +265,7 @@ public class PHPCrudCreator extends CrudCreator {
 		String phpClassFileName = getPHPTemplatesParser()
 				.parseTableCrudHighLevelScripts(tablesCrudHighLevelScriptsStorageDirectory, className);
 
-		if (!getFilesHandler().createByteWeighedFile(phpClassFileName, tableHighLevelCrud)) {
-			System.out.println("Could not create File[" + phpClassFileName + "]");
-		} else {
-			System.out.println("File Successfully created [" + phpClassFileName + "]");
-		}
+		getFilesHandler().createByteWeighedFile(phpClassFileName, tableHighLevelCrud);
 
 	}
 

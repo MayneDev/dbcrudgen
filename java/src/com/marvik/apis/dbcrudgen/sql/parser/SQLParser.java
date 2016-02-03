@@ -42,8 +42,6 @@ public class SQLParser {
 	}
 
 	private String getDatabaseName(String sql) {
-		// TODO Auto-generated method stub
-
 		String databaseName = null;
 
 		String sqlDatabaseNameComment = "-- Database: `";
@@ -97,21 +95,16 @@ public class SQLParser {
 		return sqlStatement;
 	}
 
+	@SuppressWarnings("Returns Null")
 	private TableColumn[] getTableColumns(String sqlStatement) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	private String getTableName(String sqlStatement) {
-		// TODO Auto-generated method stub
 
 		int startOfTableName = sqlStatement.indexOf("`");
 		int endOfTableName = sqlStatement.indexOf("`", startOfTableName + 1);
-		print(sqlStatement.substring(startOfTableName, endOfTableName));
 		return sqlStatement.substring(startOfTableName, endOfTableName);
-	}
-
-	private void print(String string) {
-		System.err.println(string);
 	}
 }

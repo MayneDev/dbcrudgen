@@ -125,7 +125,7 @@ public class FilesHandler {
 		try {
 			// Write stream
 			writeStream(new File(filePath), fileData);
-
+			
 			// Compare written data on disk and passed data
 			return (new File(filePath)).exists() && readFile(filePath).contains(fileData);
 		} catch (IOException e) {
