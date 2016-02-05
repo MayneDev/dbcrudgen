@@ -117,7 +117,7 @@ public class PHPCrudCreator extends CrudCreator {
 	 * Database Scripts 3. Creates table specific CRUD Script
 	 */
 	public void createProject(Database database) {
-
+		
 		if (getProjectDatabaseConnectionProperties() == null) {
 			throw new NullPointerException("Project Database Connection Properties Cannot be null");
 		}

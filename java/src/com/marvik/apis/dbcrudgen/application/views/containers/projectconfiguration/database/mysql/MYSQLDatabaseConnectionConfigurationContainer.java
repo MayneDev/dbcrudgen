@@ -104,7 +104,7 @@ public class MYSQLDatabaseConnectionConfigurationContainer extends ProjectConfig
 		String selectedDatabase = lvDatabases.getSelectionModel().getSelectedItems().get(0);
 		List<String> tables;
 
-		tables = getTasksExecutor().getDatabaseTables(selectedDatabase);
+		tables = getTasksExecutor().getDatabaseTablesNames(selectedDatabase);
 
 		lvTables.getItems().addAll(tables);
 

@@ -74,9 +74,15 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 		mysqlDatabaseConfigWidget = getMYSQLDatabaseConfigView();
 		phpProjectConfigWidget.getChildren().add(mysqlDatabaseConfigWidget);
 
+		HorizontalLayout buttons = new HorizontalLayout();
+		Button setFields = new Button("Set Fields");
+		setFields.setOnAction(e -> setFieldsData());
+
 		createPHPSourceCode = new Button("Create Source Code");
 		createPHPSourceCode.setOnAction(e -> createPHPSourceCode());
-		phpProjectConfigWidget.getChildren().add(createPHPSourceCode);
+
+		buttons.getChildren().addAll(setFields, createPHPSourceCode);
+		phpProjectConfigWidget.getChildren().add(buttons);
 
 		this.getChildren().add(phpProjectConfigWidget);
 	}
@@ -228,15 +234,12 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 	 * Created the PHP Source code for the database
 	 */
 	private void createPHPSourceCode() {
-		
+
 		String databaseName = MainWindow.databaseName;
-		
+
 		TasksExecutor tasksExecutor = new TasksExecutor();
 		Database database = tasksExecutor.createDatabaseModel(databaseName);
-		
-		
-		tvDatabaseName.setText(databaseName);
-		
+				
 		if (tvLowLevelCrudScriptDir.getText().length() < 1) {
 			System.out.println("low level crud Cannot be empty");
 			return;
@@ -269,9 +272,6 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 			return;
 		}
 
-		
-		
-
 		String projectName = databaseName;
 		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(projectName);
 
@@ -301,7 +301,22 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 		PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
 		phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
 		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
-		//phpCrudCreator.createProject(database);
+		phpCrudCreator.createProject(database);
 	}
 
+	private void setFieldsData() {
+
+		String projectName = MainWindow.databaseName;
+
+		tvLowLevelCrudScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\low\\");
+		tvHighLevelCrudScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\high\\");
+		tvCorePHPDatabaseScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\core\\");
+		tvSQLScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\sql\\");
+
+		tvUserPassword.setText("");
+		tvDatabaseUser.setText("root");
+		tvDatabaseHost.setText("localhost");
+
+		tvDatabaseName.setText(projectName);
+	}
 }

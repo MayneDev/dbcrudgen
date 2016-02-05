@@ -4,6 +4,8 @@ import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ForeignKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.UniqueKeys;
+import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
+import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 
 /**
  * Table - Contains all the basic data of a typical MYSQL database table
@@ -200,6 +202,9 @@ public class Table {
 	 * @return the primaryKeyColumn
 	 */
 	public PrimaryKey getPrimaryKey() {
+		if(primaryKey == null){
+			return new PrimaryKey(tableName, new DataType("String", new Constraints()));
+		}
 		return primaryKey;
 	}
 

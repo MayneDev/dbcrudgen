@@ -414,13 +414,15 @@ public class PHPTemplatesParser extends TemplatesParser {
 	private String generatePrimaryKeyCrudFunctions(Table table) {
 
 		String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
-
+		
 		String primaryKeyColumnName = table.getPrimaryKey().getColumnName();
 
 		String functionParams = "";
 		String functionParamsValues = "";
-		TableColumn[] tableColumns = table.getColumns();
 
+		TableColumn[] tableColumns = table.getColumns();
+		System.out.println("table == null " + (table == null));
+		System.out.println("tables " +tableColumns.length);
 		for (int i = 0; i < tableColumns.length; i++) {
 			String columnName = tableColumns[i].getColumnName();
 			functionParams += "'" + columnName + "'";

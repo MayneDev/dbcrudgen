@@ -97,7 +97,8 @@ public class TasksExecutor {
 		try {
 			for (mysqlDatabases.first(); !mysqlDatabases.isAfterLast(); mysqlDatabases.next()) {
 				String databaseName = mysqlDatabases.getString(MYSQLQueries.ResultsKeys.ShowDatabases.KEY_DATABASE);
-				databases.add(new Database(databaseName, null));
+				Table[] databaseTables = createDatabaseTables(databaseName);
+				databases.add(new Database(databaseName,databaseTables ));
 			}
 		} catch (SQLException e) {
 
@@ -114,7 +115,7 @@ public class TasksExecutor {
 	 * @throws SocketException
 	 * @throws ConnectException
 	 */
-	public List<String> getDatabaseTables(String database) {
+	public List<String> getDatabaseTablesNames(String database) {
 
 		MainWindow.setSelectedDatabase(database);
 
@@ -193,8 +194,9 @@ public class TasksExecutor {
 	 * @return Database
 	 */
 	public Database createDatabaseModel(String databaseName) {
-
-		return new Database(databaseName, createDatabaseTables(databaseName));
+		Table[] tables = createDatabaseTables(databaseName);
+		
+		return new Database(databaseName, tables);
 	}
 
 	/**
@@ -204,7 +206,7 @@ public class TasksExecutor {
 	 * @return array of tables in a database
 	 */
 	private Table[] createDatabaseTables(String databaseName) {
-		List<String> databaseTables = getDatabaseTables(databaseName);
+		List<String> databaseTables = getDatabaseTablesNames(databaseName);
 		Table[] tables = new Table[databaseTables.size()];
 		for (int i = 0; i < databaseTables.size(); i++) {
 			tables[i] = getDatabaseTable(databaseTables.get(i), databaseName);
@@ -217,7 +219,7 @@ public class TasksExecutor {
 	 * @return
 	 */
 	private Table getDatabaseTable(String tableName, String databaseName) {
-		Table table = null;
+
 		String showTableColumsQuery = MYSQLQueries.MYSQL_QUERY_SHOW_TABLE_COLUMNS;
 		showTableColumsQuery = showTableColumsQuery.replace(MYSQLQueries.QueryTags.TABLE, tableName);
 		showTableColumsQuery = showTableColumsQuery.replace(MYSQLQueries.QueryTags.DATABASE, databaseName);
@@ -257,9 +259,8 @@ public class TasksExecutor {
 		for (int i = 0; i < lTableColumns.size(); i++) {
 			columns[i] = lTableColumns.get(i);
 		}
-		table = new Table(tableName, columns, getCreateTableSQL(tableName), primaryKey);
 
-		return table;
+		return new Table(tableName, columns, getCreateTableSQL(tableName), primaryKey);
 	}
 
 	/**

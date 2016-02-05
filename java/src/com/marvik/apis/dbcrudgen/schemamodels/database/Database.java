@@ -1,6 +1,5 @@
 package com.marvik.apis.dbcrudgen.schemamodels.database;
 
-import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 
 public class Database {
@@ -9,9 +8,9 @@ public class Database {
 	Table[] tables;
 
 	public Database(String databaseName, Table[] tables) {
-		super();
 		this.databaseName = databaseName;
 		this.tables = tables;
+		System.out.println("DATABASE TABLES LENGTH ->"+tables.length);
 	}
 
 	/**
