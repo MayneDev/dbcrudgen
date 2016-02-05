@@ -3,6 +3,15 @@ package com.marvik.apis.dbcrudgen.projects.android.configuration;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
 
+/**
+ * 
+ * AndroidProjectConfiguration
+ * 
+ * Used for setting up all the configuration for an android project
+ * 
+ * @author victor
+ *
+ */
 public class AndroidProjectConfiguration {
 
 	private String _javaFilesStorageLocation;
@@ -13,6 +22,14 @@ public class AndroidProjectConfiguration {
 	private String packageName;
 	private AndroidContentProviderConfiguration androidContentProviderConfiguration;
 
+	/**
+	 * Android Project Configuration
+	 * 
+	 * @param projectStorageDir
+	 * @param javaSrcDir
+	 * @param packageName
+	 * @param androidContentProviderConfiguration
+	 */
 	public AndroidProjectConfiguration(String projectStorageDir, String javaSrcDir, String packageName,
 			AndroidContentProviderConfiguration androidContentProviderConfiguration) {
 		this.androidContentProviderConfiguration = androidContentProviderConfiguration;
@@ -111,12 +128,14 @@ public class AndroidProjectConfiguration {
 	 */
 	private void _setProjectDefaultJavaFilesRootStorageLocation() {
 		String packageNameAsPath = NativeUtils.parsePackagePath(getPackageName());
-		_projectDefaultJavaFilesRootStorageLocation = _javaFilesStorageLocation + NativeUtils.getFileSeparator() + packageNameAsPath;
+		_projectDefaultJavaFilesRootStorageLocation = _javaFilesStorageLocation + NativeUtils.getFileSeparator()
+				+ packageNameAsPath;
 	}
+
 	/**
-	 * Returns the default path where java files are in the project This is usually
-	 * the project name storage path + java src folder + the project package
-	 * folder(which is generated from the package name
+	 * Returns the default path where java files are in the project This is
+	 * usually the project name storage path + java src folder + the project
+	 * package folder(which is generated from the package name
 	 */
 	public String _getProjectDefaultJavaFilesRootStorageLocation() {
 		return _projectDefaultJavaFilesRootStorageLocation;

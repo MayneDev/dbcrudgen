@@ -12,7 +12,7 @@ public class FilesHandler {
 	private FileStreamWriter fileStreamWriter;
 
 	/**
-	 * Perform various I/O functions 
+	 * Perform various I/O functions
 	 * 
 	 */
 	public FilesHandler() {
@@ -125,7 +125,7 @@ public class FilesHandler {
 		try {
 			// Write stream
 			writeStream(new File(filePath), fileData);
-			
+
 			// Compare written data on disk and passed data
 			return (new File(filePath)).exists() && readFile(filePath).contains(fileData);
 		} catch (IOException e) {
@@ -133,6 +133,20 @@ public class FilesHandler {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	/**
+	 * Gets all the files in a directory
+	 * 
+	 * @param directory
+	 * @return File Array
+	 */
+	public File[] getDirectoryFiles(String directory) {
+		File file = new File(directory);
+		if (file.isDirectory()) {
+			return file.listFiles();
+		}
+		return null;
 	}
 
 }

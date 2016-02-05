@@ -25,11 +25,22 @@ import $TABLE_MODEL_CLASS;
             return context;
         }
 
+		/**
+		* Return the Uri for this relation
+		* This URI is used for doing CRUD Operations
+		*/
         @Override
         public Uri getUri() {
             return $TABLE_DEFINITION_LINK.CONTENT_URI;
         }
 
+		/**
+        * $DATABASE_TABLE_CLASS#insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
+        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and inserts the data 
+        * as a new row in the table -> $TABLE_DEFINITION_LINK
+        *
+        * @return Uri of the inserted item
+        */
         @Override
         public Uri insert(ContentValues values) {
           return  getContext().getContentResolver().insert(getUri(), values);
@@ -40,11 +51,25 @@ import $TABLE_MODEL_CLASS;
             return getContext().getContentResolver().query(getUri(), projection, selection, selectionArgs, sortOrder);
         }
 
+		/**
+        * $DATABASE_TABLE_CLASS#update$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
+        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and updates the data 
+        * in the table -> $TABLE_DEFINITION_LINK if the selection matches
+        *
+        * @return the number of updated rows
+        */
         @Override
         public int update(ContentValues values, String selection, String[] selectionArgs) {
             return getContext().getContentResolver().update(getUri(), values, selection, selectionArgs);
         }
 
+		/**
+        * $DATABASE_TABLE_CLASS#delete$DATABASE_TABLE_CLASS
+        * uses the selection and deletes the data in the table -> $TABLE_DEFINITION_LINK
+        * if the selection matches
+        *
+        * @return the number of deleted rows
+        */
         @Override
         public int delete(String selection, String[] selectionArgs) {
             return getContext().getContentResolver().delete(getUri(), selection, selectionArgs);
@@ -172,6 +197,13 @@ import $TABLE_MODEL_CLASS;
             	$TABLE_MODEL_OBJECT.add(new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS));
             }
             
+            //Close cursor
+            if(cursor!= null){
+        		if(!cursor.isClosed()){
+        			cursor.close();
+        		}
+        	}
+        	
             return $TABLE_MODEL_OBJECT;
         }
                 
@@ -207,6 +239,13 @@ import $TABLE_MODEL_CLASS;
             	$TABLE_MODEL_OBJECT = new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS);
             }
             
+             //Close cursor
+            if(cursor!= null){
+        		if(!cursor.isClosed()){
+        			cursor.close();
+        		}
+        	}
+        	
             return $TABLE_MODEL_OBJECT;
         }
     }
