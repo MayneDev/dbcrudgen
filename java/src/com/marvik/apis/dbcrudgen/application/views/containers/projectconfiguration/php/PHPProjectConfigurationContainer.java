@@ -3,10 +3,18 @@
  */
 package com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.php;
 
+import com.foo.Main;
+import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.ProjectConfigurationContainer;
 import com.marvik.apis.dbcrudgen.application.views.layouts.HorizontalLayout;
 import com.marvik.apis.dbcrudgen.application.views.layouts.VerticalLayout;
+import com.marvik.apis.dbcrudgen.application.views.windows.MainWindow;
+import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
+import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
+import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
+import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,6 +28,8 @@ import javafx.scene.control.TextField;
  *
  */
 public class PHPProjectConfigurationContainer extends ProjectConfigurationContainer {
+
+	private Button createPHPSourceCode;
 
 	private VerticalLayout phpProjectConfigWidget;
 
@@ -39,7 +49,8 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 	public PHPProjectConfigurationContainer() {
 
 		// PHPProjectConfiguration
-		phpProjectConfigWidget = new VerticalLayout();
+		phpProjectConfigWidget = new VerticalLayout(true);
+		phpProjectConfigWidget.setPadding(new Insets(10));
 
 		phpProjectConfigWidget.getChildren().add(new Label("PHP Project Configuration"));
 
@@ -62,6 +73,10 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 		phpProjectConfigWidget.getChildren().add(new Label("MYSQL Database Config"));
 		mysqlDatabaseConfigWidget = getMYSQLDatabaseConfigView();
 		phpProjectConfigWidget.getChildren().add(mysqlDatabaseConfigWidget);
+
+		createPHPSourceCode = new Button("Create Source Code");
+		createPHPSourceCode.setOnAction(e -> createPHPSourceCode());
+		phpProjectConfigWidget.getChildren().add(createPHPSourceCode);
 
 		this.getChildren().add(phpProjectConfigWidget);
 	}
@@ -208,4 +223,85 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 
 		return layout;
 	}
+
+	/**
+	 * Created the PHP Source code for the database
+	 */
+	private void createPHPSourceCode() {
+		
+		String databaseName = MainWindow.databaseName;
+		
+		TasksExecutor tasksExecutor = new TasksExecutor();
+		Database database = tasksExecutor.createDatabaseModel(databaseName);
+		
+		
+		tvDatabaseName.setText(databaseName);
+		
+		if (tvLowLevelCrudScriptDir.getText().length() < 1) {
+			System.out.println("low level crud Cannot be empty");
+			return;
+		}
+		if (tvHighLevelCrudScriptDir.getText().length() < 1) {
+			System.out.println("high level Cannot be empty");
+			return;
+		}
+		if (tvSQLScriptDir.getText().length() < 1) {
+			System.out.println("sql script Cannot be empty");
+			return;
+		}
+		if (tvCorePHPDatabaseScriptDir.getText().length() < 1) {
+			System.out.println("core php Cannot be empty");
+			return;
+		}
+
+		if (tvDatabaseHost.getText().length() < 1) {
+			System.out.println("database host Cannot be empty");
+			return;
+		}
+
+		if (tvDatabaseUser.getText().length() < 1) {
+			System.out.println("database user Cannot be empty");
+			return;
+		}
+
+		if (tvDatabaseName.getText().length() < 1) {
+			System.out.println("Cannot be empty");
+			return;
+		}
+
+		
+		
+
+		String projectName = databaseName;
+		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(projectName);
+
+		String projectStorageDirectory = "C:\\xampp\\htdocs\\" + databaseName + "\\";
+		phpProjectConfiguration.setProjectStorageDirectory(projectStorageDirectory);
+
+		String lowLevelCrudScriptsStorageDirectory = tvLowLevelCrudScriptDir.getText();
+		phpProjectConfiguration
+				.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(lowLevelCrudScriptsStorageDirectory);
+
+		String highLevelCrudScriptsStorageDirectory = tvHighLevelCrudScriptDir.getText();
+		phpProjectConfiguration
+				.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(highLevelCrudScriptsStorageDirectory);
+
+		String phpDatabaseAPIScriptsStorageDirectory = tvCorePHPDatabaseScriptDir.getText();
+		phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(phpDatabaseAPIScriptsStorageDirectory);
+
+		String sqlScriptsStorageDirectory = tvSQLScriptDir.getText();
+		phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(sqlScriptsStorageDirectory);
+
+		String databaseUserPassword = tvUserPassword.getText();
+		String databaseUser = tvDatabaseUser.getText();
+		String databaseHost = tvDatabaseHost.getText();
+		ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
+				databaseHost, databaseUser, databaseUserPassword, databaseName);
+
+		PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
+		phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
+		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
+		//phpCrudCreator.createProject(database);
+	}
+
 }

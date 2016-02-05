@@ -3,9 +3,18 @@
  */
 package com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.android;
 
+import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.ProjectConfigurationContainer;
 import com.marvik.apis.dbcrudgen.application.views.layouts.HorizontalLayout;
 import com.marvik.apis.dbcrudgen.application.views.layouts.VerticalLayout;
+import com.marvik.apis.dbcrudgen.application.views.windows.MainWindow;
+import com.marvik.apis.dbcrudgen.creator.android.AndroidCRUDCreator;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.provider.ProviderConfiguration;
+import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.transactions.TransactionManagerConfiguration;
+import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
+import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,11 +33,14 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 	/**
 	 * @param parent
 	 */
+
+	private Button btCreateSourceCode;
+
 	public AndroidProjectConfigurationContainer() {
 		super();
-		VerticalLayout androidRootLayout = new VerticalLayout();
+		VerticalLayout androidRootLayout = new VerticalLayout(true);
 		androidRootLayout.getChildren().add(new Label("Android Project Configuration"));
-		
+
 		HorizontalLayout androidProjectConfigWidgets = new HorizontalLayout();
 
 		// Add android project configuration
@@ -39,11 +51,15 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		VerticalLayout sqliteDatabaseConfig = new VerticalLayout();
 		sqliteDatabaseConfig.getChildren().add(new Label("SQLite Database Configuration"));
 		sqliteDatabaseConfig.getChildren().add(createSQLiteDatabaseConfiguration());
-		
+
 		androidProjectConfigWidgets.getChildren().add(sqliteDatabaseConfig);
 
 		// Attach all the widgets to the parent container
 		androidRootLayout.getChildren().add(androidProjectConfigWidgets);
+
+		btCreateSourceCode = new Button("Create SourceCode");
+		btCreateSourceCode.setOnAction(e -> createAndroidProjectSourceCode());
+		androidRootLayout.getChildren().add(btCreateSourceCode);
 		this.getChildren().add(androidRootLayout);
 
 	}
@@ -63,20 +79,20 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 	 * Contains all the widgets for basic project configuration
 	 */
 	private VerticalLayout createAndroidBasicProjectConfiguraion() {
-		
+
 		VerticalLayout vlBasicProjectConfiguration = new VerticalLayout();
-		
+
 		vlBasicProjectConfiguration.getChildren().add(new Label("Basic Project Configuration"));
 		VerticalLayout lvAndroidProjectConfig = createAndroidProjectConfiguration();
 		vlBasicProjectConfiguration.getChildren().add(lvAndroidProjectConfig);
 
 		// Content provider configuration
-		vlBasicProjectConfiguration.getChildren().add(new  Label("Content Provider Configuration"));
+		vlBasicProjectConfiguration.getChildren().add(new Label("Content Provider Configuration"));
 		VerticalLayout contentProviderConfig = createAndroidContentProviderConfiguration();
 		vlBasicProjectConfiguration.getChildren().add(contentProviderConfig);
 
 		// Transaction manager class configuration String
-		vlBasicProjectConfiguration.getChildren().add(new  Label("Transaction Manager Configuration"));
+		vlBasicProjectConfiguration.getChildren().add(new Label("Transaction Manager Configuration"));
 		VerticalLayout transactionManagerConfig = createAndroidTransactionsManagerConfiguration();
 		vlBasicProjectConfiguration.getChildren().add(transactionManagerConfig);
 
@@ -278,5 +294,63 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		verticalLayout.getChildren().addAll(lTableModelsPackage, tfTableModelsPackage);
 
 		return verticalLayout;
+	}
+
+	private void createAndroidProjectSourceCode() {
+
+		if(tfDatabaseName.getText().length() < 1){ System.out.println("Database Name cannot be null"); return;}
+		if(tfDatabaseVersion.getText().length() < 1){ System.out.println("Database Version cannot be null"); return;}
+		if(tfSQLiteOpenHelperClass.getText().length() < 1){ System.out.println("SQLiteOpenHelperClass cannot be null"); return;}
+		if(tfSQLiteOpenHelperPackage.getText().length() < 1){ System.out.println("SQLite Class Package cannot be null"); return;}
+		if(tfTablesSchemasPackage.getText().length() < 1){ System.out.println("Table Schemas Package cannot be null"); return;}
+		if(tfTablesCrudPackage.getText().length() < 1){ System.out.println("Tables Crud Package cannot be null"); return;}
+		if(tfTableModelsPackage.getText().length() < 1){ System.out.println("Table Model Package cannot be null"); return;}
+		
+		if(tfContentProviderPackage.getText().length() < 1){ System.out.println("ContentProviders Package cannot be null"); return;}
+		if(tfContentProviderClass.getText().length() < 1){ System.out.println("Content Provider Class"); return;}
+		
+		if(tfTransactionsManagerPackage.getText().length() < 1){ System.out.println("Transaction Manager Package cannot be null"); return;}
+		if(tfTransactionsManagerClass.getText().length() < 1){ System.out.println("Transaction Manager Class cannot be null"); return;}
+		
+		if(tfAndroidProjectStorageDirectory.getText().length() < 1){ System.out.println("Project Storage Directory cannot be null"); return;}
+		if(tfAndroidProjectJavaSrcDirs.getText().length() < 1){ System.out.println("Java Src Dirs cannot be null"); return;}
+		if(tfAndroidProjectPackageName.getText().length() < 1){ System.out.println("Project Name cannot be null"); return;}
+		
+		String databaseName = tfDatabaseName.getText().toString();
+		int databaseVersion = Integer.parseInt(tfDatabaseVersion.getText());
+		String sqliteOpenHelperClass = tfSQLiteOpenHelperClass.getText().toString();
+		String sqliteOpenHelperClassPackage = tfSQLiteOpenHelperPackage.getText().toString();
+		String tablesSchemasPackage = tfTablesSchemasPackage.getText().toString();
+		String tablesCRUDPackage = tfTablesCrudPackage.getText().toString();
+		String tablesInfosModelClassesPackage = tfTableModelsPackage.getText().toString();
+
+		TasksExecutor tasksExecutor = new TasksExecutor();
+		Database database = tasksExecutor.createDatabaseModel(databaseName);
+
+		AndroidDatabaseConfiguration androidDatabaseConfiguration = 
+				new AndroidDatabaseConfiguration(databaseName, databaseVersion, sqliteOpenHelperClass, sqliteOpenHelperClassPackage, tablesSchemasPackage, tablesCRUDPackage, tablesInfosModelClassesPackage);
+
+		String contentProviderPackage = tfContentProviderPackage.getText();
+		String contentProviderClass = tfContentProviderClass.getText();
+		ProviderConfiguration providerConfiguration = new ProviderConfiguration(contentProviderClass,
+				contentProviderPackage);
+
+		String transactionManagerPackage = tfTransactionsManagerPackage.getText();
+		String transactionManagerClass = tfTransactionsManagerClass.getText();
+		TransactionManagerConfiguration transactionManagerConfiguration = new TransactionManagerConfiguration(
+				transactionManagerPackage, transactionManagerClass);
+
+		AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
+				providerConfiguration, transactionManagerConfiguration, androidDatabaseConfiguration);
+
+		String projectStorageDir = tfAndroidProjectStorageDirectory.getText();
+		String javaSrcDir = tfAndroidProjectJavaSrcDirs.getText();
+		String packageName = tfAndroidProjectPackageName.getText();
+		AndroidProjectConfiguration androidProjectConfiguration = 
+				new AndroidProjectConfiguration(projectStorageDir, javaSrcDir, packageName, androidContentProviderConfiguration);
+
+		AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
+		androidCRUDCreator.setAndroidProjectConfiguration(androidProjectConfiguration);
+		//androidCRUDCreator.createProject(database);
 	}
 }

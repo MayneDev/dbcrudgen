@@ -1,12 +1,9 @@
 package com.marvik.apis.dbcrudgen.application.views.windows;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.marvik.apis.dbcrudgen.application.events.UserEventActions;
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.database.mysql.MYSQLDatabaseConnectionConfigurationContainer;
-import com.marvik.apis.dbcrudgen.application.views.layouts.VerticalLayout;
 import com.marvik.apis.dbcrudgen.application.views.widgets.ProjectsConfigurationWidget;
 import com.marvik.apis.dbcrudgen.application.views.windows.properties.WindowProperties;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
@@ -16,10 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MainWindow extends Application implements UserEventActions {
+public class MainWindow extends Application  {
 
 	private TasksExecutor tasksExecutor;
 
+	public static String databaseName;
 	/**
 	 * This is the main GUI for the application where all the action take place
 	 */
@@ -74,8 +72,10 @@ public class MainWindow extends Application implements UserEventActions {
 
 	}
 
+	private MYSQLDatabaseConnectionConfigurationContainer mysqlDatabaseConnectionConfigurationContainer;
+	
 	public void addCenterPane(BorderPane mainWindow) {
-		MYSQLDatabaseConnectionConfigurationContainer mysqlDatabaseConnectionConfigurationContainer = new MYSQLDatabaseConnectionConfigurationContainer();
+		mysqlDatabaseConnectionConfigurationContainer = new MYSQLDatabaseConnectionConfigurationContainer();
 		mysqlDatabaseConnectionConfigurationContainer.setTasksExecutor(tasksExecutor);
 		mysqlDatabases = tasksExecutor.getDatabases();
 		mysqlDatabaseConnectionConfigurationContainer.addDatabasesListView(mysqlDatabases);
@@ -83,15 +83,10 @@ public class MainWindow extends Application implements UserEventActions {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.marvik.apis.dbcrudgen.application.events.UserEventActions#
-	 * onDatabaseSelected(java.lang.String)
-	 */
-	@Override
-	public void onDatabaseSelected(String databaseName) {
-		System.out.println("Selected : " + databaseName);
+	public static String getSelectedDatabase(){
+		return databaseName;
 	}
-
+	public static void setSelectedDatabase(String  databaseName){
+		MainWindow.databaseName = databaseName;
+	}
 }

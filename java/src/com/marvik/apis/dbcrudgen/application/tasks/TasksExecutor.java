@@ -14,12 +14,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.marvik.apis.dbcrudgen.application.views.windows.MainWindow;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDatabaseConnection;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDefaultConnectionProperties;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLQueryExecutor;
+import com.marvik.apis.dbcrudgen.core.platforms.mysql.grammar.MYSQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.queries.MYSQLQueries;
 import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
+import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
+import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
+import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 
 /**
 *Created on Feb 5, 2016-10:40:21 AM by victor
@@ -89,11 +96,11 @@ public class TasksExecutor {
 		ResultSet mysqlDatabases = getMYSQLQueryExecutor().execSQL(MYSQLQueries.MYSQL_QUERY_SHOW_DATABASES);
 		try {
 			for (mysqlDatabases.first(); !mysqlDatabases.isAfterLast(); mysqlDatabases.next()) {
-				String databaseName = mysqlDatabases.getString(MYSQLQueries.MYSQL_QUERY_SHOW_DATABASES_RESULTS_KEY);
+				String databaseName = mysqlDatabases.getString(MYSQLQueries.ResultsKeys.ShowDatabases.KEY_DATABASE);
 				databases.add(new Database(databaseName, null));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return databases;
@@ -108,6 +115,9 @@ public class TasksExecutor {
 	 * @throws ConnectException
 	 */
 	public List<String> getDatabaseTables(String database) {
+
+		MainWindow.setSelectedDatabase(database);
+
 		List<String> tables = new ArrayList<>();
 		try {
 			String useDatabaseMYSQLQuery = MYSQLQueries.MYSQL_QUERY_USE_DATABASE;
@@ -118,10 +128,9 @@ public class TasksExecutor {
 			String showTables = MYSQLQueries.MYSQL_QUERY_SHOW_TABLES;
 
 			ResultSet databaseTables = getMYSQLQueryExecutor().execSQL(showTables);
-			
 
 			for (databaseTables.first(); !databaseTables.isAfterLast(); databaseTables.next()) {
-				String showTablesResultsKey = MYSQLQueries.MYSQL_QUERY_SHOW_TABLES_RESULTS_KEY;
+				String showTablesResultsKey = MYSQLQueries.ResultsKeys.ShowDatabaseTables.TABLES_IN_DATABASE;
 				showTablesResultsKey = showTablesResultsKey.replace(MYSQLQueries.QueryTags.DATABASE, database);
 				String tableName = databaseTables.getString(showTablesResultsKey);
 				tables.add(tableName);
@@ -141,34 +150,135 @@ public class TasksExecutor {
 		try {
 			Process startApache = Runtime.getRuntime().exec(XAMPP.START_APACHE_PATH);
 			Process startMysql = Runtime.getRuntime().exec(XAMPP.START_MYSQL_PATH);
-			
-			if(startApache.isAlive()){
+
+			if (startApache.isAlive()) {
 				System.out.println("Apache : Is Alive");
-			}else{printStream(startApache.getInputStream());}
-			if(startMysql.isAlive()){
+			} else {
+				printStream(startApache.getInputStream());
+			}
+			if (startMysql.isAlive()) {
 				System.out.println("MYSQL : Is Alive");
-			}else{printStream(startMysql.getInputStream());}
+			} else {
+				printStream(startMysql.getInputStream());
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
 	 * @param outputStream
 	 */
 	private void printStream(InputStream inputStream) {
-		BufferedReader reader =new BufferedReader(new InputStreamReader(inputStream));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		String line = "";
 		StringBuilder builder = new StringBuilder();
 		try {
-			while((line = reader.readLine()) != null){
+			while ((line = reader.readLine()) != null) {
 				builder.append(line);
 			}
 			System.out.println(builder.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 
+	 * Creates an object of the selected database
+	 * 
+	 * @param databaseName
+	 * @return Database
+	 */
+	public Database createDatabaseModel(String databaseName) {
+
+		return new Database(databaseName, createDatabaseTables(databaseName));
+	}
+
+	/**
+	 * Creates all the tables in a database
+	 * 
+	 * @param databaseName
+	 * @return array of tables in a database
+	 */
+	private Table[] createDatabaseTables(String databaseName) {
+		List<String> databaseTables = getDatabaseTables(databaseName);
+		Table[] tables = new Table[databaseTables.size()];
+		for (int i = 0; i < databaseTables.size(); i++) {
+			tables[i] = getDatabaseTable(databaseTables.get(i), databaseName);
+		}
+		return tables;
+	}
+
+	/**
+	 * @param string
+	 * @return
+	 */
+	private Table getDatabaseTable(String tableName, String databaseName) {
+		Table table = null;
+		String showTableColumsQuery = MYSQLQueries.MYSQL_QUERY_SHOW_TABLE_COLUMNS;
+		showTableColumsQuery = showTableColumsQuery.replace(MYSQLQueries.QueryTags.TABLE, tableName);
+		showTableColumsQuery = showTableColumsQuery.replace(MYSQLQueries.QueryTags.DATABASE, databaseName);
+
+		ResultSet tableColumns = getMYSQLQueryExecutor().execSQL(showTableColumsQuery);
+
+		List<TableColumn> lTableColumns = new ArrayList<>();
+
+		PrimaryKey primaryKey = null;
+
+		try {
+			for (tableColumns.first(); !tableColumns.isAfterLast(); tableColumns.next()) {
+				String field = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_FIELD);
+				String type = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TYPE);
+				String _null = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_NULL);
+				String key = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TABLE_KEY);
+				String _default = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_DEFAULT);
+				String extra = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_EXTRA);
+
+				Constraints constraints = new Constraints();
+				DataType dataType = new DataType(type, constraints);
+
+				if (key.equalsIgnoreCase(MYSQLGrammar.Keys.PRIMARY_KEY)) {
+					primaryKey = new PrimaryKey(field, dataType);
+				} else {
+					TableColumn tableColumn = new TableColumn(field, dataType);
+					lTableColumns.add(tableColumn);
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		TableColumn[] columns = new TableColumn[lTableColumns.size()];
+
+		for (int i = 0; i < lTableColumns.size(); i++) {
+			columns[i] = lTableColumns.get(i);
+		}
+		table = new Table(tableName, columns, getCreateTableSQL(tableName), primaryKey);
+
+		return table;
+	}
+
+	/**
+	 * @param tableName
+	 * @return
+	 */
+	private String getCreateTableSQL(String tableName) {
+		String createTableSQL = "";
+		String query = MYSQLQueries.MYSQL_QUERY_SHOW_CREATE_TABLE;
+		query = query.replace(MYSQLQueries.QueryTags.TABLE, tableName);
+		ResultSet resultSet = getMYSQLQueryExecutor().execSQL(query);
+		try {
+			for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
+				createTableSQL = resultSet.getString(MYSQLQueries.ResultsKeys.ShowCreateTable.KEY_CREATE_TABLE);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return createTableSQL;
 	}
 }
