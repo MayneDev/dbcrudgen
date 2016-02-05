@@ -3,9 +3,16 @@
  */
 package com.marvik.apis.dbcrudgen.core.databases.mysql;
 
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
+import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
+import com.mysql.jdbc.CommunicationsException;
 
 /**
 *Created on Feb 5, 2016-9:15:37 AM by victor
@@ -30,6 +37,7 @@ public class MYSQLDatabaseConnection {
 		this.password = password;
 
 		new MYSQLDatabaseConnection(host, null, user, password);
+
 	}
 
 	public MYSQLDatabaseConnection(String host, String database, String user, String password) {
@@ -42,10 +50,18 @@ public class MYSQLDatabaseConnection {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+
+		catch (ConnectException e) {
+			e.printStackTrace();
+
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private Connection createConnection(String host, String database, String user, String password)
-			throws ClassNotFoundException, SQLException {
+			throws ClassNotFoundException, SQLException, CommunicationsException, ConnectException, SocketException {
 		Class.forName("com.mysql.jdbc.Driver");
 		if (host == null) {
 			throw new IllegalArgumentException("Missing database host");
@@ -69,11 +85,17 @@ public class MYSQLDatabaseConnection {
 	 * @return CONNECTION
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
+	 * @throws SocketException
+	 * @throws ConnectException
 	 */
-	public Connection getConnection() throws SQLException, ClassNotFoundException {
+	public Connection getConnection()
+			throws SQLException, ClassNotFoundException, CommunicationsException, ConnectException, SocketException {
 		if (connection == null) {
+
 			connection = createConnection(host, database, user, password);
+
 		}
 		return connection;
 	}
+
 }

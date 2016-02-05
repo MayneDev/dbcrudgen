@@ -26,7 +26,9 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 	 */
 	public AndroidProjectConfigurationContainer() {
 		super();
-
+		VerticalLayout androidRootLayout = new VerticalLayout();
+		androidRootLayout.getChildren().add(new Label("Android Project Configuration"));
+		
 		HorizontalLayout androidProjectConfigWidgets = new HorizontalLayout();
 
 		// Add android project configuration
@@ -41,7 +43,8 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		androidProjectConfigWidgets.getChildren().add(sqliteDatabaseConfig);
 
 		// Attach all the widgets to the parent container
-		this.getChildren().add(androidProjectConfigWidgets);
+		androidRootLayout.getChildren().add(androidProjectConfigWidgets);
+		this.getChildren().add(androidRootLayout);
 
 	}
 

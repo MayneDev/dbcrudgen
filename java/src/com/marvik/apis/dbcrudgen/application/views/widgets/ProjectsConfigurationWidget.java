@@ -4,6 +4,8 @@
 package com.marvik.apis.dbcrudgen.application.views.widgets;
 
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.android.AndroidProjectConfigurationContainer;
+import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.php.PHPProjectConfigurationContainer;
+import com.marvik.apis.dbcrudgen.application.views.layouts.HorizontalLayout;
 
 import javafx.scene.layout.StackPane;
 
@@ -25,9 +27,13 @@ import javafx.scene.layout.StackPane;
  * @author victor
  *
  */
-public class ProjectsConfigurationWidget extends StackPane {
+public class ProjectsConfigurationWidget extends HorizontalLayout {
 
+	// Android project configuration container
 	private AndroidProjectConfigurationContainer androidProjectConfigurationContainer;
+
+	// PHP project configuration container
+	private PHPProjectConfigurationContainer phpProjectConfigurationContainer;
 
 	/**
 	 * ProjectsConfigurationWidget
@@ -45,6 +51,8 @@ public class ProjectsConfigurationWidget extends StackPane {
 	 */
 	private void initContainers() {
 		androidProjectConfigurationContainer = new AndroidProjectConfigurationContainer();
+
+		phpProjectConfigurationContainer = new PHPProjectConfigurationContainer();
 	}
 
 	/**
@@ -54,6 +62,9 @@ public class ProjectsConfigurationWidget extends StackPane {
 
 		// Add Android Project Configuration Container
 		addAndroidProjectConfigurationContainer();
+
+		// Add PHP Project Configuration Container
+		addPHPProjectConfiguraionContaier();
 	}
 
 	/**
@@ -63,4 +74,11 @@ public class ProjectsConfigurationWidget extends StackPane {
 		getChildren().add(androidProjectConfigurationContainer);
 	}
 
+	/**
+	 * Add PHP Project Configuration Container
+	 */
+	private void addPHPProjectConfiguraionContaier() {
+		getChildren().add(phpProjectConfigurationContainer);
+
+	}
 }

@@ -25,10 +25,10 @@ public class WindowProperties {
 	/**
 	 * Default Screen width
 	 */
-	public static final int DEFAULT_SCREEN_WIDTH = FULL_SCREEN_WIDTH - 200;
+	public static final int DEFAULT_SCREEN_WIDTH = FULL_SCREEN_WIDTH - 100;
 
 	/**
 	 * Default Screen height
 	 */
-	public static final int DEFAULT_SCREEN_HEIGHT = FULL_SCREEN_HEIGHT - 200;
+	public static final int DEFAULT_SCREEN_HEIGHT = FULL_SCREEN_HEIGHT - 100;
 }

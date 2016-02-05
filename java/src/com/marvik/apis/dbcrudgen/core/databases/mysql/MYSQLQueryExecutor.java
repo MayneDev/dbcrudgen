@@ -3,6 +3,8 @@
  */
 package com.marvik.apis.dbcrudgen.core.databases.mysql;
 
+import java.net.ConnectException;
+import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.marvik.apis.dbcrudgen.database.connection.DatabaseConnectionProperties;
+import com.mysql.jdbc.CommunicationsException;
 
 /**
 *Created on Feb 5, 2016-10:21:33 AM by victor
@@ -46,11 +49,15 @@ public class MYSQLQueryExecutor {
 	 * Creates a statement
 	 * 
 	 * @return Statement
+	 * @throws CommunicationsException
 	 * @throws SQLException
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
+	 * @throws SocketException
+	 * @throws ConnectException
 	 */
-	public Statement createStatement() throws SQLException, ClassNotFoundException {
-		
+	public Statement createStatement()
+			throws ConnectException, ClassNotFoundException, CommunicationsException, SocketException, SQLException {
+
 		return getConnection().createStatement();
 	}
 
@@ -60,11 +67,15 @@ public class MYSQLQueryExecutor {
 	 * Get a database connection
 	 * 
 	 * @return Connection
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * @throws CommunicationsException
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws SocketException
+	 * @throws ConnectException
 	 */
-	private Connection getConnection() throws SQLException, ClassNotFoundException {
-		return getDatabaseConnection().getConnection();		
+	private Connection getConnection()
+			throws ConnectException, ClassNotFoundException, CommunicationsException, SocketException, SQLException {
+		return getDatabaseConnection().getConnection();
 	}
 
 	/**
@@ -73,20 +84,46 @@ public class MYSQLQueryExecutor {
 	 * @param sql
 	 * @return a result set
 	 * @throws SQLException
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
+	 * @throws SocketException
+	 * @throws ConnectException
 	 */
-	public ResultSet execSQL(String sql) throws SQLException, ClassNotFoundException {
-		return createStatement().executeQuery(sql);
+	public ResultSet execSQL(String sql) {
+		try {
+			return createStatement().executeQuery(sql);
+		} catch (ClassNotFoundException | SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CommunicationsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
+
 	/**
 	 * Executes an sql query
 	 * 
 	 * @param sql
 	 * @return a boolean
 	 * @throws SQLException
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
+	 * @throws SocketException
+	 * @throws ConnectException
+	 * @throws CommunicationsException
 	 */
-	public boolean execute(String sql) throws SQLException, ClassNotFoundException {
-		return createStatement().execute(sql);
+	public boolean execute(String sql) {
+
+		try {
+			return createStatement().execute(sql);
+		} catch (ClassNotFoundException | SocketException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+
 	}
 }

@@ -93,25 +93,20 @@ public class MYSQLDatabaseConnectionConfigurationContainer extends ProjectConfig
 		this.getChildren().add(databaseSchemasLayout);
 	}
 
-	public void showTablesOnDatabaseSelected() {
-		try {
-			if (lvTables == null) {
-				lvTables = new StyledListView<String>(SelectionMode.SINGLE, Cursor.HAND, new Insets(5));
-				tablesLayout.getChildren().add(lvTables);
-			} else {
-				lvTables.getItems().removeAll(lvTables.getItems());
-			}
-
-			String selectedDatabase = lvDatabases.getSelectionModel().getSelectedItems().get(0);
-			List<String> tables;
-
-			tables = getTasksExecutor().getDatabaseTables(selectedDatabase);
-
-			lvTables.getItems().addAll(tables);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void showTablesOnDatabaseSelected(){
+		if (lvTables == null) {
+			lvTables = new StyledListView<String>(SelectionMode.SINGLE, Cursor.HAND, new Insets(5));
+			tablesLayout.getChildren().add(lvTables);
+		} else {
+			lvTables.getItems().removeAll(lvTables.getItems());
 		}
+
+		String selectedDatabase = lvDatabases.getSelectionModel().getSelectedItems().get(0);
+		List<String> tables;
+
+		tables = getTasksExecutor().getDatabaseTables(selectedDatabase);
+
+		lvTables.getItems().addAll(tables);
 
 	}
 

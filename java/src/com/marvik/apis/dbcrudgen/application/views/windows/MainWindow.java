@@ -16,7 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MainWindow extends Application implements UserEventActions{
+public class MainWindow extends Application implements UserEventActions {
 
 	private TasksExecutor tasksExecutor;
 
@@ -67,8 +67,6 @@ public class MainWindow extends Application implements UserEventActions{
 
 	// Adds the left pane that originally contains all the MYSQL databases
 	private void addLeftPane(BorderPane mainWindow) {
-		
-		
 
 	}
 
@@ -77,26 +75,23 @@ public class MainWindow extends Application implements UserEventActions{
 	}
 
 	public void addCenterPane(BorderPane mainWindow) {
-		try {
-			MYSQLDatabaseConnectionConfigurationContainer mysqlDatabaseConnectionConfigurationContainer = new MYSQLDatabaseConnectionConfigurationContainer();
-			mysqlDatabaseConnectionConfigurationContainer.setTasksExecutor(tasksExecutor);
-			mysqlDatabases = tasksExecutor.getDatabases();
-			mysqlDatabaseConnectionConfigurationContainer.addDatabasesListView(mysqlDatabases);
-			mainWindow.setCenter(mysqlDatabaseConnectionConfigurationContainer);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		MYSQLDatabaseConnectionConfigurationContainer mysqlDatabaseConnectionConfigurationContainer = new MYSQLDatabaseConnectionConfigurationContainer();
+		mysqlDatabaseConnectionConfigurationContainer.setTasksExecutor(tasksExecutor);
+		mysqlDatabases = tasksExecutor.getDatabases();
+		mysqlDatabaseConnectionConfigurationContainer.addDatabasesListView(mysqlDatabases);
+		mainWindow.setCenter(mysqlDatabaseConnectionConfigurationContainer);
+
 	}
 
-	/* (non-Javadoc)
-	 * @see com.marvik.apis.dbcrudgen.application.events.UserEventActions#onDatabaseSelected(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.marvik.apis.dbcrudgen.application.events.UserEventActions#
+	 * onDatabaseSelected(java.lang.String)
 	 */
 	@Override
 	public void onDatabaseSelected(String databaseName) {
-		System.out.println("Selected : "+databaseName);	
+		System.out.println("Selected : " + databaseName);
 	}
 
 }
