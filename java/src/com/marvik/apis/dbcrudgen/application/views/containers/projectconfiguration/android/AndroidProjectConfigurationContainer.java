@@ -3,6 +3,8 @@
  */
 package com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.android;
 
+import java.util.List;
+
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.ProjectConfigurationContainer;
 import com.marvik.apis.dbcrudgen.application.views.layouts.HorizontalLayout;
@@ -36,7 +38,7 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 
 	private Button btCreateSourceCode;
 
-	public AndroidProjectConfigurationContainer() {
+	public AndroidProjectConfigurationContainer(List<Database> mysqlDatabases) {
 		super();
 		VerticalLayout androidRootLayout = new VerticalLayout(true);
 		androidRootLayout.getChildren().add(new Label("Android Project Configuration"));
@@ -57,9 +59,15 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		// Attach all the widgets to the parent container
 		androidRootLayout.getChildren().add(androidProjectConfigWidgets);
 
+		HorizontalLayout layout = new HorizontalLayout();
+		Button bSetData = new Button("Set Data");
+		bSetData.setOnAction(e -> setData());
+		layout.getChildren().add(bSetData);
+
 		btCreateSourceCode = new Button("Create SourceCode");
 		btCreateSourceCode.setOnAction(e -> createAndroidProjectSourceCode());
-		androidRootLayout.getChildren().add(btCreateSourceCode);
+		layout.getChildren().add(btCreateSourceCode);
+		androidRootLayout.getChildren().add(layout);
 		this.getChildren().add(androidRootLayout);
 
 	}
@@ -298,24 +306,66 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 
 	private void createAndroidProjectSourceCode() {
 
-		if(tfDatabaseName.getText().length() < 1){ System.out.println("Database Name cannot be null"); return;}
-		if(tfDatabaseVersion.getText().length() < 1){ System.out.println("Database Version cannot be null"); return;}
-		if(tfSQLiteOpenHelperClass.getText().length() < 1){ System.out.println("SQLiteOpenHelperClass cannot be null"); return;}
-		if(tfSQLiteOpenHelperPackage.getText().length() < 1){ System.out.println("SQLite Class Package cannot be null"); return;}
-		if(tfTablesSchemasPackage.getText().length() < 1){ System.out.println("Table Schemas Package cannot be null"); return;}
-		if(tfTablesCrudPackage.getText().length() < 1){ System.out.println("Tables Crud Package cannot be null"); return;}
-		if(tfTableModelsPackage.getText().length() < 1){ System.out.println("Table Model Package cannot be null"); return;}
-		
-		if(tfContentProviderPackage.getText().length() < 1){ System.out.println("ContentProviders Package cannot be null"); return;}
-		if(tfContentProviderClass.getText().length() < 1){ System.out.println("Content Provider Class"); return;}
-		
-		if(tfTransactionsManagerPackage.getText().length() < 1){ System.out.println("Transaction Manager Package cannot be null"); return;}
-		if(tfTransactionsManagerClass.getText().length() < 1){ System.out.println("Transaction Manager Class cannot be null"); return;}
-		
-		if(tfAndroidProjectStorageDirectory.getText().length() < 1){ System.out.println("Project Storage Directory cannot be null"); return;}
-		if(tfAndroidProjectJavaSrcDirs.getText().length() < 1){ System.out.println("Java Src Dirs cannot be null"); return;}
-		if(tfAndroidProjectPackageName.getText().length() < 1){ System.out.println("Project Name cannot be null"); return;}
-		
+		if (tfDatabaseName.getText().length() < 1) {
+			System.out.println("Database Name cannot be null");
+			return;
+		}
+		if (tfDatabaseVersion.getText().length() < 1) {
+			System.out.println("Database Version cannot be null");
+			return;
+		}
+		if (tfSQLiteOpenHelperClass.getText().length() < 1) {
+			System.out.println("SQLiteOpenHelperClass cannot be null");
+			return;
+		}
+		if (tfSQLiteOpenHelperPackage.getText().length() < 1) {
+			System.out.println("SQLite Class Package cannot be null");
+			return;
+		}
+		if (tfTablesSchemasPackage.getText().length() < 1) {
+			System.out.println("Table Schemas Package cannot be null");
+			return;
+		}
+		if (tfTablesCrudPackage.getText().length() < 1) {
+			System.out.println("Tables Crud Package cannot be null");
+			return;
+		}
+		if (tfTableModelsPackage.getText().length() < 1) {
+			System.out.println("Table Model Package cannot be null");
+			return;
+		}
+
+		if (tfContentProviderPackage.getText().length() < 1) {
+			System.out.println("ContentProviders Package cannot be null");
+			return;
+		}
+		if (tfContentProviderClass.getText().length() < 1) {
+			System.out.println("Content Provider Class");
+			return;
+		}
+
+		if (tfTransactionsManagerPackage.getText().length() < 1) {
+			System.out.println("Transaction Manager Package cannot be null");
+			return;
+		}
+		if (tfTransactionsManagerClass.getText().length() < 1) {
+			System.out.println("Transaction Manager Class cannot be null");
+			return;
+		}
+
+		if (tfAndroidProjectStorageDirectory.getText().length() < 1) {
+			System.out.println("Project Storage Directory cannot be null");
+			return;
+		}
+		if (tfAndroidProjectJavaSrcDirs.getText().length() < 1) {
+			System.out.println("Java Src Dirs cannot be null");
+			return;
+		}
+		if (tfAndroidProjectPackageName.getText().length() < 1) {
+			System.out.println("Project Name cannot be null");
+			return;
+		}
+
 		String databaseName = tfDatabaseName.getText().toString();
 		int databaseVersion = Integer.parseInt(tfDatabaseVersion.getText());
 		String sqliteOpenHelperClass = tfSQLiteOpenHelperClass.getText().toString();
@@ -327,8 +377,9 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		TasksExecutor tasksExecutor = new TasksExecutor();
 		Database database = tasksExecutor.createDatabaseModel(databaseName);
 
-		AndroidDatabaseConfiguration androidDatabaseConfiguration = 
-				new AndroidDatabaseConfiguration(databaseName, databaseVersion, sqliteOpenHelperClass, sqliteOpenHelperClassPackage, tablesSchemasPackage, tablesCRUDPackage, tablesInfosModelClassesPackage);
+		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(databaseName,
+				databaseVersion, sqliteOpenHelperClass, sqliteOpenHelperClassPackage, tablesSchemasPackage,
+				tablesCRUDPackage, tablesInfosModelClassesPackage);
 
 		String contentProviderPackage = tfContentProviderPackage.getText();
 		String contentProviderClass = tfContentProviderClass.getText();
@@ -346,11 +397,33 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		String projectStorageDir = tfAndroidProjectStorageDirectory.getText();
 		String javaSrcDir = tfAndroidProjectJavaSrcDirs.getText();
 		String packageName = tfAndroidProjectPackageName.getText();
-		AndroidProjectConfiguration androidProjectConfiguration = 
-				new AndroidProjectConfiguration(projectStorageDir, javaSrcDir, packageName, androidContentProviderConfiguration);
+		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(projectStorageDir,
+				javaSrcDir, packageName, androidContentProviderConfiguration);
 
 		AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
 		androidCRUDCreator.setAndroidProjectConfiguration(androidProjectConfiguration);
-		//androidCRUDCreator.createProject(database);
+		androidCRUDCreator.createProject(database);
+	}
+
+	private void setData() {
+		String databasename = MainWindow.databaseName;
+
+		tfDatabaseName.setText(databasename);
+		tfDatabaseVersion.setText("1");
+		tfSQLiteOpenHelperClass.setText("DatabaseManager");
+		tfSQLiteOpenHelperPackage.setText("database\\sqliteopenhelper");
+		tfTablesSchemasPackage.setText("database\\tableschemas");
+		tfTablesCrudPackage.setText("database\\tablescrud");
+		tfTableModelsPackage.setText("database\\tablemodels");
+
+		tfContentProviderPackage.setText("database\\contentprovider");
+		tfContentProviderClass.setText("DataProvider");
+
+		tfTransactionsManagerPackage.setText("database\\transactionsmanager");
+		tfTransactionsManagerClass.setText("TransactionManager");
+
+		tfAndroidProjectStorageDirectory.setText("G:\\4thYr\\GDGMMUST");
+		tfAndroidProjectJavaSrcDirs.setText("app\\src\\main\\java");
+		tfAndroidProjectPackageName.setText("com.gdgmmust.gdgevents");
 	}
 }

@@ -13,11 +13,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MainWindow extends Application  {
+public class MainWindow extends Application {
+
+	private List<Database> mysqlDatabases;
 
 	private TasksExecutor tasksExecutor;
 
 	public static String databaseName;
+
 	/**
 	 * This is the main GUI for the application where all the action take place
 	 */
@@ -38,8 +41,11 @@ public class MainWindow extends Application  {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		mysqlDatabases = tasksExecutor.getDatabases();
+
 		// Initialize the main stage
 		initStage(primaryStage);
+
 	}
 
 	private void initStage(Stage primaryStage) {
@@ -57,11 +63,9 @@ public class MainWindow extends Application  {
 	}
 
 	private void addRightPane(BorderPane mainWindow) {
-		ProjectsConfigurationWidget projectsConfigurationContainer = new ProjectsConfigurationWidget();
+		ProjectsConfigurationWidget projectsConfigurationContainer = new ProjectsConfigurationWidget(mysqlDatabases);
 		mainWindow.setRight(projectsConfigurationContainer);
 	}
-
-	private List<Database> mysqlDatabases;
 
 	// Adds the left pane that originally contains all the MYSQL databases
 	private void addLeftPane(BorderPane mainWindow) {
@@ -73,20 +77,20 @@ public class MainWindow extends Application  {
 	}
 
 	private MYSQLDatabaseConnectionConfigurationContainer mysqlDatabaseConnectionConfigurationContainer;
-	
+
 	public void addCenterPane(BorderPane mainWindow) {
 		mysqlDatabaseConnectionConfigurationContainer = new MYSQLDatabaseConnectionConfigurationContainer();
 		mysqlDatabaseConnectionConfigurationContainer.setTasksExecutor(tasksExecutor);
-		mysqlDatabases = tasksExecutor.getDatabases();
 		mysqlDatabaseConnectionConfigurationContainer.addDatabasesListView(mysqlDatabases);
 		mainWindow.setCenter(mysqlDatabaseConnectionConfigurationContainer);
 
 	}
 
-	public static String getSelectedDatabase(){
+	public static String getSelectedDatabase() {
 		return databaseName;
 	}
-	public static void setSelectedDatabase(String  databaseName){
+
+	public static void setSelectedDatabase(String databaseName) {
 		MainWindow.databaseName = databaseName;
 	}
 }

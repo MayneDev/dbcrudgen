@@ -21,6 +21,7 @@ import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLQueryExecutor;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.grammar.MYSQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.queries.MYSQLQueries;
 import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
+import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
 import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
@@ -233,6 +234,7 @@ public class TasksExecutor {
 		try {
 			for (tableColumns.first(); !tableColumns.isAfterLast(); tableColumns.next()) {
 				String field = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_FIELD);
+				field = NativeUtils.toLetters(field);
 				String type = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TYPE);
 				String _null = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_NULL);
 				String key = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TABLE_KEY);

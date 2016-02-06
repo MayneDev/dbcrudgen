@@ -11,6 +11,7 @@ import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentP
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.AndroidDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
+import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
@@ -281,7 +282,9 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		}
 
 		// Dont forget to Add primary key column and other key columns
-		columnVariables += parseColumnVariables(tableColumnsVariableTemplate, table.getPrimaryKey().getColumnName());
+		PrimaryKey primaryKey = table.getPrimaryKey();
+		String primaryKeyColumnName = primaryKey.getColumnName();
+		columnVariables += parseColumnVariables(tableColumnsVariableTemplate, primaryKeyColumnName);
 		return columnVariables;
 	}
 

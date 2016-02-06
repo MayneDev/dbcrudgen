@@ -422,7 +422,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 
 		TableColumn[] tableColumns = table.getColumns();
 		System.out.println("table == null " + (table == null));
-		System.out.println("tables " +tableColumns.length);
+		System.out.println("tableColumns==null " +(tableColumns == null));
 		for (int i = 0; i < tableColumns.length; i++) {
 			String columnName = tableColumns[i].getColumnName();
 			functionParams += "'" + columnName + "'";

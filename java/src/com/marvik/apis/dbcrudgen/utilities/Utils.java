@@ -1,11 +1,14 @@
 package com.marvik.apis.dbcrudgen.utilities;
 
+import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.MYSQLDataTypes;
 
 public class Utils {
 
 	public static MYSQLDataTypes parseMysqlDatatype(String datatype) {
 
+		datatype = NativeUtils.toLetters(datatype);
+		
 		if (datatype.equalsIgnoreCase("BIGINT"))
 			return MYSQLDataTypes.BIGINT;
 

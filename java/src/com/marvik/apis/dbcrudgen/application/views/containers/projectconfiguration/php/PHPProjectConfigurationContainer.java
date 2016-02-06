@@ -3,6 +3,8 @@
  */
 package com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.php;
 
+import java.util.List;
+
 import com.foo.Main;
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.ProjectConfigurationContainer;
@@ -43,10 +45,14 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 
 	private VerticalLayout mysqlDatabaseConfigWidget;
 
+	private List<Database> mysqlDatabases;
+
 	/**
+	 * @param mysqlDatabases
 	 * @param parent
 	 */
-	public PHPProjectConfigurationContainer() {
+	public PHPProjectConfigurationContainer(List<Database> mysqlDatabases) {
+		this.mysqlDatabases = mysqlDatabases;
 
 		// PHPProjectConfiguration
 		phpProjectConfigWidget = new VerticalLayout(true);
@@ -238,8 +244,15 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 		String databaseName = MainWindow.databaseName;
 
 		TasksExecutor tasksExecutor = new TasksExecutor();
-		Database database = tasksExecutor.createDatabaseModel(databaseName);
-				
+
+		Database database = null;
+
+		for (Database _database : mysqlDatabases) {
+			if (_database.getDatabaseName().equals(databaseName)) {
+				database = _database;
+			}
+		}
+
 		if (tvLowLevelCrudScriptDir.getText().length() < 1) {
 			System.out.println("low level crud Cannot be empty");
 			return;

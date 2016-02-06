@@ -98,11 +98,10 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	 * @return
 	 */
 	private String parsePrimaryKeySelectionStatement(String tableCrudTemplate, Table table) {
-		String primaryKeyReference = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME 
-				+PrintingChars.DOT + NativeUtils.toJavaBeansClass(table.getTableName()) 
-				+PrintingChars.DOT + table.getPrimaryKey().getColumnName().toUpperCase();
-		return tableCrudTemplate.replace(TemplateTags.Android.COLUMN_REFERENCE,
-				primaryKeyReference);
+		String primaryKeyReference = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME + PrintingChars.DOT
+				+ NativeUtils.toJavaBeansClass(table.getTableName()) + PrintingChars.DOT
+				+ table.getPrimaryKey().getColumnName().toUpperCase();
+		return tableCrudTemplate.replace(TemplateTags.Android.COLUMN_REFERENCE, primaryKeyReference);
 	}
 
 	/**
@@ -114,9 +113,13 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	 * @return
 	 */
 	private String parsePrimaryKeyDatatypeAndParameters(String tableCrudTemplate, Table table) {
+		
 		String primaryKeyObject = table.getPrimaryKey().getColumnName();
 		String primaryKeyDatatype = table.getPrimaryKey().getDataType().getDataType();
 		String primaryKeyJavaDatatype = getAndroidObjectDataType(primaryKeyDatatype);
+		if(primaryKeyJavaDatatype == null){
+			System.out.println("primaryKeyJavaDatatype IS NULL");
+		}
 		return tableCrudTemplate.replace(TemplateTags.Android.PRIMARY_KEY_DATATYPE, primaryKeyJavaDatatype)
 				.replace(TemplateTags.Android.PRIMARY_KEY_OBJECT, primaryKeyObject);
 	}
@@ -323,6 +326,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 			tableColumnsVariable += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT, dataType,
 					objectName, javaDelimeter);
 		}
+		System.out.println("PRIMARY KEY DATA TYPE" + primaryKeyDataType);
 		String template = getAndroidColumnQueryCrudTemplate(primaryKeyDataType).getTemplate();
 
 		return parseQueriedColumnQueryArtificats(template, primaryKeyColumn, primaryKeyColumnReference,

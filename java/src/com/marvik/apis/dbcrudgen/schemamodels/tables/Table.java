@@ -30,90 +30,87 @@ public class Table {
 	 * @param foreignKeys
 	 * @param uniqueKeys
 	 */
-	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey,
-			ForeignKeys[] foreignKeys, UniqueKeys[] uniqueKeys) {
+	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey) {
 		this.tableName = tableName;
 		this.tableColumn = columns;
 		this.tableSql = tableSql;
 		this.primaryKey = primaryKey;
-		this.foreignKeys = foreignKeys;
-		this.uniqueKeys = uniqueKeys;
 	}
 
 	/**
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
-	 */
+	 *//*
 	public Table(String tableName, TableColumn[] columns, String tableSql) {
 		new Table(tableName, columns, tableSql, null, null, null);
 	}
 
-	/**
+	*//**
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
 	 * @param primaryKey
-	 */
+	 *//*
 	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey) {
 		new Table(tableName, columns, tableSql, primaryKey, null, null);
 	}
 
-	/**
+	*//**
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
 	 * @param primaryKey
 	 * @param foreignKeys
-	 */
+	 *//*
 	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey,
 			ForeignKeys[] foreignKeys) {
 		new Table(tableName, columns, tableSql, primaryKey, foreignKeys, null);
 	}
 
-	/**
+	*//**
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
 	 * @param primaryKey
 	 * @param uniqueKeys
-	 */
+	 *//*
 	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey,
 			UniqueKeys[] uniqueKeys) {
 		new Table(tableName, columns, tableSql, primaryKey, null, uniqueKeys);
 	}
 
-	/**
+	*//**
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
 	 * @param foreignKeys
 	 * @param uniqueKeys
-	 */
+	 *//*
 	public Table(String tableName, TableColumn[] columns, String tableSql, ForeignKeys[] foreignKeys,
 			UniqueKeys[] uniqueKeys) {
 		new Table(tableName, columns, tableSql, null, foreignKeys, uniqueKeys);
 	}
 
-	/**
+	*//**
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
 	 * @param foreignKeys
-	 */
+	 *//*
 	public Table(String tableName, TableColumn[] columns, String tableSql, ForeignKeys[] foreignKeys) {
 		new Table(tableName, columns, tableSql, null, foreignKeys, null);
 	}
 
-	/**
+	*//**
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
 	 * @param uniqueKeys
-	 */
+	 *//*
 	public Table(String tableName, TableColumn[] columns, String tableSql, UniqueKeys[] uniqueKeys) {
 		new Table(tableName, columns, tableSql, null, null, uniqueKeys);
-	}
+	}*/
 
 	/**
 	 * @return the foreignKeys
@@ -202,9 +199,6 @@ public class Table {
 	 * @return the primaryKeyColumn
 	 */
 	public PrimaryKey getPrimaryKey() {
-		if(primaryKey == null){
-			return new PrimaryKey(tableName, new DataType("String", new Constraints()));
-		}
 		return primaryKey;
 	}
 

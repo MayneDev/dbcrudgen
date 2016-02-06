@@ -3,9 +3,12 @@
  */
 package com.marvik.apis.dbcrudgen.application.views.widgets;
 
+import java.util.List;
+
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.android.AndroidProjectConfigurationContainer;
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.php.PHPProjectConfigurationContainer;
 import com.marvik.apis.dbcrudgen.application.views.layouts.HorizontalLayout;
+import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
 import javafx.scene.layout.StackPane;
 
@@ -37,9 +40,15 @@ public class ProjectsConfigurationWidget extends HorizontalLayout {
 
 	/**
 	 * ProjectsConfigurationWidget
+	 * 
+	 * @param mysqlDatabases
 	 */
-	public ProjectsConfigurationWidget() {
 
+	List<Database> mysqlDatabases;
+
+	public ProjectsConfigurationWidget(List<Database> mysqlDatabases) {
+		this.mysqlDatabases = mysqlDatabases;
+		
 		initContainers();
 
 		addContainers();
@@ -50,9 +59,9 @@ public class ProjectsConfigurationWidget extends HorizontalLayout {
 	 * Initialises all the project configuration containers
 	 */
 	private void initContainers() {
-		androidProjectConfigurationContainer = new AndroidProjectConfigurationContainer();
+		androidProjectConfigurationContainer = new AndroidProjectConfigurationContainer(mysqlDatabases);
 
-		phpProjectConfigurationContainer = new PHPProjectConfigurationContainer();
+		phpProjectConfigurationContainer = new PHPProjectConfigurationContainer(mysqlDatabases);
 	}
 
 	/**
