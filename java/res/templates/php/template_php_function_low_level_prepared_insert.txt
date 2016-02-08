@@ -1,0 +1,10 @@
+	/**
+	* Inserts data into the table[$TABLE_NAME]
+	*
+	* @return 1 if data was inserted,0 otherwise
+	*/
+	public function insert_prepared_records($RECORDS, $printSQL = false) {
+		$columns = array($COLUMNS);
+		$records = array($RECORDS);
+		return $this->insert_records_to_$TABLE_NAME ( $columns, $records, $printSQL );
+	}

@@ -46,6 +46,8 @@
 
 	}
 
+	$TABLE_PREPARED_INSERT_FUNCTION
+
 	public function query(){
 
 		$columns = $records = array ();

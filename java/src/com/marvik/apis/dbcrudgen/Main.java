@@ -1,8 +1,5 @@
 package com.marvik.apis.dbcrudgen;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.creator.android.AndroidCRUDCreator;
 import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
@@ -13,17 +10,12 @@ import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.provid
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.database.transactions.TransactionManagerConfiguration;
 import com.marvik.apis.dbcrudgen.projects.android.configuration.AndroidProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
-import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
-import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
-import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 
 public class Main {
 	public static void main(String[] args) {
-		testAndroidCrudGenerator();
-		//testPHPCrudGenerator();
+		//testAndroidCrudGenerator();
+		testPHPCrudGenerator();
 	}
 
 	private static void testAndroidCrudGenerator() {

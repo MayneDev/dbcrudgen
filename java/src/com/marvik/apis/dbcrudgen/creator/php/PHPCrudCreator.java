@@ -262,6 +262,7 @@ public class PHPCrudCreator extends CrudCreator {
 		String tableHighLevelCrud = getPHPTemplatesParser().getTableHighLevelCrud(getPhpProjectConfiguration(),table);
 
 		String className = NativeUtils.toJavaBeansClass(tableName);
+		
 		String phpClassFileName = getPHPTemplatesParser()
 				.parseTableCrudHighLevelScripts(tablesCrudHighLevelScriptsStorageDirectory, className);
 

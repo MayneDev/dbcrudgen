@@ -62,6 +62,8 @@ class CLASS_NAME {
 		
 	$TABLE_COLUMNS_CRUD_FUNCTIONS
 	
+	$TABLE_PREPARED_INSERT_FUNCTION
+	
 	/**
 	* Returns the table name. This is the owner of these crud functions.
 	* The various crud functions directly affect this table

@@ -20,8 +20,11 @@ import com.marvik.apis.dbcrudgen.templates.php.crud.classcrud.PHPLowLevelTableCl
 import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionColumnAccessorsTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionColumnsCrudTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionHighLevelFetchAssocGettersTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionsHighLevelPreparedInsertTemplate;
+import com.marvik.apis.dbcrudgen.templates.php.crud.functions.PHPFunctionsLowLevelPreparedInsertTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.statements.PHPStatementClassFileNameTemplate;
 import com.marvik.apis.dbcrudgen.templates.php.crud.variables.PHPVariablesDatabaseActionsTemplate;
+import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.sql.SQLTableFilenameTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags.DatabaseConnection;
@@ -171,60 +174,66 @@ public class PHPTemplatesParser extends TemplatesParser {
 	public String getTableCrud(PHPProjectConfiguration phpProjectConfiguration,
 			ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties, Table table) {
 
-		String tableCrudSQL = getPhpTableClassCrudTemplate().getTemplate();
+		String tableCrudTemplate = getPhpTableClassCrudTemplate().getTemplate();
 
 		String tableName = table.getTableName();
 		TableColumn[] columns = table.getColumns();
 
 		String columnsCrud = generateColumnsCrudFunctions(table);
+
 		String columnsAccessor = generateColumnAccessorMethods(columns);
 
 		// Parse column accessors - replaces the column accessor templates with
 		// the actual functions
-		tableCrudSQL = addColumnAccessorFunctions(tableCrudSQL, columnsAccessor);
+		tableCrudTemplate = addColumnAccessorFunctions(tableCrudTemplate, columnsAccessor);
+
+		String lowLevelPreparedInsertFunctionTemplate = new PHPFunctionsLowLevelPreparedInsertTemplate().getTemplate();
+		String preparedInsertFunction = generatePreparedInsertFunction(lowLevelPreparedInsertFunctionTemplate, columns);
+
+		tableCrudTemplate = parsePreparedInsertFunction(tableCrudTemplate, preparedInsertFunction);
 
 		// Parse column crud functions - replaces the column crud templates with
 		// the actual crud functions
-		tableCrudSQL = addColumnsQueryFunctions(tableCrudSQL, columnsCrud);
+		tableCrudTemplate = addColumnsQueryFunctions(tableCrudTemplate, columnsCrud);
 
 		// Replace table name tag with the actual table name
-		tableCrudSQL = addTableName(tableCrudSQL, tableName);
+		tableCrudTemplate = addTableName(tableCrudTemplate, tableName);
 
 		// Replace the Dependencies URIs file path.
-		tableCrudSQL = addDependencieURIs(phpProjectConfiguration, tableCrudSQL);
+		tableCrudTemplate = addDependencieURIs(phpProjectConfiguration, tableCrudTemplate);
 
 		// Replace the class name tag with the actual class name which is
 		// derived from the table name
-		tableCrudSQL = addClassName(tableCrudSQL, table.getTableName());
+		tableCrudTemplate = addClassName(tableCrudTemplate, table.getTableName());
 
 		// Replace the template info with the template info
-		tableCrudSQL = addPHPDbCrudTemplateInfo(tableCrudSQL);
+		tableCrudTemplate = addPHPDbCrudTemplateInfo(tableCrudTemplate);
 
-		return tableCrudSQL;
+		return tableCrudTemplate;
 	}
 
 	/**
 	 * Add Template Info
 	 * 
-	 * @param tableCrudSQL
+	 * @param tableCrudTemplate
 	 * @return PHP Db Crud Generator Info
 	 */
-	private String addPHPDbCrudTemplateInfo(String tableCrudSQL) {
+	private String addPHPDbCrudTemplateInfo(String tableCrudTemplate) {
 		DbCrudGeneratorNativeTemplates dbCrudGeneratorNativeTemplates = new DbCrudGeneratorNativeTemplates();
 		String templateInfo = dbCrudGeneratorNativeTemplates.getTemplate();
-		return parsePHPDbCrudTemplateInfo(templateInfo, tableCrudSQL);
+		return parsePHPDbCrudTemplateInfo(templateInfo, tableCrudTemplate);
 	}
 
 	/**
 	 * Adds the Db Crud Generator info to the generated script.
 	 * 
 	 * @param templateInfo
-	 * @param tableCrudSQL
+	 * @param tableCrudTemplate
 	 * @return PHP Db Crud Generator Template Info to the table sql
 	 */
-	private String parsePHPDbCrudTemplateInfo(String templateInfo, String tableCrudSQL) {
-		
-		return tableCrudSQL.replace(TemplateTags.PHP.DB_CRUD_GENERATOR_TEMPLATE, templateInfo).replace(
+	private String parsePHPDbCrudTemplateInfo(String templateInfo, String tableCrudTemplate) {
+
+		return tableCrudTemplate.replace(TemplateTags.PHP.DB_CRUD_GENERATOR_TEMPLATE, templateInfo).replace(
 				NativeTemplateTags.SYSTEM_WRITE_TIME,
 				NativeUtils.getCurrentTime("EEE hh:mm:ss  dd/MM/yyy", System.currentTimeMillis()));
 	}
@@ -233,10 +242,10 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * addDependencieURIs
 	 * 
 	 * @param projectDatabaseConnectionProperties
-	 * @param tableCrudSQL
+	 * @param tableCrudTemplate
 	 * @return
 	 */
-	private String addDependencieURIs(PHPProjectConfiguration phpProjectConfiguration, String tableCrudSQL) {
+	private String addDependencieURIs(PHPProjectConfiguration phpProjectConfiguration, String tableCrudTemplate) {
 
 		// Add dependencies uris for database utils
 		String databaseUtilsStorageDirectory = phpProjectConfiguration.getPhpDatabaseAPIScriptsStorageDirectory();
@@ -244,29 +253,29 @@ public class PHPTemplatesParser extends TemplatesParser {
 				+ PHPProjectFileNames.DATABASE_UTILS_SCRIPT_FILENAME;
 		String dataActionsFileName = databaseUtilsStorageDirectory + PHPProjectFileNames.DATA_ACTIONS_SCRIPT_FILENAME;
 
-		tableCrudSQL = tableCrudSQL.replace(TemplateTags.PHP.DATABASE_UTILS_FILE_PATH, databaseUtilsFileName);
+		tableCrudTemplate = tableCrudTemplate.replace(TemplateTags.PHP.DATABASE_UTILS_FILE_PATH, databaseUtilsFileName);
 
 		// Add dependencies uris for database connection files
 
 		// Add dependencies for data actions scripts
-		tableCrudSQL = tableCrudSQL.replace(TemplateTags.PHP.DATA_ACTIONS_FILE_PATH, dataActionsFileName);
+		tableCrudTemplate = tableCrudTemplate.replace(TemplateTags.PHP.DATA_ACTIONS_FILE_PATH, dataActionsFileName);
 
-		return tableCrudSQL;
+		return tableCrudTemplate;
 	}
 
 	/**
 	 * Replaces the class name tag with the actual class name
 	 */
-	private String addClassName(String tableCrudSQL, String tableName) {
+	private String addClassName(String tableCrudTemplate, String tableName) {
 		String className = NativeUtils.toJavaBeansClass(tableName);
-		return tableCrudSQL.replace(TemplateTags.PHP.CLASS_NAME, className);
+		return tableCrudTemplate.replace(TemplateTags.PHP.CLASS_NAME, className);
 	}
 
 	/**
 	 * Replaces the table name tag with the actual table name
 	 */
-	private String addTableName(String tableCrudSQL, String tableName) {
-		return tableCrudSQL.replace(TemplateTags.PHP.TABLE_NAME, tableName);
+	private String addTableName(String tableCrudTemplate, String tableName) {
+		return tableCrudTemplate.replace(TemplateTags.PHP.TABLE_NAME, tableName);
 	}
 
 	/**
@@ -279,15 +288,57 @@ public class PHPTemplatesParser extends TemplatesParser {
 	/**
 	 * Adds the column query functions to the class template
 	 */
-	private String addColumnsQueryFunctions(String tableCrudSQL, String columnsQueryFunctions) {
-		return tableCrudSQL.replace(TemplateTags.PHP.TABLE_COLUMNS_CRUD_FUNCTIONS, columnsQueryFunctions);
+	private String addColumnsQueryFunctions(String tableCrudTemplate, String columnsQueryFunctions) {
+		return tableCrudTemplate.replace(TemplateTags.PHP.TABLE_COLUMNS_CRUD_FUNCTIONS, columnsQueryFunctions);
+	}
+
+	/**
+	 * Parse prepared insert method
+	 * 
+	 * @param tableCrudTemplate
+	 * @param preparedInsertFunction
+	 * @return table crud template with the prepared insert method added
+	 */
+	private String parsePreparedInsertFunction(String tableCrudTemplate, String preparedInsertFunction) {
+		return tableCrudTemplate.replace(TemplateTags.PHP.TABLE_PREPARED_INSERT_FUNCTION, preparedInsertFunction);
+	}
+
+	/**
+	 * Creates a prepares insert function that can be used to insert records
+	 * 
+	 * @param columns
+	 * @return prepares insert function
+	 */
+	private String generatePreparedInsertFunction(String template, TableColumn[] columns) {
+
+		String phpObjectDeclarationSyntax = SimpleTemplates.PHP.PHP_OBJECT_DECLARATION_SYNTAX;
+		String stringParameter = SimpleTemplates.PHP.PHP_STRING_PARAMETER_OBJECT;
+
+		String tableColumnsNames = "";
+		String recordsObjects = "";
+
+		for (int i = 0; i < columns.length; i++) {
+
+			String columnName = columns[i].getColumnName();
+
+			tableColumnsNames += stringParameter.replace(TemplateTags.PHP.OBJECT, columnName);
+			recordsObjects += phpObjectDeclarationSyntax.replace(TemplateTags.PHP.OBJECT, columnName);
+
+			if (i < columns.length - 1) {
+				tableColumnsNames += ",";
+				recordsObjects += ",";
+			}
+		}
+
+		return template.replace(TemplateTags.PHP.RECORDS, recordsObjects).replace(TemplateTags.PHP.COLUMNS,
+				tableColumnsNames);
 	}
 
 	/**
 	 * Adds the column accessor functions to the class template
 	 */
-	private String addColumnAccessorFunctions(String tableCrudSQL, String columnsAccessors) {
-		return tableCrudSQL.replace(TemplateTags.PHP.TABLE_COLUMNS_ACCESSOR_FUNCTIONS, columnsAccessors);
+	private String addColumnAccessorFunctions(String tableCrudTemplate, String columnsAccessors) {
+		return tableCrudTemplate.replace(TemplateTags.PHP.TABLE_COLUMNS_ACCESSOR_FUNCTIONS, columnsAccessors);
 	}
 
 	/**
@@ -414,7 +465,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 	private String generatePrimaryKeyCrudFunctions(Table table) {
 
 		String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
-		
+
 		String primaryKeyColumnName = table.getPrimaryKey().getColumnName();
 
 		String functionParams = "";
@@ -603,7 +654,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 	}
 
 	public String parseTableCrudHighLevelScripts(String tablesCrudHighLevelScriptsStorageDirectory, String className) {
-		String fileName = tablesCrudHighLevelScriptsStorageDirectory + className
+		String fileName = tablesCrudHighLevelScriptsStorageDirectory + className + TemplateTags.PHP.CLASS_INFO
 				+ PHPProjectFileNames.PHP_FILE_EXTENSION;
 		return fileName;
 	}
@@ -634,6 +685,10 @@ public class PHPTemplatesParser extends TemplatesParser {
 				+ PHPProjectFileNames.PHP_CLASS_EXTENSION;
 		String lowLevelClassPath = (tablesCrudLowLevelScriptsStorageDirectory + lowLevelTableCrudFileName);
 		template = parsePHPLowLevelTableClassInclude(template, lowLevelClassPath);
+
+		String highLevelPreparedInsertFunctionTemplate = new PHPFunctionsHighLevelPreparedInsertTemplate().getTemplate();
+		String preparedInsertFunction = generatePreparedInsertFunction(highLevelPreparedInsertFunctionTemplate,table.getColumns());
+		template = parsePreparedInsertFunction(template, preparedInsertFunction);
 
 		String columnFetchAssocFunctions = "";
 		for (TableColumn tableColumn : table.getColumns()) {

@@ -153,12 +153,12 @@ public class AndroidCRUDCreator extends CrudCreator {
 		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, packageName, tablesSchemasPackage,
 				tablesCRUDStorageLocation);
 
-	/*	// create tables model info classes
+		// create tables model info classes
 		String columnsModelInfoPackage = getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage();
 		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + columnsModelInfoPackage);
 		createTableModelInfoClassesSourceFiles(database, projectFilesDefaultStorageDirectory, packageName,
 				columnsModelInfoPackage);
-
+		/*
 		// create transactions manager class
 		TransactionManagerConfiguration transactionManagerConfiguration = getAndroidContentProviderConfiguration()
 				.getTransactionManagerConfiguration();

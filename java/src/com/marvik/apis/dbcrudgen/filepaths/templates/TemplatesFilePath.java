@@ -53,6 +53,15 @@ public class TemplatesFilePath {
 		 */
 		public static final String PHP_STATEMENTS_DATABASE_ACTIONS_TEMPLATE_FILE_PATH = "res/templates/php/template_php_statements_database_actions.txt";
 
+		/**
+		 * PHP PHP_FUNCTION_LOW_LEVEL_PREPARED_INSERT_TEMPLATE_FILE_PATH
+		 */
+		public static final String PHP_FUNCTION_LOW_LEVEL_PREPARED_INSERT_TEMPLATE_FILE_PATH = "res/templates/php/template_php_function_low_level_prepared_insert.txt";
+
+		/**
+		 * PHP PHP_FUNCTION_HIGH_LEVEL_PREPARED_INSERT_TEMPLATE_FILE_PATH
+		 */
+		public static final String PHP_FUNCTION_HIGH_LEVEL_PREPARED_INSERT_TEMPLATE_FILE_PATH = "res/templates/php/template_php_function_high_level_prepared_insert.txt";
 	}
 
 	/*

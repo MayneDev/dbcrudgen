@@ -107,4 +107,21 @@ public class SimpleTemplates {
 		}
 
 	}
+
+	public static class PHP {
+		/**
+		 * TABLE_COLUMN_GETTER_METHOD_TEMPLATE
+		 */
+		public static final String TABLE_COLUMN_GETTER_METHOD_TEMPLATE = "$this->_get_$COLUMN_NAME";
+
+		/**
+		 * PHP_STRING_PARAMETER_OBJECT
+		 */
+		public static final String PHP_STRING_PARAMETER_OBJECT = "'$OBJECT'";
+
+		/**
+		 * PHP_OBJECT_DECLARATION_SYNTAX
+		 */
+		public static final String PHP_OBJECT_DECLARATION_SYNTAX = "$$OBJECT";
+	}
 }

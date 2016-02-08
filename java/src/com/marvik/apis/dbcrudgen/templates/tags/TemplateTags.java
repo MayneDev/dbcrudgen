@@ -116,7 +116,24 @@ public class TemplateTags {
 		/**
 		 * TABLE_LOW_LEVEL_CRUD_CLASS
 		 */
-		public static final CharSequence TABLE_LOW_LEVEL_CRUD_CLASS = "$TABLE_LOW_LEVEL_CRUD_CLASS";;
+		public static final CharSequence TABLE_LOW_LEVEL_CRUD_CLASS = "$TABLE_LOW_LEVEL_CRUD_CLASS";
+
+		/**
+		 * OBJECT
+		 */
+		public static final String OBJECT = "$OBJECT";
+
+		/**
+		 * RECORDS
+		 */
+		public static final String RECORDS = "$RECORDS";
+
+		/**
+		 * COLUMNS
+		 */
+		public static final String COLUMNS = "$COLUMNS";
+
+		public static final CharSequence TABLE_PREPARED_INSERT_FUNCTION = "$TABLE_PREPARED_INSERT_FUNCTION";
 
 	}
 
