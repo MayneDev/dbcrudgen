@@ -75,8 +75,6 @@ import $TABLE_MODEL_CLASS;
             return getContext().getContentResolver().delete(getUri(), selection, selectionArgs);
         }
 
-		$COLUMN_SPECIFIC_QUERY_METHODS
-
 		/**
         * $DATABASE_TABLE_CLASS#insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
         * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and inserts the data 
@@ -162,6 +160,13 @@ import $TABLE_MODEL_CLASS;
             	$TABLE_MODEL_OBJECT.add(new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS));
             }
             
+            //Close cursor
+            if(cursor!= null){
+        		if(!cursor.isClosed()){
+        			cursor.close();
+        		}
+        	}
+        	
             return $TABLE_MODEL_OBJECT;
         }
         
@@ -248,4 +253,6 @@ import $TABLE_MODEL_CLASS;
         	
             return $TABLE_MODEL_OBJECT;
         }
+        
+        $COLUMN_SPECIFIC_QUERY_METHODS
     }
