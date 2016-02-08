@@ -104,9 +104,11 @@ class CLASS_NAME {
 	* Inserts data into the table[$TABLE_NAME]
 	*
 	* @return 1 if data was inserted,0 otherwise
+	* if redundancy check is true, it inserts if the record if it never existed else.
+	* if the record exists, it returns the number of times the record exists on the relation
 	*/
-	public function insert_records_to_$TABLE_NAME(Array $columns, Array $records, $printSQL = false) {
-		return $this->insert_records ( $this->get_table (), $columns, $records, $printSQL );
+	public function insert_records_to_$TABLE_NAME(Array $columns, Array $records,$redundancy_check = false, $printSQL = false) {
+		return $this->insert_records ( $this->get_table (), $columns, $records,$redundancy_check, $printSQL );
 	}
 	
 	/**
@@ -177,9 +179,19 @@ class CLASS_NAME {
 	* Inserts data into the table[$TABLE_NAME]
 	*
 	* @return 1 if data was inserted,0 otherwise
+	* if redundancy check is true, it inserts if the record if it never existed else.
+	* if the record exists, it returns the number of times the record exists on the relation
 	*/
-	private function insert_records($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_database_utils ()->insert_records ( $table, $columns, $records, $printSQL );
+	
+	private function insert_records($table, Array $columns, Array $records,$redundancy_check = false, $printSQL = false) {
+		if($redundancy_check){
+			if($this->is_exists($columns, $records) == 0){
+				return $this->get_database_utils ()->insert_records ( $table, $columns, $records, $printSQL );
+			} else return $this->is_exists($columns, $records);
+		}else{
+			return $this->get_database_utils ()->insert_records ( $table, $columns, $records, $printSQL );
+		}
+		
 	}
 	
 	/**
