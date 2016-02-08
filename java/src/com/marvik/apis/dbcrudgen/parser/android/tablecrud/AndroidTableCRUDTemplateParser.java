@@ -65,7 +65,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		tableCrudTemplate = prepareTableModelClassParametersInQueryAndSearchMethods(tableCrudTemplate, table);
 
 		// add table row query method
-		tableCrudTemplate = prepareTableRowQueryMethod(tableCrudTemplate, table);
+		tableCrudTemplate = prepareTableColumnQueryMethod(tableCrudTemplate, table);
 
 		return tableCrudTemplate;
 	}
@@ -78,7 +78,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	 * @param table
 	 * @return
 	 */
-	private String prepareTableRowQueryMethod(String tableCrudTemplate, Table table) {
+	private String prepareTableColumnQueryMethod(String tableCrudTemplate, Table table) {
 
 		// Add primary key parameters in the query method
 		tableCrudTemplate = parsePrimaryKeyDatatypeAndParameters(tableCrudTemplate, table);
@@ -113,13 +113,11 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	 * @return
 	 */
 	private String parsePrimaryKeyDatatypeAndParameters(String tableCrudTemplate, Table table) {
-		
+
 		String primaryKeyObject = table.getPrimaryKey().getColumnName();
 		String primaryKeyDatatype = table.getPrimaryKey().getDataType().getDataType();
 		String primaryKeyJavaDatatype = getAndroidObjectDataType(primaryKeyDatatype);
-		if(primaryKeyJavaDatatype == null){
-			System.out.println("primaryKeyJavaDatatype IS NULL");
-		}
+
 		return tableCrudTemplate.replace(TemplateTags.Android.PRIMARY_KEY_DATATYPE, primaryKeyJavaDatatype)
 				.replace(TemplateTags.Android.PRIMARY_KEY_OBJECT, primaryKeyObject);
 	}
@@ -132,7 +130,9 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
 		String constructorParams = "";
 		for (int i = 0; i < tableColumns.length; i++) {
-			constructorParams += tableColumns[i].getColumnName();
+			String columnName = tableColumns[i].getColumnName();
+			String columnObject = NativeUtils.toJavaBeansVariable(columnName);
+			constructorParams += columnObject;
 
 			if (i < tableColumns.length - 1) {
 				constructorParams += ",";
@@ -305,6 +305,9 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		for (int i = 0; i < columns.length; i++) {
 			String columnName = columns[i].getColumnName();
 			String dataType = columns[i].getDataType().getDataType();
+			MYSQLDataTypes mysqlDataType = Utils.parseMysqlDatatype(dataType);
+			String javaDataType = Utils.generateJavaQueryMethodReturnType(mysqlDataType);
+			
 			String objectName = NativeUtils.toJavaBeansVariable(columnName);
 			JavaDelimiter javaDelimeter = JavaDelimiter.NONE;
 
@@ -323,10 +326,10 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 			// DO NOT MOVE THIS METHOD FROM HERE - -THE GENERATED CODE WILL NOT
 			// HAVE ANY JAVA DELIMETER - BECAUSE IT WILL USE THE
 			// JAVA_DELIMETER#NULL
-			tableColumnsVariable += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT, dataType,
+			tableColumnsVariable += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT, javaDataType,
 					objectName, javaDelimeter);
 		}
-		System.out.println("PRIMARY KEY DATA TYPE" + primaryKeyDataType);
+		System.out.println("PRIMARY KEY DATA TYPE [" + primaryKeyDataType +"]");
 		String template = getAndroidColumnQueryCrudTemplate(primaryKeyDataType).getTemplate();
 
 		return parseQueriedColumnQueryArtificats(template, primaryKeyColumn, primaryKeyColumnReference,
@@ -352,13 +355,15 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
 		String queriedColumnReference = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME
 				+ TemplateTags.TAG_PRINTING_CHAR_DOT + tableJavaBeansName + TemplateTags.TAG_PRINTING_CHAR_DOT
-				+ queriedColumn.toUpperCase();
+				+ tableColumn.getColumnName().toUpperCase();
 
 		// Get the table primary key
 		PrimaryKey primaryKey = table.getPrimaryKey();
+		String primaryKeyColumnName = primaryKey.getColumnName();
 
 		// Add primary key column parameters
-		String primaryKeyParamObject = NativeUtils.parseStringDefaultParser(primaryKey.getPrimaryKey());
+		String primaryKeyParamObject = NativeUtils
+				.parseStringDefaultParser(NativeUtils.toJavaBeansVariable(primaryKeyColumnName));
 
 		// Add primary key column reference
 		String primaryKeyColumnReference = createTableColumnReference(tableJavaBeansName, primaryKey.getPrimaryKey());
@@ -384,7 +389,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 				.replace(TemplateTags.Android.FUNCTION_PARAMS, methodParamsObjects)
 
 				// Add queried column comment
-				.replace(TemplateTags.Android.QUERIED_TABLE_COLUMN_NAME, (queriedColumn))
+				.replace(TemplateTags.Android.QUERIED_TABLE_COLUMN_NAME, NativeUtils.toJavaBeansVariable(queriedColumn))
 
 				// Add queried column reference
 				.replace(TemplateTags.Android.QUERIED_TABLE_COLUMN_REFERENCE, queriedColumnReference)

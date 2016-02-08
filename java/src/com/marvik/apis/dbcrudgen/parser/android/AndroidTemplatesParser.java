@@ -510,7 +510,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		if (columnDatatype.equalsIgnoreCase("Class")) {
 			return new AndroidMethodColumnsCrudDataTypeGenericTemplate();
 		}
-		return null;
+		return new AndroidMethodColumnsCrudDataTypeGenericTemplate();
 	}
 
 	/**
@@ -523,7 +523,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	 * @return CrudTemplates
 	 */
 	protected String getAndroidObjectDataType(String columnDatatype) {
-		
+
 		columnDatatype = NativeUtils.toLetters(columnDatatype);
 
 		// Boolean
@@ -559,6 +559,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		if (columnDatatype.equalsIgnoreCase("Long")) {
 			return "long";
 		}
+		// MYSQL Long
+		if (columnDatatype.equalsIgnoreCase("mediumtext")) {
+			return "long";
+		}
 		// String
 		if (columnDatatype.equalsIgnoreCase("String")) {
 			return "String";
@@ -570,9 +574,6 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		// Text
 		if (columnDatatype.equalsIgnoreCase("text")) {
 			return "String";
-		}// Text
-		if (columnDatatype.equalsIgnoreCase("mediumtext")) {
-			return "String";
 		}
 
 		System.out.println("COULD NOT GET THE DATATYPE FOR [" + columnDatatype + "]");
@@ -583,7 +584,6 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	protected String getColumnsCursorItemsGetMethodTemplate(String dataType) {
 
 		dataType = NativeUtils.toLetters(dataType);
-		System.out.println("XXXXXXXXXXXX" + dataType);
 
 		if (dataType.equalsIgnoreCase("BOOLEAN")) {
 			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_BOOLEAN;
@@ -604,7 +604,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
 		}
 		if (dataType.equalsIgnoreCase("MEDIUMTEXT")) {
-			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
+			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_LONG;
 		}
 		if (dataType.equalsIgnoreCase("VARCHAR")) {
 			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
@@ -619,7 +619,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 			return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
 		}
 
-		return null;
+		return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
 	}
 
 	/**

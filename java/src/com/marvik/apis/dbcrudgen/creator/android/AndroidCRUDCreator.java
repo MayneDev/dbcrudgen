@@ -133,7 +133,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String tablesCRUDStorageLocation = getAndroidDatabaseConfiguration().getTablesCRUDPackage();
 		createDirectory(
 				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDStorageLocation);
-
+/*
 		// Create table schemas source file and saves it on disk
 		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, tablesShemasStorageLocation);
 
@@ -147,13 +147,13 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		createAbstractCRUDOperationsSourceFile(projectFilesDefaultStorageDirectory, tablesCRUDStorageLocation);
 
-		// create table custom CRUD class
+*/		// create table custom CRUD class
 		String tablesSchemasPackage = packageName + NativeTemplateTags.DOT
 				+ NativeUtils.parseJavaPackage(tablesShemasStorageLocation);
 		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, packageName, tablesSchemasPackage,
 				tablesCRUDStorageLocation);
 
-		// create tables model info classes
+	/*	// create tables model info classes
 		String columnsModelInfoPackage = getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage();
 		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + columnsModelInfoPackage);
 		createTableModelInfoClassesSourceFiles(database, projectFilesDefaultStorageDirectory, packageName,
@@ -163,7 +163,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		TransactionManagerConfiguration transactionManagerConfiguration = getAndroidContentProviderConfiguration()
 				.getTransactionManagerConfiguration();
 		createTransactionManagerClass(packageName, transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
-				tablesCRUDStorageLocation, database.getTables());
+				tablesCRUDStorageLocation, database.getTables());*/
 	}
 
 	// create transactions manager class
@@ -335,6 +335,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String tablesSchemasAbsoluteSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
 				+ databaseTablesPackage + NativeUtils.getFileSeparator()
 				+ AndroidProjectFileNames.TABLE_SCHEMAS_FILE_NAME;
+		
 		createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemasSourceCode);
 	}
 

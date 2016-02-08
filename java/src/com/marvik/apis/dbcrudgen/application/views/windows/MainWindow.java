@@ -10,6 +10,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -57,7 +58,8 @@ public class MainWindow extends Application {
 		addCenterPane(mainWindow);
 		Scene mainScene = new Scene(mainWindow, WindowProperties.DEFAULT_SCREEN_WIDTH,
 				WindowProperties.DEFAULT_SCREEN_HEIGHT);
-
+		primaryStage.setTitle("Database CRUD Code Generator");
+		primaryStage.getIcons().add(new Image("http://127.0.0.1/dbcrudgen/favico.png"));
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
 	}

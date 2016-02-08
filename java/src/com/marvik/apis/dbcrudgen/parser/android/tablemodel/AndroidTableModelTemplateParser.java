@@ -35,6 +35,9 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 			String objectName = tableColumn[i].getColumnName();
 			String androidDatatype = getAndroidObjectDataType(columnDatatype);
 
+			objectName = NativeUtils.toJavaBeansVariable(objectName);
+
+			
 			classVariables += NativeUtils.createJavaVariable(JavaObjectAccessibility.PRIVATE, androidDatatype,
 					objectName, JavaDelimiter.SEMICOLON);
 			
@@ -51,6 +54,7 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 
 			classVariablesAccessors += androidJavaObjectDefaultEncapsulationTemplateParser
 					.createAndroidJavaObjectDefaultAccessorSourceCode(androidDatatype, objectName);
+		
 		}
 		
 		return template.replace(TemplateTags.Android.PACKAGE_NAME, tableModelPackageName)

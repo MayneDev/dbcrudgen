@@ -10,7 +10,6 @@ public class Database {
 	public Database(String databaseName, Table[] tables) {
 		this.databaseName = databaseName;
 		this.tables = tables;
-		System.out.println("DATABASE TABLES LENGTH ->"+tables.length);
 	}
 
 	/**

@@ -73,7 +73,7 @@ public class SQLParser {
 			if (sqlStatement.contains(new String("CREATE TABLE IF NOT EXISTS `"))) {
 
 				Table _table = new Table(getTableName(sqlStatement), getTableColumns(sqlStatement),
-						getTableSQL(sqlStatement), null, null, null);
+						getTableSQL(sqlStatement), null);
 				tables.add(_table);
 			}
 
@@ -97,7 +97,7 @@ public class SQLParser {
 
 	@SuppressWarnings("Returns Null")
 	private TableColumn[] getTableColumns(String sqlStatement) {
-		
+
 		return null;
 	}
 

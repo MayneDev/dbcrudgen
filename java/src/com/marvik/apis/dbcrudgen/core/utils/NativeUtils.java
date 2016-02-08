@@ -31,22 +31,12 @@ public final class NativeUtils {
 		return getSystemProperty("file.separator") != null ? getSystemProperty("file.separator") : File.separator;
 	}
 
-	/**
-	 * Convert a class name to a java bean class name This method is deprecated.
-	 * Please use the new {@link NativeUtils#toNewJavaBeansClass(String)}
-	 */
-	@Deprecated
-	public static String toJavaBeansClass(String className) {
-		return toNewJavaBeansClass(className);
-	}
-
+	
 	/**
 	 * Convert a class name to a java bean variable name This method is
-	 * deprecated. Please use the new
-	 * {@link NativeUtils#toNewJavaBeansClass(String)(String)}
 	 */
-	@Deprecated
 	public static String toJavaBeansVariable(String className) {
+		className = toJavaBeansClass(className);
 		return className.substring(0, 1).toLowerCase() + className.substring(1, className.length());
 	}
 
@@ -66,6 +56,7 @@ public final class NativeUtils {
 	 * @return
 	 */
 	public static String parseJavaPackage(String packageFilePath) {
+		packageFilePath = packageFilePath.replace("_", "");
 		return packageFilePath.replace(NativeUtils.getFileSeparator(), TemplateTags.TAG_PRINTING_CHAR_DOT);
 	}
 
@@ -127,7 +118,7 @@ public final class NativeUtils {
 			dataType = "byte";
 		}
 
-		javaVariable += dataType + JavaGrammar.SPACE + objectName;
+		javaVariable += dataType + JavaGrammar.SPACE + toJavaBeansVariable(objectName);
 
 		switch (javaDelimeter) {
 		case COMMA:
@@ -171,7 +162,7 @@ public final class NativeUtils {
 	 *            name
 	 * @return valid class name
 	 */
-	public static String toNewJavaBeansClass(String className) {
+	public static String toJavaBeansClass(String className) {
 		String newClassName = "";
 
 		// Create new parts from the class name whenever we encounter a space
@@ -203,17 +194,6 @@ public final class NativeUtils {
 	}
 
 	/**
-	 * Converts the given word to a variable
-	 * 
-	 * @param variableName
-	 * @return variable name
-	 */
-	public static CharSequence toNewJavaBeansVariable(String variableName) {
-		String className = toNewJavaBeansClass(variableName);
-		return toJavaBeansVariable(className);
-	}
-
-	/**
 	 * Creates a sentence from a word
 	 * 
 	 * @param words
@@ -233,7 +213,7 @@ public final class NativeUtils {
 		text = text.replace("1", "").replace("2", "").replace("3", "").replace("4", "").replace("5", "")
 				.replace("6", "").replace("7", "").replace("8", "").replace("9", "").replace("0", "").replace("~", "")
 				.replace("`", "").replace("!", "").replace("@", "").replace("#", "").replace("$", "").replace("%", "")
-				.replace("^", "").replace("&", "").replace("*", "").replace("(", "").replace(")", "").replace("_", "")
+				.replace("^", "").replace("&", "").replace("*", "").replace("(", "").replace(")", "")
 				.replace("-", "").replace("=", "").replace("+", "").replace("[", "").replace("]", "").replace("{", "")
 				.replace("}", "").replace("\\", "").replace(";", "").replace(":", "").replace("'", "").replace("\"", "")
 				.replace("/", "").replace("?", "").replace(">", "").replace("<", "").replace(".", "").replace(",", "");

@@ -81,7 +81,7 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 		phpProjectConfigWidget.getChildren().add(mysqlDatabaseConfigWidget);
 
 		HorizontalLayout buttons = new HorizontalLayout();
-		Button setFields = new Button("Set Fields");
+		Button setFields = new Button("AutoConfigure");
 		setFields.setOnAction(e -> setFieldsData());
 
 		createPHPSourceCode = new Button("Create Source Code");
@@ -321,10 +321,10 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 
 		String projectName = MainWindow.databaseName;
 
-		tvLowLevelCrudScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\low\\");
-		tvHighLevelCrudScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\high\\");
-		tvCorePHPDatabaseScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\core\\");
-		tvSQLScriptDir.setText("C:\\xampp\\" + projectName + "\\database\\crud\\sql\\");
+		tvLowLevelCrudScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\low\\");
+		tvHighLevelCrudScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\high\\");
+		tvCorePHPDatabaseScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\core\\");
+		tvSQLScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\sql\\");
 
 		tvUserPassword.setText("");
 		tvDatabaseUser.setText("root");

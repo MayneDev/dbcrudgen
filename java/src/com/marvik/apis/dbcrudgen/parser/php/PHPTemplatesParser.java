@@ -223,7 +223,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * @return PHP Db Crud Generator Template Info to the table sql
 	 */
 	private String parsePHPDbCrudTemplateInfo(String templateInfo, String tableCrudSQL) {
-		// TODO Auto-generated method stub
+		
 		return tableCrudSQL.replace(TemplateTags.PHP.DB_CRUD_GENERATOR_TEMPLATE, templateInfo).replace(
 				NativeTemplateTags.SYSTEM_WRITE_TIME,
 				NativeUtils.getCurrentTime("EEE hh:mm:ss  dd/MM/yyy", System.currentTimeMillis()));
@@ -421,8 +421,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 		String functionParamsValues = "";
 
 		TableColumn[] tableColumns = table.getColumns();
-		System.out.println("table == null " + (table == null));
-		System.out.println("tableColumns==null " +(tableColumns == null));
+
 		for (int i = 0; i < tableColumns.length; i++) {
 			String columnName = tableColumns[i].getColumnName();
 			functionParams += "'" + columnName + "'";

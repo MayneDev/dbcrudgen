@@ -180,7 +180,6 @@ public class TasksExecutor {
 			while ((line = reader.readLine()) != null) {
 				builder.append(line);
 			}
-			System.out.println(builder.toString());
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -235,7 +234,10 @@ public class TasksExecutor {
 			for (tableColumns.first(); !tableColumns.isAfterLast(); tableColumns.next()) {
 				String field = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_FIELD);
 				field = NativeUtils.toLetters(field);
+				
 				String type = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TYPE);
+				type = NativeUtils.toLetters(type);
+				
 				String _null = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_NULL);
 				String key = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TABLE_KEY);
 				String _default = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_DEFAULT);

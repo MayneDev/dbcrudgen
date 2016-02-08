@@ -60,7 +60,7 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		androidRootLayout.getChildren().add(androidProjectConfigWidgets);
 
 		HorizontalLayout layout = new HorizontalLayout();
-		Button bSetData = new Button("Set Data");
+		Button bSetData = new Button("AutoConfigure");
 		bSetData.setOnAction(e -> setData());
 		layout.getChildren().add(bSetData);
 
@@ -422,8 +422,8 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		tfTransactionsManagerPackage.setText("database\\transactionsmanager");
 		tfTransactionsManagerClass.setText("TransactionManager");
 
-		tfAndroidProjectStorageDirectory.setText("G:\\4thYr\\GDGMMUST");
+		//tfAndroidProjectStorageDirectory.setText("");
 		tfAndroidProjectJavaSrcDirs.setText("app\\src\\main\\java");
-		tfAndroidProjectPackageName.setText("com.gdgmmust.gdgevents");
+		//tfAndroidProjectPackageName.setText("");
 	}
 }

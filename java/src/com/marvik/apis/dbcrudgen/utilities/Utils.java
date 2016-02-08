@@ -141,7 +141,7 @@ public class Utils {
 	}
 
 	public static String generateJavaQueryMethodReturnType(MYSQLDataTypes mysqlDataType) {
-
+		
 		switch (mysqlDataType) {
 		// Boolean
 		case TINYINT:
@@ -183,6 +183,7 @@ public class Utils {
 			return "Float";
 
 		// Long
+		case MEDIUMTEXT:
 		case MEDIUMINT:
 		case BIGINT:
 		case SERIAL:
@@ -193,7 +194,6 @@ public class Utils {
 		case VARCHAR:
 		case TEXT:
 		case TINYTEXT:
-		case MEDIUMTEXT:
 		case LONGTEXT:
 		case MEDIUMBLOB:
 		case BLOB:

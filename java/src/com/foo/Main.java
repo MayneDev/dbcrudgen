@@ -131,7 +131,7 @@ public class Main {
 				new DataType("integer", new Constraints("primary key auto_increment")));
 		
 
-		tablesList.add(new Table("user", firstAidColumns, tableSql, primaryKey, null, null));
+		tablesList.add(new Table("user", firstAidColumns, tableSql, primaryKey));
 	
 	}
 
