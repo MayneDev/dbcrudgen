@@ -38,6 +38,16 @@ define ( "POST_CLIENT", "client" );
 define ( "POST_ACTION", "action" );
 
 /**
+* Defines a constant post action unknown posting data
+*
+*/
+define ( "POST_ACTION_UNKNOWN ", "action_unknown" );
+/**
+* Defines a constant post client unknown that represents an unknown client posting data
+*
+*/
+define ( "POST_CLIENT_UNKNOWN ", "client_unknown" );
+/**
 * Defines a constant post client desktop that represents a desktop client posting data
 *
 */
