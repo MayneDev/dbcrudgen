@@ -15,6 +15,10 @@ import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLConnectionTemplatePa
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLDatabaseConnectionPropertiesTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsExecutorTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsWrapperTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsDeleteExceptionTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsInsertExceptionTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsQueryExceptionTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsUpdateExceptionTemplateParser;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectMYSQLDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.java.filenames.JavaProjectFileNames;
@@ -99,6 +103,105 @@ public class J2SECrudCreator extends CrudCreator {
 		// Create MYSQL APIS
 		createMYSQLAPIS(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
 
+		// Create SQL EXCEPTIONS CLASSES
+		createSQLExceptionClasses(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+
+	}
+
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param mysqlAPIStorageLocation
+	 * @throws IOException
+	 */
+	private void createSQLExceptionClasses(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+			String mysqlAPIStorageLocation) throws IOException {
+
+		// Create delete Exception class
+		createDeleteExceptionClasses(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+
+		// Create insert Exception class
+		createInsertExceptionClasses(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+
+		// Create query Exception class
+		createQueryExceptionClasses(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+
+		// Create update Exception class
+		createUpdateExceptionClasses(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+	}
+
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param mysqlAPIStorageLocation
+	 * @throws IOException
+	 */
+	private void createUpdateExceptionClasses(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+			String mysqlAPIStorageLocation) throws IOException {
+
+		RecordsUpdateExceptionTemplateParser recordsUpdateExceptionTemplateParser = new RecordsUpdateExceptionTemplateParser();
+		String sourceCode = recordsUpdateExceptionTemplateParser
+				.parseUpdateExceptionTemplateParser(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+		String sourceFile = JavaProjectFileNames.RECORDS_UPDATE_EXCEPTION_CLASS_NAME;
+		String sourceFileStoragePath = mysqlAPIStorageLocation + NativeUtils.getFileSeparator() + sourceFile
+				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
+		new FileStreamWriter().writeStream(new File(sourceFileStoragePath), sourceCode);
+
+	}
+
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param mysqlAPIStorageLocation
+	 * @throws IOException
+	 */
+	private void createQueryExceptionClasses(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+			String mysqlAPIStorageLocation) throws IOException {
+
+		RecordsQueryExceptionTemplateParser recordsQueryExceptionTemplateParser = new RecordsQueryExceptionTemplateParser();
+		String sourceCode = recordsQueryExceptionTemplateParser
+				.parseQueryExceptionTemplateParser(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+		String sourceFile = JavaProjectFileNames.RECORDS_QUERY_EXCEPTION_CLASS_NAME;
+		String sourceFileStoragePath = mysqlAPIStorageLocation + NativeUtils.getFileSeparator() + sourceFile
+				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
+		new FileStreamWriter().writeStream(new File(sourceFileStoragePath), sourceCode);
+	}
+
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param mysqlAPIStorageLocation
+	 * @throws IOException
+	 */
+	private void createInsertExceptionClasses(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+			String mysqlAPIStorageLocation) throws IOException {
+
+		RecordsInsertExceptionTemplateParser recordsInsertExceptionTemplateParser = new RecordsInsertExceptionTemplateParser();
+		String sourceCode = recordsInsertExceptionTemplateParser
+				.parseInsertExceptionTemplateParser(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+		String sourceFile = JavaProjectFileNames.RECORDS_INSERT_EXCEPTION_CLASS_NAME;
+		String sourceFileStoragePath = mysqlAPIStorageLocation + NativeUtils.getFileSeparator() + sourceFile
+				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
+		new FileStreamWriter().writeStream(new File(sourceFileStoragePath), sourceCode);
+	}
+
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param mysqlAPIStorageLocation
+	 * @throws IOException
+	 */
+	private void createDeleteExceptionClasses(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+			String mysqlAPIStorageLocation) throws IOException {
+
+		RecordsDeleteExceptionTemplateParser recordsDeleteExceptionTemplateParser = new RecordsDeleteExceptionTemplateParser();
+		String sourceCode = recordsDeleteExceptionTemplateParser
+				.parseDeleteExceptionTemplateParser(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
+		String sourceFile = JavaProjectFileNames.RECORDS_DELETE_EXCEPTION_CLASS_NAME;
+		String sourceFileStoragePath = mysqlAPIStorageLocation + NativeUtils.getFileSeparator() + sourceFile
+				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
+		new FileStreamWriter().writeStream(new File(sourceFileStoragePath), sourceCode);
+
 	}
 
 	/**
@@ -124,7 +227,9 @@ public class J2SECrudCreator extends CrudCreator {
 			// STANDARD ISO WAY
 			classPathXML = classPathXML.replace(TemplateTags.Java.CLASS_PATH_XML_CLOSING_ELEMENT,
 					libClassPathItemEntryTemplate + TemplateTags.Java.CLASS_PATH_XML_CLOSING_ELEMENT);
-			new FileStreamWriter().writeStream(new File(projectClassPathConfigFile), classPathXML);
+			// new FileStreamWriter().writeStream(new
+			// File(projectClassPathConfigFile), classPathXML);
+			System.err.println("EDITING BUILD PATH DISABLED in " +this.getClass().getCanonicalName());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

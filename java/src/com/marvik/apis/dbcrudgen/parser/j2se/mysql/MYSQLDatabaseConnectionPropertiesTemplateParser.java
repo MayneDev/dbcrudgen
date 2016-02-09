@@ -5,6 +5,7 @@ package com.marvik.apis.dbcrudgen.parser.j2se.mysql;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.natives.syntax.Syntax.PrintingChars;
+import com.marvik.apis.dbcrudgen.parser.java.j2se.J2SETemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.templates.j2se.classes.MYSQLDatabaseConnectionPropertiesTemplate;
@@ -19,7 +20,11 @@ import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
  * @author victor
  *
  */
-public class MYSQLDatabaseConnectionPropertiesTemplateParser {
+public class MYSQLDatabaseConnectionPropertiesTemplateParser extends J2SETemplatesParser {
+
+	public MYSQLDatabaseConnectionPropertiesTemplateParser() {
+
+	}
 
 	/**
 	 * @param j2seProjectConfiguration

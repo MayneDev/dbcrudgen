@@ -8,9 +8,9 @@ import java.net.SocketException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.foo.test.RecordsInsertException;
-import com.foo.test.RecordsQueryException;
-import com.foo.test.RecordsUpdateException;
+import ${PACKAGE_NAME}.RecordsInsertException;
+import ${PACKAGE_NAME}.RecordsQueryException;
+import ${PACKAGE_NAME}.RecordsUpdateException;
 
 /**
 *Created on Feb 9, 2016-5:15:22 PM by victor

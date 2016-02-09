@@ -47,4 +47,21 @@ public class JavaProjectFileNames {
 	 */
 	public static final String MYSQL_TRANSACTIONS_EXECUTOR_CLASS_NAME = "MYSQLTransactionsExecutor";
 
+	/**
+	 * RECORDS_INSERT_EXCEPTION_CLASS_NAME
+	 */
+	public static final String RECORDS_INSERT_EXCEPTION_CLASS_NAME = "RecordsInsertException";
+	/**
+	 * RECORDS_DELETE_EXCEPTION_CLASS_NAME
+	 */
+	public static final String RECORDS_DELETE_EXCEPTION_CLASS_NAME = "RecordsDeleteException";
+	/**
+	 * RECORDS_UPDATE_EXCEPTION_CLASS_NAME
+	 */
+	public static final String RECORDS_UPDATE_EXCEPTION_CLASS_NAME = "RecordsUpdateException";
+	/**
+	 * RECORDS_QUERY_EXCEPTION_CLASS_NAME
+	 */
+	public static final String RECORDS_QUERY_EXCEPTION_CLASS_NAME = "RecordsQueryException";
+
 }

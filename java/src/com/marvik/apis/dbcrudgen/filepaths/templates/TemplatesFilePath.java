@@ -272,5 +272,22 @@ public class TemplatesFilePath {
 		 */
 		public static final String MYSQL_TRANSACTIONS_WRAPPER_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_mysql_transactions_wrapper.txt";
 
+		/**
+		 * RECORDS_DELETE_EXCEPTION_TEMPLATE_FILE_PATH
+		 */
+		public static final String RECORDS_DELETE_EXCEPTION_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_records_delete_exception.txt";
+		/**
+		 * RECORDS_INSERT_EXCEPTION_TEMPLATE_FILE_PATH
+		 */
+		public static final String RECORDS_INSERT_EXCEPTION_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_records_insert_exception.txt";
+		/**
+		 * RECORDS_QUERY_EXCEPTION_TEMPLATE_FILE_PATH
+		 */
+		public static final String RECORDS_QUERY_EXCEPTION_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_records_query_exception.txt";
+		/**
+		 * RECORDS_UPDATE_EXCEPTION_TEMPLATE_FILE_PATH
+		 */
+		public static final String RECORDS_UPDATE_EXCEPTION_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_records_update_exception.txt";
+
 	}
 }
