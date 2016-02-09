@@ -560,5 +560,10 @@ public class TemplateTags {
 		 * CLASS_PATH_XML_CLOSING_ELEMENT
 		 */
 		public static final CharSequence CLASS_PATH_XML_CLOSING_ELEMENT = "</classpath>";
+
+		/**
+		 * PACKAGE_NAME
+		 */
+		public static final CharSequence PACKAGE_NAME = "${PACKAGE_NAME}";
 	}
 }

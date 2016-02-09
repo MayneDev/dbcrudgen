@@ -1,5 +1,7 @@
 package com.marvik.apis.dbcrudgen;
 
+import java.io.IOException;
+
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.creator.android.AndroidCRUDCreator;
 import com.marvik.apis.dbcrudgen.creator.j2se.J2SECrudCreator;
@@ -20,10 +22,15 @@ public class Main {
 	public static void main(String[] args) {
 		// testAndroidCrudGenerator();
 		// testPHPCrudGenerator();
-		testJ2SECrudCreator();
+		try {
+			testJ2SECrudCreator();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	private static void testJ2SECrudCreator() {
+	private static void testJ2SECrudCreator() throws IOException {
 
 		Database database = prepareDatabase();
 

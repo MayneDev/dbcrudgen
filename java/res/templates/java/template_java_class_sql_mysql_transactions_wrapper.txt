@@ -23,7 +23,7 @@ import com.foo.test.RecordsUpdateException;
 public class TransactionWrapper {
 
 	/**
-	 * TransactionWrapper - Provides API's for performing MYSQL tasks
+	 * TransactionWrapper - Provides API's for performing MYSQL Operations
 	 */
 	public TransactionWrapper() {
 
