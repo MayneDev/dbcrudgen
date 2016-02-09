@@ -3,15 +3,12 @@
  */
 package com.marvik.apis.dbcrudgen.core.databases.mysql;
 
-import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
-import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
 import com.mysql.jdbc.CommunicationsException;
 
 /**

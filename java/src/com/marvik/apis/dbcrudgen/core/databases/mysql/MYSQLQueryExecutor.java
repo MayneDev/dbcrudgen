@@ -19,7 +19,7 @@ import com.mysql.jdbc.CommunicationsException;
 */
 
 /**
- * MYSQLQueryExecutor provides handles for executing MYSQL Queries
+ * MYSQLTransactionsExecutor provides handles for executing MYSQL Queries
  * 
  * @author victor
  *
@@ -27,7 +27,7 @@ import com.mysql.jdbc.CommunicationsException;
 public class MYSQLQueryExecutor {
 
 	/**
-	 * MYSQLQueryExecutor provides handles for executing MYSQL Queries
+	 * MYSQLTransactionsExecutor provides handles for executing MYSQL Queries
 	 */
 
 	private MYSQLDatabaseConnection databaseConnection;
