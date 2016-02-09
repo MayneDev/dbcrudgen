@@ -6,13 +6,14 @@ package com.marvik.apis.dbcrudgen.creator.j2se;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import com.marvik.apis.dbcrudgen.core.toolchains.jdk.JDKFilenames;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.io.writer.FileStreamWriter;
 import com.marvik.apis.dbcrudgen.natives.assets.NativeAssets;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLConnectionTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLDatabaseConnectionPropertiesTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsExecutorTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsWrapperTemplateParser;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectMYSQLDatabaseConfiguration;
@@ -173,14 +174,15 @@ public class J2SECrudCreator extends CrudCreator {
 
 	/**
 	 * create the transaction executor class
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	private void createTransactionExecutorClass(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
 			String mysqlAPIsStorageLocation) throws IOException {
-		MYSQLTransactionsWrapperTemplateParser mysqlTransactionsWrapperTemplateParser = new MYSQLTransactionsWrapperTemplateParser();
-		String sourceCode = mysqlTransactionsWrapperTemplateParser.parseTransactionsWrapper(j2seProjectConfiguration,
+		MYSQLTransactionsExecutorTemplateParser mysqlTransactionsExecutorTemplateParser = new MYSQLTransactionsExecutorTemplateParser();
+		String sourceCode = mysqlTransactionsExecutorTemplateParser.parseTransactionsExecutor(j2seProjectConfiguration,
 				database, mysqlAPIsStorageLocation);
-		String sourceFile = JavaProjectFileNames.MYSQL_TRANSACTIONS_WRAPPER_CLASS_NAME;
+		String sourceFile = JavaProjectFileNames.MYSQL_TRANSACTIONS_EXECUTOR_CLASS_NAME;
 		String sourceFileStoragePath = mysqlAPIsStorageLocation + NativeUtils.getFileSeparator() + sourceFile
 				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
 		new FileStreamWriter().writeStream(new File(sourceFileStoragePath), sourceCode);
@@ -188,14 +190,15 @@ public class J2SECrudCreator extends CrudCreator {
 
 	/**
 	 * create the j2se mysql connection classs
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	private void createJ2SEMYSQLConnectionClass(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
 			String mysqlAPIsStorageLocation) throws IOException {
-		MYSQLTransactionsWrapperTemplateParser mysqlTransactionsWrapperTemplateParser = new MYSQLTransactionsWrapperTemplateParser();
-		String sourceCode = mysqlTransactionsWrapperTemplateParser.parseTransactionsWrapper(j2seProjectConfiguration,
+		J2SEMYSQLConnectionTemplateParser j2semysqlConnectionTemplateParser = new J2SEMYSQLConnectionTemplateParser();
+		String sourceCode = j2semysqlConnectionTemplateParser.parseJ2SEMYSQLConnection(j2seProjectConfiguration,
 				database, mysqlAPIsStorageLocation);
-		String sourceFile = JavaProjectFileNames.MYSQL_TRANSACTIONS_WRAPPER_CLASS_NAME;
+		String sourceFile = JavaProjectFileNames.J2SE_MYSQL_DATABASE_CONNECTION_CLASS_NAME;
 		String sourceFileStoragePath = mysqlAPIsStorageLocation + NativeUtils.getFileSeparator() + sourceFile
 				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
 		new FileStreamWriter().writeStream(new File(sourceFileStoragePath), sourceCode);
@@ -203,14 +206,15 @@ public class J2SECrudCreator extends CrudCreator {
 
 	/**
 	 * create the database connection properties class
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	private void createDatabaseConnectionPropertiesClass(J2SEProjectConfiguration j2seProjectConfiguration,
 			Database database, String mysqlAPIsStorageLocation) throws IOException {
-		MYSQLTransactionsWrapperTemplateParser mysqlTransactionsWrapperTemplateParser = new MYSQLTransactionsWrapperTemplateParser();
-		String sourceCode = mysqlTransactionsWrapperTemplateParser.parseTransactionsWrapper(j2seProjectConfiguration,
-				database, mysqlAPIsStorageLocation);
-		String sourceFile = JavaProjectFileNames.MYSQL_TRANSACTIONS_WRAPPER_CLASS_NAME;
+		MYSQLDatabaseConnectionPropertiesTemplateParser mysqlDatabaseConnectionPropertiesTemplateParser = new MYSQLDatabaseConnectionPropertiesTemplateParser();
+		String sourceCode = mysqlDatabaseConnectionPropertiesTemplateParser
+				.parseTransactionsWrapper(j2seProjectConfiguration, database, mysqlAPIsStorageLocation);
+		String sourceFile = JavaProjectFileNames.MYSQL_DATABASE_CONNECTION_PROPERTIES_CLASS_NAME;
 		String sourceFileStoragePath = mysqlAPIsStorageLocation + NativeUtils.getFileSeparator() + sourceFile
 				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
 		new FileStreamWriter().writeStream(new File(sourceFileStoragePath), sourceCode);

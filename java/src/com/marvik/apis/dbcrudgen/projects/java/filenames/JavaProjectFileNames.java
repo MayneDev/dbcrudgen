@@ -26,25 +26,25 @@ public class JavaProjectFileNames {
 	public static final String MYSQL_TRANSACTIONS_WRAPPER_CLASS_NAME = "TransactionWrapper";
 
 	/**
-	 * MYSQL_DATABASE_CONNECTION
+	 * J2SE_MYSQL_DATABASE_CONNECTION_CLASS_NAME
 	 * 
 	 * 
 	 * Creates and maintains database connectionsF
 	 */
-	public static final String MYSQL_DATABASE_CONNECTION = "MYSQLDatabaseConnection";
+	public static final String J2SE_MYSQL_DATABASE_CONNECTION_CLASS_NAME = "MYSQLDatabaseConnection";
 
 	/**
-	 * MYSQL_DATABASE_CONNECTION_PROPERTIES
+	 * MYSQL_DATABASE_CONNECTION_PROPERTIES_CLASS_NAME
 	 * 
 	 * Provided the database connection properties
 	 */
-	public static final String MYSQL_DATABASE_CONNECTION_PROPERTIES = "MYSQLDefaultConnectionProperties";
+	public static final String MYSQL_DATABASE_CONNECTION_PROPERTIES_CLASS_NAME = "MYSQLDefaultConnectionProperties";
 
 	/**
-	 * MYSQL_TRANSACTIONS_EXECUTOR
+	 * MYSQL_TRANSACTIONS_EXECUTOR_CLASS_NAME
 	 * 
 	 * Provides handles for executing MYSQL Queries
 	 */
-	public static final String MYSQL_TRANSACTIONS_EXECUTOR = "MYSQLTransactionsExecutor";
+	public static final String MYSQL_TRANSACTIONS_EXECUTOR_CLASS_NAME = "MYSQLTransactionsExecutor";
 
 }

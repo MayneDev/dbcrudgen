@@ -16,9 +16,9 @@ import com.marvik.apis.dbcrudgen.templates.j2se.crud.J2SECRUDTemplates;
  * @author victor
  *
  */
-public class DatabaseConnectionPropertiesTemplate  extends J2SECRUDTemplates {
+public class MYSQLDatabaseConnectionPropertiesTemplate  extends J2SECRUDTemplates {
 
-	public DatabaseConnectionPropertiesTemplate() {
+	public MYSQLDatabaseConnectionPropertiesTemplate() {
 
 	}
 
