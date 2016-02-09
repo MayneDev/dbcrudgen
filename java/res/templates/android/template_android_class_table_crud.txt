@@ -254,5 +254,30 @@ import $TABLE_MODEL_CLASS;
             return $TABLE_MODEL_OBJECT;
         }
         
+        
+        /**
+     * Performs the passed query and returns the first value of the query results
+     *
+     * @param selection
+     * @param queryColumn
+     * @return the first 
+     */
+    public String performRawQuery(String selection, String queryColumn) {
+        String data = "";
+        Cursor cursor = query(null, selection, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            data = cursor.getString(cursor.getColumnIndex(queryColumn));
+        }
+        if (cursor != null) {
+            if (cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return data;
+    }
+    
         $COLUMN_SPECIFIC_QUERY_METHODS
+        
+        
     }
