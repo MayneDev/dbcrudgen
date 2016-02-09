@@ -149,4 +149,13 @@ public class FilesHandler {
 		return null;
 	}
 
+	/**
+	 * @param jdbcJarFilePath
+	 * @param jdbcJarStorageLocation
+	 */
+	public void copyFile(String jdbcJarFilePath, String jdbcJarStorageLocation) {
+		fileStreamWriter.copyFile(jdbcJarFilePath, jdbcJarStorageLocation);
+
+	}
+
 }
