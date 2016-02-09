@@ -1,8 +1,13 @@
 package com.marvik.apis.dbcrudgen.io.writer;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class FileStreamWriter {
@@ -38,7 +43,7 @@ public class FileStreamWriter {
 		osw.flush();
 		osw.close();
 		fos.close();
-		
+
 		System.out.println("Created file [" + file.getAbsolutePath() + "]");
 	}
 
@@ -91,5 +96,42 @@ public class FileStreamWriter {
 			return true;
 		}
 		return file.delete();
+	}
+
+	/**
+	 * Creates a file on the disk
+	 * 
+	 * @param jdbcJarFilePath
+	 * @param jdbcJarStorageLocation
+	 * @return
+	 */
+	public void copyFile(String jdbcJarFilePath, String jdbcJarStorageLocation) {
+		try {
+			FileInputStream fileInputStream = new FileInputStream(new File(jdbcJarFilePath));
+			int count = 0;
+			byte[] buffer = new byte[1024];
+
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+
+			FileOutputStream fileOutputStream = new FileOutputStream(new File(jdbcJarStorageLocation));
+
+			while ((count = bufferedInputStream.read(buffer)) != -1) {
+				fileOutputStream.write(buffer, 0, count);
+			}
+
+			fileOutputStream.close();
+
+			bufferedInputStream.close();
+
+			fileInputStream.close();
+
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 }
