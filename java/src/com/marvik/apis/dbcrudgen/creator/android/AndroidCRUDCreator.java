@@ -133,10 +133,10 @@ public class AndroidCRUDCreator extends CrudCreator {
 		String tablesCRUDStorageLocation = getAndroidDatabaseConfiguration().getTablesCRUDPackage();
 		createDirectory(
 				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDStorageLocation);
-/*
+
 		// Create table schemas source file and saves it on disk
 		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, tablesShemasStorageLocation);
-
+/*
 		// Create the database content provider file and saves it on disk
 		createContentProviderSourceFile(projectFilesDefaultStorageDirectory, contentProviderPackage, database);
 
@@ -146,8 +146,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		// create CRUD Operations interface
 
 		createAbstractCRUDOperationsSourceFile(projectFilesDefaultStorageDirectory, tablesCRUDStorageLocation);
-
-*/		// create table custom CRUD class
+		// create table custom CRUD class
 		String tablesSchemasPackage = packageName + NativeTemplateTags.DOT
 				+ NativeUtils.parseJavaPackage(tablesShemasStorageLocation);
 		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, packageName, tablesSchemasPackage,

@@ -540,5 +540,25 @@ public class TemplateTags {
 		 * DATATYPE
 		 */
 		public static final CharSequence DATATYPE = "$DATATYPE";
+
+		/**
+		 * CLASS_PATH_ITEM_KIND
+		 */
+		public static final CharSequence CLASS_PATH_ITEM_KIND = "${ITEM_KIND}";
+
+		/**
+		 * CLASS_PATH_ITEM_PATH
+		 */
+		public static final String CLASS_PATH_ITEM_PATH = "${ITEM_PATH}";
+
+		/**
+		 * CLASS_PATH_ITEM_KIND_LIB
+		 */
+		public static final CharSequence CLASS_PATH_ITEM_KIND_LIB = "lib";
+
+		/**
+		 * CLASS_PATH_XML_CLOSING_ELEMENT
+		 */
+		public static final CharSequence CLASS_PATH_XML_CLOSING_ELEMENT = "</classpath>";
 	}
 }

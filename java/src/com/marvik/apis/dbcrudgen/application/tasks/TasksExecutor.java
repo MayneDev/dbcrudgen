@@ -247,6 +247,7 @@ public class TasksExecutor {
 				DataType dataType = new DataType(type, constraints);
 
 				if (key.equalsIgnoreCase(MYSQLGrammar.Keys.PRIMARY_KEY)) {
+					dataType = new DataType("integer", new Constraints("PRIMARY KEY AUTO_INCREMENT"));
 					primaryKey = new PrimaryKey(field, dataType);
 				} else {
 					TableColumn tableColumn = new TableColumn(field, dataType);

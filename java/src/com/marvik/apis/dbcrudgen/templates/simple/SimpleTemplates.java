@@ -88,6 +88,11 @@ public class SimpleTemplates {
 		 */
 		public static final String JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE = "this.$OBJECT = $OBJECT;";
 
+		/**
+		 * CLASS_PATH_ITEM_ENTRY
+		 */
+		public static final String CLASS_PATH_ITEM_ENTRY = "<classpathentry exported=\"true\" kind=\"${ITEM_KIND}\" path=\"${ITEM_PATH}\"/>";
+
 	}
 
 	public static class FileNameTemplates {

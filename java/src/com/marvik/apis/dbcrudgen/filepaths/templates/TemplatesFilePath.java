@@ -252,5 +252,25 @@ public class TemplatesFilePath {
 		 */
 		public static final String JAVA_INFO_CLASS_MODEL_FILEPATH = "res/templates/java/template_java_info_class_model.txt";
 
+		/**
+		 * MYSQL_TRANSACTIONS_EXECUTOR_TEMPLATE_FILE_PATH
+		 */
+		public static final String MYSQL_TRANSACTIONS_EXECUTOR_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_mysql_transactions_executor.txt";
+
+		/**
+		 * DATABASE_CONNECTION_PROPERTIES_TEMPLATE_FILE_PATH
+		 */
+		public static final String DATABASE_CONNECTION_PROPERTIES_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_mysql_database_connection_properties.txt";
+
+		/**
+		 * J2SE_MYSQL_CONNECTION_TEMPLATE_FILE_PATH
+		 */
+		public static final String J2SE_MYSQL_CONNECTION_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_mysql_database_connection.txt";
+
+		/**
+		 * MYSQL_TRANSACTIONS_WRAPPER_TEMPLATE_FILE_PATH
+		 */
+		public static final String MYSQL_TRANSACTIONS_WRAPPER_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_mysql_transactions_wrapper.txt";
+
 	}
 }

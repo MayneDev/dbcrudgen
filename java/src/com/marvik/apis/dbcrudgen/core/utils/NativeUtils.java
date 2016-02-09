@@ -67,7 +67,7 @@ public final class NativeUtils {
 	 * @return
 	 */
 	public static String parsePackagePath(String packageName) {
-		return packageName.replace(NativeTemplateTags.DOT, NativeTemplateTags.FORWARD_SLASH);
+		return packageName.replace(NativeTemplateTags.DOT, NativeUtils.getFileSeparator());
 	}
 
 	public static String createJavaVariable(JavaObjectAccessibility javaAccessibility, String dataType,
