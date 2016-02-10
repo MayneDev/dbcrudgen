@@ -1,5 +1,9 @@
 package com.marvik.apis.dbcrudgen.schemamodels.tables;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.ForeignKeys;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
@@ -41,76 +45,79 @@ public class Table {
 	 * @param tableName
 	 * @param tableColumn
 	 * @param tableSql
-	 *//*
-	public Table(String tableName, TableColumn[] columns, String tableSql) {
-		new Table(tableName, columns, tableSql, null, null, null);
-	}
-
-	*//**
-	 * @param tableName
-	 * @param tableColumn
-	 * @param tableSql
-	 * @param primaryKey
-	 *//*
-	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey) {
-		new Table(tableName, columns, tableSql, primaryKey, null, null);
-	}
-
-	*//**
-	 * @param tableName
-	 * @param tableColumn
-	 * @param tableSql
-	 * @param primaryKey
-	 * @param foreignKeys
-	 *//*
-	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey,
-			ForeignKeys[] foreignKeys) {
-		new Table(tableName, columns, tableSql, primaryKey, foreignKeys, null);
-	}
-
-	*//**
-	 * @param tableName
-	 * @param tableColumn
-	 * @param tableSql
-	 * @param primaryKey
-	 * @param uniqueKeys
-	 *//*
-	public Table(String tableName, TableColumn[] columns, String tableSql, PrimaryKey primaryKey,
-			UniqueKeys[] uniqueKeys) {
-		new Table(tableName, columns, tableSql, primaryKey, null, uniqueKeys);
-	}
-
-	*//**
-	 * @param tableName
-	 * @param tableColumn
-	 * @param tableSql
-	 * @param foreignKeys
-	 * @param uniqueKeys
-	 *//*
-	public Table(String tableName, TableColumn[] columns, String tableSql, ForeignKeys[] foreignKeys,
-			UniqueKeys[] uniqueKeys) {
-		new Table(tableName, columns, tableSql, null, foreignKeys, uniqueKeys);
-	}
-
-	*//**
-	 * @param tableName
-	 * @param tableColumn
-	 * @param tableSql
-	 * @param foreignKeys
-	 *//*
-	public Table(String tableName, TableColumn[] columns, String tableSql, ForeignKeys[] foreignKeys) {
-		new Table(tableName, columns, tableSql, null, foreignKeys, null);
-	}
-
-	*//**
-	 * @param tableName
-	 * @param tableColumn
-	 * @param tableSql
-	 * @param uniqueKeys
-	 *//*
-	public Table(String tableName, TableColumn[] columns, String tableSql, UniqueKeys[] uniqueKeys) {
-		new Table(tableName, columns, tableSql, null, null, uniqueKeys);
-	}*/
+	 */
+	/*
+	 * public Table(String tableName, TableColumn[] columns, String tableSql) {
+	 * new Table(tableName, columns, tableSql, null, null, null); }
+	 * 
+	 *//**
+		 * @param tableName
+		 * @param tableColumn
+		 * @param tableSql
+		 * @param primaryKey
+		 */
+	/*
+	 * public Table(String tableName, TableColumn[] columns, String tableSql,
+	 * PrimaryKey primaryKey) { new Table(tableName, columns, tableSql,
+	 * primaryKey, null, null); }
+	 * 
+	 *//**
+		 * @param tableName
+		 * @param tableColumn
+		 * @param tableSql
+		 * @param primaryKey
+		 * @param foreignKeys
+		 */
+	/*
+	 * public Table(String tableName, TableColumn[] columns, String tableSql,
+	 * PrimaryKey primaryKey, ForeignKeys[] foreignKeys) { new Table(tableName,
+	 * columns, tableSql, primaryKey, foreignKeys, null); }
+	 * 
+	 *//**
+		 * @param tableName
+		 * @param tableColumn
+		 * @param tableSql
+		 * @param primaryKey
+		 * @param uniqueKeys
+		 */
+	/*
+	 * public Table(String tableName, TableColumn[] columns, String tableSql,
+	 * PrimaryKey primaryKey, UniqueKeys[] uniqueKeys) { new Table(tableName,
+	 * columns, tableSql, primaryKey, null, uniqueKeys); }
+	 * 
+	 *//**
+		 * @param tableName
+		 * @param tableColumn
+		 * @param tableSql
+		 * @param foreignKeys
+		 * @param uniqueKeys
+		 */
+	/*
+	 * public Table(String tableName, TableColumn[] columns, String tableSql,
+	 * ForeignKeys[] foreignKeys, UniqueKeys[] uniqueKeys) { new
+	 * Table(tableName, columns, tableSql, null, foreignKeys, uniqueKeys); }
+	 * 
+	 *//**
+		 * @param tableName
+		 * @param tableColumn
+		 * @param tableSql
+		 * @param foreignKeys
+		 */
+	/*
+	 * public Table(String tableName, TableColumn[] columns, String tableSql,
+	 * ForeignKeys[] foreignKeys) { new Table(tableName, columns, tableSql,
+	 * null, foreignKeys, null); }
+	 * 
+	 *//**
+		 * @param tableName
+		 * @param tableColumn
+		 * @param tableSql
+		 * @param uniqueKeys
+		 *//*
+		 * public Table(String tableName, TableColumn[] columns, String
+		 * tableSql, UniqueKeys[] uniqueKeys) { new Table(tableName, columns,
+		 * tableSql, null, null, uniqueKeys); }
+		 */
 
 	/**
 	 * @return the foreignKeys
@@ -210,4 +217,35 @@ public class Table {
 		this.primaryKey = primaryKey;
 	}
 
+	/**
+	 * {@link Table#getTableColumnsAll(Table)}
+	 * 
+	 * Returns an array of table columns
+	 * 
+	 * @return TableColumn[]
+	 */
+	public TableColumn[] getTableColumnsAll() {
+
+		TableColumn[] tableColumns = getColumns();
+
+		List<TableColumn> allTableColumns = new ArrayList<>();
+
+		// Add primary key column as the last
+		if (getPrimaryKey() != null) {
+			PrimaryKey primaryKey = getPrimaryKey();
+			String primaryKeyColumn = primaryKey.getColumnName();
+			allTableColumns.add(new TableColumn(primaryKeyColumn, primaryKey.getDataType()));
+		}
+
+		for (TableColumn tableColumn : tableColumns) {
+			allTableColumns.add(tableColumn);
+		}
+
+		tableColumns = new TableColumn[allTableColumns.size()];
+
+		for (int i = 0; i < allTableColumns.size(); i++) {
+			tableColumns[i] = allTableColumns.get(i);
+		}
+		return tableColumns;
+	}
 }

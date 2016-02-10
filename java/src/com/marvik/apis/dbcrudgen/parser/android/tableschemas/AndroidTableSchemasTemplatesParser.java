@@ -180,7 +180,7 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 
 		String tableColumns = "";
 
-		TableColumn[] columns = getTableColumnsAll(table);
+		TableColumn[] columns = table.getTableColumnsAll();
 
 		for (int i = 0; i < columns.length; i++) {
 

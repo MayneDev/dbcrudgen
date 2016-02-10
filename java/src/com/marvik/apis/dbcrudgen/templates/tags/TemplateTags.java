@@ -534,12 +534,12 @@ public class TemplateTags {
 		/**
 		 * OBJECT
 		 */
-		public static final CharSequence OBJECT = "$OBJECT";
+		public static final CharSequence OBJECT = "${OBJECT}";
 
 		/**
 		 * DATATYPE
 		 */
-		public static final CharSequence DATATYPE = "$DATATYPE";
+		public static final CharSequence DATATYPE = "${DATATYPE}";
 
 		/**
 		 * CLASS_PATH_ITEM_KIND
@@ -565,5 +565,61 @@ public class TemplateTags {
 		 * PACKAGE_NAME
 		 */
 		public static final CharSequence PACKAGE_NAME = "${PACKAGE_NAME}";
+		/**
+		 * TAG DATABASE_TABLES_SQL_VARIABLE
+		 */
+		public static final CharSequence DATABASE_TABLES_SQL_VARIABLE = "${TABLE_SQL}";
+		/**
+		 * TAG JAVA_BEANS_CLASS_NAME
+		 */
+		public static final CharSequence JAVA_BEANS_CLASS_NAME = "${JAVA_BEANS_CLASS_NAME}";
+		/**
+		 * TAG TABLES_PACKAGE_DEFINITION
+		 */
+		public static final CharSequence TABLES_PACKAGE_DEFINITION = "${TABLES_PACKAGE_DEFINITION}";
+		/**
+		 * TAG DATABASE_TABLES_SCHEMAS
+		 */
+		public static final CharSequence DATABASE_TABLES_SCHEMAS = "${DATABASE_TABLES_SCHEMAS}";
+		/**
+		 * TAG_TABLE_COLUMNS
+		 */
+		public static final CharSequence TABLE_COLUMNS = "${TABLE_COLUMNS}";
+		/**
+		 * TAG TABLE_COLUMNS_COMMA_SEPARATOR
+		 */
+		public static final CharSequence TABLE_COLUMNS_COMMA_SEPARATOR = "${TABLE_COLUMNS_COMMA_SEPARATOR}";
+		/**
+		 * TAG TABLE_COLUMN_DEFINITION
+		 */
+		public static final String TABLE_COLUMN_DEFINITION = "${TABLE_COLUMN_DEFINITION}";
+		/**
+		 * TAG TABLE_COLUMN_DATATYPE
+		 */
+		public static final String TABLE_COLUMN_DATATYPE = "${TABLE_COLUMN_DATATYPE}";
+		/**
+		 * TAG TABLE_CREATE_SQL
+		 */
+		public static final CharSequence TABLE_CREATE_SQL = "${TABLE_CREATE_SQL}";
+
+		/**
+		 * TAG TABLE NAME
+		 */
+		public static final CharSequence TABLE_NAME = "${TABLE_NAME}";
+		/**
+		 * TAG TABLE_JAVA_BEANS_CLASS_NAME
+		 */
+		public static final CharSequence TABLE_JAVA_BEANS_CLASS_NAME = "${TABLE_JAVA_BEANS_CLASS_NAME}";
+
+		/**
+		 * TAG_TABLE_COLUMN_DEFINITION
+		 */
+		public static final CharSequence TAG_TABLE_COLUMN_DEFINITION = "${TABLE_COLUMN_DEFINITION}";
+
+		/**
+		 * TAG_TABLE_COLUMN_REFERENCE
+		 */
+		public static final CharSequence TAG_TABLE_COLUMN_REFERENCE = "${TABLE_COLUMN_REFERENCE}";
+
 	}
 }

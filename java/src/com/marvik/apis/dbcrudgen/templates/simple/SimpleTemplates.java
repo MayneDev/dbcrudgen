@@ -3,11 +3,11 @@ package com.marvik.apis.dbcrudgen.templates.simple;
 public class SimpleTemplates {
 	public static class Android {
 		/**
-		 * ANDROID_DATABASE_TABLE_SQL_VARIABLE
+		 * J2SE_MYSQL_DATABASE_TABLE_SQL_VARIABLE
 		 */
 		public static final String ANDROID_DATABASE_TABLE_SQL_VARIABLE = "$JAVA_BEANS_CLASS_NAME.SQL";
 		/**
-		 * ANDROID_DATABASE_TABLE_SQL_VARIABLE
+		 * J2SE_MYSQL_DATABASE_TABLE_SQL_VARIABLE
 		 */
 		public static final String URI_MATCHER_CODE_SUFFIX = "_URI_MATCHER_CODE";
 
@@ -92,7 +92,10 @@ public class SimpleTemplates {
 		 * CLASS_PATH_ITEM_ENTRY
 		 */
 		public static final String CLASS_PATH_ITEM_ENTRY = "<classpathentry exported=\"true\" kind=\"${ITEM_KIND}\" path=\"${ITEM_PATH}\"/>";
-
+		/**
+		 * J2SE_MYSQL_DATABASE_TABLE_SQL_VARIABLE
+		 */
+		public static final String J2SE_MYSQL_DATABASE_TABLE_SQL_VARIABLE = "${JAVA_BEANS_CLASS_NAME}.SQL";
 	}
 
 	public static class FileNameTemplates {

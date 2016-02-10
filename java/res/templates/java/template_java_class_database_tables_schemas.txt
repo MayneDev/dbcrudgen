@@ -1,0 +1,11 @@
+package ${PACKAGE_NAME};
+
+
+public class TableSchemas {
+
+    public static final String[] TABLES_SQL = {
+            ${TABLE_SQL}
+    };
+
+	${DATABASE_TABLES_SCHEMAS}
+}

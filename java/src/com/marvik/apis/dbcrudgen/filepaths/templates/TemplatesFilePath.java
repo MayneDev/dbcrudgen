@@ -289,5 +289,30 @@ public class TemplatesFilePath {
 		 */
 		public static final String RECORDS_UPDATE_EXCEPTION_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_sql_records_update_exception.txt";
 
+		/**
+		 * J2SE_MYSQL_CLASS_DATABASE_TABLES_SCHEMAS_TEMPLATE_FILE_PATH
+		 */
+		public static final String J2SE_MYSQL_CLASS_DATABASE_TABLES_SCHEMAS_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_database_tables_schemas.txt";
+
+		/**
+		 * J2SE_MYSQL_TABLE_SCHEMAS_CLASS_TEMPLATE_FILE_PATH
+		 */
+		public static final String J2SE_MYSQL_TABLE_SCHEMAS_CLASS_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_mysql_table_schemas.txt";
+
+		/**
+		 * J2SE_MYSQL_TABLE_COLUMN_VARIABLE_DEFINITION_TEMPLATE_FILE_PATH
+		 */
+		public static final String J2SE_MYSQL_TABLE_COLUMN_VARIABLE_DEFINITION_TEMPLATE_FILE_PATH = "res/templates/java/template_java_variable_table_column_definition.txt";
+
+		/**
+		 * J2SE_MYSQL_TABLE_CREATE_SQL_TEMPLATE_FILE_PATH
+		 */
+		public static final String J2SE_MYSQL_TABLE_CREATE_SQL_TEMPLATE_FILE_PATH = "res/templates/java/template_java_variable_table_create_sql.txt";
+
+		/**
+		 * J2SE_MYSQl_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_TEMPLATE_FILE_PATH
+		 */
+		public static final String J2SE_MYSQl_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_TEMPLATE_FILE_PATH = "res/templates/java/template_java_statement_sql_table_column_statement.txt";
+
 	}
 }

@@ -126,7 +126,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 		String tableName = table.getTableName();
 		String tableModelClass = NativeUtils.toJavaBeansClass(tableName) + TemplateTags.Android.INFO;
 
-		TableColumn[] tableColumns = getTableColumnsAll(table);
+		TableColumn[] tableColumns = table.getTableColumnsAll();
 
 		String constructorParams = "";
 		for (int i = 0; i < tableColumns.length; i++) {
@@ -158,7 +158,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	private String createAndroidSqlSelectionSearchStatement(String sqlSearchStatement, Table table) {
 		String sqlSearchSelection = "";
 
-		TableColumn[] tableColumns = getTableColumnsAll(table);
+		TableColumn[] tableColumns = table.getTableColumnsAll();
 
 		for (int i = 0; i < tableColumns.length; i++) {
 
@@ -196,7 +196,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 	// Create Methods to read cursor items
 	private String createColumnsCursorItemsGetMethods(Table table) {
 
-		TableColumn[] tableColumns = getTableColumnsAll(table);
+		TableColumn[] tableColumns = table.getTableColumnsAll();
 
 		String tableColumnsCursorGetters = "";
 

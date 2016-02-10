@@ -1,7 +1,7 @@
-public $DATATYPE get$JAVA_BEANS_OBJECT (){
-	return $OBJECT;
+public $DATATYPE get${JAVA_BEANS_OBJECT} (){
+	return ${OBJECT};
 }
 
-public void set$JAVA_BEANS_OBJECT ($DATATYPE $OBJECT){
-	this.$OBJECT = $OBJECT;
+public void set${JAVA_BEANS_OBJECT} (${DATATYPE} ${OBJECT}){
+	this.${OBJECT} = ${OBJECT};
 }

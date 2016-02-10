@@ -1,9 +1,5 @@
 package com.marvik.apis.dbcrudgen.creator.android;
 
-import java.io.File;
-
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
@@ -24,8 +20,6 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTransactionsManagerTemplate;
-import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates.FileNameTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
 public class AndroidCRUDCreator extends CrudCreator {
@@ -337,24 +331,4 @@ public class AndroidCRUDCreator extends CrudCreator {
 		
 		createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemasSourceCode);
 	}
-
-	/**
-	 * Creates a source file
-	 * 
-	 * @param absoluteFileName
-	 * @param sourceCode
-	 */
-	private boolean createSourceFile(String absoluteFileName, String sourceCode) {
-		return getFilesHandler().createByteWeighedFile(absoluteFileName, sourceCode);
-	}
-
-	/**
-	 * Creates a directory
-	 * 
-	 * @param directory
-	 */
-	private void createDirectory(String directory) {
-		getFilesHandler().createDirectories(new File(directory));
-	}
-
 }

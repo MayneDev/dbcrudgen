@@ -135,7 +135,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 	private AndroidStatementContentProviderSQLUpdateTemplate androidStatementContentProviderSQLUpdateTemplate;
 
 	/**
-	 * AndroidStatementSQLTableColumnStatementTemplate
+	 * J2SEMYSQLStatementSQLTableColumnStatementTemplate
 	 */
 	private AndroidStatementSQLTableColumnStatementTemplate androidStatementSQLTableColumnStatementTemplate;
 
@@ -622,35 +622,5 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
 	}
 
-	/**
-	 * {@link AndroidTemplatesParser#getTableColumnsAll(Table)}
-	 * 
-	 * Returns an array of table columns
-	 * 
-	 * @return TableColumn[]
-	 */
-	protected TableColumn[] getTableColumnsAll(Table table) {
-
-		TableColumn[] tableColumns = table.getColumns();
-
-		List<TableColumn> allTableColumns = new ArrayList<>();
-
-		// Add primary key column as the last
-		if (table.getPrimaryKey() != null) {
-			PrimaryKey primaryKey = table.getPrimaryKey();
-			String primaryKeyColumn = primaryKey.getColumnName();
-			allTableColumns.add(new TableColumn(primaryKeyColumn, primaryKey.getDataType()));
-		}
-
-		for (TableColumn tableColumn : tableColumns) {
-			allTableColumns.add(tableColumn);
-		}
-
-		tableColumns = new TableColumn[allTableColumns.size()];
-
-		for (int i = 0; i < allTableColumns.size(); i++) {
-			tableColumns[i] = allTableColumns.get(i);
-		}
-		return tableColumns;
-	}
+	
 }

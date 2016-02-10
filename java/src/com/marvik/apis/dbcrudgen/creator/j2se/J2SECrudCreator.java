@@ -12,6 +12,7 @@ import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.io.writer.FileStreamWriter;
 import com.marvik.apis.dbcrudgen.natives.assets.NativeAssets;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLConnectionTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLTableSchemasTemplatesParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLDatabaseConnectionPropertiesTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsExecutorTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsWrapperTemplateParser;
@@ -55,6 +56,21 @@ public class J2SECrudCreator extends CrudCreator {
 	 */
 	public void createProject(J2SEProjectConfiguration j2seProjectConfiguration, Database database) throws IOException {
 
+		// Create all the source codes storage directories
+		createAllStorageDirs(j2seProjectConfiguration, database);
+
+		// Create all source codes
+		createSourceCodes(j2seProjectConfiguration, database);
+
+	}
+
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param mysqlAPIStorageLocation
+	 */
+	private void createAllStorageDirs(J2SEProjectConfiguration j2seProjectConfiguration, Database database) {
+
 		// Create project folder if it does not exists
 		String projectStorageDir = j2seProjectConfiguration.getProjectStorageDir();
 		getFilesHandler().createDirectories(projectStorageDir);
@@ -72,8 +88,6 @@ public class J2SECrudCreator extends CrudCreator {
 		String libsStorageDirs = j2seProjectConfiguration.getLibsStorageDirs();
 		getFilesHandler().createDirectories(projectStorageDir + NativeUtils.getFileSeparator() + projectName
 				+ NativeUtils.getFileSeparator() + libsStorageDirs);
-
-		// TODO ADD CODE TO AD LIBS TO CLASS PATH
 
 		// Create the projects main package dirs
 		String packageName = j2seProjectConfiguration.getPackageName();
@@ -95,10 +109,38 @@ public class J2SECrudCreator extends CrudCreator {
 		J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = j2seProjectConfiguration
 				.getJ2SEProjectMYSQLDatabaseConfiguration();
 		String mysqlAPISrcDirs = j2seProjectMYSQLDatabaseConfiguration.getMysqlAPIsClassesSrcDirs();
+
 		String mysqlAPIStorageLocation = projectStorageDir + NativeUtils.getFileSeparator() + projectName
 				+ NativeUtils.getFileSeparator() + javaSrcDirs + NativeUtils.getFileSeparator()
 				+ NativeUtils.parsePackagePath(packageName) + NativeUtils.getFileSeparator() + mysqlAPISrcDirs;
 		getFilesHandler().createDirectories(mysqlAPIStorageLocation);
+
+	}
+
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param mysqlAPIStorageLocation
+	 * @throws IOException
+	 */
+	private void createSourceCodes(J2SEProjectConfiguration j2seProjectConfiguration, Database database)
+			throws IOException {
+
+		String projectStorageDir = j2seProjectConfiguration.getProjectStorageDir();
+		String projectName = j2seProjectConfiguration.getProjectName();
+		String packageName = j2seProjectConfiguration.getPackageName();
+		String javaSrcDirs = j2seProjectConfiguration.getJavaSrcDirs();
+
+		J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = j2seProjectConfiguration
+				.getJ2SEProjectMYSQLDatabaseConfiguration();
+
+		String projectFilesDefaultStorageDirectory = projectStorageDir + NativeUtils.getFileSeparator() + projectName
+				+ NativeUtils.getFileSeparator() + javaSrcDirs + NativeUtils.getFileSeparator()
+				+ NativeUtils.parsePackagePath(packageName);
+
+		String mysqlAPISrcDirs = j2seProjectMYSQLDatabaseConfiguration.getMysqlAPIsClassesSrcDirs();
+		String mysqlAPIStorageLocation = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
+				+ mysqlAPISrcDirs;
 
 		// Create MYSQL APIS
 		createMYSQLAPIS(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
@@ -106,6 +148,37 @@ public class J2SECrudCreator extends CrudCreator {
 		// Create SQL EXCEPTIONS CLASSES
 		createSQLExceptionClasses(j2seProjectConfiguration, database, mysqlAPIStorageLocation);
 
+		// Create table schemas class
+		createTablesSchemasSourceFile(j2seProjectConfiguration, database, projectFilesDefaultStorageDirectory);
+	}
+
+	/**
+	 * {@link J2SECrudCreator}#createTablesSchemasSourceFile
+	 * 
+	 * Creates all the source code for all the tables schemas and saves the
+	 * source code to the disk.
+	 * 
+	 * @param j2seProjectConfiguration
+	 * 
+	 * @param database
+	 * @param projectFilesDefaultStorageDirectory
+	 * @param databaseTablesPackage
+	 */
+	private void createTablesSchemasSourceFile(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+			String projectFilesDefaultStorageDirectory) {
+
+		J2SEMYSQLTableSchemasTemplatesParser j2semysqlTableSchemasTemplatesParser = new J2SEMYSQLTableSchemasTemplatesParser();
+
+		String databaseTablesSchemasPackage = j2seProjectConfiguration.getJ2SEProjectMYSQLDatabaseConfiguration().getTableSchemasSrcDir();
+		String tablesSchemasSourceCode = j2semysqlTableSchemasTemplatesParser
+				.createTablesSchemas(j2seProjectConfiguration, database.getTables());
+		
+		String tablesSchemasAbsoluteSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
+				+ databaseTablesSchemasPackage + NativeUtils.getFileSeparator() + JavaProjectFileNames.TABLE_SCHEMAS_FILE_NAME
+				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
+
+		
+		createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemasSourceCode);
 	}
 
 	/**
@@ -229,7 +302,7 @@ public class J2SECrudCreator extends CrudCreator {
 					libClassPathItemEntryTemplate + TemplateTags.Java.CLASS_PATH_XML_CLOSING_ELEMENT);
 			// new FileStreamWriter().writeStream(new
 			// File(projectClassPathConfigFile), classPathXML);
-			System.err.println("EDITING BUILD PATH DISABLED in " +this.getClass().getCanonicalName());
+			System.err.println("EDITING BUILD PATH DISABLED in " + this.getClass().getCanonicalName());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
