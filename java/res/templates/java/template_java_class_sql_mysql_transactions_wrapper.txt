@@ -73,7 +73,7 @@ public class TransactionWrapper {
 	 * @param values
 	 * @throws SQLException
 	 */
-	public void insert(String table, String[] columns, String[] values) throws SQLException {
+	public boolean insert(String table, String[] columns, String[] values,boolean printSQL) throws SQLException {
 
 		if (table.length() == 0 || table == null) {
 			throw new NullPointerException("Invalid Table name ");
@@ -101,6 +101,11 @@ public class TransactionWrapper {
 			}
 		}
 		insertStatement += ");";
+		
+		if(printSQL){
+			System.out.println(printSQL);
+		}
+		return getMYSQLTransactionsExecutor().execute(insertStatement);
 	}
 
 	/**
@@ -240,6 +245,19 @@ public class TransactionWrapper {
 			System.out.println("statement.executeUpdate(" + queryStatement + ")");
 		}
 		return getMYSQLTransactionsExecutor().executeQuery(queryStatement);
+	}
+
+	/**
+	 * Performs a query on the table and return all the rows in the table
+	 * 
+	 * @param table
+	 * @param printSQL
+	 * @return
+	 * @throws SQLException
+	 */
+	public ResultSet queryAll(String table, boolean printSQL)
+			throws SQLException {
+		return query(table, new String [] {}, new String [] {}, printSQL);
 	}
 
 	/**

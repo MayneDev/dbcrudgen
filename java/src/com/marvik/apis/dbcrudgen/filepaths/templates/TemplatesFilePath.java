@@ -319,5 +319,10 @@ public class TemplatesFilePath {
 		 */
 		public static final String JAVA_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH = JAVA_INFO_CLASS_MODEL_FILEPATH;
 
+		/**
+		 * J2SE_MYSQL_TABLE_CRUD_TEMPLATE_FILE_PATH
+		 */
+		public static final String J2SE_MYSQL_TABLE_CRUD_TEMPLATE_FILE_PATH = "res/templates/java/template_java_class_mysql_table_crud.txt";
+
 	}
 }

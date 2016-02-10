@@ -33,7 +33,7 @@ public class TemplatesParser {
 	public boolean createSourceFile(String absoluteFileName, String sourceCode) {
 		return getFilesHandler().createByteWeighedFile(absoluteFileName, sourceCode);
 	}
-	
+
 	/**
 	 * JavaTemplatesParser#getJavaColumnQueryCrudTemplate
 	 * 

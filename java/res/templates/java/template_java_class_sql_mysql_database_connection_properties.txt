@@ -1,11 +1,4 @@
-/**
- * 
- */
 package ${PACKAGE_NAME};
-
-/**
-*Created on Feb 5, 2016-10:31:05 AM by victor
-*/
 
 /**
  * @author victor

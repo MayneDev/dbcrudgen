@@ -64,6 +64,14 @@ public class JavaProjectFileNames {
 	 */
 	public static final String RECORDS_QUERY_EXCEPTION_CLASS_NAME = "RecordsQueryException";
 
+	/**
+	 * TABLE_SCHEMAS_FILE_NAME
+	 */
 	public static final String TABLE_SCHEMAS_FILE_NAME = "TableSchemas";
+
+	/**
+	 * TABLE_SCHEMAS_CLASS_NAME
+	 */
+	public static final CharSequence TABLE_SCHEMAS_CLASS_NAME = "TableSchemas";
 
 }

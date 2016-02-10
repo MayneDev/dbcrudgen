@@ -13,6 +13,7 @@ import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.io.writer.FileStreamWriter;
 import com.marvik.apis.dbcrudgen.natives.assets.NativeAssets;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLConnectionTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLTableCrudTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLTableSchemasTemplatesParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.JavaObjectDefaultEncapsulationTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.JavaTableModelTemplateParser;
@@ -158,19 +159,57 @@ public class J2SECrudCreator extends CrudCreator {
 
 		// create tables model classes
 		createTableModelInfoClassesSourceFiles(j2seProjectConfiguration, database, projectFilesDefaultStorageDirectory);
+
+		// create tables crud classes
+		createTablesCRUDClases(j2seProjectConfiguration, database, projectFilesDefaultStorageDirectory);
 	}
 
-	
-	private void createTableModelInfoClassesSourceFiles(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+	/**
+	 * @param j2seProjectConfiguration
+	 * @param database
+	 * @param projectFilesDefaultStorageDirectory
+	 */
+	private void createTablesCRUDClases(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
 			String projectFilesDefaultStorageDirectory) {
 
+		
+
+		String tablesCrudSrcDirs = j2seProjectConfiguration.getJ2SEProjectMYSQLDatabaseConfiguration()
+				.getTablesCRUDSrcDir();
+
+		J2SEMYSQLTableCrudTemplateParser j2seMYSQLTableCrudTemplateParser = new J2SEMYSQLTableCrudTemplateParser();
+		
+		for (Table table : database.getTables()) {
+
+			String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
+
+			// package where this table model info class will be saved
+			String tableCrudSourceFilePackageFilePath = projectFilesDefaultStorageDirectory
+					+ NativeUtils.getFileSeparator() + tablesCrudSrcDirs + NativeUtils.getFileSeparator()
+					+ tableClassName.toLowerCase();
+
+			// the table model source file
+			String tableCrudSourceFile = tableCrudSourceFilePackageFilePath + NativeUtils.getFileSeparator()+ tableClassName
+					+ TemplateTags.Java.TRANSACTIONS + JavaProjectFileNames.JAVA_FILE_EXTENSION;
+
+			String tableCrudSourceCode = j2seMYSQLTableCrudTemplateParser.createSourceCode( j2seProjectConfiguration,table);
+
+			createSourceFile(tableCrudSourceFile, tableCrudSourceCode);
+
+		}
+
+	}
+
+	private void createTableModelInfoClassesSourceFiles(J2SEProjectConfiguration j2seProjectConfiguration,
+			Database database, String projectFilesDefaultStorageDirectory) {
+
 		String packageName = j2seProjectConfiguration.getPackageName();
-		
-		String tablesModelInfoPackage  = j2seProjectConfiguration.getJ2SEProjectMYSQLDatabaseConfiguration()
+
+		String tablesModelInfoPackage = j2seProjectConfiguration.getJ2SEProjectMYSQLDatabaseConfiguration()
 				.getTableModelsSrcDir();
-		
+
 		JavaTableModelTemplateParser javaTableModelTemplateParser = new JavaTableModelTemplateParser();
-		
+
 		JavaObjectDefaultEncapsulationTemplateParser javaObjectDefaultEncapsulationTemplateParser = new JavaObjectDefaultEncapsulationTemplateParser();
 
 		for (Table table : database.getTables()) {

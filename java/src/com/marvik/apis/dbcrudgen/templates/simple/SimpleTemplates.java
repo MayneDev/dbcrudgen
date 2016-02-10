@@ -79,6 +79,11 @@ public class SimpleTemplates {
 		public static final String STRING_DEFAULT_PARSER = "String.valueOf($OBJECT)";
 
 		/**
+		 * STRING_DEFAULT_PARSER
+		 */
+		public static final String STRING_GENERIC_PARSER = "String.valueOf(${OBJECT})";
+
+		/**
 		 * JAVA_OBJECT_INIT_STATEMENT_TEMPLATE
 		 */
 		public static final String JAVA_OBJECT_INIT_STATEMENT_TEMPLATE = "$OBJECT = new $DATATYPE();";
@@ -87,7 +92,7 @@ public class SimpleTemplates {
 		 * JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE
 		 */
 		public static final String JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE = "this.$OBJECT = $OBJECT;";
-		
+
 		/**
 		 * JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE
 		 */
@@ -101,6 +106,49 @@ public class SimpleTemplates {
 		 * J2SE_MYSQL_DATABASE_TABLE_SQL_VARIABLE
 		 */
 		public static final String J2SE_MYSQL_DATABASE_TABLE_SQL_VARIABLE = "${JAVA_BEANS_CLASS_NAME}.SQL";
+
+		/**
+		 * TABLE_COLUMN_NAME_REFERENCE
+		 */
+		public static final String TABLE_COLUMN_NAME_REFERENCE = "${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME}";
+
+		/**
+		 * JAVA_BEANS_GETTER_STATEMENT_TEMPLATE
+		 */
+		public static final String JAVA_BEANS_GETTER_STATEMENT_TEMPLATE = "${OBJECT}.get${PROPERTY}()";
+
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_BOOLEAN
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_BOOLEAN = "boolean ${COLUMN_OBJECT} = resultSet.getBoolean(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_BYTE
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_BYTE = "byte ${COLUMN_OBJECT} = resultSet.getByte(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_INT
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_INT = "int ${COLUMN_OBJECT} = resultSet.getInt(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_DATE
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_DATE = "Date ${COLUMN_OBJECT} = resultSet.getDate(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_DOUBLE
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_DOUBLE = "double ${COLUMN_OBJECT} = resultSet.getDouble(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_FLOAT
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_FLOAT = "float ${COLUMN_OBJECT} = resultSet.getFloat(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_LONG
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_LONG = "long ${COLUMN_OBJECT} = resultSet.getLong(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
+		/**
+		 * RESULT_SET_VALUES_GETTER_TEMPLATE_STRING
+		 */
+		public static final String RESULT_SET_VALUES_GETTER_TEMPLATE_STRING = "String ${COLUMN_OBJECT} = resultSet.getString(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME});";
 	}
 
 	public static class FileNameTemplates {

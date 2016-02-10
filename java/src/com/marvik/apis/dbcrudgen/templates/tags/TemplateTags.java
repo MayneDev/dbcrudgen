@@ -146,6 +146,15 @@ public class TemplateTags {
 		 * TABLE_NAME TAG
 		 */
 		public static final String TABLE_NAME = "$TABLENAME";
+
+		/**
+		 * VERSION_NEW
+		 */
+		public static final String VERSION_NEW = "new";
+		/**
+		 * VERSION_OLD
+		 */
+		public static final String VERSION_OLD = "old";
 	}
 
 	public static class DatabaseConnection {
@@ -606,6 +615,12 @@ public class TemplateTags {
 		 * TAG TABLE NAME
 		 */
 		public static final CharSequence TABLE_NAME = "${TABLE_NAME}";
+
+		/**
+		 * TAG TABLE NAME
+		 */
+		public static final CharSequence TABLE_CLASS = "${TABLE_CLASS}";
+
 		/**
 		 * TAG TABLE_JAVA_BEANS_CLASS_NAME
 		 */
@@ -654,5 +669,132 @@ public class TemplateTags {
 		 * INFO
 		 */
 		public static final String INFO = "Info";
+
+		/**
+		 * Transactions
+		 */
+		public static final String TRANSACTIONS = "Transactions";
+
+		/**
+		 * PROJECT_PACKAGE_NAME
+		 */
+		public static final CharSequence PROJECT_PACKAGE_NAME = "${PROJECT_PKG_NAME}";
+
+		/**
+		 * TABLES_MODELS_PACKAGE
+		 */
+		public static final CharSequence TABLES_MODELS_PACKAGE = "${TABLES_MODELS_PACKAGE}";
+
+		/**
+		 * TABLE_MODEL_PACKAGE
+		 */
+		public static final CharSequence TABLE_MODEL_PACKAGE = "${TABLE_MODEL_PACKAGE}";
+
+		/**
+		 * TABLE_MODEL_CLASS
+		 */
+		public static final CharSequence TABLE_MODEL_CLASS = "${TABLE_MODEL_CLASS}";
+
+		/**
+		 * TABLES_SCHEMAS_PACKAGE
+		 */
+		public static final CharSequence TABLES_SCHEMAS_PACKAGE = "${TABLES_SCHEMAS_PACKAGE}";
+
+		/**
+		 * TABLE_MODEL_OBJECT
+		 */
+		public static final CharSequence TABLE_MODEL_OBJECT = "${TABLE_MODEL_OBJECT}";
+
+		/**
+		 * TABLE_INSERT_COLUMNS
+		 */
+		public static final CharSequence TABLE_INSERT_COLUMNS = "${INSERT_COLUMNS}";
+
+		/**
+		 * TABLE_INSERT_VALUES
+		 */
+		public static final CharSequence TABLE_INSERT_VALUES = "${INSERT_VALUES}";
+		/**
+		 * TABLE_DELETE_COLUMNS
+		 */
+		public static final CharSequence TABLE_DELETE_COLUMNS = "${DELETE_COLUMNS}";
+
+		/**
+		 * TABLE_DELETE_VALUES
+		 */
+		public static final CharSequence TABLE_DELETE_VALUES = "${DELETE_VALUES}";
+		/**
+		 * TABLE_SEARCH_COLUMNS
+		 */
+		public static final CharSequence TABLE_SEARCH_COLUMNS = "${SEARCH_COLUMNS}";
+
+		/**
+		 * TABLE_SEARCH_VALUES
+		 */
+		public static final CharSequence TABLE_SEARCH_VALUES = "${SEARCH_VALUES}";
+
+		/**
+		 * COLUMN_NAME
+		 */
+		public static final String COLUMN_NAME = "${COLUMN_NAME}";
+
+		/**
+		 * TABLES_SCHEMAS_CLASS
+		 */
+		public static final CharSequence TABLES_SCHEMAS_CLASS = "${TABLES_SCHEMAS_CLASS}";
+
+		/**
+		 * CLASS
+		 */
+		public static final String CLASS = "${CLASS}";
+		/**
+		 * PROPERTY
+		 */
+		public static final String PROPERTY = "${PROPERTY}";
+
+		/**
+		 * TABLE_MODEL_CONSTRUCTOR_OBJECTS
+		 */
+		public static final CharSequence TABLE_MODEL_CONSTRUCTOR_OBJECTS = "${TABLE_MODEL_CONSTRUCTOR_OBJECTS}";
+
+		/**
+		 * TABLE_UPDATE_NEW_VALUES
+		 */
+		public static final CharSequence TABLE_UPDATE_NEW_VALUES = "${NEW_RECORDS}";
+
+		/**
+		 * TABLE_UPDATE_OLD_VALUES
+		 */
+		public static final CharSequence TABLE_UPDATE_OLD_VALUES = "${OLD_RECORDS}";
+
+		/**
+		 * RESULT_SET_COLUMNS_VALUES_GETTERS
+		 */
+		public static final CharSequence RESULT_SET_COLUMNS_VALUES_GETTERS = "${RESULT_SET_COLUMNS_VALUES_GETTERS}";
+		/**
+		 * RESULT_SET_COLUMNS_ALL_VALUES_GETTERS
+		 */
+		public static final CharSequence RESULT_SET_COLUMNS_ALL_VALUES_GETTERS = "${RESULT_SET_COLUMNS_ALL_VALUES_GETTERS}";
+
+		/**
+		 * COLUMN_OBJECT
+		 */
+		public static final CharSequence COLUMN_OBJECT = "${COLUMN_OBJECT}";
+
+		/**
+		 * PRIMARY_KEY_REFERENCE
+		 */
+		public static final CharSequence PRIMARY_KEY_REFERENCE = "${PK_COLUMN_REFERENCE}";
+
+		/**
+		 * PRIMARY_KEY_OBJECT
+		 */
+		public static final CharSequence PRIMARY_KEY_OBJECT = "${PRIMARY_KEY_OBJECT}";
+
+		/**
+		 * PRIMARY_KEY_DATATYPE
+		 */
+		public static final CharSequence PRIMARY_KEY_DATATYPE = "${PRIMARY_KEY_DATA_TYPE}";
+
 	}
 }

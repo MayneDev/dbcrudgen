@@ -1,0 +1,227 @@
+package ${PACKAGE_NAME};
+
+import java.net.ConnectException;
+import java.net.SocketException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import ${PROJECT_PKG_NAME}.coreutils.TransactionWrapper;
+import ${PROJECT_PKG_NAME}.${TABLES_MODELS_PACKAGE}.${TABLE_MODEL_PACKAGE}.${TABLE_MODEL_CLASS};
+import ${PROJECT_PKG_NAME}.${TABLES_SCHEMAS_PACKAGE}.TableSchemas;
+
+/**
+* ${TABLE_CLASS}Transactions
+*
+* Provides a super set of methods for performing the CRUD database transactions
+* for the table[${TABLE_NAME}] associated with this class
+* 
+* The actual transaction are performed else where.
+*
+* DO NOT DIRECTLY EDIT THIS CLASS. MAKE SEPARATE COPY BY EXTENDING THIS CLASS AND WRITING
+* CUSTOM METHODS AND OVERRIDE THE METHODS TO CUSTOMIZE 
+*
+* 
+*/
+public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
+
+	/**
+	* Gets the table name associated with this transaction class
+	* 
+	* The actual table associated with this transaction class is ${TABLE_NAME}
+	*
+	* @return the table name
+	*/
+	public final String getTableName() {
+		return TableSchemas.${TABLE_CLASS}.TABLE_NAME;
+	}
+
+	/**
+	* Inserts a new record in the table ${TABLE_NAME}
+	*
+	* @param ${TABLE_MODEL_CLASS} to insert
+	* @throws SQLException 
+	* @return the success status of the transaction
+	*/
+	public boolean insert(${TABLE_MODEL_CLASS} ${TABLE_MODEL_OBJECT}) throws SQLException {
+		String[] columns = { ${INSERT_COLUMNS} };
+		String[] values = { ${INSERT_VALUES} };
+		return insert(getTableName(), columns, values, true);
+	}
+
+	/**
+	* Deleted a record from the table ${TABLE_NAME}
+	*
+	* @param ${TABLE_MODEL_CLASS} to delete
+	*
+	* @return the success status of the transaction
+	*/
+	public boolean delete(${TABLE_MODEL_CLASS} ${TABLE_MODEL_OBJECT}) throws SQLException {
+		String[] whereColumns = { ${DELETE_COLUMNS} };
+		String[] whereRecords = { ${DELETE_VALUES} };
+		return delete(getTableName(), whereColumns, whereRecords, false);
+	}
+
+	/**
+	* Updates an existing record in the table ${TABLE_NAME}
+	*
+	* @param old${TABLE_MODEL_CLASS} to insert
+	* @param new${TABLE_MODEL_CLASS} to delete
+	*
+	* @throws SocketException 
+	* @throws ClassNotFoundException 
+	* @throws ConnectException 
+	*
+	*@return number of update columns
+	*/
+	public int update(${TABLE_MODEL_CLASS} old${TABLE_MODEL_CLASS}, ${TABLE_MODEL_CLASS} new${TABLE_MODEL_CLASS}) throws SQLException, ConnectException, ClassNotFoundException, SocketException {
+
+		String[] newColumns = {${TABLE_COLUMNS}};
+		String[] newRecords = {${NEW_RECORDS}};
+		String[] whereColumns = {${TABLE_COLUMNS}};
+		String[] whereRecords = {${OLD_RECORDS}};
+		
+		return update(getTableName(), newColumns, newRecords, whereColumns, whereRecords, false);
+	}
+
+	/**
+	* Searches for records in the table ${TABLE_NAME}
+	*
+	* @param ${TABLE_MODEL_OBJECT} to search
+	* @throws SQLException 
+	* @return a result set of the search query
+	*/
+	public ResultSet searchRaw(${TABLE_MODEL_CLASS} ${TABLE_MODEL_OBJECT}) throws SQLException {
+		String[] whereColumns = { ${SEARCH_COLUMNS} };
+		String[] whereRecords = { ${SEARCH_VALUES} };
+		return query(getTableName(), whereColumns, whereRecords, false);
+	}
+
+	/**
+	* Searches for records in the table ${TABLE_NAME}
+	*
+	* @param ${TABLE_MODEL_OBJECT} to search
+	* @throws SQLException 
+	* @return a list of the search query results
+	*/
+	public List<${TABLE_MODEL_CLASS}> search(${TABLE_MODEL_CLASS} ${TABLE_MODEL_OBJECT}) throws SQLException{
+		
+		List<${TABLE_MODEL_CLASS}> ${TABLE_MODEL_OBJECT}List = new ArrayList<${TABLE_MODEL_CLASS}>();
+		
+		String[] whereColumns = { ${SEARCH_COLUMNS} };
+		String[] whereRecords = { ${SEARCH_VALUES} };
+		 
+		ResultSet resultSet = query(getTableName(), whereColumns, whereRecords, false);
+
+		for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
+
+			${RESULT_SET_COLUMNS_ALL_VALUES_GETTERS}
+			
+			${TABLE_MODEL_OBJECT}List.add(new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS}));
+		}
+
+		if (!resultSet.isClosed()) {
+			resultSet.close();
+		}
+		return ${TABLE_MODEL_OBJECT}List;
+	}
+
+
+	/**
+	* Returns a list of all the records in the table ${TABLE_NAME}
+	* @throws SQLException 
+	* @return List of ${TABLE_MODEL_CLASS} objects
+	* 
+	*/
+	public List<${TABLE_MODEL_CLASS}> get${TABLE_MODEL_CLASS}All() throws SQLException {
+
+		List<${TABLE_MODEL_CLASS}> ${TABLE_MODEL_OBJECT} = new ArrayList<${TABLE_MODEL_CLASS}>();
+		
+		ResultSet resultSet = queryAll(getTableName(), false);
+
+		for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
+
+			${RESULT_SET_COLUMNS_ALL_VALUES_GETTERS}
+			
+			${TABLE_MODEL_OBJECT}.add(new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS}));
+		}
+
+		if (!resultSet.isClosed()) {
+			resultSet.close();
+		}
+		return ${TABLE_MODEL_OBJECT};
+	}
+
+	/**
+	* Returns a record of from the table ${TABLE_NAME} based on the value of the primary key ${PK_COLUMN_REFERENCE}
+	* @throws SQLException 
+	* @return an object of ${TABLE_MODEL_CLASS} that represents a single record
+	* 
+	*/
+	public ${TABLE_MODEL_CLASS} get${TABLE_MODEL_CLASS}(${PRIMARY_KEY_DATA_TYPE} ${PRIMARY_KEY_OBJECT}) throws SQLException{
+
+		${TABLE_MODEL_CLASS} ${TABLE_MODEL_OBJECT} = null;
+		
+		String[] whereColumns = {${PK_COLUMN_REFERENCE}};
+		
+		String[] whereRecords = {String.valueOf(${PRIMARY_KEY_OBJECT})};
+		
+		ResultSet resultSet = query(getTableName(), whereColumns, whereRecords, false);
+
+		for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
+
+			${RESULT_SET_COLUMNS_VALUES_GETTERS}
+
+			${TABLE_MODEL_OBJECT} = new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS});
+		}
+
+		if (!resultSet.isClosed()) {
+			resultSet.close();
+		}
+		return ${TABLE_MODEL_OBJECT};
+	}
+
+	/**
+	* Gets the first record from the table ${TABLE_NAME} that appears in the result set of the
+	* records after executing the custom query
+	* @throws SQLException 
+	* @return the first record that matches appears in the result set of the records
+	* 
+	*/
+	public Object getColumn(String query, String column, Object defaultValue) throws SQLException {
+
+		ResultSet resultSet = getMYSQLTransactionsExecutor().execSQL(query);
+
+		if (resultSet != null) {
+			resultSet.first();
+
+			if (defaultValue instanceof Boolean) {
+				return (Boolean) resultSet.getBoolean(column);
+			}
+			if (defaultValue instanceof Double) {
+				return (Double) resultSet.getDouble(column);
+			}
+			if (defaultValue instanceof Float) {
+				return (Float) resultSet.getFloat(column);
+			}
+			if (defaultValue instanceof Integer) {
+				return (Integer) resultSet.getInt(column);
+			}
+			if (defaultValue instanceof Long) {
+				return (Long) resultSet.getLong(column);
+			}
+			if (defaultValue instanceof Short) {
+				return (Short) resultSet.getShort(column);
+			}
+			if (defaultValue instanceof String) {
+				return (String) resultSet.getString(column);
+			}
+
+		}
+		if (!resultSet.isClosed()) {
+			resultSet.close();
+		}
+		return null;
+	}
+}
