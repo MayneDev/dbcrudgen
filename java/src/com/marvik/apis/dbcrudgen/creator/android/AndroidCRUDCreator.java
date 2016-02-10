@@ -130,7 +130,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 
 		// Create table schemas source file and saves it on disk
 		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, tablesShemasStorageLocation);
-/*
+
 		// Create the database content provider file and saves it on disk
 		createContentProviderSourceFile(projectFilesDefaultStorageDirectory, contentProviderPackage, database);
 
@@ -151,12 +151,12 @@ public class AndroidCRUDCreator extends CrudCreator {
 		createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + columnsModelInfoPackage);
 		createTableModelInfoClassesSourceFiles(database, projectFilesDefaultStorageDirectory, packageName,
 				columnsModelInfoPackage);
-		/*
+		
 		// create transactions manager class
 		TransactionManagerConfiguration transactionManagerConfiguration = getAndroidContentProviderConfiguration()
 				.getTransactionManagerConfiguration();
 		createTransactionManagerClass(packageName, transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
-				tablesCRUDStorageLocation, database.getTables());*/
+				tablesCRUDStorageLocation, database.getTables());
 	}
 
 	// create transactions manager class
@@ -189,6 +189,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 			String packageName, String tablesModelInfoPackage) {
 
 		AndroidTableModelTemplateParser androidTableModelTemplateParser = new AndroidTableModelTemplateParser();
+		
 		AndroidJavaObjectDefaultEncapsulationTemplateParser androidJavaObjectDefaultEncapsulationTemplateParser = new AndroidJavaObjectDefaultEncapsulationTemplateParser();
 
 		for (Table table : database.getTables()) {

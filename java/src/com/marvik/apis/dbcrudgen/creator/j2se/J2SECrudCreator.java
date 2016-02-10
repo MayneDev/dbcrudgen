@@ -6,6 +6,7 @@ package com.marvik.apis.dbcrudgen.creator.j2se;
 import java.io.File;
 import java.io.IOException;
 
+import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.toolchains.jdk.JDKFilenames;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.CrudCreator;
@@ -13,6 +14,8 @@ import com.marvik.apis.dbcrudgen.io.writer.FileStreamWriter;
 import com.marvik.apis.dbcrudgen.natives.assets.NativeAssets;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLConnectionTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.J2SEMYSQLTableSchemasTemplatesParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.JavaObjectDefaultEncapsulationTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.j2se.mysql.JavaTableModelTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLDatabaseConnectionPropertiesTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsExecutorTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.MYSQLTransactionsWrapperTemplateParser;
@@ -20,10 +23,12 @@ import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsDeleteExceptionTemplat
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsInsertExceptionTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsQueryExceptionTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.j2se.mysql.RecordsUpdateExceptionTemplateParser;
+import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectMYSQLDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.projects.java.filenames.JavaProjectFileNames;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
+import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.j2se.classes.MYSQLTransactionsWrapperTemplate;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
@@ -150,6 +155,47 @@ public class J2SECrudCreator extends CrudCreator {
 
 		// Create table schemas class
 		createTablesSchemasSourceFile(j2seProjectConfiguration, database, projectFilesDefaultStorageDirectory);
+
+		// create tables model classes
+		createTableModelInfoClassesSourceFiles(j2seProjectConfiguration, database, projectFilesDefaultStorageDirectory);
+	}
+
+	
+	private void createTableModelInfoClassesSourceFiles(J2SEProjectConfiguration j2seProjectConfiguration, Database database,
+			String projectFilesDefaultStorageDirectory) {
+
+		String packageName = j2seProjectConfiguration.getPackageName();
+		
+		String tablesModelInfoPackage  = j2seProjectConfiguration.getJ2SEProjectMYSQLDatabaseConfiguration()
+				.getTableModelsSrcDir();
+		
+		JavaTableModelTemplateParser javaTableModelTemplateParser = new JavaTableModelTemplateParser();
+		
+		JavaObjectDefaultEncapsulationTemplateParser javaObjectDefaultEncapsulationTemplateParser = new JavaObjectDefaultEncapsulationTemplateParser();
+
+		for (Table table : database.getTables()) {
+
+			String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
+
+			// package where this table model info class will be saved
+			String tableModelSourceFilePackageFilePath = tablesModelInfoPackage + NativeUtils.getFileSeparator()
+					+ tableClassName.toLowerCase();
+
+			// the table model source file
+			String tableModelSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
+					+ tableModelSourceFilePackageFilePath + NativeUtils.getFileSeparator() + tableClassName
+					+ TemplateTags.Java.INFO + JavaProjectFileNames.JAVA_FILE_EXTENSION;
+
+			String tableModelSourceCode = javaTableModelTemplateParser.createSourceCode(
+					javaObjectDefaultEncapsulationTemplateParser,
+					packageName + NativeTemplateTags.DOT
+							+ NativeUtils.parseJavaPackage(tableModelSourceFilePackageFilePath), // Package
+																									// name
+					table);
+
+			createSourceFile(tableModelSourceFile, tableModelSourceCode);
+
+		}
 	}
 
 	/**
@@ -169,15 +215,15 @@ public class J2SECrudCreator extends CrudCreator {
 
 		J2SEMYSQLTableSchemasTemplatesParser j2semysqlTableSchemasTemplatesParser = new J2SEMYSQLTableSchemasTemplatesParser();
 
-		String databaseTablesSchemasPackage = j2seProjectConfiguration.getJ2SEProjectMYSQLDatabaseConfiguration().getTableSchemasSrcDir();
+		String databaseTablesSchemasPackage = j2seProjectConfiguration.getJ2SEProjectMYSQLDatabaseConfiguration()
+				.getTableSchemasSrcDir();
 		String tablesSchemasSourceCode = j2semysqlTableSchemasTemplatesParser
 				.createTablesSchemas(j2seProjectConfiguration, database.getTables());
-		
-		String tablesSchemasAbsoluteSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
-				+ databaseTablesSchemasPackage + NativeUtils.getFileSeparator() + JavaProjectFileNames.TABLE_SCHEMAS_FILE_NAME
-				+ JavaProjectFileNames.JAVA_FILE_EXTENSION;
 
-		
+		String tablesSchemasAbsoluteSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
+				+ databaseTablesSchemasPackage + NativeUtils.getFileSeparator()
+				+ JavaProjectFileNames.TABLE_SCHEMAS_FILE_NAME + JavaProjectFileNames.JAVA_FILE_EXTENSION;
+
 		createSourceFile(tablesSchemasAbsoluteSourceFile, tablesSchemasSourceCode);
 	}
 

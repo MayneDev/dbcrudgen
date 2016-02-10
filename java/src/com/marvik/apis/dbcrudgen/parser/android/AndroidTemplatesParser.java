@@ -1,16 +1,8 @@
 package com.marvik.apis.dbcrudgen.parser.android;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
-import com.marvik.apis.dbcrudgen.natives.syntax.Syntax.PrintingChars;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
-import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassContentProviderTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassDatabaseTablesTemplate;

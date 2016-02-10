@@ -206,7 +206,7 @@ public class TemplatesFilePath {
 		/**
 		 * ANDROID ANDROID_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH
 		 */
-		public static final String ANDROID_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH = JavaTemplatesFilePath.JAVA_INFO_CLASS_MODEL_FILEPATH;
+		public static final String ANDROID_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH = "res/templates/android/template_android_table_model.txt";
 
 		/**
 		 * ANDROID_CLASS_TRANSACTIONS_MANAGER_TEMPLATE_FILE_PATH
@@ -313,6 +313,11 @@ public class TemplatesFilePath {
 		 * J2SE_MYSQl_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_TEMPLATE_FILE_PATH
 		 */
 		public static final String J2SE_MYSQl_STATEMENT_SQL_TABLE_COLUMN_STATEMENT_TEMPLATE_FILE_PATH = "res/templates/java/template_java_statement_sql_table_column_statement.txt";
+
+		/**
+		 * JAVA_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH
+		 */
+		public static final String JAVA_CLASS_TABLE_MODEL_TEMPLATE_FILE_PATH = JAVA_INFO_CLASS_MODEL_FILEPATH;
 
 	}
 }

@@ -51,8 +51,9 @@ public class Main {
 				databaseUser, databaseUserPassword, databaseName);
 		String mysqlAPIsClassesSrcDirs = "coreutils";
 		String tableSchemasSrcDir = "database\\tableschemas";
+		String tableModelsSrcDirs = "database\\tablemodels";
 		J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = new J2SEProjectMYSQLDatabaseConfiguration(
-				mysqlAPIsClassesSrcDirs, databaseConnectionProperties,tableSchemasSrcDir);
+				mysqlAPIsClassesSrcDirs, databaseConnectionProperties, tableSchemasSrcDir, tableModelsSrcDirs);
 
 		j2seProjectConfiguration.setJ2SEProjectMYSQLDatabaseConfiguration(j2seProjectMYSQLDatabaseConfiguration);
 

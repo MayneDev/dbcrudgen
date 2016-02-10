@@ -1,25 +1,36 @@
-package com.marvik.apis.dbcrudgen.parser.android.tablemodel;
+/**
+ * 
+ */
+package com.marvik.apis.dbcrudgen.parser.j2se.mysql;
 
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.delimeters.JavaDelimiter;
 import com.marvik.apis.dbcrudgen.core.platforms.java.object.accessibility.JavaObjectAccessibility;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
-import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
-import com.marvik.apis.dbcrudgen.parser.android.javaobjects.AndroidJavaObjectDefaultEncapsulationTemplateParser;
+import com.marvik.apis.dbcrudgen.parser.java.j2se.J2SETemplatesParser;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
+import com.marvik.apis.dbcrudgen.templates.j2se.classes.JavaTableModelClassTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 
-public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
+/**
+*Created on Feb 10, 2016-3:40:14 AM by victor
+*/
+
+/**
+ * @author victor
+ *
+ */
+public class J2SEMYSQLTableModelParser extends J2SETemplatesParser {
 
 	public String createSourceCode(
-			AndroidJavaObjectDefaultEncapsulationTemplateParser javaObjectDefaultEncapsulationTemplateParser,
+			JavaObjectDefaultEncapsulationTemplateParser javaObjectDefaultEncapsulationTemplateParser,
 			String tableModelPackageName, Table table) {
 
 		String tableName = table.getTableName();
 
 		String tableClassName = NativeUtils.toJavaBeansClass(tableName);
 
-		String template = getAndroidClassTableModelTemplate().getTemplate();
+		String template = new JavaTableModelClassTemplate().getTemplate();
 
 		String classVariables = "";
 		String classVariablesInit = "";
@@ -29,38 +40,38 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
 		TableColumn[] tableColumn = table.getTableColumnsAll();
 
 		for (int i = 0; i < tableColumn.length; i++) {
-			
+
 			String columnDatatype = tableColumn[i].getDataType().getDataType();
 			String objectName = tableColumn[i].getColumnName();
-			String androidDatatype = getAndroidObjectDataType(columnDatatype);
+			String androidDatatype = getJavaObjectDataType(columnDatatype);
 
 			objectName = NativeUtils.toJavaBeansVariable(objectName);
 
-			
 			classVariables += NativeUtils.createJavaVariable(JavaObjectAccessibility.PRIVATE, androidDatatype,
 					objectName, JavaDelimiter.SEMICOLON);
-			
-			JavaDelimiter classConstructorVariablesJavaDelimeter = JavaDelimiter.COMMA;;
-			
+
+			JavaDelimiter classConstructorVariablesJavaDelimeter = JavaDelimiter.COMMA;
+			;
+
 			if (i >= (tableColumn.length - 1)) {
-				classConstructorVariablesJavaDelimeter = JavaDelimiter.NONE; 
+				classConstructorVariablesJavaDelimeter = JavaDelimiter.NONE;
 			}
-			
+
 			classConstructorVariables += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT,
-					androidDatatype, objectName,classConstructorVariablesJavaDelimeter );
-			
+					androidDatatype, objectName, classConstructorVariablesJavaDelimeter);
+
 			classVariablesInit += NativeUtils.createJavaClassVariableInitStatement(objectName);
 
 			classVariablesAccessors += javaObjectDefaultEncapsulationTemplateParser
-					.createAndroidJavaObjectDefaultAccessorSourceCode(androidDatatype, objectName);
-		
+					.createJavaObjectDefaultAccessorSourceCode(androidDatatype, objectName);
+
 		}
-		
-		return template.replace(TemplateTags.Android.PACKAGE_NAME, tableModelPackageName)
-				.replace(TemplateTags.Android.CLASS_NAME, tableClassName)
-				.replace(TemplateTags.Android.TABLE_COLUMN_CLASS_VARIABLES, classVariables)
-				.replace(TemplateTags.Android.INIT_CONSTRUCTOR_PARAMS, classVariablesInit)
-				.replace(TemplateTags.Android.CONSTRUCTOR_PARAMS, classConstructorVariables)
-				.replace(TemplateTags.Android.CLASS_VARIABLES_ENCAPSULATOR_METHODS, classVariablesAccessors);
+
+		return template.replace(TemplateTags.Java.PACKAGE_NAME, tableModelPackageName)
+				.replace(TemplateTags.Java.CLASS_NAME, tableClassName)
+				.replace(TemplateTags.Java.TABLE_COLUMN_CLASS_VARIABLES, classVariables)
+				.replace(TemplateTags.Java.INIT_CONSTRUCTOR_PARAMS, classVariablesInit)
+				.replace(TemplateTags.Java.CONSTRUCTOR_PARAMS, classConstructorVariables)
+				.replace(TemplateTags.Java.CLASS_VARIABLES_ENCAPSULATOR_METHODS, classVariablesAccessors);
 	}
 }

@@ -621,5 +621,38 @@ public class TemplateTags {
 		 */
 		public static final CharSequence TAG_TABLE_COLUMN_REFERENCE = "${TABLE_COLUMN_REFERENCE}";
 
+		/**
+		 * CLASS_NAME
+		 */
+		public static final String CLASS_NAME = "${CLASS_NAME}";
+
+		/**
+		 * TABLE_COLUMN_CLASS_VARIABLES
+		 */
+		public static final CharSequence TABLE_COLUMN_CLASS_VARIABLES = "${TABLE_COLUMN_CLASS_VARIABLES}";
+
+		/**
+		 * INIT_CONSTRUCTOR_PARAMS
+		 */
+		public static final String INIT_CONSTRUCTOR_PARAMS = "${INIT_CONSTRUCTOR_PARAMS}";
+
+		/**
+		 * CONSTRUCTOR_PARAMS
+		 */
+		public static final CharSequence CONSTRUCTOR_PARAMS = "${CONSTRUCTOR_PARAMS}";
+
+		/**
+		 * CLASS_VARIABLES_ENCAPSULATOR_METHODS
+		 */
+		public static final String CLASS_VARIABLES_ENCAPSULATOR_METHODS = "${CLASS_VARIABLES_ENCAPSULATOR_METHODS}";
+
+		/**
+		 * JAVA_BEANS_OBJECT
+		 */
+		public static final CharSequence JAVA_BEANS_OBJECT = "${JAVA_BEANS_OBJECT}";
+		/**
+		 * INFO
+		 */
+		public static final String INFO = "Info";
 	}
 }

@@ -18,12 +18,15 @@ public class J2SEProjectMYSQLDatabaseConfiguration {
 	private String mysqlAPIsClassesSrcDirs;
 	private DatabaseConnectionProperties databaseConnectionProperties;
 	private String tableSchemasSrcDir;
+	private String tableModelsSrcDir;
 
 	public J2SEProjectMYSQLDatabaseConfiguration(String mysqlAPIsClassesSrcDirs,
-			DatabaseConnectionProperties databaseConnectionProperties,String tableSchemasSrcDir) {
+			DatabaseConnectionProperties databaseConnectionProperties, String tableSchemasSrcDir,
+			String tableModelsSrcDir) {
 		this.databaseConnectionProperties = databaseConnectionProperties;
 		this.mysqlAPIsClassesSrcDirs = mysqlAPIsClassesSrcDirs;
 		this.tableSchemasSrcDir = tableSchemasSrcDir;
+		this.tableModelsSrcDir = tableModelsSrcDir;
 	}
 
 	/**
@@ -39,11 +42,18 @@ public class J2SEProjectMYSQLDatabaseConfiguration {
 	public String getMysqlAPIsClassesSrcDirs() {
 		return mysqlAPIsClassesSrcDirs;
 	}
-	
+
 	/**
 	 * @return the tableSchemasSrcDir
 	 */
 	public String getTableSchemasSrcDir() {
 		return tableSchemasSrcDir;
+	}
+
+	/**
+	 * @return the tableModelsSrcDir
+	 */
+	public String getTableModelsSrcDir() {
+		return tableModelsSrcDir;
 	}
 }
