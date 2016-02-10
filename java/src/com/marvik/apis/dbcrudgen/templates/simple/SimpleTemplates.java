@@ -87,6 +87,11 @@ public class SimpleTemplates {
 		 * JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE
 		 */
 		public static final String JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE = "this.$OBJECT = $OBJECT;";
+		
+		/**
+		 * JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE
+		 */
+		public static final String NEW_JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE = "this.${OBJECT} = ${OBJECT};";
 
 		/**
 		 * CLASS_PATH_ITEM_ENTRY

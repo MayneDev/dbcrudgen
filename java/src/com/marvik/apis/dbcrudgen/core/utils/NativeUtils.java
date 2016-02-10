@@ -150,8 +150,13 @@ public final class NativeUtils {
 				.replace(TemplateTags.Java.DATATYPE, datatype);
 	}
 
+	@Deprecated
 	public static String createJavaClassVariableInitStatement(String object) {
 		String javaClassVariableInitStatementTemplate = SimpleTemplates.Java.JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE;
+		return javaClassVariableInitStatementTemplate.replace(TemplateTags.Java.OBJECT, object);
+	}
+	public static String createNewJavaClassVariableInitStatement(String object) {
+		String javaClassVariableInitStatementTemplate = SimpleTemplates.Java.NEW_JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE;
 		return javaClassVariableInitStatementTemplate.replace(TemplateTags.Java.OBJECT, object);
 	}
 

@@ -1,4 +1,4 @@
-public $DATATYPE get${JAVA_BEANS_OBJECT} (){
+public ${DATATYPE} get${JAVA_BEANS_OBJECT} (){
 	return ${OBJECT};
 }
 
