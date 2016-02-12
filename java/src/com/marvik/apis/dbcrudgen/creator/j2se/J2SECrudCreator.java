@@ -385,8 +385,7 @@ public class J2SECrudCreator extends CrudCreator {
 			// STANDARD ISO WAY
 			classPathXML = classPathXML.replace(TemplateTags.Java.CLASS_PATH_XML_CLOSING_ELEMENT,
 					libClassPathItemEntryTemplate + TemplateTags.Java.CLASS_PATH_XML_CLOSING_ELEMENT);
-			// new FileStreamWriter().writeStream(new
-			// File(projectClassPathConfigFile), classPathXML);
+			//new FileStreamWriter().writeStream(new File(projectClassPathConfigFile), classPathXML);
 			System.err.println("EDITING BUILD PATH DISABLED in " + this.getClass().getCanonicalName());
 		} catch (IOException e) {
 			e.printStackTrace();

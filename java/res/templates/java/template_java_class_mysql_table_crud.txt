@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ${PROJECT_PKG_NAME}.coreutils.TransactionWrapper;
+import ${PROJECT_PKG_NAME}.${MYSQL_APIS_PACKAGE}.TransactionWrapper;
 import ${PROJECT_PKG_NAME}.${TABLES_MODELS_PACKAGE}.${TABLE_MODEL_PACKAGE}.${TABLE_MODEL_CLASS};
 import ${PROJECT_PKG_NAME}.${TABLES_SCHEMAS_PACKAGE}.TableSchemas;
 
@@ -121,9 +121,6 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 			${TABLE_MODEL_OBJECT}List.add(new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS}));
 		}
 
-		if (!resultSet.isClosed()) {
-			resultSet.close();
-		}
 		return ${TABLE_MODEL_OBJECT}List;
 	}
 
@@ -147,9 +144,6 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 			${TABLE_MODEL_OBJECT}.add(new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS}));
 		}
 
-		if (!resultSet.isClosed()) {
-			resultSet.close();
-		}
 		return ${TABLE_MODEL_OBJECT};
 	}
 
@@ -176,23 +170,23 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 			${TABLE_MODEL_OBJECT} = new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS});
 		}
 
-		if (!resultSet.isClosed()) {
-			resultSet.close();
-		}
 		return ${TABLE_MODEL_OBJECT};
 	}
 
 	/**
 	* Gets the first record from the table ${TABLE_NAME} that appears in the result set of the
 	* records after executing the custom query
+	*
+	* TODO THIS METHOD SHOULD RETURN THE DEFAULT VALUE IF THE RESULT SET IS NULL
+	*
 	* @throws SQLException 
 	* @return the first record that matches appears in the result set of the records
 	* 
 	*/
-	public Object getColumn(String query, String column, Object defaultValue) throws SQLException {
+	public Object getBlindColumn(String query, String column, Object defaultValue) throws SQLException {
 
 		ResultSet resultSet = getMYSQLTransactionsExecutor().execSQL(query);
-
+		
 		if (resultSet != null) {
 			resultSet.first();
 
@@ -219,9 +213,7 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 			}
 
 		}
-		if (!resultSet.isClosed()) {
-			resultSet.close();
-		}
+
 		return null;
 	}
 }

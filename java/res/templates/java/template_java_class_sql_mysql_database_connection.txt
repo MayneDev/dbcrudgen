@@ -27,19 +27,13 @@ public class MYSQLDatabaseConnection {
 	private String user;
 	private String password;
 
-	public MYSQLDatabaseConnection(String host, String user, String password) {
-
+	public MYSQLDatabaseConnection(String host, String database, String user, String password) {
+		
 		this.host = host;
+		this.database = database;
 		this.user = user;
 		this.password = password;
-
-		new MYSQLDatabaseConnection(host, null, user, password);
-
-	}
-
-	public MYSQLDatabaseConnection(String host, String database, String user, String password) {
-
-		this.database = database;
+		
 
 		try {
 			connection = createConnection(host, database, user, password);

@@ -155,6 +155,25 @@ public class TemplateTags {
 		 * VERSION_OLD
 		 */
 		public static final String VERSION_OLD = "old";
+
+		/**
+		 * MYSQL database host
+		 */
+		public static final String DATABASE_HOST = "${DATABASE_HOST}";
+
+		/**
+		 * MYSQL database name
+		 */
+		public static final String DATABASE_NAME = "${DATABASE_NAME}";
+		/**
+		 * MYSQL database user
+		 */
+		public static final String DATABASE_USER = "${DATABASE_USER}";
+
+		/**
+		 * MYSQL database user password
+		 */
+		public static final String USER_PASSWORD = "${USER_PASSWORD}";
 	}
 
 	public static class DatabaseConnection {
@@ -684,6 +703,10 @@ public class TemplateTags {
 		 * TABLES_MODELS_PACKAGE
 		 */
 		public static final CharSequence TABLES_MODELS_PACKAGE = "${TABLES_MODELS_PACKAGE}";
+		/**
+		 * MYSQL_APIS_PACKAGE
+		 */
+		public static final CharSequence MYSQL_APIS_PACKAGE = "${MYSQL_APIS_PACKAGE}";
 
 		/**
 		 * TABLE_MODEL_PACKAGE

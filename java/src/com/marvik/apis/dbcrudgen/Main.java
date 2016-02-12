@@ -23,13 +23,43 @@ public class Main {
 		// testAndroidCrudGenerator();
 		// testPHPCrudGenerator();
 		try {
-			testJ2SECrudCreator();
+			testKCATechExpoCrudCreator();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	private static void testKCATechExpoCrudCreator() throws IOException {
 
+		Database database =  new TasksExecutor().createDatabaseModel("kcateche_main"); //database name
+
+		String projectName = "KCATechExpo"; //project name
+		String packageName = "com.kca.tech.expo"; //java package name for the whole project
+		String projectStorageDir = "G:\\4thYr"; //the location where the project is stored on the HDD
+		String javaSrcDirs = "src";
+		String libsSrcDirs = "lib";
+
+		J2SEProjectConfiguration j2seProjectConfiguration = new J2SEProjectConfiguration(projectName, packageName,
+				projectStorageDir, javaSrcDirs, libsSrcDirs);
+
+		String databaseHost = "localhost";
+		String databaseUser = "root";
+		String databaseUserPassword = "";
+		String databaseName = "kcateche_main"; //database name
+		DatabaseConnectionProperties databaseConnectionProperties = new DatabaseConnectionProperties(databaseHost,
+				databaseUser, databaseUserPassword, databaseName);
+		String mysqlAPIsClassesSrcDirs = "database\\mysqlutils";
+		String tableSchemasSrcDir = "database\\tableschemas";
+		String tableModelsSrcDirs = "database\\tablemodels";
+		String tablesCrudSrcDirs = "database\\tablescrud";
+		J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = new J2SEProjectMYSQLDatabaseConfiguration(
+				mysqlAPIsClassesSrcDirs, databaseConnectionProperties, tableSchemasSrcDir, tableModelsSrcDirs,tablesCrudSrcDirs);
+
+		j2seProjectConfiguration.setJ2SEProjectMYSQLDatabaseConfiguration(j2seProjectMYSQLDatabaseConfiguration);
+
+		J2SECrudCreator j2seCrudCreator = new J2SECrudCreator();
+		j2seCrudCreator.createProject(j2seProjectConfiguration, database);
+	}
 	private static void testJ2SECrudCreator() throws IOException {
 
 		Database database = prepareDatabase();

@@ -5,7 +5,6 @@ package com.marvik.apis.dbcrudgen.application.views.containers.projectconfigurat
 
 import java.util.List;
 
-import com.foo.Main;
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.application.views.containers.projectconfiguration.ProjectConfigurationContainer;
 import com.marvik.apis.dbcrudgen.application.views.layouts.HorizontalLayout;

@@ -401,6 +401,10 @@ public class J2SEMYSQLTableCrudTemplateParser extends J2SETemplatesParser {
 		// Add project package name
 		template = addProjectPackageName(template, projectPackageName);
 
+		//Add MYSQL API's package name
+		String mysqlAPIsSrcDir = j2seProjectMYSQLDatabaseConfiguration.getMysqlAPIsClassesSrcDirs();
+		template = addMYSQLAPIsPackageName(template,NativeUtils.parseJavaPackage(mysqlAPIsSrcDir));
+		
 		// Add table models package name
 		String tableModelsSrcDir = j2seProjectMYSQLDatabaseConfiguration.getTableModelsSrcDir();
 		template = addTableModelsPackageName(template, NativeUtils.parseJavaPackage(tableModelsSrcDir));
@@ -460,6 +464,9 @@ public class J2SEMYSQLTableCrudTemplateParser extends J2SETemplatesParser {
 		return template.replace(TemplateTags.Java.TABLE_MODEL_PACKAGE, tableModelPackage);
 	}
 
+	private String addMYSQLAPIsPackageName(String template,String mysqlAPIsSrcDir){
+		return template.replace(TemplateTags.Java.MYSQL_APIS_PACKAGE,mysqlAPIsSrcDir);
+	}
 	/**
 	 * 
 	 * Adds the table models package name

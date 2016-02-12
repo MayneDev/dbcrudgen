@@ -57,8 +57,11 @@ public class TransactionWrapper {
 	public MYSQLDatabaseConnection getMYSQLDatabaseConnection() {
 
 		if (databaseConnection == null) {
-			databaseConnection = new MYSQLDatabaseConnection(MYSQLDefaultConnectionProperties.DATABASE_HOST,
-					MYSQLDefaultConnectionProperties.DATABASE_USER, MYSQLDefaultConnectionProperties.USER_PASSWORD);
+			databaseConnection = new MYSQLDatabaseConnection(
+			MYSQLDefaultConnectionProperties.DATABASE_HOST,
+			MYSQLDefaultConnectionProperties.DATABASE_NAME,
+			MYSQLDefaultConnectionProperties.DATABASE_USER,
+			MYSQLDefaultConnectionProperties.USER_PASSWORD);
 		}
 
 		return databaseConnection;
@@ -80,7 +83,7 @@ public class TransactionWrapper {
 		}
 
 		if (columns.length != values.length) {
-			throw new RecordsUpdateException("Cannot update the table [" + table + "]." + " Cannot match  "
+			throw new RecordsUpdateException("Cannot insert records into the table [" + table + "]." + " Cannot match  "
 					+ columns.length + "  table columns to " + values.length + " old records ");
 		}
 
@@ -92,7 +95,7 @@ public class TransactionWrapper {
 				insertStatement += ",";
 			}
 		}
-		insertStatement += insertStatement + ") VALUES (";
+		insertStatement +=  ") VALUES (";
 
 		for (int i = 0; i < columns.length; i++) {
 			insertStatement += " '" + values[i] + "'";
@@ -103,7 +106,7 @@ public class TransactionWrapper {
 		insertStatement += ");";
 		
 		if(printSQL){
-			System.out.println(printSQL);
+			System.out.println(insertStatement);
 		}
 		return getMYSQLTransactionsExecutor().execute(insertStatement);
 	}
@@ -159,7 +162,7 @@ public class TransactionWrapper {
 			}
 		}
 
-		updateStatement += ");";
+		updateStatement += ";";
 
 		if (printSQL) {
 			System.out.println("statement.executeUpdate(" + updateStatement + ")");
@@ -190,17 +193,19 @@ public class TransactionWrapper {
 					+ whereColumns.length + " table columns to " + whereRecords.length + " new records ");
 		}
 
-		String deleteStatement = "UPDATE `" + table + "` SET ";
+		String deleteStatement = "DELETE FROM `" + table + "` WHERE";
 
-		deleteStatement += " WHERE ";
-
-		for (int i = 0; i < whereColumns.length; i++) {
-			deleteStatement += " `" + whereColumns[i] + "`='" + whereRecords[i] + "' ";
-			if (i < whereColumns.length - 1) {
-				deleteStatement += " AND ";
+		if(whereColumns.length ==0 &&whereRecords.length == 0 ){
+			deleteStatement += " 1 ";
+		}else{
+			for (int i = 0; i < whereColumns.length; i++) {
+				deleteStatement += " `" + whereColumns[i] + "`='" + whereRecords[i] + "' ";
+				if (i < whereColumns.length - 1) {
+					deleteStatement += " AND ";
+				}
 			}
 		}
-		deleteStatement += ");";
+		deleteStatement += ";";
 
 		if (printSQL) {
 			System.out.println("statement.executeUpdate(" + deleteStatement + ")");

@@ -10,7 +10,11 @@ public class MYSQLDefaultConnectionProperties {
 	 * Default MYSQL database host
 	 */
 	public static final String DATABASE_HOST = "${DATABASE_HOST}";
-
+	
+	/**
+	 * Default MYSQL database associated with the project
+	 */
+	public static final String DATABASE_NAME = "${DATABASE_NAME}";
 	/**
 	 * Default MYSQL database user
 	 */
