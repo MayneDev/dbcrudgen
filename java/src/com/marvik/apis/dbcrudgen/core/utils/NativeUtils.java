@@ -31,12 +31,15 @@ public final class NativeUtils {
 		return getSystemProperty("file.separator") != null ? getSystemProperty("file.separator") : File.separator;
 	}
 
-	
 	/**
 	 * Convert a class name to a java bean variable name This method is
 	 */
 	public static String toJavaBeansVariable(String className) {
+		System.out.println("Clsas Name : " + className);
 		className = toJavaBeansClass(className);
+		if (className.length() < 2) {
+			return className;
+		}
 		return className.substring(0, 1).toLowerCase() + className.substring(1, className.length());
 	}
 
@@ -155,6 +158,7 @@ public final class NativeUtils {
 		String javaClassVariableInitStatementTemplate = SimpleTemplates.Java.JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE;
 		return javaClassVariableInitStatementTemplate.replace(TemplateTags.Java.OBJECT, object);
 	}
+
 	public static String createNewJavaClassVariableInitStatement(String object) {
 		String javaClassVariableInitStatementTemplate = SimpleTemplates.Java.NEW_JAVA_CLASS_VARIABLE_INIT_STATMENT_TEMPLATE;
 		return javaClassVariableInitStatementTemplate.replace(TemplateTags.Java.OBJECT, object);
@@ -168,32 +172,46 @@ public final class NativeUtils {
 	 * @return valid class name
 	 */
 	public static String toJavaBeansClass(String className) {
+
+		className = className.substring(0, 1).toUpperCase() + className.substring(1, className.length());
+
 		String newClassName = "";
 
-		// Create new parts from the class name whenever we encounter a space
-		String[] parts = className.split(" ");
+		String[] parts = null;
 
-		for (String part : parts) {
-			part = part.substring(0, 1).toUpperCase() + part.substring(1, part.length());
-			newClassName += part;
+		if (className.contains(" ")) {
+			// Create new parts from the class name whenever we encounter a
+			// space
+			parts = className.split(" ");
 
-		}
-		// Create new parts of the class name from the new array of name
-		parts = newClassName.split("_");
-
-		// Reset class name
-		newClassName = "";
-
-		for (String part : parts) {
-
-			// Make the first letter a capital letter
-			part = part.substring(0, 1).toUpperCase() + part.substring(1, part.length());
-
-			// rebuild the class name
-			newClassName += part;
-
+			for (String part : parts) {
+				if (part.length() != 0) {
+					part = part.substring(0, 1).toUpperCase() + part.substring(1, part.length());
+					newClassName += part;
+				}
+			}
+		} else {
+			newClassName = className;
 		}
 
+		if (newClassName.contains("_")) {
+			// Create new parts of the class name from the new array of name
+			parts = newClassName.split("_");
+
+			// Reset class name
+			newClassName = "";
+
+			for (String part : parts) {
+
+				if (part.length() != 0) {
+					// Make the first letter a capital letter
+					part = part.substring(0, 1).toUpperCase() + part.substring(1, part.length());
+
+					// rebuild the class name
+					newClassName += part;
+				}
+			}
+		}
 		return newClassName;
 
 	}
@@ -218,10 +236,10 @@ public final class NativeUtils {
 		text = text.replace("1", "").replace("2", "").replace("3", "").replace("4", "").replace("5", "")
 				.replace("6", "").replace("7", "").replace("8", "").replace("9", "").replace("0", "").replace("~", "")
 				.replace("`", "").replace("!", "").replace("@", "").replace("#", "").replace("$", "").replace("%", "")
-				.replace("^", "").replace("&", "").replace("*", "").replace("(", "").replace(")", "")
-				.replace("-", "").replace("=", "").replace("+", "").replace("[", "").replace("]", "").replace("{", "")
-				.replace("}", "").replace("\\", "").replace(";", "").replace(":", "").replace("'", "").replace("\"", "")
-				.replace("/", "").replace("?", "").replace(">", "").replace("<", "").replace(".", "").replace(",", "");
+				.replace("^", "").replace("&", "").replace("*", "").replace("(", "").replace(")", "").replace("-", "")
+				.replace("=", "").replace("+", "").replace("[", "").replace("]", "").replace("{", "").replace("}", "")
+				.replace("\\", "").replace(";", "").replace(":", "").replace("'", "").replace("\"", "").replace("/", "")
+				.replace("?", "").replace(">", "").replace("<", "").replace(".", "").replace(",", "");
 		return text;
 	}
 

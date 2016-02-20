@@ -24,7 +24,7 @@ public class NativeTemplateTags {
 		/**
 		 * $OBJECT
 		 */
-		public static final String JAVA_OBJECT_TAG = "$OBJECT";
+		public static final String JAVA_OBJECT_TAG = "${OBJECT}";
 	}
 
 }

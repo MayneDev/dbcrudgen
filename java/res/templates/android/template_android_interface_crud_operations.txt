@@ -1,4 +1,4 @@
-package $CRUD_OPERATIONS_INTERFACE_PACKAGE;
+package ${CRUD_OPERATIONS_INTERFACE_PACKAGE};
 
 import java.util.Arrays;
 

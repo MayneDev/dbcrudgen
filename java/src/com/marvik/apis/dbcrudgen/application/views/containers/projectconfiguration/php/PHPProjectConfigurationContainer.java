@@ -320,10 +320,10 @@ public class PHPProjectConfigurationContainer extends ProjectConfigurationContai
 
 		String projectName = MainWindow.databaseName;
 
-		tvLowLevelCrudScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\low\\");
-		tvHighLevelCrudScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\high\\");
-		tvCorePHPDatabaseScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\core\\");
-		tvSQLScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\database\\crud\\sql\\");
+		tvLowLevelCrudScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\scripts\\php\\database\\crud\\low\\");
+		tvHighLevelCrudScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\scripts\\php\\database\\crud\\high\\");
+		tvCorePHPDatabaseScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\scripts\\php\\database\\crud\\core\\");
+		tvSQLScriptDir.setText("C:\\xampp\\htdocs\\" + projectName + "\\scripts\\php\\database\\crud\\sql\\");
 
 		tvUserPassword.setText("");
 		tvDatabaseUser.setText("root");

@@ -1,20 +1,20 @@
 	
 	/**
-	* private class variable COLUMN_NAME
+	* private class variable ${COLUMN_NAME}
 	*/
-	private $_COLUMN_NAME;
+	private $_${COLUMN_NAME};
 	
 	/**
-	* returns the value of COLUMN_NAME
+	* returns the value of ${COLUMN_NAME}
 	*/
-	public function _get_COLUMN_NAME() {
-		return $this->_COLUMN_NAME;
+	public function _get_${COLUMN_NAME}() {
+		return $this->_${COLUMN_NAME};
 	}
 	
 	/**
-	* sets the value of COLUMN_NAME
+	* sets the value of ${COLUMN_NAME}
 	*/
-	public function set_COLUMN_NAME($COLUMN_NAME) {
-		$this->_COLUMN_NAME = $COLUMN_NAME;
+	public function set_${COLUMN_NAME}($${COLUMN_NAME}) {
+		$this->_${COLUMN_NAME} = ${COLUMN_NAME};
 	}
 	

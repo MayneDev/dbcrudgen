@@ -1,4 +1,4 @@
-package $PACKAGE_NAME;
+package ${PACKAGE_NAME};
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,15 +8,15 @@ import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
-import $DATABASE_TABLES_CLASS;
+import ${DATABASE_TABLES_CLASS};
 
-import $TABLE_MODEL_CLASS;
+import ${TABLE_MODEL_CLASS};
 
- public class $DATABASE_TABLE_CLASS extends DatabaseCRUDOperations {
+ public class ${DATABASE_TABLE_CLASS} extends DatabaseCRUDOperations {
 
 		private Context context;
 		
-		public $DATABASE_TABLE_CLASS(Context context){
+		public ${DATABASE_TABLE_CLASS}(Context context){
 			super(context);
 			this.context = context ;
 		}
@@ -31,13 +31,13 @@ import $TABLE_MODEL_CLASS;
 		*/
         @Override
         public Uri getUri() {
-            return $TABLE_DEFINITION_LINK.CONTENT_URI;
+            return ${TABLE_DEFINITION_LINK}.CONTENT_URI;
         }
 
 		/**
-        * $DATABASE_TABLE_CLASS#insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
-        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and inserts the data 
-        * as a new row in the table -> $TABLE_DEFINITION_LINK
+        * ${DATABASE_TABLE_CLASS}#insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and inserts the data 
+        * as a new row in the table -> ${TABLE_DEFINITION_LINK}
         *
         * @return Uri of the inserted item
         */
@@ -52,9 +52,9 @@ import $TABLE_MODEL_CLASS;
         }
 
 		/**
-        * $DATABASE_TABLE_CLASS#update$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
-        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and updates the data 
-        * in the table -> $TABLE_DEFINITION_LINK if the selection matches
+        * ${DATABASE_TABLE_CLASS}#update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data 
+        * in the table -> ${TABLE_DEFINITION_LINK} if the selection matches
         *
         * @return the number of updated rows
         */
@@ -64,8 +64,8 @@ import $TABLE_MODEL_CLASS;
         }
 
 		/**
-        * $DATABASE_TABLE_CLASS#delete$DATABASE_TABLE_CLASS
-        * uses the selection and deletes the data in the table -> $TABLE_DEFINITION_LINK
+        * ${DATABASE_TABLE_CLASS}#delete${DATABASE_TABLE_CLASS}
+        * uses the selection and deletes the data in the table -> ${TABLE_DEFINITION_LINK}
         * if the selection matches
         *
         * @return the number of deleted rows
@@ -76,69 +76,69 @@ import $TABLE_MODEL_CLASS;
         }
 
 		/**
-        * $DATABASE_TABLE_CLASS#insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
-        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and inserts the data 
-        * as a new row in the table -> $TABLE_DEFINITION_LINK
+        * ${DATABASE_TABLE_CLASS}#insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and inserts the data 
+        * as a new row in the table -> ${TABLE_DEFINITION_LINK}
         *
         * @return Uri of the inserted item
         */
-        public Uri insert$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS $TABLE_MODEL_OBJECT) {
+        public Uri insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT}) {
 
             ContentValues values = new ContentValues();
             
-            $CONTENT_VALUES_PUT_STATEMENTS
+            ${CONTENT_VALUES_PUT_STATEMENTS}
             
             return insert(values);
         }
         
        /**
-        * $DATABASE_TABLE_CLASS#update$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS.$TABLE_MODEL_OBJECT)
-        * Mines data from $TABLE_MODEL_OBJECT, an object of $TABLE_MODEL_INFO_CLASS and updates the data 
-        * in the table -> $TABLE_DEFINITION_LINK if the selection matches
+        * ${DATABASE_TABLE_CLASS}#update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data 
+        * in the table -> ${TABLE_DEFINITION_LINK} if the selection matches
         *
         * @return the number of updated rows
         */
- 		public int update$DATABASE_TABLE_CLASS($TABLE_MODEL_INFO_CLASS $TABLE_MODEL_OBJECT, String selection, String[] selectionArgs) {
+ 		public int update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT}, String selection, String[] selectionArgs) {
 
             ContentValues values = new ContentValues();
             
-            $CONTENT_VALUES_PUT_STATEMENTS
+            ${CONTENT_VALUES_PUT_STATEMENTS}
             
             return update(values,selection,selectionArgs);
         }
         
         /**
-        * $DATABASE_TABLE_CLASS#delete$DATABASE_TABLE_CLASS
-        * uses the selection and deletes the data in the table -> $TABLE_DEFINITION_LINK
+        * ${DATABASE_TABLE_CLASS}#delete${DATABASE_TABLE_CLASS}
+        * uses the selection and deletes the data in the table -> ${TABLE_DEFINITION_LINK}
         * if the selection matches
         *
         * @return the number of deleted rows
         */
-        public int delete$DATABASE_TABLE_CLASS(String selection, String[] selectionArgs) {
+        public int delete${DATABASE_TABLE_CLASS}(String selection, String[] selectionArgs) {
 
             return delete(selection,selectionArgs);
         }
         
         /**
-        * $DATABASE_TABLE_CLASS#query$DATABASE_TABLE_CLASS
+        * ${DATABASE_TABLE_CLASS}#query${DATABASE_TABLE_CLASS}
         * uses the selection projection,  selection,  selectionArgs,  sortOrder
-        * to query  the data in the table -> $TABLE_DEFINITION_LINK
+        * to query  the data in the table -> ${TABLE_DEFINITION_LINK}
         * 
-        * @return an iteratable Cursor object of the table -> $TABLE_DEFINITION_LINK
+        * @return an iteratable Cursor object of the table -> ${TABLE_DEFINITION_LINK}
         */
-        public Cursor query$DATABASE_TABLE_CLASS(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        public Cursor query${DATABASE_TABLE_CLASS}(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
             return query(projection,  selection,  selectionArgs,  sortOrder);
         }
         
         /**
-        * $DATABASE_TABLE_CLASS#get$TABLE_MODEL_INFO_CLASSAll
+        * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}All
         * Returns a list of all the items in the table
         *
-        * @return List<$TABLE_MODEL_INFO_CLASS>
+        * @return List<${TABLE_MODEL_INFO_CLASS}>
         */
-        public List<$TABLE_MODEL_INFO_CLASS> get$TABLE_MODEL_INFO_CLASSAll() {
+        public List<${TABLE_MODEL_INFO_CLASS}> get${TABLE_MODEL_INFO_CLASS}All() {
         	
-        	Cursor cursor = query$DATABASE_TABLE_CLASS(null,null,null,null);
+        	Cursor cursor = query${DATABASE_TABLE_CLASS}(null,null,null,null);
         	
         	int rowsCount = 0;
         	
@@ -146,18 +146,18 @@ import $TABLE_MODEL_CLASS;
         		rowsCount = cursor.getCount();
         	}
 			
-			List<$TABLE_MODEL_INFO_CLASS>$TABLE_MODEL_OBJECT = new ArrayList<$TABLE_MODEL_INFO_CLASS>(rowsCount);
+			List<${TABLE_MODEL_INFO_CLASS}>${TABLE_MODEL_OBJECT} = new ArrayList<${TABLE_MODEL_INFO_CLASS}>(rowsCount);
 			
 			//if cursor does not have any items
 			if(rowsCount<1){
-				return $TABLE_MODEL_OBJECT;
+				return ${TABLE_MODEL_OBJECT};
 			}
             
             for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
             
-            	$CURSOR_ITEMS_GETTER_METHODS
+            	${CURSOR_ITEMS_GETTER_METHODS}
             	
-            	$TABLE_MODEL_OBJECT.add(new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS));
+            	${TABLE_MODEL_OBJECT}.add(new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS}));
             }
             
             //Close cursor
@@ -167,20 +167,20 @@ import $TABLE_MODEL_CLASS;
         		}
         	}
         	
-            return $TABLE_MODEL_OBJECT;
+            return ${TABLE_MODEL_OBJECT};
         }
         
         /**
-        * $DATABASE_TABLE_CLASS#search$TABLE_MODEL_INFO_CLASS
+        * ${DATABASE_TABLE_CLASS}#search${TABLE_MODEL_INFO_CLASS}
         * Returns a list of all the items in the table that match the query
         *
-        * @return List<$TABLE_MODEL_INFO_CLASS>
+        * @return List<${TABLE_MODEL_INFO_CLASS}>
         */
-        public List<$TABLE_MODEL_INFO_CLASS> search$TABLE_MODEL_INFO_CLASS(String searchKey) {
+        public List<${TABLE_MODEL_INFO_CLASS}> search${TABLE_MODEL_INFO_CLASS}(String searchKey) {
         	
-        	String selection = $ANDROID_SQL_SEARCH_SELECTION_STATEMENT;
+        	String selection = ${ANDROID_SQL_SEARCH_SELECTION_STATEMENT};
         	
-        	Cursor cursor = query$DATABASE_TABLE_CLASS(null,selection,null,null);
+        	Cursor cursor = query${DATABASE_TABLE_CLASS}(null,selection,null,null);
         	
         	int rowsCount = 0;
         	
@@ -188,18 +188,18 @@ import $TABLE_MODEL_CLASS;
         		rowsCount = cursor.getCount();
         	}
 			
-			List<$TABLE_MODEL_INFO_CLASS>$TABLE_MODEL_OBJECT = new ArrayList<$TABLE_MODEL_INFO_CLASS>(rowsCount);
+			List<${TABLE_MODEL_INFO_CLASS}>${TABLE_MODEL_OBJECT} = new ArrayList<${TABLE_MODEL_INFO_CLASS}>(rowsCount);
 			
 			//if cursor does not have any items
 			if(rowsCount<1){
-				return $TABLE_MODEL_OBJECT;
+				return ${TABLE_MODEL_OBJECT};
 			}
             
             for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
             
-            	$CURSOR_ITEMS_GETTER_METHODS
+            	${CURSOR_ITEMS_GETTER_METHODS}
             	
-            	$TABLE_MODEL_OBJECT.add(new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS));
+            	${TABLE_MODEL_OBJECT}.add(new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS}));
             }
             
             //Close cursor
@@ -209,20 +209,20 @@ import $TABLE_MODEL_CLASS;
         		}
         	}
         	
-            return $TABLE_MODEL_OBJECT;
+            return ${TABLE_MODEL_OBJECT};
         }
                 
         /**
-        * $DATABASE_TABLE_CLASS#get$TABLE_MODEL_INFO_CLASS
+        * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}
         * Returns an object of queried row in the table
         *
-        * @return $TABLE_MODEL_INFO_CLASS
+        * @return ${TABLE_MODEL_INFO_CLASS}
         */
-        public $TABLE_MODEL_INFO_CLASS get$TABLE_MODEL_INFO_CLASS($PRIMARY_KEY_DATATYPE _$PRIMARY_KEY_OBJECT) {
+        public ${TABLE_MODEL_INFO_CLASS} get${TABLE_MODEL_INFO_CLASS}(${PRIMARY_KEY_DATATYPE} _${PRIMARY_KEY_OBJECT}) {
         	
-        	String selection = $COLUMN_REFERENCE +"='" +String.valueOf(_$PRIMARY_KEY_OBJECT) +"'";
+        	String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
         	
-        	Cursor cursor = query$DATABASE_TABLE_CLASS(null,selection,null,null);
+        	Cursor cursor = query${DATABASE_TABLE_CLASS}(null,selection,null,null);
         	
         	int rowsCount = 0;
         	
@@ -230,18 +230,18 @@ import $TABLE_MODEL_CLASS;
         		rowsCount = cursor.getCount();
         	}
 			
-			$TABLE_MODEL_INFO_CLASS $TABLE_MODEL_OBJECT =  null;
+			${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} =  null;
 			
 			//if cursor does not have any items
 			if(rowsCount<1){
-				return $TABLE_MODEL_OBJECT;
+				return ${TABLE_MODEL_OBJECT};
 			}
             
             for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
             
-            	$CURSOR_ITEMS_GETTER_METHODS
+            	${CURSOR_ITEMS_GETTER_METHODS}
             	
-            	$TABLE_MODEL_OBJECT = new $TABLE_INFO_CLASS($CONTRUCTOR_PARAMS);
+            	${TABLE_MODEL_OBJECT} = new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS});
             }
             
              //Close cursor
@@ -251,7 +251,7 @@ import $TABLE_MODEL_CLASS;
         		}
         	}
         	
-            return $TABLE_MODEL_OBJECT;
+            return ${TABLE_MODEL_OBJECT};
         }
         
         
@@ -277,7 +277,7 @@ import $TABLE_MODEL_CLASS;
         return data;
     }
     
-        $COLUMN_SPECIFIC_QUERY_METHODS
+        ${COLUMN_SPECIFIC_QUERY_METHODS}
         
         
     }

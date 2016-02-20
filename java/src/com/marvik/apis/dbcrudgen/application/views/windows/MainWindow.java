@@ -42,11 +42,21 @@ public class MainWindow extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		mysqlDatabases = tasksExecutor.getDatabases();
-
+		//new Thread( () -> {getAllLocalHostDatabaseSchemas();}).start(); :: this thread seems slow
+		
+		getAllLocalHostDatabaseSchemas();
+		
 		// Initialize the main stage
 		initStage(primaryStage);
 
+	}
+
+	/**
+	 * 
+	 */
+	private void getAllLocalHostDatabaseSchemas() {
+	
+		mysqlDatabases = tasksExecutor.getDatabases();
 	}
 
 	private void initStage(Stage primaryStage) {

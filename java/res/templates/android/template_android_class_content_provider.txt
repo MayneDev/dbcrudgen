@@ -1,4 +1,4 @@
-package $PACKAGE_NAME;
+package ${PACKAGE_NAME};
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -8,30 +8,30 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
-import $SQLITE_OPENHELPER_CLASS;
-import $DATABASE_TABLES_CLASS;
+import ${SQLITE_OPENHELPER_CLASS};
+import ${DATABASE_TABLES_CLASS};
 
 
-public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
+public class ${CONTENT_PROVIDER_CLASS} extends ContentProvider {
 
-    public static final String AUTHORITY = "$PACKAGE_NAME.$CONTENT_PROVIDER_CLASS";
+    public static final String AUTHORITY = "${PACKAGE_NAME}.${CONTENT_PROVIDER_CLASS}";
 
     private static final UriMatcher uriMatcher;
 
-    $URI_MATCHER_CODES
+    ${URI_MATCHER_CODES}
 
-    private static final String DATABASE_NAME = "$DATABASE_NAME";
+    private static final String DATABASE_NAME = "${DATABASE_NAME}";
 
-    private static final int DATABASE_VERSION = $DATABASE_VERSION;
+    private static final int DATABASE_VERSION = ${DATABASE_VERSION};
 
     static {
         
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-        $INIT_URI_MATCHES
+        ${INIT_URI_MATCHES}
     }
 
-    private $SQLITE_OPEN_HELPER_SUBCLASS $SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE;
+    private ${SQLITE_OPEN_HELPER_SUBCLASS} ${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE};
     
     private SQLiteDatabase sqLiteDatabase;
 
@@ -39,22 +39,22 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
     @Override
     public boolean onCreate() {
         
-        $SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE = new $SQLITE_OPEN_HELPER_SUBCLASS(getContext(), DATABASE_NAME, null, DATABASE_VERSION);
+        ${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE} = new ${SQLITE_OPEN_HELPER_SUBCLASS}(getContext(), DATABASE_NAME, null, DATABASE_VERSION);
         
-        return  $SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE != null;
+        return  ${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE} != null;
     }
 
     
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         
-        sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getReadableDatabase();
+        sqLiteDatabase = get${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE}().getReadableDatabase();
 
 		Log.i("QUERY",uri.toString());
         
         switch (uriMatcher.match(uri)) {
         
-         	$TABLES_ROWS_QUERY_STATEMENTS
+         	${TABLES_ROWS_QUERY_STATEMENTS}
               
         }
         return null;
@@ -63,7 +63,7 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
     
     @Override
     public String getType(Uri uri) {
-        sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getReadableDatabase();
+        sqLiteDatabase = get${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE}().getReadableDatabase();
         return null;
     }
 
@@ -71,13 +71,13 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         
-        sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getWritableDatabase();
+        sqLiteDatabase = get${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE}().getWritableDatabase();
         
         Log.i("INSERT",uri.toString());
         
         switch (uriMatcher.match(uri)) {
             
-            $TABLES_ROWS_INSERT_STATEMENTS
+            ${TABLES_ROWS_INSERT_STATEMENTS}
             
         }
         return uri;
@@ -87,13 +87,13 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         
-        sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getWritableDatabase();
+        sqLiteDatabase = get${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE}().getWritableDatabase();
         
         Log.i("DELETE",uri.toString());
         
         switch (uriMatcher.match(uri)) {
             
-            $TABLES_ROWS_DELETE_STATEMENTS
+            ${TABLES_ROWS_DELETE_STATEMENTS}
         }
         return 0;
     }
@@ -102,20 +102,20 @@ public class $CONTENT_PROVIDER_CLASS extends ContentProvider {
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         
-        sqLiteDatabase = get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE().getWritableDatabase();
+        sqLiteDatabase = get${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE}().getWritableDatabase();
         
         Log.i("UPDATE",uri.toString());
         
         switch (uriMatcher.match(uri)) {
             
-           $TABLES_ROWS_UPDATE_STATEMENTS
+           ${TABLES_ROWS_UPDATE_STATEMENTS}
             
         }
         return 0;
     }
 
-    public $SQLITE_OPEN_HELPER_SUBCLASS get$SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE() {
-        return $SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE;
+    public ${SQLITE_OPEN_HELPER_SUBCLASS} get${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE}() {
+        return ${SQLITE_OPEN_HELPER_SUBCLASS_DATA_TYPE_VARIABLE};
     }
 
     public SQLiteDatabase getSqLiteDatabase() {

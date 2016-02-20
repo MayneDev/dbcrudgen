@@ -1,19 +1,19 @@
-package $PACKAGE_NAME;
+package ${PACKAGE_NAME};
 
 import android.content.Context;
 
-$TABLES_CRUD_CLASSES_IMPORT
+${TABLES_CRUD_CLASSES_IMPORT}
 
-public class $TRANSACTION_CLASS {
+public class ${TRANSACTION_CLASS} {
 
 	private Context context;
 	
-	public $TRANSACTION_CLASS(Context context){
+	public ${TRANSACTION_CLASS}(Context context){
 		this.context = context;
 	}
 	
 	/**
-	* $TRANSACTION_CLASS#getContext()
+	* ${TRANSACTION_CLASS}#getContext()
 	* 
 	* return Context
 	*/
@@ -21,6 +21,6 @@ public class $TRANSACTION_CLASS {
 		return this.context;
 	}
 	
-	$TABLES_CRUD_CLASSES_GETTERS
+	${TABLES_CRUD_CLASSES_GETTERS}
 
 }

@@ -241,7 +241,7 @@ public class PHPCrudCreator extends CrudCreator {
 				.parseTableCrudLowLevelScriptsFileName(tablesCrudLowLevelScriptsStorageDirectory, className);
 
 		String sqlTableFileName = getPHPTemplatesParser().parseSQLFileName(tablesSQLScriptsStorageDirectory, tableName);
-
+System.err.println(phpClassFileName);
 		getFilesHandler().createByteWeighedFile(phpClassFileName, tablesCrud);
 
 		getFilesHandler().createByteWeighedFile(sqlTableFileName, tableSQL);

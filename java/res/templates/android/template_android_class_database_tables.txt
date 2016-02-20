@@ -1,15 +1,15 @@
-package $TABLES_PACKAGE_DEFINITION;
+package ${TABLES_PACKAGE_DEFINITION};
 
 import android.net.Uri;
 
-import $CONTENT_PROVIDER_PACKAGE.$CONTENT_PROVIDER_CLASS;
+import ${CONTENT_PROVIDER_PACKAGE}.${CONTENT_PROVIDER_CLASS};
 
 
 public class Tables {
 
     public static final String[] TABLES_SQL = {
-            $TABLE_SQL
+            ${TABLE_SQL}
     };
 
-	$DATABASE_TABLES_SCHEMAS
+	${DATABASE_TABLES_SCHEMAS}
 }

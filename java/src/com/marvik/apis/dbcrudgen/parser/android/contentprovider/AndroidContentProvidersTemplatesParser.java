@@ -126,6 +126,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 			tableInsertStatement += createTableInsertStatements(tableName, tableUriMatcherObject);
 			tableQueryStatement += createTableQueryStatements(tableName, tableUriMatcherObject);
 			tableUpdateStatement += createTableUpdateStatements(tableName, tableUriMatcherObject);
+			
 		}
 
 		// add uri matcher codes
@@ -176,6 +177,7 @@ public class AndroidContentProvidersTemplatesParser extends AndroidTemplatesPars
 	}
 
 	private String parseCRUDBindigsStatement(String crudBindingTemplate, String tableName, String uriMatcherCode) {
+	
 		String tableDefinitionLink = parseTableDefinitionLink(tableName);
 		crudBindingTemplate = crudBindingTemplate.replace(TemplateTags.Android.TABLE_URI_MATCHER_CODE, uriMatcherCode);
 		crudBindingTemplate = crudBindingTemplate.replace(TemplateTags.Android.TABLE_DEFINITION_LINK,
