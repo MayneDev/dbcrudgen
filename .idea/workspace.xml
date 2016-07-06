@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="46a9fd74-c08b-4c13-bfda-8dc018c8cfb0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/crud/includes/dbapi/db_actions.php" afterPath="$PROJECT_DIR$/java/res/crud/includes/dbapi/db_actions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/crud/includes/dbapi/db_connect.php" afterPath="$PROJECT_DIR$/java/res/crud/includes/dbapi/db_connect.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/crud/includes/dbapi/db_utils.php" afterPath="$PROJECT_DIR$/java/res/crud/includes/dbapi/db_utils.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/dbcrudgen/native/template_php_db_crud_gen_info.txt" afterPath="$PROJECT_DIR$/java/res/dbcrudgen/native/template_php_db_crud_gen_info.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/samples/samplesql.sql" afterPath="$PROJECT_DIR$/java/res/samples/samplesql.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_class_content_provider.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_class_content_provider.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_class_database_tables.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_class_database_tables.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_class_sql_table.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_class_sql_table.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_class_sqlite_open_helper.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_class_sqlite_open_helper.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_class_table_crud.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_class_table_crud.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_class_transactions_manager.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_class_transactions_manager.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_interface_crud_operations.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_interface_crud_operations.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_float.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_float.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_generic.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_generic.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_int.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_int.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_long.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_long.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_string.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_datatype_string.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_default.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_method_columns_crud_default.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_method_table_crud_class_getter_template.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_method_table_crud_class_getter_template.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_add_uri_matcher.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_add_uri_matcher.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_delete.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_delete.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_insert.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_insert.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_query.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_query.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_update.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_statement_content_provider_sql_update.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_table_model.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_table_model.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/android/template_android_variable_table_create_sql.txt" afterPath="$PROJECT_DIR$/java/res/templates/android/template_android_variable_table_create_sql.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_database_tables_schemas.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_database_tables_schemas.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_mysql_table_crud.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_mysql_table_crud.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_mysql_table_schemas.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_mysql_table_schemas.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_database_connection.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_database_connection.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_database_connection_properties.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_database_connection_properties.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_transactions_executor.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_transactions_executor.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_transactions_wrapper.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_mysql_transactions_wrapper.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_delete_exception.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_delete_exception.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_insert_exception.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_insert_exception.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_query_exception.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_query_exception.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_update_exception.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_class_sql_records_update_exception.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_info_class_model.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_info_class_model.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_object_default_encapsulator_template.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_object_default_encapsulator_template.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_object_getter_encapsulator_template.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_object_getter_encapsulator_template.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_object_setter_encapsulator_template.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_object_setter_encapsulator_template.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/java/template_java_variable_table_create_sql.txt" afterPath="$PROJECT_DIR$/java/res/templates/java/template_java_variable_table_create_sql.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_class_database_connect.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_class_database_connect.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_class_database_utils.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_class_database_utils.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_class_table_crud_high_level.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_class_table_crud_high_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_class_table_crud_low_level.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_class_table_crud_low_level.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_function_columns_crud.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_function_columns_crud.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_function_high_level_fetch_assoc_data_getters.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_function_high_level_fetch_assoc_data_getters.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_function_high_level_prepared_insert.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_function_high_level_prepared_insert.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_function_low_level_prepared_insert.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_function_low_level_prepared_insert.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_function_table_column_accessors.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_function_table_column_accessors.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_statement_class_file_name.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_statement_class_file_name.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/res/templates/php/template_php_statements_database_actions.txt" afterPath="$PROJECT_DIR$/java/res/templates/php/template_php_statements_database_actions.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/Main.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/events/UserEventActions.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/events/UserEventActions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/tasks/TasksExecutor.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/tasks/TasksExecutor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/ApplicationMainWindow.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/ApplicationMainWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/ConfigurationContainer.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/ConfigurationContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/ProjectConfigurationContainer.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/ProjectConfigurationContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/android/AndroidProjectConfigurationContainer.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/android/AndroidProjectConfigurationContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/database/mysql/MYSQLDatabaseConnectionConfigurationContainer.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/database/mysql/MYSQLDatabaseConnectionConfigurationContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/j2se/J2SEProjectConfigurationContainer.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/j2se/J2SEProjectConfigurationContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/php/PHPProjectConfigurationContainer.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/containers/projectconfiguration/php/PHPProjectConfigurationContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/layouts/HorizontalLayout.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/layouts/HorizontalLayout.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/layouts/VerticalLayout.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/layouts/VerticalLayout.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/lists/StyledListView.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/lists/StyledListView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/widgets/ProjectsConfigurationWidget.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/widgets/ProjectsConfigurationWidget.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/windows/MainWindow.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/windows/MainWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/windows/properties/WindowProperties.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/application/views/windows/properties/WindowProperties.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/databases/mysql/MYSQLDatabaseConnection.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/databases/mysql/MYSQLDatabaseConnection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/databases/mysql/MYSQLDefaultConnectionProperties.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/databases/mysql/MYSQLDefaultConnectionProperties.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/databases/mysql/MYSQLQueryExecutor.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/databases/mysql/MYSQLQueryExecutor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/filepaths/templates/TemplateNativeFilePaths.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/filepaths/templates/TemplateNativeFilePaths.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/java/grammar/JavaGrammar.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/java/grammar/JavaGrammar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/java/grammar/delimeters/JavaDelimiter.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/java/grammar/delimeters/JavaDelimiter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/java/object/accessibility/JavaObjectAccessibility.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/java/object/accessibility/JavaObjectAccessibility.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/mysql/grammar/MYSQLGrammar.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/mysql/grammar/MYSQLGrammar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/mysql/queries/MYSQLQueries.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/mysql/queries/MYSQLQueries.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/php/grammar/PHPGrammar.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/php/grammar/PHPGrammar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/sql/grammar/SQLGrammar.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/sql/grammar/SQLGrammar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/sqlite/grammar/SQLiteGrammar.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/platforms/sqlite/grammar/SQLiteGrammar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/templates/DbCrudGeneratorNativeTemplates.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/templates/DbCrudGeneratorNativeTemplates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/templates/tags/NativeTemplateTags.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/templates/tags/NativeTemplateTags.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/test/Test.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/test/Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/test/codebuilder/CodeBuilder.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/test/codebuilder/CodeBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/toolchains/jdk/JDKFilenames.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/toolchains/jdk/JDKFilenames.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/toolchains/xampp/XAMPP.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/toolchains/xampp/XAMPP.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/utils/NativeUtils.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/core/utils/NativeUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/CrudCreator.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/CrudCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/android/AndroidCRUDCreator.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/android/AndroidCRUDCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/j2se/J2SECrudCreator.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/j2se/J2SECrudCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/php/PHPCrudCreator.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/creator/php/PHPCrudCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/database/connection/DatabaseConnectionProperties.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/database/connection/DatabaseConnectionProperties.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/database/connection/project/ProjectDatabaseConnectionProperties.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/database/connection/project/ProjectDatabaseConnectionProperties.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/filepaths/templates/TemplatesFilePath.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/filepaths/templates/TemplatesFilePath.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/filepaths/templates/TestRes.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/filepaths/templates/TestRes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/io/FilesHandler.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/io/FilesHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/io/reader/FileStreamReader.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/io/reader/FileStreamReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/io/writer/FileStreamWriter.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/io/writer/FileStreamWriter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/natives/Natives.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/natives/Natives.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/natives/assets/NativeAssets.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/natives/assets/NativeAssets.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/natives/syntax/Syntax.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/natives/syntax/Syntax.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/TemplatesParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/TemplatesParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/AndroidTemplatesParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/AndroidTemplatesParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/contentprovider/AndroidContentProvidersTemplatesParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/contentprovider/AndroidContentProvidersTemplatesParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/crudoperations/AndroidCrudOperationsTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/crudoperations/AndroidCrudOperationsTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/database/transactions/AndroidDatabaseTransactionsParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/database/transactions/AndroidDatabaseTransactionsParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/javaobjects/AndroidJavaObjectDefaultEncapsulationTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/javaobjects/AndroidJavaObjectDefaultEncapsulationTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/javaobjects/AndroidJavaObjectGetterEncapsulationTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/javaobjects/AndroidJavaObjectGetterEncapsulationTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/javaobjects/AndroidJavaObjectSetterEncapsulationTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/javaobjects/AndroidJavaObjectSetterEncapsulationTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/sqliteopenhelper/AndroidSQLiteOpenHelperTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/sqliteopenhelper/AndroidSQLiteOpenHelperTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/tablecrud/AndroidTableCRUDTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/tablecrud/AndroidTableCRUDTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/tablemodel/AndroidTableModelTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/tablemodel/AndroidTableModelTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/tableschemas/AndroidTableSchemasTemplatesParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/android/tableschemas/AndroidTableSchemasTemplatesParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMYSQLTableCrudTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMYSQLTableCrudTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMYSQLTableModelParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMYSQLTableModelParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMYSQLTableSchemasTemplatesParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMYSQLTableSchemasTemplatesParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMysqlConnectionTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/J2SEMysqlConnectionTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/JavaObjectDefaultEncapsulationTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/JavaObjectDefaultEncapsulationTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/JavaTableModelTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/JavaTableModelTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/MYSQLDatabaseConnectionPropertiesTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/MYSQLDatabaseConnectionPropertiesTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/MYSQLTransactionsExecutorTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/MYSQLTransactionsExecutorTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/MYSQLTransactionsWrapperTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/MYSQLTransactionsWrapperTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsDeleteExceptionTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsDeleteExceptionTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsInsertExceptionTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsInsertExceptionTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsQueryExceptionTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsQueryExceptionTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsUpdateExceptionTemplateParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/j2se/mysql/RecordsUpdateExceptionTemplateParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/java/j2se/J2SETemplatesParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/java/j2se/J2SETemplatesParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/php/PHPTemplatesParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/parser/php/PHPTemplatesParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/AndroidContentProviderConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/AndroidContentProviderConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/database/AndroidDatabaseConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/database/AndroidDatabaseConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/database/provider/ProviderConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/database/provider/ProviderConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/database/transactions/TransactionManagerConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/platforms/android/configuration/database/transactions/TransactionManagerConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/ProjectConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/ProjectConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/android/configuration/AndroidProjectConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/android/configuration/AndroidProjectConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/android/filenames/AndroidProjectFileNames.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/android/filenames/AndroidProjectFileNames.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/j2se/configuration/J2SEProjectConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/j2se/configuration/J2SEProjectConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/j2se/configuration/J2SEProjectMYSQLDatabaseConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/j2se/configuration/J2SEProjectMYSQLDatabaseConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/java/filenames/JavaProjectFileNames.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/java/filenames/JavaProjectFileNames.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/php/configuration/PHPProjectConfiguration.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/php/configuration/PHPProjectConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/php/filenames/PHPProjectFileNames.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/projects/php/filenames/PHPProjectFileNames.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/TableColumn.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/TableColumn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/ForeignKeys.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/ForeignKeys.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/KeyColumn.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/KeyColumn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/PrimaryKey.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/PrimaryKey.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/UniqueKeys.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/UniqueKeys.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/constraints/Constraints.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/constraints/Constraints.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/database/Database.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/database/Database.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/datatypes/DataType.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/datatypes/DataType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/datatypes/MYSQLDataTypes.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/datatypes/MYSQLDataTypes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/tables/Table.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/tables/Table.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/sql/parser/SQLParser.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/sql/parser/SQLParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/sql/reader/SQLReader.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/sql/reader/SQLReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/CrudTemplates.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/CrudTemplates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/AndroidCRUDTemplates.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/AndroidCRUDTemplates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassContentProviderTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassContentProviderTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassDatabaseTablesTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassDatabaseTablesTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassSQLTableTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassSQLTableTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassSQLiteOpenHelperTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassSQLiteOpenHelperTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassTableCrudTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassTableCrudTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassTableModelTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassTableModelTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassTransactionsManagerTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/classes/AndroidClassTransactionsManagerTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/interfaces/AndroidInterfaceCrudOperationsTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/interfaces/AndroidInterfaceCrudOperationsTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeFloatTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeFloatTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeGenericTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeGenericTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeIntTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeIntTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeLongTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeLongTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeStringTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDataTypeStringTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDefaultTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodColumnsCrudDefaultTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodsTransactionsTableCrudClassGetterTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/methods/AndroidMethodsTransactionsTableCrudClassGetterTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementAddUriMatcherTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementAddUriMatcherTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLDeleteTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLDeleteTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLInsertTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLInsertTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLQueryTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLQueryTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLUpdateTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentProviderSQLUpdateTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentValuesPutTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementContentValuesPutTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementSQLTableColumnStatementTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/statements/AndroidStatementSQLTableColumnStatementTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidJavaVariableTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidJavaVariableTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidVariableSQLTableColumnTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidVariableSQLTableColumnTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidVariableSQLTableCreateSQLTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidVariableSQLTableCreateSQLTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidVariableUriMatcherCodeTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/crud/variables/AndroidVariableUriMatcherCodeTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/javaobject/encapsulation/AndroidJavaObjectDefaultEncapsulationTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/javaobject/encapsulation/AndroidJavaObjectDefaultEncapsulationTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/javaobject/encapsulation/AndroidJavaObjectGetterEncapsulationTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/javaobject/encapsulation/AndroidJavaObjectGetterEncapsulationTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/javaobject/encapsulation/AndroidJavaObjectSetterEncapsulationTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/android/javaobject/encapsulation/AndroidJavaObjectSetterEncapsulationTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLConnectionTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLConnectionTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLDatabaseTablesSchemasTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLDatabaseTablesSchemasTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLTableCrudTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLTableCrudTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLTablesSchemasTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/J2SEMYSQLTablesSchemasTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/JavaTableModelClassTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/JavaTableModelClassTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/MYSQLDatabaseConnectionPropertiesTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/MYSQLDatabaseConnectionPropertiesTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/MYSQLTransactionsExecutorTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/MYSQLTransactionsExecutorTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/MYSQLTransactionsWrapperTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/MYSQLTransactionsWrapperTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsDeleteExceptionTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsDeleteExceptionTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsInsertExceptionTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsInsertExceptionTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsQueryExceptionTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsQueryExceptionTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsUpdateExceptionTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/classes/RecordsUpdateExceptionTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/crud/J2SECRUDTemplates.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/crud/J2SECRUDTemplates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/statements/J2SEMYSQLStatementSQLTableColumnStatementTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/statements/J2SEMYSQLStatementSQLTableColumnStatementTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/variables/J2SEMYSQLTableColumnVariableDefinitionTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/variables/J2SEMYSQLTableColumnVariableDefinitionTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/variables/J2SEMYSQLTableCreateSQLTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/j2se/variables/J2SEMYSQLTableCreateSQLTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/JavaTemplates.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/JavaTemplates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/grammar/JavaVariableGrammarTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/grammar/JavaVariableGrammarTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/object/encapsulation/JavaObjectDefaultEncapsulationTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/object/encapsulation/JavaObjectDefaultEncapsulationTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/object/encapsulation/JavaObjectGetterEncapsulationTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/object/encapsulation/JavaObjectGetterEncapsulationTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/object/encapsulation/JavaObjectSetterEncapsulationTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/java/object/encapsulation/JavaObjectSetterEncapsulationTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/PHPCrudTemplates.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/PHPCrudTemplates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPClassDatabaseConnectionTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPClassDatabaseConnectionTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPClassDatabaseUtilsTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPClassDatabaseUtilsTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPHighLevelTableClassCrudTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPHighLevelTableClassCrudTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPLowLevelTableClassCrudTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/classcrud/PHPLowLevelTableClassCrudTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionColumnAccessorsTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionColumnAccessorsTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionColumnsCrudTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionColumnsCrudTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionHighLevelFetchAssocGettersTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionHighLevelFetchAssocGettersTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionsHighLevelPreparedInsertTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionsHighLevelPreparedInsertTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionsLowLevelPreparedInsertTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/functions/PHPFunctionsLowLevelPreparedInsertTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/statements/PHPStatementClassFileNameTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/statements/PHPStatementClassFileNameTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/variables/PHPVariablesDatabaseActionsTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/php/crud/variables/PHPVariablesDatabaseActionsTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/simple/SimpleTemplates.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/simple/SimpleTemplates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/sql/SQLRoutinesTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/sql/SQLRoutinesTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/sql/SQLTableFilenameTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/sql/SQLTableFilenameTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/sql/SQLTablesTemplate.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/sql/SQLTablesTemplate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/tags/TemplateTags.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/templates/tags/TemplateTags.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/utilities/Utils.java" afterPath="$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/utilities/Utils.java" />
+    </list>
+    <ignored path="dbcrudgen.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="dbcrudgen" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="KeyColumn.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/KeyColumn.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="12" />
+    <option name="y" value="1" />
+    <option name="width" value="1346" />
+    <option name="height" value="728" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbcrudgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbcrudgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbcrudgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbcrudgen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="KeyColumn&#9;PSI&#9;JAVA://com.marvik.apis.dbcrudgen.schemamodels.columns.keys.KeyColumn" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="46a9fd74-c08b-4c13-bfda-8dc018c8cfb0" name="Default" comment="" />
+      <created>1467794748924</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1467794748924</updated>
+      <workItem from="1467794754430" duration="319000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="319000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="12" y="1" width="1346" height="728" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962406" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/java/src/com/marvik/apis/dbcrudgen/schemamodels/columns/keys/KeyColumn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
