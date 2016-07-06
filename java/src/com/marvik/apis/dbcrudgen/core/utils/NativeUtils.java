@@ -35,7 +35,7 @@ public final class NativeUtils {
 	 * Convert a class name to a java bean variable name This method is
 	 */
 	public static String toJavaBeansVariable(String className) {
-		System.out.println("Clsas Name : " + className);
+		System.out.println("Class Name : " + className);
 		className = toJavaBeansClass(className);
 		if (className.length() < 2) {
 			return className;

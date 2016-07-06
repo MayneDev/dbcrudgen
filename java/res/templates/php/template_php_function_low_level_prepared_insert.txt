@@ -3,7 +3,7 @@
 	* array (${COLUMNS})
 	* is mappped into 
 	* array (${RECORDS})
-	* @return 1 if data was inserted,0 otherwise
+	* @return int 1 if data was inserted,0 otherwise
 	* if redundancy check is true, it inserts if the record if it never existed else.
 	* if the record exists, it returns the number of times the record exists on the relation
 	*/

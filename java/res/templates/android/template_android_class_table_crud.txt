@@ -7,11 +7,28 @@ import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import ${DATABASE_TABLES_CLASS};
 
 import ${TABLE_MODEL_CLASS};
 
+/**
+* ${DATABASE_TABLE_CLASS}
+*
+* Contains all the method to 
+*
+* CREATE - Create new records
+* READ - Read existing records
+* UPDATE - Update existing records
+* DELETE - Delete existing records
+* 
+* The data in the associated table
+*
+* This source code is auto-generated
+* Victor Mwenda
+* @author vmwenda.vm@gmail.com
+*/
  public class ${DATABASE_TABLE_CLASS} extends DatabaseCRUDOperations {
 
 		private Context context;
@@ -75,6 +92,22 @@ import ${TABLE_MODEL_CLASS};
             return getContext().getContentResolver().delete(getUri(), selection, selectionArgs);
         }
 
+		/**
+	     * Performs a blind query where you specify the data to search, the columns to search and the targetColumn
+	     * where you want to get the results from. 
+	     * 
+	     * The returned results which are the value in the targetColumn is
+	     * the first results of the query. Use this method where there only exists possibility of one result only
+	     *
+	     * @param index the data to search
+	     * @param indexColumn the index columns that contains the data to search
+	     * @param targetColumn the target column to get data from
+	     * @return targetData
+	     */
+	    public String getColumnsValues(  String[] index, String[] indexColumn, String targetColumn) {
+	        return super.getColumnsValues(getUri(), index, indexColumn, targetColumn);
+	    }
+	    
 		/**
         * ${DATABASE_TABLE_CLASS}#insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
         * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and inserts the data 

@@ -538,6 +538,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		// Date
 		if (columnDatatype.equalsIgnoreCase("Date")) {
 			// TO DO ADD SOURCE CODE
+			return "String";
 		}
 		// Double
 		if (columnDatatype.equalsIgnoreCase("Double")) {
@@ -567,8 +568,12 @@ public class AndroidTemplatesParser extends TemplatesParser {
 		if (columnDatatype.equalsIgnoreCase("text")) {
 			return "String";
 		}
+		// Timestamp
+		if (columnDatatype.equalsIgnoreCase("timestamp")) {
+			return "String";
+		}
 
-		System.out.println("COULD NOT GET THE DATATYPE FOR [" + columnDatatype + "]");
+		System.err.println("COULD NOT GET THE DATATYPE FOR [" + columnDatatype + "]");
 
 		return "Object";
 	}

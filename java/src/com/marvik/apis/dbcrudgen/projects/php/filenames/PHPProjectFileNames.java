@@ -5,15 +5,15 @@ public class PHPProjectFileNames {
 	/**
 	 * DATABASE_UTILS_SCRIPT_FILENAME
 	 */
-	public static final String DATABASE_UTILS_SCRIPT_FILENAME = "DatabaseUtils.class.inc.php";
+	public static final String DATABASE_UTILS_SCRIPT_FILENAME = "DatabaseUtils.php";
 	/**
 	 * DATABASE_CONNECTION_SCRIPT_FILENAME
 	 */
-	public static final String DATABASE_CONNECTION_SCRIPT_FILENAME = "DatabaseConnection.class.inc.php";
+	public static final String DATABASE_CONNECTION_SCRIPT_FILENAME = "DatabaseConnection.php";
 	/**
 	 * DATA_ACTIONS_SCRIPT_FILENAME
 	 */
-	public static final String DATA_ACTIONS_SCRIPT_FILENAME = "DatabaseActions.class.inc.php";
+	public static final String DATA_ACTIONS_SCRIPT_FILENAME = "DatabaseActions.php";
 	/**
 	 * PHP_FILE_EXTENSION
 	 */

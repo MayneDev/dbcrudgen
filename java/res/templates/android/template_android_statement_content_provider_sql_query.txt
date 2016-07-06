@@ -1,3 +1,2 @@
 case ${TABLE_URI_MATCHER_CODE}:
-
 	return getSqLiteDatabase().query(${TABLE_DEFINITION_LINK}, projection, selection, selectionArgs, null, null, sortOrder);

@@ -1,3 +1,8 @@
+/**
+* Sets the value of  ${OBJECT}
+*
+* @param  ${OBJECT}  ${OBJECT}
+*/
 public void set${JAVA_BEANS_OBJECT} (${DATATYPE} ${OBJECT}){
 	this.${OBJECT} = ${OBJECT};
 }

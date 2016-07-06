@@ -157,7 +157,7 @@ public class SimpleTemplates {
 			/**
 			 * PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH
 			 */
-			public static final String PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH = "${DIRECTORY}${JAVA_BEANS_CLASSNAME}.class.php";
+			public static final String PHP_CLASS_FILENAME_TEMPLATE_FILE_PATH = "${DIRECTORY}${JAVA_BEANS_CLASSNAME}.php";
 		}
 
 		public static class SQL {

@@ -67,6 +67,7 @@ public class TemplatesParser {
 		// Date
 		if (columnDatatype.equalsIgnoreCase("Date")) {
 			// TO DO ADD SOURCE CODE
+			return "String";
 		}
 		// Double
 		if (columnDatatype.equalsIgnoreCase("Double")) {
@@ -95,6 +96,9 @@ public class TemplatesParser {
 		// Text
 		if (columnDatatype.equalsIgnoreCase("text")) {
 			return "String";
+		}
+		if (columnDatatype.equalsIgnoreCase("timestamp")) {
+			return "long";
 		}
 
 		System.out.println("COULD NOT GET THE DATATYPE FOR [" + columnDatatype + "]");

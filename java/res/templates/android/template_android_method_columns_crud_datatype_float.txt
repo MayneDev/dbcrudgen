@@ -6,8 +6,8 @@
 	
 		String _${QUERIED_COLUMN} = getColumnsValues(
                     getUri(),
-                    new String[]{${FUNCTION_PARAMS_KEYS}},
                     new String[]{${FUNCTION_PARAMS_VALUES}},
+                    new String[]{${FUNCTION_PARAMS_KEYS}},
 					${QUERIED_TABLE_COLUMN_REFERENCE}
             );
             

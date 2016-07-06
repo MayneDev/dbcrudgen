@@ -1,23 +1,33 @@
 <?php
 
+	namespace app\libs\marvik\libs\database\crud;
+ 
+	use app\libs\marvik\libs\database\core\mysql\DatabaseUtils;
+
+	use app\libs\marvik\libs\database\core\mysql\DatabaseActions;
+
 	${CRUD_GENERATOR_TEMPLATE}
-	
+
+/**
+*  
+* ${CLASS_NAME}
+*  
+* Low level class for manipulating the data in the table ${TABLE_NAME}
+*
+* This source code is auto-generated
+* @author Victor Mwenda
+* 
+* Email : vmwenda.vm@gmail.com
+* Phone : 0718034449
+*/
 class ${CLASS_NAME} {
 
 	private $databaseUtils;
 	private $action;
 	private $client;
 	
-	public function __construct($action, $client) {
-	
-		//Data Actions script file - It contains all the various data actions that can be performed on data.
-		require_once '${DATA_ACTIONS_FILE_PATH}';
-		
-		//Database Utils Script - It contains all the MYSQL API's for performing CRUD transactions
-		require_once '${DATABASE_UTILS_FILE_PATH}';
-		
+	public function __construct($action = "", $client = "") {		
 		$this->init(true);
-		
 	}
 	
 	//Initializes
@@ -26,36 +36,6 @@ class ${CLASS_NAME} {
 		//Init
 		$this->databaseUtils = new DatabaseUtils ();
 		
-		//Ensure that the POST_CLIENT was posted before trying to get it
-		if(!empty($_POST [POST_CLIENT])){
-			$this->client = $_POST [POST_CLIENT];
-		}
-		
-		//Ensure that the POST_ACTION was posted before trying to get it
-		if(!empty($_POST [POST_ACTION])){
-			$this->action = $_POST [POST_ACTION];
-		}
-		
-		
-		
-		if ($execute) {
-			
-			if ($this->get_action() == ACTION_INSERT) {
-			
-			}
-			
-			if ($this->get_action() == ACTION_UPDATE) {
-			
-			}
-			
-			if ($this->get_action() == ACTION_QUERY) {
-			
-			}
-			
-			if ($this->get_action() == ACTION_DELETE) {
-			
-			}
-		}
 	}
 	
 	${TABLE_COLUMNS_ACCESSOR_FUNCTIONS}
@@ -67,7 +47,7 @@ class ${CLASS_NAME} {
 	/**
 	* Returns the table name. This is the owner of these crud functions.
 	* The various crud functions directly affect this table
-	* @return Table Name [${TABLE_NAME}] 
+	* @return string table name -> '${TABLE_NAME}' 
 	*/
 	public static function get_table() {
 		return '${TABLE_NAME}';
@@ -76,7 +56,7 @@ class ${CLASS_NAME} {
 	/**
 	* This action represents the intended database transaction
 	*
-	* @return the set action.
+	* @return string the set action.
 	*/
 	private function get_action() {
 		return $this->action;
@@ -85,82 +65,113 @@ class ${CLASS_NAME} {
 	/**
 	* Returns the client doing transactions
 	*
-	* @return the client
+	* @return string the client
 	*/
 	private function get_client() {
 		return $this->client;
 	}
 	
 	/**
-	* Used  to calculate the number of times a record exists in the table [${TABLE_NAME}]
-	*
-	* @return the number of times a record exists exists in the table [${TABLE_NAME}]
-	*/
+     * Used  to calculate the number of times a record exists in the table ${TABLE_NAME}
+     * It returns the number of times a record exists exists in the table ${TABLE_NAME}
+     * @param array $columns
+     * @param array $records
+     * @param bool $printSQL
+     * @return mixed
+     */
 	public function is_exists(Array $columns, Array $records, $printSQL = false) {
 		return $this->get_database_utils ()->is_exists ( $this->get_table (), $columns, $records, $printSQL );
 	}
 	
 	/**
-	* Inserts data into the table[${TABLE_NAME}]
-	*
-	* @return 1 if data was inserted,0 otherwise
-	* if redundancy check is true, it inserts if the record if it never existed else.
-	* if the record exists, it returns the number of times the record exists on the relation
-	*/
+     * Inserts data into the table ${TABLE_NAME}
+     * if redundancy check is true, it inserts if the record if it never existed else.
+     * if the record exists, it returns the number of times the record exists on the relation
+     *
+     * @param array $columns
+     * @param array $records
+     * @param bool $redundancy_check
+     * @param bool $printSQL
+     * @return mixed
+     */
 	public function insert_records_to_${TABLE_NAME}(Array $columns, Array $records,$redundancy_check = false, $printSQL = false) {
 		return $this->insert_records ( $this->get_table (), $columns, $records,$redundancy_check, $printSQL );
 	}
 	
 	/**
-	* Deletes all the records that meets the passed criteria from the table [${TABLE_NAME}]
-	*  
-	* @return number of deleted rows
-	*/
+	 * Deletes all the records that meets the passed criteria from the table ${TABLE_NAME}
+	 * @param array $columns
+	 * @param array $records
+	 * @param bool $printSQL
+	 * @return number of deleted rows
+	 */
 	public function delete_record_from_${TABLE_NAME}(Array $columns, Array $records, $printSQL = false) {
 		return $this->delete_record ( $this->get_table (), $columns, $records, $printSQL );
 	}
 	
 	/**
-	* updates all the records that meets the passed criteria from the table [${TABLE_NAME}]
-	*  
-	* @return number of updated rows
-	*/
+	 * Updates all the records that meets the passed criteria from the table ${TABLE_NAME}
+	 * 
+	 * @param array $columns
+	 * @param array $records
+	 * @param array $where_columns
+	 * @param array $where_records
+	 * @param bool $printSQL
+	 * @return number of updated rows
+	 */
 	public function update_record_in_${TABLE_NAME}(Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
 		return $this->update_record ( $this->get_table (), $columns, $records, $where_columns, $where_records, $printSQL );
 	}
 	
 	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the passed criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
+	 * Gets an Associative array of the records in the table '${TABLE_NAME}' that meets the passed criteria
+	 *
+	 * @param $distinct
+	 * @param array $columns
+	 * @param array $records
+	 * @param string $extraSQL
+	 * @param bool $printSQL
+	 * @return array|mixed associative
+	 */
 	public function fetch_assoc_in_${TABLE_NAME}($distinct, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
 		return $this->fetch_assoc ( $distinct, $this->get_table (),$columns, $records, $extraSQL , $printSQL );
 	}
 	
 	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the passed criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
+	 * Gets an Associative array of the records in the table ${TABLE_NAME} that meets the passed criteria
+	 *
+	 * @param array $columns
+	 * @param array $records
+	 * @param string $extraSQL
+	 * @param bool $printSQL
+	 * @return array|mixed associative
+	 */
 	public function query_from_${TABLE_NAME}(Array $columns, Array $records,$extraSQL="",  $printSQL = false) {
 		return $this->query ( $this->get_table (), $columns, $records,$extraSQL,$printSQL );
 	}
 	
 	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the passed distinct criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
+	 * Gets an Associative array of the records in the table ${TABLE_NAME} that meets the passed distinct criteria
+	 * 
+	 * @param array $columns
+	 * @param array $records
+	 * @param string $extraSQL
+	 * @param bool $printSQL
+	 * @return array|mixed associative
+	 */
 	public function query_distinct_from_${TABLE_NAME}(Array $columns, Array $records,$extraSQL="",  $printSQL = false) {
 		return $this->query_distinct ( $this->get_table (), $columns, $records,$extraSQL,$printSQL );
 	}
 	
 	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the passed criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
+	 * Performs a search in the table ${TABLE_NAME} that meets the passed criteria
+	 * 
+	 * @param array $columns
+	 * @param array $records
+	 * @param string $extraSQL
+	 * @param bool $printSQL
+	 * @return array|mixed associative
+	 */
 	public function search_in_${TABLE_NAME}(Array $columns, Array $records,$extraSQL="", $printSQL = false) {
 		return $this->search ( $this->get_table (), $columns, $records,$extraSQL, $printSQL );
 	}
@@ -168,30 +179,42 @@ class ${CLASS_NAME} {
 	/**
 	* Get Database Utils
 	*  
-	* @return an object of database utils
+	* @return DatabaseUtils $this->databaseUtils
 	*/
 	public function get_database_utils() {
 		return $this->databaseUtils;
 	}
 	
+	
 	/**
-	* Deletes all the records that meets the passed criteria from the table [${TABLE_NAME}]
-	*  
-	* @return number of deleted rows
-	*/
+	 * Deletes all the records that meets the passed criteria from the table [${TABLE_NAME}]
+	 *
+	 * @param $table
+	 * @param array $columns
+	 * @param array $records
+	 * @param bool $printSQL
+	 * @return bool|int|\mysqli_result number of deleted rows
+	 * @throws \app\libs\marvik\libs\database\core\mysql\InvalidColumnValueMatchException
+	 * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+	 */
 	private function delete_record($table, Array $columns, Array $records, $printSQL = false) {
 		return $this->get_database_utils ()->delete_record ( $table, $columns, $records, $printSQL );
 	}
 	
 	
 	/**
-	* Inserts data into the table[${TABLE_NAME}]
-	*
-	* @return 1 if data was inserted,0 otherwise
-	* if redundancy check is true, it inserts if the record if it never existed else.
-	* if the record exists, it returns the number of times the record exists on the relation
-	*/
-	
+     * Inserts data into the table ${TABLE_NAME}
+     *
+     * if redundancy check is true, it inserts if the record if it never existed else.
+     * if the record exists, it returns the number of times the record exists on the relation
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param bool $redundancy_check
+     * @param bool $printSQL
+     * @return bool|mixed|\mysqli_result the number of times the record exists
+     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+     */
 	private function insert_records($table, Array $columns, Array $records,$redundancy_check = false, $printSQL = false) {
 		if($redundancy_check){
 			if($this->is_exists($columns, $records) == 0){
@@ -204,45 +227,75 @@ class ${CLASS_NAME} {
 	}
 	
 	/**
-	* updates all the records that meets the passed criteria from the table [${TABLE_NAME}]
-	*  
-	* @return number of updated rows
-	*/
+     * Updates all the records that meets the passed criteria from the table ${TABLE_NAME}
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param array $where_columns
+     * @param array $where_records
+     * @param bool $printSQL
+     * @return bool|\mysqli_result number of updated rows
+     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+     */
 	private function update_record($table, Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
 		return $this->get_database_utils ()->update_record ( $table, $columns, $records, $where_columns, $where_records, $printSQL );
 	}
 	
 	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the passed criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
+     * Gets an Associative array of the records in the table ${TABLE_NAME} that meets the passed criteria
+     * associative array of the records that are found after performing the query
+     * @param $distinct
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array|null
+     * @throws \app\libs\marvik\libs\database\core\mysql\InvalidColumnValueMatchException
+     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+     */
 	private function fetch_assoc($distinct, $table, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
 		return $this->get_database_utils ()->fetch_assoc ( $distinct, $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	
-	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the passed criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
-	public function query($table, Array $columns, Array $records,$extraSQL="",$printSQL = false) {
+	 /**
+     * Gets an Associative array of the records in the table ${TABLE_NAME}  that meets the passed criteria
+     *
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array
+     */
+	private function query($table, Array $columns, Array $records,$extraSQL="",$printSQL = false) {
 		return $this->get_database_utils ()->query ( $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the distinct passed criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
-	public function query_distinct($table, Array $columns, Array $records,$extraSQL="",$printSQL = false) {
+     * Gets an Associative array of the records in the table ${TABLE_NAME} that meets the distinct passed criteria
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array
+     */
+	private function query_distinct($table, Array $columns, Array $records,$extraSQL="",$printSQL = false) {
 		return $this->get_database_utils ()->query_distinct ( $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	
-	/**
-	* Gets an Associative array of the records in the table [${TABLE_NAME}] that meets the passed criteria
-	*  
-	* @return associative array of the records that are found after performing the query
-	*/
+	 /**
+     * Performs a search and returns an associative array of the records in the table ${TABLE_NAME}  that meets the passed criteria
+     * 
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array|null
+     * @throws \app\libs\marvik\libs\database\core\mysql\InvalidColumnValueMatchException
+     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+     */
 	private function search($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
 		return $this->get_database_utils ()->search ( $table, $columns, $records, $extraSQL, $printSQL );
 	}

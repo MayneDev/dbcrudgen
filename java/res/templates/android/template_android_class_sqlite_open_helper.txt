@@ -6,7 +6,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import ${DATABASE_TABLES_CLASS};
 
-
+/**
+* ${SQLITE_OPEN_HELPER_SUBCLASS}
+*
+* This class is responsible for all the operations done by the SQLiteOpenHelper
+*
+* This source code is auto-generated
+* Victor Mwenda
+* @author vmwenda.vm@gmail.com
+*/
 public class ${SQLITE_OPEN_HELPER_SUBCLASS} extends SQLiteOpenHelper {
     
     /**

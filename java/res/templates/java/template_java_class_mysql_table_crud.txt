@@ -22,7 +22,10 @@ import ${PROJECT_PKG_NAME}.${TABLES_SCHEMAS_PACKAGE}.TableSchemas;
 * DO NOT DIRECTLY EDIT THIS CLASS. MAKE SEPARATE COPY BY EXTENDING THIS CLASS AND WRITING
 * CUSTOM METHODS AND OVERRIDE THE METHODS TO CUSTOMIZE 
 *
-* 
+* This source code is auto-generated
+* Victor Mwenda
+* @author vmwenda.vm@gmail.com
+*
 */
 public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 

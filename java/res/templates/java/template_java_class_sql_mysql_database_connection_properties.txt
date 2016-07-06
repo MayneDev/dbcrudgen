@@ -1,7 +1,13 @@
 package ${PACKAGE_NAME};
 
 /**
- * @author victor
+* MYSQL Default Connection Properties
+*
+* Contains MYSQL Database Default Connection Properties
+*
+* This source code is auto-generated
+* Victor Mwenda
+* @author vmwenda.vm@gmail.com
  *
  */
 public class MYSQLDefaultConnectionProperties {

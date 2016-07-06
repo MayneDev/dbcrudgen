@@ -155,8 +155,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 		// create transactions manager class
 		TransactionManagerConfiguration transactionManagerConfiguration = getAndroidContentProviderConfiguration()
 				.getTransactionManagerConfiguration();
-		createTransactionManagerClass(packageName, transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
-				tablesCRUDStorageLocation, database.getTables());
+		//createTransactionManagerClass(packageName, transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
+				//tablesCRUDStorageLocation, database.getTables());
 	}
 
 	// create transactions manager class

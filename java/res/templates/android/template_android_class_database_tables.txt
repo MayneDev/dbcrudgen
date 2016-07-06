@@ -4,7 +4,15 @@ import android.net.Uri;
 
 import ${CONTENT_PROVIDER_PACKAGE}.${CONTENT_PROVIDER_CLASS};
 
-
+/**
+* Tables 
+*
+* This class contains all the schemas for all the tables in the database
+*
+* This source code is auto-generated
+* Victor Mwenda
+* @author vmwenda.vm@gmail.com
+*/
 public class Tables {
 
     public static final String[] TABLES_SQL = {

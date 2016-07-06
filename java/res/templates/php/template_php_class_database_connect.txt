@@ -1,7 +1,17 @@
 <?php
 
+namespace app\libs\marvik\libs\database\core\mysql;
+
+use mysqli;
+
 /**
-* DatabaseConnection class used to open a database connection to the server
+*  DatabaseConnection class used to open a database connection to the server
+*
+* The Content Provider for the database associated
+*
+* This source code is auto-generated
+* Victor Mwenda
+* @author vmwenda.vm@gmail.com
 *
 */
 class DatabaseConnection {

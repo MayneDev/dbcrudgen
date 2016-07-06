@@ -171,7 +171,7 @@ public class Utils {
 		case TIMESTAMP:
 		case TIME:
 		case YEAR:
-			return "Date";
+			return "String";
 
 		// Double
 		case DECIMAL:

@@ -46,6 +46,7 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		String tablesSchemas = "";
 
 		for (Table table : tables) {
+			System.out.println(table.getTableName());
 			tablesSchemas += createTableSchemas(androidProjectConfiguration, table);
 		}
 
@@ -162,9 +163,9 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 
 		String autoincrement = SQLiteGrammar.Keywords.AUTOINCREMENT;
 		String auto_increment = SQLGrammar.Keywords.AUTO_INCREMENT;
-		
+
 		// Replace AUTO_INCREMENT with AUTOINCREMENT;
-		
+
 		tableSchema = tableSchema.replace(auto_increment, autoincrement);
 		tableSchema = tableSchema.replace(auto_increment.toLowerCase(), autoincrement.toLowerCase());
 

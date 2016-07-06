@@ -1,6 +1,8 @@
 package com.marvik.apis.dbcrudgen;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.creator.android.AndroidCRUDCreator;
@@ -20,13 +22,12 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
 public class Main {
 	public static void main(String[] args) {
-		testPHPCrudGenerator(new TasksExecutor().createDatabaseModel("titledeeds"));
-		//
-		/*
-		 * testAndroidCrudGenerator(); try { testKCATechExpoCrudCreator(); }
-		 * catch (IOException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 */
+		Database database = new TasksExecutor().createDatabaseModel("givewatts");
+		String projectStorageDir = "F:\\Android\\KlevaSolutions";
+		String projectName = "Givewatts";
+		String packageName = "com.givewatts.android";
+		//testAndroidCrudGenerator(database, projectStorageDir, projectName, packageName);
+		giveWattsPHPCrudGenerator(database);
 	}
 
 	private static void testKCATechExpoCrudCreator(Database database) throws IOException {
@@ -93,10 +94,8 @@ public class Main {
 		j2seCrudCreator.createProject(j2seProjectConfiguration, database);
 	}
 
-	private static void testAndroidCrudGenerator() {
-
-		Database database = new TasksExecutor().createDatabaseModel("member"); // database
-																				// name
+	private static void testAndroidCrudGenerator(Database database, String projectStorageDir, String projectName,
+			String packageName) {
 
 		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
 				database.getDatabaseName(), 1, "DatabaseManager", "database\\sqliteopenhelper",
@@ -116,7 +115,7 @@ public class Main {
 				providerConfiguration, transactionManagerConfiguration, androidDatabaseConfiguration);
 
 		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
-				"G:\\MarvikApps2016\\Safshortcuts", "app\\src\\main\\java", "com.jello.debtmanagerr",
+				projectStorageDir + "\\" + projectName, "app\\src\\main\\java", packageName,
 				androidContentProviderConfiguration);
 
 		AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
@@ -145,6 +144,28 @@ public class Main {
 		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
 		phpCrudCreator.createProject(database);
 
+	}
+	private static void giveWattsPHPCrudGenerator(Database database) {
+		
+		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
+		phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\");
+		phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
+				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\crud\\");
+		phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
+				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\modules\\");
+		phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
+				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\core\\mysql\\");
+		phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
+				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\sql\\");
+		
+		ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
+				"localhost", "root", "", database.getDatabaseName());
+		
+		PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
+		phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
+		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
+		phpCrudCreator.createProject(database);
+		
 	}
 
 }

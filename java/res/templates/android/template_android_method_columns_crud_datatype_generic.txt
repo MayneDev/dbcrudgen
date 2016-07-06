@@ -5,7 +5,8 @@
 	public <T> T get${QUERIED_COLUMN}(${FUNCTION_PARAMS_VARIABLES}) {
             return (T) getColumnsValues(
                     getUri(),
+                    new String[]{${FUNCTION_PARAMS_VALUES}},
                     new String[]{${FUNCTION_PARAMS_KEYS}},
-                    new String[]{${FUNCTION_PARAMS_VALUES}}, ${QUERIED_TABLE_COLUMN_REFERENCE}
+                     ${QUERIED_TABLE_COLUMN_REFERENCE}
             );
      }

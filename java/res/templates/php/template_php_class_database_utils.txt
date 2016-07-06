@@ -1,5 +1,11 @@
 <?php
 
+namespace app\libs\marvik\libs\database\core\mysql;
+
+use Exception;
+
+use app\libs\marvik\libs\database\core\mysql\DatabaseConnection;
+
 /**
 * DatabaseException - Thrown whenever an Exception occurs
 */
@@ -25,7 +31,15 @@ class InvalidColumnValuePairMatchException extends DatabaseException {
 }
 
 /**
-* Database Utilities  - Contains the various utility functions
+*  
+*
+*  Database Utilities  - Contains the various database utility functions
+*
+* This source code is auto-generated
+* @author Victor Mwenda
+* 
+* Email : vmwenda.vm@gmail.com
+* Phone : 0718034449
 */
 class DatabaseUtils {
 	
@@ -41,6 +55,14 @@ class DatabaseUtils {
 		
 		$this->database_handle = $database_connection->open_database_connection ();
 	}
+	
+	
+	 /**
+     * Deletes a table from the database
+     * @param $table
+     * @param bool $printSQL
+     * @throws NullabilityException
+     */
 	public function drop_table($table, $printSQL = false) {
 		if (empty ( $table )) {
 			throw new NullabilityException ( "The table name cannot be null" );
@@ -51,20 +73,21 @@ class DatabaseUtils {
 		if ($printSQL) {
 			echo $query;
 		}
-		$this->database->query ( $query );
+		$this->database_handle->query ( $query );
 	}
 	
-	/**
-	 * Checks whether a certain record exitst in a relation
-	 * 
-	 * @param
-	 *        	string Table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 * @return integer number of rows found
-	 */
+	 /**
+     * Checks whether a certain record exists in a relation.
+     * It returns the number of occurrences of this record in the relation
+     *
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param bool $printSQL
+     * @return int numberOfOccurrences
+     * @throws InvalidColumnValueMatchException
+     * @throws NullabilityException
+     */
 	public function is_exists($table, Array $columns, Array $records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
@@ -100,29 +123,31 @@ class DatabaseUtils {
 			$num_rows = $rows->num_rows; /* Count the Number of rows */
 			return $num_rows; // Return number of rows
 		} else {
+
 			$message = "Columns are more or rows are more";
+
 			if (count ( $columns ) > count ( $records )) {
 				$message = "Column count(" . count ( $columns ) . ") is greater than record count(" . count ( $records ) . ") ";
 			} else {
 				$message = "Record count(" . count ( $records ) . ") is greater than record column(" . count ( $columns ) . ") ";
 			}
+
 			throw new InvalidColumnValueMatchException ( 'Invalid query,' . $message );
 		}
-		
-		return $num_rows;
+
 	}
 	
 	/**
-	 * Deletes the specified record(s) in a relation
-	 * 
-	 * @param
-	 *        	string Table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 * @return integer 1 if success, 0 if failed
-	 */
+     * Deletes the specified record(s) in a relation
+     *
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param bool $printSQL
+     * @return bool|int|\mysqli_result
+     * @throws InvalidColumnValueMatchException
+     * @throws NullabilityException
+     */
 	public function delete_record($table, Array $columns, Array $records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
@@ -164,15 +189,16 @@ class DatabaseUtils {
 			}
 			throw new InvalidColumnValueMatchException ( 'Invalid query,' . $message );
 		}
-		
-		return $num_rows;
+
 	}
 	
 	/**
-	 * Deletes all records in a relation
-	 * 
-	 * @return integer 1 if success, 0 if failed
-	 */
+     * Deletes all records in a relation
+     * @param $table
+     * @param bool $printSQL
+     * @return bool|\mysqli_result
+     * @throws NullabilityException
+     */
 	public function delete_all_records($table, $printSQL = false) {
 		if (empty ( $table )) {
 			throw new NullabilityException ( "The table name cannot be null" );
@@ -187,16 +213,17 @@ class DatabaseUtils {
 		
 		return $this->database_handle->query ( $query );
 	}
+	
 	/**
-	 * Inserts records in a relation
-	 * 
-	 * @param
-	 *        	string table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 */
+     * Inserts records in a relation
+     *
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param bool $printSQL
+     * @return bool|\mysqli_result
+     * @throws NullabilityException
+     */
 	public function insert_records($table, Array $columns, Array $records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
@@ -239,16 +266,17 @@ class DatabaseUtils {
 		
 		return $this->database_handle->query ( $query );
 	}
-	/**
-	 * Inserts a large number of records in a relation
-	 * 
-	 * @param
-	 *        	string table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 */
+	 /**
+     * Inserts a large number of records in a relation
+     *
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param bool $printSQL
+     * @return bool|\mysqli_result
+     * @throws InvalidColumnValuePairMatchException
+     * @throws NullabilityException
+     */
 	public function bulk_insert_records($table, Array $columns, Array $records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
@@ -306,20 +334,17 @@ class DatabaseUtils {
 	}
 	
 	/**
-	 * Updates the specified record(s) in a relation
-	 * 
-	 * @param
-	 *        	string Table name
-	 * @param
-	 *        	new array columns
-	 * @param
-	 *        	new array records
-	 * @param
-	 *        	old array columns
-	 * @param
-	 *        	old array records
-	 * @return integer 1 if success, 0 if failed
-	 */
+     * Updates the specified record(s) in a relation
+     *
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param array $where_columns
+     * @param array $where_records
+     * @param bool $printSQL
+     * @return bool|\mysqli_result
+     * @throws NullabilityException
+     */
 	public function update_record($table, Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0 || count ( $where_columns ) == 0 || count ( $where_records ) == 0) {
 			if (empty ( $table )) {
@@ -362,21 +387,18 @@ class DatabaseUtils {
 	}
 	
 	/**
-	 * Returns an associative array of the query
-	 * 
-	 * @param
-	 *        	boolean distinct
-	 * @param
-	 *        	string Table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 * @param 
-	 *			string extraSQL
-	 *
-	 * @return associative array
-	 */
+     * Performs a query and returns an associative array of the query
+     *
+     * @param $distinct
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array|null
+     * @throws InvalidColumnValueMatchException
+     * @throws NullabilityException
+     */
 	public function fetch_assoc($distinct, $table, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
@@ -414,11 +436,11 @@ class DatabaseUtils {
 			if ((count ( $columns ) == 0) && (count ( $records ) == 0)) {
 				
 				if ($extraSQL != "") {
-					$query .= " WHERE " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			} else {
 				if ($extraSQL != "") {
-					$query .= " AND " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			}
 			
@@ -443,57 +465,51 @@ class DatabaseUtils {
 			}
 			throw new InvalidColumnValueMatchException ( 'Invalid query,' . $message );
 		}
-		
-		return null;
 	}
 	
 	/**
-	 * Returns an associative array of the query
-	 * 
-	 * @param
-	 *        	string Table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 * @param 
-	 *			string extraSQL
-	 *
-	 * @return associative array
-	 */
+     * Performs a query on a table and returns an associative array of the query results
+     * 
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array associative
+     * @throws InvalidColumnValueMatchException
+     * @throws NullabilityException
+     */
 	public function query($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
 		return $this->fetch_assoc (false, $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	
-	/**
-	 * Returns an associative array of the distinct query
-	 * 
-	 * @param
-	 *        	string Table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 * @param 
-	 *			string extraSQL
-	 *
-	 * @return associative array
-	 */
+	 /**
+     * Returns an associative array of the distinct query
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array associative
+     * @throws InvalidColumnValueMatchException
+     * @throws NullabilityException
+     */
 	public function query_distinct($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
 		return $this->fetch_assoc (true, $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	
 	/**
-	 * Returns an associative array of the query
-	 * 
-	 * @param
-	 *        	string Table name
-	 * @param
-	 *        	array columns
-	 * @param
-	 *        	array records
-	 * @return associative array
-	 */
+     * Returns an associative array of the query
+     * 
+     * @param $table
+     * @param array $columns
+     * @param array $records
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array|null
+     * @throws InvalidColumnValueMatchException
+     * @throws NullabilityException
+     */
 	public function search($table, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
@@ -521,11 +537,11 @@ class DatabaseUtils {
 			if ((count ( $columns ) == 0) && (count ( $records ) == 0)) {
 				
 				if ($extraSQL != "") {
-					$query .= " WHERE " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			} else {
 				if ($extraSQL != "") {
-					$query .= " AND " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			}
 				
@@ -538,7 +554,7 @@ class DatabaseUtils {
 			while ( $assoc = $exec->fetch_assoc () ) {
 				$results [count ( $results )] = $assoc; // Return rows
 			}
-			
+
 			return $results;
 		} else {
 			$message = "Columns are more or rows are more";
@@ -549,13 +565,14 @@ class DatabaseUtils {
 			}
 			throw new InvalidColumnValueMatchException ( 'Invalid query,' . $message );
 		}
-		
-		return null;
 	}
 	
 	/**
-	*Resets the auto increment value of the table
-	*/
+     * Resets the auto increment value of the table
+     * @param $table
+     * @param bool $printSQL
+     * @throws NullabilityException
+     */
 	public function resetAutoIncrement($table, $printSQL = false) {
 		if (empty ( $table )) {
 			throw new NullabilityException ( "The table name cannot be null" );
@@ -568,8 +585,35 @@ class DatabaseUtils {
 	}
 	
 	/**
-	* Renames a database table
-	*/
+     * Performs a raw sql query
+     * @param $query
+     * @return array
+     * @throws NullabilityException
+     */
+    public function rawQuery($query)
+    {
+        if (empty ($query)) {
+            throw new NullabilityException ("The query name cannot be null");
+        }
+
+        $results = array();
+
+        $exec = $this->database_handle->query($query); // Perform Query
+        while ($assoc = $exec->fetch_assoc()) {
+            $results [count($results)] = $assoc; // Return rows
+        }
+
+        return $results;
+    }
+	/**
+	 * Renames a database table
+	 * 
+	 * @param $oldname
+	 * @param $newname
+	 * @param bool $printSQL
+	 * @return bool|\mysqli_result
+	 * @throws NullabilityException
+	 */
 	public function renameTable($oldname, $newname, $printSQL = false) {
 		if (empty ( $oldname ) || empty ( $newname )) {
 			throw new NullabilityException ( "The table name cannot be null" );
@@ -583,6 +627,4 @@ class DatabaseUtils {
 		
 		return $this->database_handle->query ( $query );
 	}
-}
-
-?>
+}?>

@@ -1,4 +1,22 @@
-<?php class ${CLASS_NAME}{
+<?php 
+
+	namespace app\libs\marvik\libs\database\modules;
+
+	use app\libs\marvik\libs\database\crud\${TABLE_CLASS};
+
+	/**
+	*  
+	*	${CLASS_NAME}
+	*  
+	* Provides High level features for interacting with the ${TABLE_CLASS};
+	*
+	* This source code is auto-generated
+	* @author Victor Mwenda
+	* 
+	* Email : vmwenda.vm@gmail.com
+	* Phone : 0718034449
+	*/
+	class ${CLASS_NAME}{
 
 	private $build;
 	private $client;
@@ -22,58 +40,46 @@
 		$this->client = $client;
 		$this->action = $action;
 		$this->build = $build;
-
-		include '${TABLE_LOW_LEVEL_CRUD_CLASS}';
 		
-		$this->${TABLE_NAME} = new $TABLE_CLASS( $action, $client );
+		$this->${TABLE_NAME} = new ${TABLE_CLASS}( $action, $client );
 
 	}
 
-	public function init(){
-
-		if($this->action == ACTION_INSERT){
-				
-		}
-		if($this->action == ACTION_QUERY){
-			return $this->query();
-		}
-		if($this->action == ACTION_UPDATE){
-				
-		}
-		if($this->action == ACTION_DELETE){
-				
-		}
-
-	}
+	
 
 	${TABLE_PREPARED_INSERT_FUNCTION}
 
+ 	/**
+     * @param $distinct
+     * @param string $extraSQL
+     * @return string
+     */
 	public function query($distinct,$extraSQL=""){
 
 		$columns = $records = array ();
 		$queried_${TABLE_NAME} = $this->${TABLE_NAME}->fetch_assoc_in_${TABLE_NAME} ($distinct, $columns, $records,$extraSQL );
 
-		if($this->build = ENG_BUILD){
+		if($this->build == "eng-build"){
 			return $this->query_eng_build($queried_${TABLE_NAME});
 		}
-		if($this->build = USER_BUILD){
+		if($this->build == "user-build"){
 			return $this->query_user_build($queried_${TABLE_NAME});
 		}
 	}
 
 	public function query_eng_build($queried_${TABLE_NAME}){
-		if($this->client == POST_CLIENT_DESKTOP){
+		if($this->client == "web-desktop"){
 			return $this->export_query_html($queried_${TABLE_NAME});
 		}
-		if($this->client == POST_CLIENT_MOBILE_ANDROID){
+		if($this->client == "mobile-android"){
 			return $this->export_query_json($queried_${TABLE_NAME});
 		}
 	}
-	public function query_user_build(){
-		if($this->client == POST_CLIENT_DESKTOP){
+	public function query_user_build($queried_${TABLE_NAME}){
+		if($this->client == "web-desktop"){
 			return $this->export_query_html($queried_${TABLE_NAME});
 		}
-		if($this->client == POST_CLIENT_MOBILE_ANDROID){
+		if($this->client == "mobile-android"){
 			return $this->export_query_json($queried_${TABLE_NAME});
 		}
 	}
