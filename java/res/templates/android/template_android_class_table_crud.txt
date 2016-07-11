@@ -92,6 +92,18 @@ import ${TABLE_MODEL_CLASS};
             return getContext().getContentResolver().delete(getUri(), selection, selectionArgs);
         }
 
+         /**
+         * Performs a database query and returns true if the records being looked for in the columns
+         * exist
+         *
+         * @param columns      the columns to compare on
+         * @param columnValues the records to compare with
+         * @return isExists
+         */
+        public boolean isExists(String[] columns, String[] columnValues) {
+            return isExists(getUri(), columns , columnValues );
+        }
+
 		/**
 	     * Performs a blind query where you specify the data to search, the columns to search and the targetColumn
 	     * where you want to get the results from. 
