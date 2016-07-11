@@ -220,11 +220,11 @@ public class TasksExecutor {
 	 */
 	private Table getDatabaseTable(String tableName, String databaseName) {
 
-		String showTableColumsQuery = MYSQLQueries.MYSQL_QUERY_SHOW_TABLE_COLUMNS;
-		showTableColumsQuery = showTableColumsQuery.replace(MYSQLQueries.QueryTags.TABLE, tableName);
-		showTableColumsQuery = showTableColumsQuery.replace(MYSQLQueries.QueryTags.DATABASE, databaseName);
+		String showTableColumnsQuery = MYSQLQueries.MYSQL_QUERY_SHOW_TABLE_COLUMNS;
+		showTableColumnsQuery = showTableColumnsQuery.replace(MYSQLQueries.QueryTags.TABLE, tableName);
+		showTableColumnsQuery = showTableColumnsQuery.replace(MYSQLQueries.QueryTags.DATABASE, databaseName);
 
-		ResultSet tableColumns = getMYSQLQueryExecutor().execSQL(showTableColumsQuery);
+		ResultSet tableColumns = getMYSQLQueryExecutor().execSQL(showTableColumnsQuery);
 
 		List<TableColumn> lTableColumns = new ArrayList<>();
 
@@ -243,11 +243,11 @@ public class TasksExecutor {
 				String _default = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_DEFAULT);
 				String extra = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_EXTRA);
 
-				Constraints constraints = new Constraints();
+				Constraints constraints = new Constraints(_null.equalsIgnoreCase("no")?" NOT NULL  " : " NULL DEFAULT " +_default);
 				DataType dataType = new DataType(type, constraints);
 
 				if (key.equalsIgnoreCase(MYSQLGrammar.Keys.PRIMARY_KEY)) {
-					dataType = new DataType("integer", new Constraints("PRIMARY KEY AUTO_INCREMENT"));
+					dataType = new DataType(type, constraints);
 					primaryKey = new PrimaryKey(field, dataType);
 				} else {
 					TableColumn tableColumn = new TableColumn(field, dataType);
