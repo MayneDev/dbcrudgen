@@ -21,151 +21,176 @@ import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfigurat
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
 public class Main {
-	public static void main(String[] args) {
-		Database database = new TasksExecutor().createDatabaseModel("givewatts");
-		String projectStorageDir = "F:\\Android\\KlevaSolutions";
-		String projectName = "Givewatts";
-		String packageName = "com.givewatts.android";
-		//testAndroidCrudGenerator(database, projectStorageDir, projectName, packageName);
-		giveWattsPHPCrudGenerator(database);
-	}
+    public static void main(String[] args) {
+        Database database = new TasksExecutor().createDatabaseModel("givewatts");
 
-	private static void testKCATechExpoCrudCreator(Database database) throws IOException {
+        String projectStorageDir = "F:\\Android\\KlevaSolutions";
+        String projectName = "Givewatts";
+        String packageName = "com.givewatts.android";
+        //testAndroidCrudGenerator(database, projectStorageDir, projectName, packageName);
+        giveWattsSyncAndroidPHPCrudGenerator(database);
+    }
 
-		String projectName = "KCATechExpo"; // project name
-		String packageName = "com.kca.tech.expo"; // java package name for the
-													// whole project
-		String projectStorageDir = "G:\\4thYr"; // the location where the
-												// project is stored on the HDD
-		String javaSrcDirs = "src";
-		String libsSrcDirs = "lib";
+    private static void testKCATechExpoCrudCreator(Database database) throws IOException {
 
-		J2SEProjectConfiguration j2seProjectConfiguration = new J2SEProjectConfiguration(projectName, packageName,
-				projectStorageDir, javaSrcDirs, libsSrcDirs);
+        String projectName = "KCATechExpo"; // project name
+        String packageName = "com.kca.tech.expo"; // java package name for the
+        // whole project
+        String projectStorageDir = "G:\\4thYr"; // the location where the
+        // project is stored on the HDD
+        String javaSrcDirs = "src";
+        String libsSrcDirs = "lib";
 
-		String databaseHost = "localhost";
-		String databaseUser = "root";
-		String databaseUserPassword = "";
-		String databaseName = database.getDatabaseName();
-		DatabaseConnectionProperties databaseConnectionProperties = new DatabaseConnectionProperties(databaseHost,
-				databaseUser, databaseUserPassword, databaseName);
-		String mysqlAPIsClassesSrcDirs = "database\\mysqlutils";
-		String tableSchemasSrcDir = "database\\tableschemas";
-		String tableModelsSrcDirs = "database\\tablemodels";
-		String tablesCrudSrcDirs = "database\\tablescrud";
-		J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = new J2SEProjectMYSQLDatabaseConfiguration(
-				mysqlAPIsClassesSrcDirs, databaseConnectionProperties, tableSchemasSrcDir, tableModelsSrcDirs,
-				tablesCrudSrcDirs);
+        J2SEProjectConfiguration j2seProjectConfiguration = new J2SEProjectConfiguration(projectName, packageName,
+                projectStorageDir, javaSrcDirs, libsSrcDirs);
 
-		j2seProjectConfiguration.setJ2SEProjectMYSQLDatabaseConfiguration(j2seProjectMYSQLDatabaseConfiguration);
+        String databaseHost = "localhost";
+        String databaseUser = "root";
+        String databaseUserPassword = "";
+        String databaseName = database.getDatabaseName();
+        DatabaseConnectionProperties databaseConnectionProperties = new DatabaseConnectionProperties(databaseHost,
+                databaseUser, databaseUserPassword, databaseName);
+        String mysqlAPIsClassesSrcDirs = "database\\mysqlutils";
+        String tableSchemasSrcDir = "database\\tableschemas";
+        String tableModelsSrcDirs = "database\\tablemodels";
+        String tablesCrudSrcDirs = "database\\tablescrud";
+        J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = new J2SEProjectMYSQLDatabaseConfiguration(
+                mysqlAPIsClassesSrcDirs, databaseConnectionProperties, tableSchemasSrcDir, tableModelsSrcDirs,
+                tablesCrudSrcDirs);
 
-		J2SECrudCreator j2seCrudCreator = new J2SECrudCreator();
-		j2seCrudCreator.createProject(j2seProjectConfiguration, database);
-	}
+        j2seProjectConfiguration.setJ2SEProjectMYSQLDatabaseConfiguration(j2seProjectMYSQLDatabaseConfiguration);
 
-	private static void testJ2SECrudCreator(Database database) throws IOException {
+        J2SECrudCreator j2seCrudCreator = new J2SECrudCreator();
+        j2seCrudCreator.createProject(j2seProjectConfiguration, database);
+    }
 
-		String projectName = "WTNDJ2SE";
-		String packageName = "com.victor.j2se.wtnd";
-		String projectStorageDir = "G:\\4thYr";
-		String javaSrcDirs = "src";
-		String libsSrcDirs = "lib";
+    private static void testJ2SECrudCreator(Database database) throws IOException {
 
-		J2SEProjectConfiguration j2seProjectConfiguration = new J2SEProjectConfiguration(projectName, packageName,
-				projectStorageDir, javaSrcDirs, libsSrcDirs);
+        String projectName = "WTNDJ2SE";
+        String packageName = "com.victor.j2se.wtnd";
+        String projectStorageDir = "G:\\4thYr";
+        String javaSrcDirs = "src";
+        String libsSrcDirs = "lib";
 
-		String databaseHost = "localhost";
-		String databaseUser = "root";
-		String databaseUserPassword = "";
-		String databaseName = database.getDatabaseName();
-		DatabaseConnectionProperties databaseConnectionProperties = new DatabaseConnectionProperties(databaseHost,
-				databaseUser, databaseUserPassword, databaseName);
-		String mysqlAPIsClassesSrcDirs = "coreutils";
-		String tableSchemasSrcDir = "database\\tableschemas";
-		String tableModelsSrcDirs = "database\\tablemodels";
-		String tablesCrudSrcDirs = "database\\tablescrud";
-		J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = new J2SEProjectMYSQLDatabaseConfiguration(
-				mysqlAPIsClassesSrcDirs, databaseConnectionProperties, tableSchemasSrcDir, tableModelsSrcDirs,
-				tablesCrudSrcDirs);
+        J2SEProjectConfiguration j2seProjectConfiguration = new J2SEProjectConfiguration(projectName, packageName,
+                projectStorageDir, javaSrcDirs, libsSrcDirs);
 
-		j2seProjectConfiguration.setJ2SEProjectMYSQLDatabaseConfiguration(j2seProjectMYSQLDatabaseConfiguration);
+        String databaseHost = "localhost";
+        String databaseUser = "root";
+        String databaseUserPassword = "";
+        String databaseName = database.getDatabaseName();
+        DatabaseConnectionProperties databaseConnectionProperties = new DatabaseConnectionProperties(databaseHost,
+                databaseUser, databaseUserPassword, databaseName);
+        String mysqlAPIsClassesSrcDirs = "coreutils";
+        String tableSchemasSrcDir = "database\\tableschemas";
+        String tableModelsSrcDirs = "database\\tablemodels";
+        String tablesCrudSrcDirs = "database\\tablescrud";
+        J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration = new J2SEProjectMYSQLDatabaseConfiguration(
+                mysqlAPIsClassesSrcDirs, databaseConnectionProperties, tableSchemasSrcDir, tableModelsSrcDirs,
+                tablesCrudSrcDirs);
 
-		J2SECrudCreator j2seCrudCreator = new J2SECrudCreator();
-		j2seCrudCreator.createProject(j2seProjectConfiguration, database);
-	}
+        j2seProjectConfiguration.setJ2SEProjectMYSQLDatabaseConfiguration(j2seProjectMYSQLDatabaseConfiguration);
 
-	private static void testAndroidCrudGenerator(Database database, String projectStorageDir, String projectName,
-			String packageName) {
+        J2SECrudCreator j2seCrudCreator = new J2SECrudCreator();
+        j2seCrudCreator.createProject(j2seProjectConfiguration, database);
+    }
 
-		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
-				database.getDatabaseName(), 1, "DatabaseManager", "database\\sqliteopenhelper",
-				"database\\tableschemas", "database\\tablescrud", "database\\tablemodels");
+    private static void testAndroidCrudGenerator(Database database, String projectStorageDir, String projectName,
+                                                 String packageName) {
 
-		String contentProviderPackage = "database\\contentprovider";
-		String contentProviderClass = "DataProvider";
-		ProviderConfiguration providerConfiguration = new ProviderConfiguration(contentProviderClass,
-				contentProviderPackage);
+        AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
+                database.getDatabaseName(), 1, "DatabaseManager", "database\\sqliteopenhelper",
+                "database\\tableschemas", "database\\tablescrud", "database\\tablemodels");
 
-		String transactionManagerPackage = "database\\transactions";
-		String transactionManagerClass = "TransactionsManager";
-		TransactionManagerConfiguration transactionManagerConfiguration = new TransactionManagerConfiguration(
-				transactionManagerPackage, transactionManagerClass);
+        String contentProviderPackage = "database\\contentprovider";
+        String contentProviderClass = "DataProvider";
+        ProviderConfiguration providerConfiguration = new ProviderConfiguration(contentProviderClass,
+                contentProviderPackage);
 
-		AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
-				providerConfiguration, transactionManagerConfiguration, androidDatabaseConfiguration);
+        String transactionManagerPackage = "database\\transactions";
+        String transactionManagerClass = "TransactionsManager";
+        TransactionManagerConfiguration transactionManagerConfiguration = new TransactionManagerConfiguration(
+                transactionManagerPackage, transactionManagerClass);
 
-		AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
-				projectStorageDir + "\\" + projectName, "app\\src\\main\\java", packageName,
-				androidContentProviderConfiguration);
+        AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
+                providerConfiguration, transactionManagerConfiguration, androidDatabaseConfiguration);
 
-		AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
-		androidCRUDCreator.setAndroidProjectConfiguration(androidProjectConfiguration);
-		androidCRUDCreator.createProject(database);
-	}
+        AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
+                projectStorageDir + "\\" + projectName, "app\\src\\main\\java", packageName,
+                androidContentProviderConfiguration);
 
-	private static void testPHPCrudGenerator(Database database) {
+        AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();
+        androidCRUDCreator.setAndroidProjectConfiguration(androidProjectConfiguration);
+        androidCRUDCreator.createProject(database);
+    }
 
-		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
-		phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\");
-		phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\crud\\");
-		phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\modules\\");
-		phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\core-apis\\");
-		phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\sql\\");
+    private static void testPHPCrudGenerator(Database database) {
 
-		ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
-				"localhost", "root", "", database.getDatabaseName());
+        PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
+        phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\");
+        phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\crud\\");
+        phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\modules\\");
+        phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\core-apis\\");
+        phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\sql\\");
 
-		PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
-		phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
-		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
-		phpCrudCreator.createProject(database);
+        ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
+                "localhost", "root", "", database.getDatabaseName());
 
-	}
-	private static void giveWattsPHPCrudGenerator(Database database) {
-		
-		PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
-		phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\");
-		phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\crud\\");
-		phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\modules\\");
-		phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\core\\mysql\\");
-		phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
-				"C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\sql\\");
-		
-		ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
-				"localhost", "root", "", database.getDatabaseName());
-		
-		PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
-		phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
-		phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
-		phpCrudCreator.createProject(database);
-		
-	}
+        PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
+        phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
+        phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
+        phpCrudCreator.createProject(database);
+
+    }
+
+    private static void giveWattsPHPCrudGenerator(Database database) {
+
+        PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
+        phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\");
+        phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\crud\\");
+        phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\modules\\");
+        phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\core\\mysql\\");
+        phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-yii\\libs\\marvik\\libs\\database\\sql\\");
+
+        ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
+                "localhost", "root", "", database.getDatabaseName());
+
+        PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
+        phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
+        phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
+        phpCrudCreator.createProject(database);
+
+    }
+
+    private static void giveWattsSyncAndroidPHPCrudGenerator(Database database) {
+
+        PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
+        phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\");
+        phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\crud\\");
+        phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\modules\\");
+        phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\core\\mysql\\");
+        phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
+                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\sql\\");
+
+        ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
+                "localhost", "root", "", database.getDatabaseName());
+
+        PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
+        phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
+        phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
+        phpCrudCreator.createProject(database);
+
+    }
 
 }

@@ -119,9 +119,9 @@ public class AndroidCRUDCreator extends CrudCreator {
 				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + sqliteOpenHelperSubclassPackage);
 
 		// Database table package
-		String tablesShemasStorageLocation = getAndroidDatabaseConfiguration().getTablesSchemasPackage();
+		String tablesSchemasStorageLocation = getAndroidDatabaseConfiguration().getTablesSchemasPackage();
 		createDirectory(
-				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesShemasStorageLocation);
+				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesSchemasStorageLocation);
 
 		// table CRUD storage location and package name
 		String tablesCRUDStorageLocation = getAndroidDatabaseConfiguration().getTablesCRUDPackage();
@@ -129,7 +129,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 				projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesCRUDStorageLocation);
 
 		// Create table schemas source file and saves it on disk
-		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, tablesShemasStorageLocation);
+		createTablesSchemasSourceFile(database, projectFilesDefaultStorageDirectory, tablesSchemasStorageLocation);
 
 		// Create the database content provider file and saves it on disk
 		createContentProviderSourceFile(projectFilesDefaultStorageDirectory, contentProviderPackage, database);
@@ -142,7 +142,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 		createAbstractCRUDOperationsSourceFile(projectFilesDefaultStorageDirectory, tablesCRUDStorageLocation);
 		// create table custom CRUD class
 		String tablesSchemasPackage = packageName + NativeTemplateTags.DOT
-				+ NativeUtils.parseJavaPackage(tablesShemasStorageLocation);
+				+ NativeUtils.parseJavaPackage(tablesSchemasStorageLocation);
 		createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, packageName, tablesSchemasPackage,
 				tablesCRUDStorageLocation);
 

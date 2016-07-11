@@ -141,13 +141,13 @@ public class PHPCrudCreator extends CrudCreator {
 		// Create all the core required scripts
 
 		// Create the data action script
-		//createDataActionsSciptFile();
+		createDataActionsSciptFile();
 
 		// Create the database connection script
-		//createDatabaseConnectionScriptFile();
+		createDatabaseConnectionScriptFile();
 
 		// create the database utils script file
-		//createDatabaseUtilsScriptFile();
+		createDatabaseUtilsScriptFile();
 
 		/*
 		 * Create all the generated scripts -> Create all table crud -> create
@@ -157,7 +157,7 @@ public class PHPCrudCreator extends CrudCreator {
 
 		// Create Table CRUD
 		for (Table table : database.getTables()) {
-			//writeLowLevelTableScriptsToDisk(table);
+			writeLowLevelTableScriptsToDisk(table);
 		}
 		// Create Table CRUD
 		for (Table table : database.getTables()) {
