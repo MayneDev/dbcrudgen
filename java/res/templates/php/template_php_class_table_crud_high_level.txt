@@ -35,7 +35,7 @@
 	 * Email : vmwenda.vm@gmail.com
 	 * Phone : +254718034449
 	 */
-	public function __construct($action, $client,$build) {
+	public function __construct($action = "query", $client = "mobile-android",$build="user-build") {
 
 		$this->client = $client;
 		$this->action = $action;
@@ -58,6 +58,24 @@
 
 		$columns = $records = array ();
 		$queried_${TABLE_NAME} = $this->${TABLE_NAME}->fetch_assoc_in_${TABLE_NAME} ($distinct, $columns, $records,$extraSQL );
+
+		if($this->build == "eng-build"){
+			return $this->query_eng_build($queried_${TABLE_NAME});
+		}
+		if($this->build == "user-build"){
+			return $this->query_user_build($queried_${TABLE_NAME});
+		}
+	}
+
+     /**
+        * Performs a raw Query
+        * @param $sql string sql to execute
+        * @return string sql results
+        * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+        */
+	public function rawQuery($sql){
+
+		$queried_${TABLE_NAME} = $this->${TABLE_NAME}->get_database_utils()->rawQuery($sql);
 
 		if($this->build == "eng-build"){
 			return $this->query_eng_build($queried_${TABLE_NAME});
