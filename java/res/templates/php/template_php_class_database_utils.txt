@@ -1,10 +1,10 @@
 <?php
 
-namespace app\libs\marvik\libs\database\core\mysql;
+//namespace app\libs\marvik\libs\database\core\mysql;
 
-use Exception;
+//use Exception;
 
-use app\libs\marvik\libs\database\core\mysql\DatabaseConnection;
+//use app\libs\marvik\libs\database\core\mysql\DatabaseConnection;
 
 /**
 * DatabaseException - Thrown whenever an Exception occurs
@@ -49,7 +49,7 @@ class DatabaseUtils {
 	}
 	public function __construct($host = "$SERVER_HOST", $user = "$DATABASE_USER", $password = "$USER_PASSWORD", $database = "$DATABASE_NAME") {
 		
-		require_once '$DATABASE_CONNECTION_INC_FILE';
+		//require_once '$DATABASE_CONNECTION_INC_FILE';
 		  
 		$database_connection = new DatabaseConnection ( $host, $user, $password, $database );
 		
@@ -266,6 +266,44 @@ class DatabaseUtils {
 		
 		return $this->database_handle->query ( $query );
 	}
+		/**
+        	 * Inserts records in a relation
+        	 * The records are inserted in the relation columns in the order they are arranged in the array
+        	 *
+        	 * @param $table
+        	 * @param array $records
+        	 * @param bool $printSQL
+        	 * @return bool|\mysqli_result
+        	 * @throws NullabilityException
+        	 */
+        	public function insert_raw_records($table,  Array $records, $printSQL = false) {
+        		if (empty ( $table ) ||  count ( $records ) == 0) {
+        			if (empty ( $table )) {
+        				throw new NullabilityException ( "The table name cannot be null" );
+        			}
+
+        			if ((count ( $records ) == 0)) {
+        				throw new NullabilityException ( "The column records cannot be none" );
+        			}
+        		}
+
+        		$query = " INSERT INTO `" . $table . "` VALUES  (";
+
+
+        		for($x = 0; $x < count ( $records ); $x ++) {
+        			$query .= " '" . $records [$x] . "' ";
+        			if (($x < count ( $records ) - 1)) {
+        				$query .= ",";
+        			}
+        		}
+
+        		$query .= ");";
+        		if ($printSQL) {
+        			echo $query;
+        		}
+
+        		return $this->database_handle->query ( $query );
+        	}
 	 /**
      * Inserts a large number of records in a relation
      *
@@ -627,4 +665,5 @@ class DatabaseUtils {
 		
 		return $this->database_handle->query ( $query );
 	}
+
 }?>
