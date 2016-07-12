@@ -1,10 +1,10 @@
 <?php
 
-	namespace app\libs\marvik\libs\database\crud;
+	//namespace app\libs\marvik\libs\database\crud;
  
-	use app\libs\marvik\libs\database\core\mysql\DatabaseUtils;
+	//use app\libs\marvik\libs\database\core\mysql\DatabaseUtils;
 
-	use app\libs\marvik\libs\database\core\mysql\DatabaseActions;
+	//use app\libs\marvik\libs\database\core\mysql\DatabaseActions;
 
 	${CRUD_GENERATOR_TEMPLATE}
 
@@ -97,7 +97,19 @@ class ${CLASS_NAME} {
 	public function insert_records_to_${TABLE_NAME}(Array $columns, Array $records,$redundancy_check = false, $printSQL = false) {
 		return $this->insert_records ( $this->get_table (), $columns, $records,$redundancy_check, $printSQL );
 	}
-	
+	/**
+         * Inserts records in a relation
+         * The records are inserted in the relation columns in the order they are arranged in the array
+         *
+         * @param $records
+         * @param bool $printSQL
+         * @return bool|mysqli_result
+         * @throws NullabilityException
+         */
+        public function insert_raw($records, $printSQL = false)
+        {
+            return $this->get_database_utils()->insert_raw_records($this->get_table(), $records, $printSQL);
+        }
 	/**
 	 * Deletes all the records that meets the passed criteria from the table ${TABLE_NAME}
 	 * @param array $columns

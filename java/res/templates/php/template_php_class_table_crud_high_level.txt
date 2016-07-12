@@ -1,8 +1,8 @@
 <?php 
 
-	namespace app\libs\marvik\libs\database\modules;
+	//namespace app\libs\marvik\libs\database\modules;
 
-	use app\libs\marvik\libs\database\crud\${TABLE_CLASS};
+	//use app\libs\marvik\libs\database\crud\${TABLE_CLASS};
 
 	/**
 	*  
@@ -66,7 +66,19 @@
 			return $this->query_user_build($queried_${TABLE_NAME});
 		}
 	}
-
+/**
+     * Inserts records in a relation
+     * The records are inserted in the relation columns in the order they are arranged in the array
+     *
+     * @param $records
+     * @param bool $printSQL
+     * @return bool|mysqli_result
+     * @throws NullabilityException
+     */
+    public function insert_raw($records, $printSQL = false)
+    {
+        return $this->${TABLE_NAME}->insert_raw($records, $printSQL);
+    }
      /**
         * Performs a raw Query
         * @param $sql string sql to execute
