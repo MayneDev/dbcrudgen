@@ -28,7 +28,7 @@ public class Main {
         String projectName = "Givewatts";
         String packageName = "com.givewatts.android";
         //testAndroidCrudGenerator(database, projectStorageDir, projectName, packageName);
-        giveWattsSyncAndroidPHPCrudGenerator(database);
+        giveWattsSyncAndroidPHPCrudGenerator(database,"givewatts-web-master");
     }
 
     private static void testKCATechExpoCrudCreator(Database database) throws IOException {
@@ -170,18 +170,18 @@ public class Main {
 
     }
 
-    private static void giveWattsSyncAndroidPHPCrudGenerator(Database database) {
+    private static void giveWattsSyncAndroidPHPCrudGenerator(Database database,String storageDir) {
 
         PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
-        phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\");
+        phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + storageDir + "\\libs\\marvik\\libs\\");
         phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\crud\\");
+                "C:\\xampp\\htdocs\\" + storageDir + "\\libs\\marvik\\libs\\database\\crud\\");
         phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\modules\\");
+                "C:\\xampp\\htdocs\\" + storageDir + "\\libs\\marvik\\libs\\database\\modules\\");
         phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\core\\mysql\\");
+                "C:\\xampp\\htdocs\\" + storageDir + "\\libs\\marvik\\libs\\database\\core\\mysql\\");
         phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "-sync-android\\libs\\marvik\\libs\\database\\sql\\");
+                "C:\\xampp\\htdocs\\" + storageDir + "\\libs\\marvik\\libs\\database\\sql\\");
 
         ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
                 "localhost", "root", "", database.getDatabaseName());
@@ -190,7 +190,7 @@ public class Main {
         phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
         phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
         phpCrudCreator.createProject(database);
-
     }
+
 
 }

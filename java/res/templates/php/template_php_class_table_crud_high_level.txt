@@ -79,6 +79,7 @@
     {
         return $this->${TABLE_NAME}->insert_raw($records, $printSQL);
     }
+
     /**
      * Inserts records in a relation
      * The records are matched alongside the columns in the relation
@@ -91,6 +92,7 @@
         public function insert_records_to_${TABLE_NAME}(Array $columns, Array $records,$redundancy_check = false, $printSQL = false){
             return $this->${TABLE_NAME}->insert_records_to_${TABLE_NAME}($columns, $records,$redundancy_check,$printSQL);
         }
+
      /**
         * Performs a raw Query
         * @param $sql string sql to execute
