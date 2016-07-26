@@ -22,13 +22,26 @@ import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
 public class Main {
     public static void main(String[] args) {
-        Database database = new TasksExecutor().createDatabaseModel("givewatts");
+        createComphoaComphoProject();
+    }
 
-        String projectStorageDir = "F:\\Android\\KlevaSolutions";
+    private static void addGiveWattsSyncDataTable() {
+        Database database = new TasksExecutor().createDatabaseModel("test");
+
+        String projectStorageDir = "C:\\Users\\victor\\Desktop\\Givewatts\\android\\SyncData";
         String projectName = "Givewatts";
         String packageName = "com.givewatts.android";
-        //testAndroidCrudGenerator(database, projectStorageDir, projectName, packageName);
-        giveWattsSyncAndroidPHPCrudGenerator(database,"givewatts-web-master");
+        testAndroidCrudGenerator(database, projectStorageDir, projectName, packageName);
+    }
+
+    private static void createComphoaComphoProject() {
+        Database database = new TasksExecutor().createDatabaseModel("comphoa2_compho");
+
+        String projectStorageDir = "F:\\Android\\Clients\\MosesAsiago";
+        String projectName = "Camphoa";
+        String packageName = "nerdygeek.camphoa";
+        testAndroidCrudGenerator(database, projectStorageDir, projectName, packageName);
+        testPHPCrudGenerator(database);
     }
 
     private static void testKCATechExpoCrudCreator(Database database) throws IOException {
@@ -170,7 +183,7 @@ public class Main {
 
     }
 
-    private static void giveWattsSyncAndroidPHPCrudGenerator(Database database,String storageDir) {
+    private static void giveWattsSyncAndroidPHPCrudGenerator(Database database, String storageDir) {
 
         PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
         phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + storageDir + "\\libs\\marvik\\libs\\");
@@ -191,6 +204,4 @@ public class Main {
         phpCrudCreator.setProjectDatabaseConnectionProperties(projectDatabaseConnectionProperties);
         phpCrudCreator.createProject(database);
     }
-
-
 }

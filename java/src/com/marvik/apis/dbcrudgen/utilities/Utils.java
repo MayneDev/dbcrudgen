@@ -8,7 +8,7 @@ public class Utils {
 	public static MYSQLDataTypes parseMysqlDatatype(String datatype) {
 
 		datatype = NativeUtils.toLetters(datatype);
-		
+
 		if (datatype.equalsIgnoreCase("BIGINT"))
 			return MYSQLDataTypes.BIGINT;
 
