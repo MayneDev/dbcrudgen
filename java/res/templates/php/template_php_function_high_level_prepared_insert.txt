@@ -9,6 +9,6 @@
 	*/
 	public function insert(${RECORDS},$redundancy_check= false, $printSQL = false) {
 		$columns = array(${COLUMNS});
-		$records = array($${RECORDS});
-		return $this->${TABLE_NAME}->insert_prepared_records($${RECORDS},$redundancy_check,$printSQL );
+		$records = array(${RECORDS});
+		return $this->${TABLE_NAME}->insert_prepared_records(${RECORDS},$redundancy_check,$printSQL );
 	}
