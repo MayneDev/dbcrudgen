@@ -104,6 +104,15 @@ import ${TABLE_MODEL_CLASS};
             return isExists(getUri(), columns , columnValues );
         }
 
+       /**
+        * Truncates the table
+        *
+        * @return deletedRows
+        */
+        public int truncate() {
+            return truncateTable(getUri());
+        }
+
 		/**
 	     * Performs a blind query where you specify the data to search, the columns to search and the targetColumn
 	     * where you want to get the results from. 
@@ -300,7 +309,7 @@ import ${TABLE_MODEL_CLASS};
         }
         
         
-        /**
+     /**
      * Performs the passed query and returns the first value of the query results
      *
      * @param selection
