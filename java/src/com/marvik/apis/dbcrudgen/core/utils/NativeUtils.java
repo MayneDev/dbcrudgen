@@ -35,7 +35,6 @@ public final class NativeUtils {
 	 * Convert a class name to a java bean variable name This method is
 	 */
 	public static String toJavaBeansVariable(String className) {
-		System.out.println("Class Name : " + className);
 		className = toJavaBeansClass(className);
 		if (className.length() < 2) {
 			return className;
@@ -167,8 +166,7 @@ public final class NativeUtils {
 	/**
 	 * Creates a Java Bean class name from a string of text
 	 * 
-	 * @param class
-	 *            name
+	 * @param className
 	 * @return valid class name
 	 */
 	public static String toJavaBeansClass(String className) {
@@ -229,7 +227,7 @@ public final class NativeUtils {
 	/**
 	 * toLetters removes all other characters that are not a letter from a word
 	 * 
-	 * @param columnDatatype
+	 * @param text
 	 * @return
 	 */
 	public static String toLetters(String text) {

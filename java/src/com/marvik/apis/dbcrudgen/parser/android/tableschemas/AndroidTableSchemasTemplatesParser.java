@@ -46,7 +46,6 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 		String tablesSchemas = "";
 
 		for (Table table : tables) {
-			System.out.println(table.getTableName());
 			tablesSchemas += createTableSchemas(androidProjectConfiguration, table);
 		}
 

@@ -329,7 +329,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 			tableColumnsVariable += NativeUtils.createJavaVariable(JavaObjectAccessibility.DEFAULT, javaDataType,
 					objectName, javaDelimeter);
 		}
-		System.out.println("PRIMARY KEY DATA TYPE [" + primaryKeyDataType +"]");
+
 		String template = getAndroidColumnQueryCrudTemplate(primaryKeyDataType).getTemplate();
 
 		return parseQueriedColumnQueryArtificats(template, primaryKeyColumn, primaryKeyColumnReference,
