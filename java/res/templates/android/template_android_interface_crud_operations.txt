@@ -19,33 +19,92 @@ import android.util.Log;
 **/
 public abstract class DatabaseCRUDOperations {
 
-
-    public abstract Uri getUri();
-
-    public abstract Uri insert(ContentValues values);
-
-    public abstract Cursor query(String[] projection, String selection, String[] selectionArgs, String sortOrder);
-
-    public abstract int update(ContentValues values, String selection, String[] selectionArgs);
-
-    public abstract int delete(String selection, String[] selectionArgs);
-
     private Context context;
 
+    /**
+     * Database crud operation
+     * Provides method for performing crud operations
+     *
+     * @param context
+     */
     public DatabaseCRUDOperations(Context context) {
-        
-    	this.context = context;
+        this.context = context;
     }
 
+    /**
+     * Get the associated context
+     *
+     * @return context
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Return the uri of the table
+     *
+     * @return uri
+     */
+    public abstract Uri getUri();
+
+    /**
+     * Insert the content values
+     *
+     * @param values to insert
+     * @return uri of inserted row
+     */
+    public abstract Uri insert(ContentValues values);
+
+    /**
+     * Query a table
+     *
+     * @param projection
+     * @param selection
+     * @param selectionArgs
+     * @param sortOrder
+     * @return cursor
+     */
+    public abstract Cursor query(String[] projection, String selection, String[] selectionArgs, String sortOrder);
+
+    /**
+     * Updates table columns and rows
+     *
+     * @param values
+     * @param selection
+     * @param selectionArgs
+     * @return number of updated rows
+     */
+    public abstract int update(ContentValues values, String selection, String[] selectionArgs);
+
+    /**
+     * Deletes rows
+     *
+     * @param selection
+     * @param selectionArgs
+     * @return deleted rows
+     */
+    public abstract int delete(String selection, String[] selectionArgs);
+
+
+    /**
+     * Truncates the table
+     *
+     * @param uri to truncate
+     * @return deletedRows
+     */
     public int truncateTable(Uri uri) {
         return getContext().getContentResolver().delete(uri, null, null);
     }
 
-    public boolean isExists( Uri uri,  String[] columns,  String[] columnValues) {
+    /**
+     * Check if this row exists in a uri
+     *
+     * @param uri
+     * @param columns
+     * @param columnValues
+     * @return exists
+     */
+    public boolean isExists(Uri uri, String[] columns, String[] columnValues) {
 
         String where = null;
 
@@ -80,20 +139,29 @@ public abstract class DatabaseCRUDOperations {
         return isExists;
     }
 
-    public String getColumnsValues( Uri uri,  String[] index,  String[] indexColumn, String targetColumn) {
+    /**
+     * Return the value of the specified column after executing the generated query of the columnValues and the tableColumns
+     *
+     * @param uri
+     * @param columnValues
+     * @param tableColumns
+     * @param targetColumn
+     * @return
+     */
+    public String getColumnsValues(Uri uri, String[] columnValues, String[] tableColumns, String targetColumn) {
         String where = null;
-        if (index.length == 0 && indexColumn.length == 0) {
+        if (columnValues.length == 0 && tableColumns.length == 0) {
             where = null;
         } else {
             where = "";
-            if (index.length != indexColumn.length) {
-                throw new IllegalArgumentException("Missing params for Columns " + Arrays.deepToString(indexColumn) + ", You provided " + Arrays.deepToString(index));
+            if (columnValues.length != tableColumns.length) {
+                throw new IllegalArgumentException("Missing params for Columns " + Arrays.deepToString(tableColumns) + ", You provided " + Arrays.deepToString(columnValues));
             }
 
-            if (index.length == indexColumn.length) {
-                for (int i = 0; i < indexColumn.length; i++) {
-                    where += indexColumn[i] + "='" + index[i] + "' ";
-                    if (i < (index.length - 1)) {
+            if (columnValues.length == tableColumns.length) {
+                for (int i = 0; i < tableColumns.length; i++) {
+                    where += tableColumns[i] + "='" + columnValues[i] + "' ";
+                    if (i < (columnValues.length - 1)) {
                         where += " AND ";
                     }
                 }
