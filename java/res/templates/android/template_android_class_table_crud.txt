@@ -311,13 +311,15 @@ import ${TABLE_MODEL_CLASS};
 
               ContentValues[] contentValues = new ContentValues[${TABLE_MODEL_OBJECT}s.size()];
 
+              int index = 0;
               for (${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} : ${TABLE_MODEL_OBJECT}s) {
 
                   ContentValues values = new ContentValues();
 
                   ${CONTENT_VALUES_PUT_STATEMENTS}
 
-                  contentValues[contentValues.length] = values;
+                  contentValues[index] = values;
+                  index++;
                }
 
                return bulkInsert(contentValues);
