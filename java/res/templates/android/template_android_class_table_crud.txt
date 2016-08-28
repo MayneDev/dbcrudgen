@@ -309,7 +309,7 @@ import ${TABLE_MODEL_CLASS};
        */
         public int bulkInsert${DATABASE_TABLE_CLASS}(List<${TABLE_MODEL_INFO_CLASS}> ${TABLE_MODEL_OBJECT}s) {
 
-              ContentValues[] contentValues = new ContentValues[qbChatMessagesInfos.size()];
+              ContentValues[] contentValues = new ContentValues[${TABLE_MODEL_OBJECT}s.size()];
 
               for (${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} : ${TABLE_MODEL_OBJECT}s) {
 
