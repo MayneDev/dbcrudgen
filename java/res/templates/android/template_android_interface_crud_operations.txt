@@ -56,6 +56,14 @@ public abstract class DatabaseCRUDOperations {
     public abstract Uri insert(ContentValues values);
 
     /**
+     * Bulk inserts rows in a relation
+     *
+     * @param contentValues values to insert
+     * @return
+     */
+    public abstract int bulkInsert(ContentValues[] contentValues);
+
+    /**
      * Query a table
      *
      * @param projection

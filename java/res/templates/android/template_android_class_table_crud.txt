@@ -63,6 +63,26 @@ import ${TABLE_MODEL_CLASS};
           return  getContext().getContentResolver().insert(getUri(), values);
         }
 
+        /**
+         * Bulk inserts rows in a relation
+         *
+         * @param contentValues values to insert
+         * @return
+         */
+        @Override
+        public int bulkInsert(ContentValues[] contentValues) {
+            return getContext().getContentResolver().bulkInsert(getUri(), contentValues);
+        }
+
+        /**
+          * Query a table
+          *
+          * @param projection
+          * @param selection
+          * @param selectionArgs
+          * @param sortOrder
+          * @return cursor
+          */
         @Override
         public Cursor query(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
             return getContext().getContentResolver().query(getUri(), projection, selection, selectionArgs, sortOrder);
@@ -144,7 +164,8 @@ import ${TABLE_MODEL_CLASS};
             
             return insert(values);
         }
-        
+
+
        /**
         * ${DATABASE_TABLE_CLASS}#update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
         * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data 
@@ -265,7 +286,43 @@ import ${TABLE_MODEL_CLASS};
         	
             return ${TABLE_MODEL_OBJECT};
         }
-                
+
+       /**
+       * Inserts a list of List<${TABLE_MODEL_INFO_CLASS}> columns values one by one
+       *
+       * @param ${TABLE_MODEL_OBJECT}s List<${TABLE_MODEL_INFO_CLASS}>
+       * @return list of inserted uris
+       */
+       public List<Uri> bulkInsert${DATABASE_TABLE_CLASS}Sequentially(List<${TABLE_MODEL_INFO_CLASS}> ${TABLE_MODEL_OBJECT}s) {
+          List<Uri>insertedUris = new ArrayList<>();
+          for (${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} : ${TABLE_MODEL_OBJECT}s) {
+             insertedUris.add(insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_OBJECT}));
+           }
+         return insertedUris;
+       }
+
+       /**
+       * Inserts a list of List<${TABLE_MODEL_INFO_CLASS}> columns all at once
+       *
+       * @param ${TABLE_MODEL_OBJECT}s List<${TABLE_MODEL_INFO_CLASS}>
+       * @return number of inserted rows
+       */
+        public int bulkInsert${DATABASE_TABLE_CLASS}(List<${TABLE_MODEL_INFO_CLASS}> ${TABLE_MODEL_OBJECT}s) {
+
+              ContentValues[] contentValues = new ContentValues[qbChatMessagesInfos.size()];
+
+              for (${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} : ${TABLE_MODEL_OBJECT}s) {
+
+                  ContentValues values = new ContentValues();
+
+                  ${CONTENT_VALUES_PUT_STATEMENTS}
+
+                  contentValues[contentValues.length] = values;
+               }
+
+               return bulkInsert(contentValues);
+        }
+
         /**
         * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}
         * Returns an object of queried row in the table
