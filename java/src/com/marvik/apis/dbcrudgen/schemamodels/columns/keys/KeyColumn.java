@@ -5,27 +5,27 @@ import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 
 public class KeyColumn extends TableColumn {
 
-	/**
-	 * Sets table key column
-	 */
-	public KeyColumn(String keyColumnName, DataType dataType) {
-		super(keyColumnName, dataType);
+    /**
+     * Sets table key column
+     */
+    public KeyColumn(String keyColumnName, DataType dataType, boolean isPrimaryKey) {
+        super(keyColumnName, dataType, isPrimaryKey);
 
-	}
+    }
 
-	/**
-	 * Return the name of the key column
-	 */
-	public String getKeyColumn() {
-		return getColumnName();
-	}
+    /**
+     * Return the name of the key column
+     */
+    public String getKeyColumn() {
+        return getColumnName();
+    }
 
-	/**
-	 * KeyColumn#getDataType
-	 * 
-	 * @return DataType
-	 */
-	public DataType getDataType() {
-		return super.getDataType();
-	}
+    /**
+     * KeyColumn#getDataType
+     *
+     * @return DataType
+     */
+    public DataType getDataType() {
+        return super.getDataType();
+    }
 }

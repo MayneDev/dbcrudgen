@@ -8,7 +8,7 @@ public class UniqueKeys extends KeyColumn {
 	 * Defines a unique key column
 	 */
 	public UniqueKeys(String uniqueKey, DataType dataType) {
-		super(uniqueKey, dataType);
+		super(uniqueKey, dataType,false);
 	}
 
 	/**
