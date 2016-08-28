@@ -389,6 +389,20 @@ import ${TABLE_MODEL_CLASS};
     }
     
         ${COLUMN_SPECIFIC_QUERY_METHODS}
-        
-        
+
+    /**
+     * Close this cursor
+     *
+     * @param cursor toClose
+     */
+    public void closeCursor(Cursor cursor) {
+
+        if (cursor != null) {
+            if (!cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
     }
+
+}
