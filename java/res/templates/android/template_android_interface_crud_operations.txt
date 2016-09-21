@@ -14,9 +14,12 @@ import android.util.Log;
 * Provides an abstract layer of crud operations that each CRUD Class should do
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
-**/
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
+*
+*/
 public abstract class DatabaseCRUDOperations {
 
     private Context context;

@@ -26,8 +26,11 @@ import ${TABLE_MODEL_CLASS};
 * The data in the associated table
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
+*
 */
  public class ${DATABASE_TABLE_CLASS} extends DatabaseCRUDOperations {
 

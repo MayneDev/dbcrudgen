@@ -10,8 +10,11 @@ import ${CONTENT_PROVIDER_PACKAGE}.${CONTENT_PROVIDER_CLASS};
 * This class contains all the schemas for all the tables in the database
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
+*
 */
 public class Tables {
 

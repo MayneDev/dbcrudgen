@@ -1,19 +1,23 @@
 package ${PACKAGE_NAME};
 
-public class ${CLASS_NAME}Info{
-
-${TABLE_COLUMN_CLASS_VARIABLES}
-
 /**
 * ${CLASS_NAME}Info
 *
 * Model class that contains all the attributes of a table
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
 *
 */
+public class ${CLASS_NAME}Info{
+
+
+${TABLE_COLUMN_CLASS_VARIABLES}
+
+
 public ${CLASS_NAME}Info (${CONSTRUCTOR_PARAMS}) {
 	${INIT_CONSTRUCTOR_PARAMS}
 }

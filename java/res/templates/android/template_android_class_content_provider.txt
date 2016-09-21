@@ -17,8 +17,10 @@ import ${DATABASE_TABLES_CLASS};
 * The Content Provider for the database associated
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
 *
 */
 public class ${CONTENT_PROVIDER_CLASS} extends ContentProvider {

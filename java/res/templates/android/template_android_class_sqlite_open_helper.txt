@@ -12,8 +12,11 @@ import ${DATABASE_TABLES_CLASS};
 * This class is responsible for all the operations done by the SQLiteOpenHelper
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
+*
 */
 public class ${SQLITE_OPEN_HELPER_SUBCLASS} extends SQLiteOpenHelper {
     

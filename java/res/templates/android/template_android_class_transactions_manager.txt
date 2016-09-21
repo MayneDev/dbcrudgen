@@ -10,8 +10,11 @@ ${TABLES_CRUD_CLASSES_IMPORT}
 * This class provides hooks for writing custom code to access the CRUD Classes
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
+*
 */
 public class ${TRANSACTION_CLASS} {
 
