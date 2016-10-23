@@ -1,6 +1,3 @@
-/**
- * 
- */
 package ${PACKAGE_NAME};
 
 import java.net.ConnectException;
@@ -14,13 +11,11 @@ import java.sql.Statement;
 import com.mysql.jdbc.CommunicationsException;
 
 /**
-*Created on Feb 5, 2016-10:21:33 AM by victor
-*/
-
-/**
  * MYSQLTransactionsExecutor provides handles for executing MYSQL Queries
  * 
- * @author victor
+ * This source code is auto-generated
+ * Victor Mwenda
+ * @author vmwenda.vm@gmail.com
  *
  */
 public class MYSQLTransactionsExecutor {

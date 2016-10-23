@@ -1,16 +1,13 @@
-/**
- * 
- */
 package ${PACKAGE_NAME};
 
 import java.sql.SQLException;
 
 /**
-*Created on Feb 9, 2016-6:15:15 PM by victor
-*/
-
-/**
- * @author victor
+ * RecordsInsertException
+ *
+ * This source code is auto-generated
+ * Victor Mwenda
+ * @author vmwenda.vm@gmail.com
  *
  */
 public class RecordsInsertException extends SQLException {

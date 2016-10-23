@@ -1,5 +1,13 @@
 package ${PACKAGE_NAME};
 
+/**
+ * ${CLASS_NAME}Info
+ *
+ * This source code is auto-generated
+ * Victor Mwenda
+ * @author vmwenda.vm@gmail.com
+ *
+ */
 public class ${CLASS_NAME}Info{
 
 ${TABLE_COLUMN_CLASS_VARIABLES}
