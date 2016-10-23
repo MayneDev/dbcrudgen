@@ -400,7 +400,6 @@ public class PHPTemplatesParser extends TemplatesParser {
 	 * Generate TableColumn Crud Functions
 	 * 
 	 * @param table
-	 * @param columns
 	 * @return
 	 */
 	private String generateColumnsCrudFunctions(Table table) {
@@ -453,6 +452,11 @@ public class PHPTemplatesParser extends TemplatesParser {
 
 		// Generate crud functions for other database columns
 		for (TableColumn tableColumn : columns) {
+
+			if(tableColumn.getColumnName().equals(table.getPrimaryKey().getColumnName())){
+				continue;
+			}
+
 			columnsCrudFunction += generateColumnCrudFunctions(table.getPrimaryKey(), tableColumn);
 		}
 		return columnsCrudFunction;
