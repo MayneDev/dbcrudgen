@@ -3,8 +3,6 @@
  */
 package com.marvik.apis.dbcrudgen.parser.j2se.mysql;
 
-import com.marvik.apis.dbcrudgen.core.platforms.sql.grammar.SQLGrammar;
-import com.marvik.apis.dbcrudgen.core.platforms.sqlite.grammar.SQLiteGrammar;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.natives.Natives;
@@ -13,7 +11,6 @@ import com.marvik.apis.dbcrudgen.parser.java.j2se.J2SETemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectConfiguration;
 import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectMYSQLDatabaseConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
-import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
 import com.marvik.apis.dbcrudgen.templates.j2se.classes.J2SEMYSQLDatabaseTablesSchemasTemplate;
@@ -44,7 +41,7 @@ public class J2SEMYSQLTableSchemasTemplatesParser extends J2SETemplatesParser {
 	/**
 	 * Creates the schemas of all the database tables
 	 * 
-	 * @param androidProjectConfiguration
+	 * @param j2seProjectConfiguration
 	 */
 	public String createTablesSchemas(J2SEProjectConfiguration j2seProjectConfiguration, Table[] tables) {
 
@@ -118,7 +115,7 @@ public class J2SEMYSQLTableSchemasTemplatesParser extends J2SETemplatesParser {
 	/**
 	 * Creates the schemas of a database tables
 	 * 
-	 * @param androidProjectConfiguration
+	 * @param j2seProjectMYSQLDatabaseConfiguration
 	 */
 	private String createTableSchemas(J2SEProjectMYSQLDatabaseConfiguration j2seProjectMYSQLDatabaseConfiguration, Table table) {
 
@@ -234,11 +231,6 @@ public class J2SEMYSQLTableSchemasTemplatesParser extends J2SETemplatesParser {
 			String columnName = columns[i].getColumnName();
 			columnVariables += parseColumnVariables(tableColumnsVariableTemplate, columnName);
 		}
-
-		// Dont forget to Add primary key column and other key columns
-		PrimaryKey primaryKey = table.getPrimaryKey();
-		String primaryKeyColumnName = primaryKey.getColumnName();
-		columnVariables += parseColumnVariables(tableColumnsVariableTemplate, primaryKeyColumnName);
 		return columnVariables;
 	}
 
