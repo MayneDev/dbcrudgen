@@ -325,4 +325,49 @@ public class TransactionWrapper {
 		}
 		return getMYSQLTransactionsExecutor().execute(query);
 	}
+	/**
+     * Gets the first record from the table  that appears in the result set of the
+    	* records after executing the custom query
+    	 *
+    	 * @return the first record that matches appears in the result set of the records
+    	 * @throws SQLException
+    	 */
+    public Object getBlindColumn(String query, String column, Class<?> mClass) throws SQLException {
+
+    		ResultSet resultSet = getMYSQLTransactionsExecutor().execSQL(query);
+
+    		if (resultSet != null) {
+    			resultSet.first();
+
+    			if (mClass == Boolean.class || mClass == Double.class ||
+    					mClass == Float.class || mClass == Integer.class ||
+    					mClass == Long.class || mClass == Short.class || mClass == String.class) {
+
+    				if (mClass == Boolean.class) {
+    					return (Boolean) resultSet.getBoolean(column);
+    				}
+    				if (mClass == Double.class) {
+    					return (Double) resultSet.getDouble(column);
+    				}
+    				if (mClass == Float.class) {
+    					return (Float) resultSet.getFloat(column);
+    				}
+    				if (mClass == Integer.class) {
+    					return (Integer) resultSet.getInt(column);
+    				}
+    				if (mClass == Long.class) {
+    					return (Long) resultSet.getLong(column);
+    				}
+    				if (mClass == Short.class) {
+    					return (Short) resultSet.getShort(column);
+    				}
+    				if (mClass == String.class) {
+    					return (String) resultSet.getString(column);
+    				}
+    		} else {
+    			throw new IllegalArgumentException("This method only accepts the following classes [Boolean, Double, Float, Integer, Long, Short]");
+    		}
+    	}
+    	return null;
+    }
 }

@@ -180,43 +180,12 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 	* Gets the first record from the table ${TABLE_NAME} that appears in the result set of the
 	* records after executing the custom query
 	*
-	* TODO THIS METHOD SHOULD RETURN THE DEFAULT VALUE IF THE RESULT SET IS NULL
 	*
 	* @throws SQLException 
 	* @return the first record that matches appears in the result set of the records
 	* 
 	*/
-	public Object getBlindColumn(String query, String column, Object defaultValue) throws SQLException {
-
-		ResultSet resultSet = getMYSQLTransactionsExecutor().execSQL(query);
-		
-		if (resultSet != null) {
-			resultSet.first();
-
-			if (defaultValue instanceof Boolean) {
-				return (Boolean) resultSet.getBoolean(column);
-			}
-			if (defaultValue instanceof Double) {
-				return (Double) resultSet.getDouble(column);
-			}
-			if (defaultValue instanceof Float) {
-				return (Float) resultSet.getFloat(column);
-			}
-			if (defaultValue instanceof Integer) {
-				return (Integer) resultSet.getInt(column);
-			}
-			if (defaultValue instanceof Long) {
-				return (Long) resultSet.getLong(column);
-			}
-			if (defaultValue instanceof Short) {
-				return (Short) resultSet.getShort(column);
-			}
-			if (defaultValue instanceof String) {
-				return (String) resultSet.getString(column);
-			}
-
-		}
-
-		return null;
+	public Object getBlindColumn(String query, String column, Class<?> mClass) throws SQLException {
+        return super.getBlindColumn(query,column,mClass);
 	}
 }
