@@ -154,22 +154,25 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 	*/
 	public ${TABLE_MODEL_CLASS} get${TABLE_MODEL_CLASS}(${PRIMARY_KEY_DATA_TYPE} ${PRIMARY_KEY_OBJECT}) throws SQLException{
 
-		${TABLE_MODEL_CLASS} ${TABLE_MODEL_OBJECT} = null;
-		
 		String[] whereColumns = {${PK_COLUMN_REFERENCE}};
 		
 		String[] whereRecords = {String.valueOf(${PRIMARY_KEY_OBJECT})};
 		
 		ResultSet resultSet = query(getTableName(), whereColumns, whereRecords, false);
 
-		for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
-
-			${TABLE_MODEL_OBJECT} =  get${TABLE_MODEL_CLASS}(resultSet);
-		}
-
-		return ${TABLE_MODEL_OBJECT};
+        if (resultSet != null) {
+            resultSet.first();
+            return get${TABLE_MODEL_CLASS}(resultSet);
+        }
+        return null;
 	}
 
+    /**
+	 * Create an object of ${TABLE_MODEL_CLASS} from the result set
+	 * @param resultSet the result set from the executed query
+	 * @return ${TABLE_MODEL_CLASS}
+	 * @throws SQLException
+     */
     public ${TABLE_MODEL_CLASS} get${TABLE_MODEL_CLASS}(ResultSet resultSet) throws SQLException{
 
         ${RESULT_SET_COLUMNS_VALUES_GETTERS}
