@@ -239,7 +239,7 @@ public class TasksExecutor {
                 field = NativeUtils.toLetters(field);
 
                 String type = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TYPE);
-                type = NativeUtils.toLetters(type);
+                type = NativeUtils.toMYSQLDataType(type);
 
                 String _null = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_NULL);
                 String key = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TABLE_KEY);
