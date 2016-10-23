@@ -118,10 +118,8 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 		ResultSet resultSet = query(getTableName(), whereColumns, whereRecords, false);
 
 		for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
-
-			${RESULT_SET_COLUMNS_ALL_VALUES_GETTERS}
 			
-			${TABLE_MODEL_OBJECT}List.add(new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS}));
+			${TABLE_MODEL_OBJECT}List.add(get${TABLE_MODEL_CLASS}(resultSet));
 		}
 
 		return ${TABLE_MODEL_OBJECT}List;
@@ -142,9 +140,7 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 
 		for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
 
-			${RESULT_SET_COLUMNS_ALL_VALUES_GETTERS}
-			
-			${TABLE_MODEL_OBJECT}.add(new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS}));
+			${TABLE_MODEL_OBJECT}.add(get${TABLE_MODEL_CLASS}(resultSet));
 		}
 
 		return ${TABLE_MODEL_OBJECT};
@@ -168,13 +164,18 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 
 		for (resultSet.first(); !resultSet.isAfterLast(); resultSet.next()) {
 
-			${RESULT_SET_COLUMNS_VALUES_GETTERS}
-
-			${TABLE_MODEL_OBJECT} = new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS});
+			${TABLE_MODEL_OBJECT} =  get${TABLE_MODEL_CLASS}(resultSet);
 		}
 
 		return ${TABLE_MODEL_OBJECT};
 	}
+
+    public ${TABLE_MODEL_CLASS} get${TABLE_MODEL_CLASS}(ResultSet resultSet) throws SQLException{
+
+        ${RESULT_SET_COLUMNS_VALUES_GETTERS}
+
+        return new ${TABLE_MODEL_CLASS}(${TABLE_MODEL_CONSTRUCTOR_OBJECTS});
+    }
 
 	/**
 	* Gets the first record from the table ${TABLE_NAME} that appears in the result set of the
