@@ -1,10 +1,10 @@
 <?php
 
-	//namespace app\libs\marvik\libs\database\crud;
+	namespace app\libs\marvik\libs\database\crud;
  
-	//use app\libs\marvik\libs\database\core\mysql\DatabaseUtils;
+	use app\libs\marvik\libs\database\core\mysql\DatabaseUtils;
 
-	//use app\libs\marvik\libs\database\core\mysql\DatabaseActions;
+	use app\libs\marvik\libs\database\core\mysql\DatabaseActions;
 
 	${CRUD_GENERATOR_TEMPLATE}
 

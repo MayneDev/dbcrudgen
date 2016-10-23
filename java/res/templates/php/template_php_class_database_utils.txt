@@ -1,10 +1,10 @@
 <?php
 
-//namespace app\libs\marvik\libs\database\core\mysql;
+namespace app\libs\marvik\libs\database\core\mysql;
 
-//use Exception;
+use Exception;
 
-//use app\libs\marvik\libs\database\core\mysql\DatabaseConnection;
+use app\libs\marvik\libs\database\core\mysql\DatabaseConnection;
 
 /**
 * DatabaseException - Thrown whenever an Exception occurs
@@ -48,9 +48,7 @@ class DatabaseUtils {
 	public function __destruct() {
 	}
 	public function __construct($host = "$SERVER_HOST", $user = "$DATABASE_USER", $password = "$USER_PASSWORD", $database = "$DATABASE_NAME") {
-		
-		//require_once '$DATABASE_CONNECTION_INC_FILE';
-		  
+
 		$database_connection = new DatabaseConnection ( $host, $user, $password, $database );
 		
 		$this->database_handle = $database_connection->open_database_connection ();

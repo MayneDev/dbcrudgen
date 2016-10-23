@@ -25,7 +25,7 @@ import javax.xml.crypto.Data;
 public class Main {
     public static void main(String[] args) {
         Database database = new TasksExecutor().createDatabaseModel("wifihacker");
-        testJ2SECrudGenerator(database,"C:\\Users\\victor\\Desktop","WifiHacker","com.wifihacker","src","lib");
+        testPHPCrudGenerator(database);
     }
 
     private static void createAndroidChatModule() {
