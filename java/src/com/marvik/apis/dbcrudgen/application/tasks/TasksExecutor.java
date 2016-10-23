@@ -108,7 +108,7 @@ public class TasksExecutor {
     }
 
     /**
-     * @param selectedDatabase
+     * @param database
      * @return
      * @throws SQLException
      * @throws ClassNotFoundException
@@ -213,7 +213,9 @@ public class TasksExecutor {
     }
 
     /**
-     * @param string
+     *
+     * @param tableName
+     * @param databaseName
      * @return
      */
     private Table getDatabaseTable(String tableName, String databaseName) {

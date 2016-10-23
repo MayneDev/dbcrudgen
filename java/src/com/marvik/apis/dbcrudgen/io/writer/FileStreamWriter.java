@@ -60,7 +60,7 @@ public class FileStreamWriter {
 	/**
 	 * Create Directories
 	 * 
-	 * @param file
+	 * @param directoryPath
 	 * @return true if directory is created
 	 */
 	public boolean createDirectories(String directoryPath) {
@@ -101,19 +101,19 @@ public class FileStreamWriter {
 	/**
 	 * Creates a file on the disk
 	 * 
-	 * @param jdbcJarFilePath
-	 * @param jdbcJarStorageLocation
+	 * @param masterFilePath
+	 * @param slaveFilePath
 	 * @return
 	 */
-	public void copyFile(String jdbcJarFilePath, String jdbcJarStorageLocation) {
+	public void copyFile(String masterFilePath, String slaveFilePath) {
 		try {
-			FileInputStream fileInputStream = new FileInputStream(new File(jdbcJarFilePath));
+			FileInputStream fileInputStream = new FileInputStream(new File(masterFilePath));
 			int count = 0;
 			byte[] buffer = new byte[1024];
 
 			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
 
-			FileOutputStream fileOutputStream = new FileOutputStream(new File(jdbcJarStorageLocation));
+			FileOutputStream fileOutputStream = new FileOutputStream(new File(slaveFilePath));
 
 			while ((count = bufferedInputStream.read(buffer)) != -1) {
 				fileOutputStream.write(buffer, 0, count);
