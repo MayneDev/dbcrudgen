@@ -43,7 +43,7 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 	/**
 	* Inserts a new record in the table ${TABLE_NAME}
 	*
-	* @param ${TABLE_MODEL_CLASS} to insert
+	* @param ${TABLE_MODEL_OBJECT} to insert
 	* @throws SQLException 
 	* @return the success status of the transaction
 	*/
@@ -56,7 +56,7 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 	/**
 	* Deleted a record from the table ${TABLE_NAME}
 	*
-	* @param ${TABLE_MODEL_CLASS} to delete
+	* @param ${TABLE_MODEL_OBJECT} to delete
 	*
 	* @return the success status of the transaction
 	*/
@@ -110,7 +110,7 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 	*/
 	public List<${TABLE_MODEL_CLASS}> search(${TABLE_MODEL_CLASS} ${TABLE_MODEL_OBJECT}) throws SQLException{
 		
-		List<${TABLE_MODEL_CLASS}> ${TABLE_MODEL_OBJECT}List = new ArrayList<${TABLE_MODEL_CLASS}>();
+		List<${TABLE_MODEL_CLASS}> ${TABLE_MODEL_OBJECT}List = new ArrayList<>();
 		
 		String[] whereColumns = { ${SEARCH_COLUMNS} };
 		String[] whereRecords = { ${SEARCH_VALUES} };
@@ -134,7 +134,7 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 	*/
 	public List<${TABLE_MODEL_CLASS}> get${TABLE_MODEL_CLASS}All() throws SQLException {
 
-		List<${TABLE_MODEL_CLASS}> ${TABLE_MODEL_OBJECT} = new ArrayList<${TABLE_MODEL_CLASS}>();
+		List<${TABLE_MODEL_CLASS}> ${TABLE_MODEL_OBJECT} = new ArrayList<>();
 		
 		ResultSet resultSet = queryAll(getTableName(), false);
 
@@ -148,6 +148,7 @@ public class ${TABLE_CLASS}Transactions extends TransactionWrapper {
 
 	/**
 	* Returns a record of from the table ${TABLE_NAME} based on the value of the primary key ${PK_COLUMN_REFERENCE}
+	* @param ${PRIMARY_KEY_OBJECT} the primary key
 	* @throws SQLException 
 	* @return an object of ${TABLE_MODEL_CLASS} that represents a single record
 	* 
