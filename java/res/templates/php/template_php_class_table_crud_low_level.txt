@@ -15,10 +15,10 @@
 * Low level class for manipulating the data in the table ${TABLE_NAME}
 *
 * This source code is auto-generated
+*
 * @author Victor Mwenda
-* 
 * Email : vmwenda.vm@gmail.com
-* Phone : 0718034449
+* Phone : +254(0)718034449
 */
 class ${CLASS_NAME} {
 

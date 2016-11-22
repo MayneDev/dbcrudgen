@@ -36,10 +36,10 @@ class InvalidColumnValuePairMatchException extends DatabaseException {
 *  Database Utilities  - Contains the various database utility functions
 *
 * This source code is auto-generated
+*
 * @author Victor Mwenda
-* 
 * Email : vmwenda.vm@gmail.com
-* Phone : 0718034449
+* Phone : +254(0)718034449
 */
 class DatabaseUtils {
 	

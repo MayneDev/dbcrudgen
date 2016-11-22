@@ -10,8 +10,10 @@ use mysqli;
 * The Content Provider for the database associated
 *
 * This source code is auto-generated
-* Victor Mwenda
-* @author vmwenda.vm@gmail.com
+*
+* @author Victor Mwenda
+* Email : vmwenda.vm@gmail.com
+* Phone : +254(0)718034449
 *
 */
 class DatabaseConnection {

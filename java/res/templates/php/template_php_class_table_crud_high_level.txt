@@ -11,10 +11,10 @@
 	* Provides High level features for interacting with the ${TABLE_CLASS};
 	*
 	* This source code is auto-generated
-	* @author Victor Mwenda
-	* 
-	* Email : vmwenda.vm@gmail.com
-	* Phone : 0718034449
+    *
+    * @author Victor Mwenda
+    * Email : vmwenda.vm@gmail.com
+    * Phone : +254(0)718034449
 	*/
 	class ${CLASS_NAME}{
 
