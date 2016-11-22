@@ -24,7 +24,7 @@ import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-        Database database = new TasksExecutor().createDatabaseModel("wifihacker");
+        Database database = new TasksExecutor().createDatabaseModel("klevaplus_givewatts");
         testPHPCrudGenerator(database);
     }
 
@@ -91,9 +91,9 @@ public class Main {
         try {
             J2SEProjectConfiguration j2SEProjectConfiguration = new J2SEProjectConfiguration(projectName, packageName, storageDir, javaSrcDir, libDirs);
             DatabaseConnectionProperties databaseConnectionProperties =
-                    new DatabaseConnectionProperties("localhost","root","",database.getDatabaseName());
+                    new DatabaseConnectionProperties("localhost", "root", "", database.getDatabaseName());
             J2SEProjectMYSQLDatabaseConfiguration mysqlDatabaseConfiguration =
-                    new J2SEProjectMYSQLDatabaseConfiguration("mysql",databaseConnectionProperties,"schemas","models","crud");
+                    new J2SEProjectMYSQLDatabaseConfiguration("mysql", databaseConnectionProperties, "schemas", "models", "crud");
             j2SEProjectConfiguration.setJ2SEProjectMYSQLDatabaseConfiguration(mysqlDatabaseConfiguration);
             J2SECrudCreator j2SECrudCreator = new J2SECrudCreator();
             j2SECrudCreator.createProject(j2SEProjectConfiguration, database);

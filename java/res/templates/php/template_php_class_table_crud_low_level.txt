@@ -26,15 +26,15 @@ class ${CLASS_NAME} {
 	private $action;
 	private $client;
 	
-	public function __construct($action = "", $client = "") {		
-		$this->init(true);
+	public function __construct($databaseUtils, $action = "", $client = "") {
+		$this->init($databaseUtils);
 	}
 	
 	//Initializes
-	public function init($execute = false) {
+	public function init($databaseUtils) {
 		
 		//Init
-		$this->databaseUtils = new DatabaseUtils ();
+		$this->databaseUtils = $databaseUtils;
 		
 	}
 	
