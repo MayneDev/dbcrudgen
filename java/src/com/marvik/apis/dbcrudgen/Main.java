@@ -25,7 +25,7 @@ import javax.xml.crypto.Data;
 public class Main {
     public static void main(String[] args) {
         Database database = new TasksExecutor().createDatabaseModel("klevaplus_givewatts");
-        testPHPCrudGenerator(database);
+        testJ2SECrudGenerator(database,"F:\\Android\\Clients\\Nodem\\Masaj\\source","Masaj","com.masaj","app/src/main/java","app/src/main/libs");
     }
 
     private static void createAndroidChatModule() {

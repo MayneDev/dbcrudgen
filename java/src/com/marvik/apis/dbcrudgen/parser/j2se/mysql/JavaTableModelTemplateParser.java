@@ -62,7 +62,7 @@ public class JavaTableModelTemplateParser extends TemplatesParser{
 			classVariablesInit += NativeUtils.createNewJavaClassVariableInitStatement(objectName);
 
 			classVariablesAccessors += javaObjectDefaultEncapsulationTemplateParser
-					.createJavaObjectDefaultAccessorSourceCode(androidDatatype, objectName);
+					.createJavaObjectDefaultAccessorSourceCode(tableClassName+"Info",androidDatatype, objectName);
 
 		}
 

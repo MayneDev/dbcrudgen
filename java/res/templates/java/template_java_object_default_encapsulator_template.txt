@@ -15,3 +15,14 @@ public ${DATATYPE} get${JAVA_BEANS_OBJECT} (){
 public void set${JAVA_BEANS_OBJECT} (${DATATYPE} ${OBJECT}){
 	this.${OBJECT} = ${OBJECT};
 }
+
+/**
+* Sets the value of  ${OBJECT}
+*
+* @param  ${OBJECT}  ${OBJECT}
+* @return an handle of this class object to enable set more params
+*/
+public ${CLASS_NAME} append${JAVA_BEANS_OBJECT} (${DATATYPE} ${OBJECT}){
+	this.set${JAVA_BEANS_OBJECT} (${OBJECT});
+	return this;
+}

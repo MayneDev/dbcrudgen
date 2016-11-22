@@ -51,7 +51,6 @@ public class J2SEMYSQLTableModelParser extends J2SETemplatesParser {
 					objectName, JavaDelimiter.SEMICOLON);
 
 			JavaDelimiter classConstructorVariablesJavaDelimeter = JavaDelimiter.COMMA;
-			;
 
 			if (i >= (tableColumn.length - 1)) {
 				classConstructorVariablesJavaDelimeter = JavaDelimiter.NONE;
@@ -63,7 +62,7 @@ public class J2SEMYSQLTableModelParser extends J2SETemplatesParser {
 			classVariablesInit += NativeUtils.createJavaClassVariableInitStatement(objectName);
 
 			classVariablesAccessors += javaObjectDefaultEncapsulationTemplateParser
-					.createJavaObjectDefaultAccessorSourceCode(androidDatatype, objectName);
+					.createJavaObjectDefaultAccessorSourceCode(tableClassName+"Info",androidDatatype, objectName);
 
 		}
 
