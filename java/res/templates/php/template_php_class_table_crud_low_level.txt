@@ -4,8 +4,6 @@
  
 	use database\core\mysql\DatabaseUtils;
 
-	use database\core\mysql\DatabaseActions;
-
 	${CRUD_GENERATOR_TEMPLATE}
 
 /**

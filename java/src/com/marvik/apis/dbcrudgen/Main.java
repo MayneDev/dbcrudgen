@@ -24,8 +24,8 @@ import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-        Database database = new TasksExecutor().createDatabaseModel("klevaplus_givewatts");
-        testJ2SECrudGenerator(database,"F:\\Android\\Clients\\Nodem\\Masaj\\source","Masaj","com.masaj","app/src/main/java","app/src/main/libs");
+        Database database = new TasksExecutor().createDatabaseModel("comphoa2_compho");
+        testPHPCrudGenerator(database,"C:\\xampp\\htdocs\\compho");
     }
 
     private static void createAndroidChatModule() {
@@ -63,18 +63,18 @@ public class Main {
         androidCRUDCreator.createProject(database);
     }
 
-    private static void testPHPCrudGenerator(Database database) {
+    private static void testPHPCrudGenerator(Database database, String storagePath) {
 
         PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
-        phpProjectConfiguration.setProjectStorageDirectory("C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\");
+        phpProjectConfiguration.setProjectStorageDirectory(storagePath);
         phpProjectConfiguration.setProjectPHPTableCrudLowLevelScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\crud\\");
+                storagePath + "\\database\\crud\\");
         phpProjectConfiguration.setProjectPHPTableCrudHighLevelScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\modules\\");
+                storagePath + "\\database\\modules\\");
         phpProjectConfiguration.setProjectPHPDatabaseAPIScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\core-apis\\");
+                storagePath + "\\database\\core-apis\\");
         phpProjectConfiguration.setProjectSQLScriptsStorageDirectory(
-                "C:\\xampp\\htdocs\\" + database.getDatabaseName() + "\\scripts\\php\\database\\sql\\");
+                storagePath + "\\database\\sql\\");
 
         ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
                 "localhost", "root", "", database.getDatabaseName());

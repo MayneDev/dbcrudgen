@@ -1,6 +1,6 @@
 <?php
 
-namespace app\libs\marvik\libs\database\core\mysql;
+namespace database\core\mysql;
 
 /**
 *
