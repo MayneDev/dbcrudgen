@@ -3,6 +3,8 @@
 	namespace database\crud;
  
 	use database\core\mysql\DatabaseUtils;
+    use database\core\mysql\InvalidColumnValueMatchException;
+    use database\core\mysql\NullabilityException;
 
 	${CRUD_GENERATOR_TEMPLATE}
 
@@ -204,8 +206,8 @@ class ${CLASS_NAME} {
 	 * @param array $records
 	 * @param bool $printSQL
 	 * @return bool|int|\mysqli_result number of deleted rows
-	 * @throws \app\libs\marvik\libs\database\core\mysql\InvalidColumnValueMatchException
-	 * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+	* @throws InvalidColumnValueMatchException
+    * @throws NullabilityException
 	 */
 	private function delete_record($table, Array $columns, Array $records, $printSQL = false) {
 		return $this->get_database_utils ()->delete_record ( $table, $columns, $records, $printSQL );
@@ -223,7 +225,7 @@ class ${CLASS_NAME} {
      * @param bool $redundancy_check
      * @param bool $printSQL
      * @return bool|mixed|\mysqli_result the number of times the record exists
-     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+   * @throws NullabilityException
      */
 	private function insert_records($table, Array $columns, Array $records,$redundancy_check = false, $printSQL = false) {
 		if($redundancy_check){
@@ -245,7 +247,7 @@ class ${CLASS_NAME} {
      * @param array $where_records
      * @param bool $printSQL
      * @return bool|\mysqli_result number of updated rows
-     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+   * @throws NullabilityException
      */
 	private function update_record($table, Array $columns, Array $records, Array $where_columns, Array $where_records, $printSQL = false) {
 		return $this->get_database_utils ()->update_record ( $table, $columns, $records, $where_columns, $where_records, $printSQL );
@@ -261,8 +263,8 @@ class ${CLASS_NAME} {
      * @param string $extraSQL
      * @param bool $printSQL
      * @return array|null
-     * @throws \app\libs\marvik\libs\database\core\mysql\InvalidColumnValueMatchException
-     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+    * @throws InvalidColumnValueMatchException
+   * @throws NullabilityException
      */
 	private function fetch_assoc($distinct, $table, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
 		return $this->get_database_utils ()->fetch_assoc ( $distinct, $table, $columns, $records,$extraSQL, $printSQL );
@@ -303,8 +305,8 @@ class ${CLASS_NAME} {
      * @param string $extraSQL
      * @param bool $printSQL
      * @return array|null
-     * @throws \app\libs\marvik\libs\database\core\mysql\InvalidColumnValueMatchException
-     * @throws \app\libs\marvik\libs\database\core\mysql\NullabilityException
+    * @throws InvalidColumnValueMatchException
+   * @throws NullabilityException
      */
 	private function search($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
 		return $this->get_database_utils ()->search ( $table, $columns, $records, $extraSQL, $printSQL );
