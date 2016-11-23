@@ -1,8 +1,8 @@
 <?php 
 
-	namespace app\libs\marvik\libs\database\modules;
+	namespace database\modules;
 
-	use app\libs\marvik\libs\database\crud\${TABLE_CLASS};
+	use database\crud\${TABLE_CLASS};
 
 	/**
 	*  

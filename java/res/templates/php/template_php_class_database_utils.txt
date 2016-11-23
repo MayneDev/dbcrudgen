@@ -1,10 +1,10 @@
 <?php
 
-namespace app\libs\marvik\libs\database\core\mysql;
+namespace database\core\mysql;
 
 use Exception;
 
-use app\libs\marvik\libs\database\core\mysql\DatabaseConnection;
+use database\core\mysql\DatabaseConnection;
 
 /**
 * DatabaseException - Thrown whenever an Exception occurs
