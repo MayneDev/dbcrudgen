@@ -356,7 +356,8 @@ public class PHPTemplatesParser extends TemplatesParser {
      * with the passed column name
      */
     private String parseColumnAccesssors(String columnName, String template) {
-        return template.replace(TemplateTags.PHP.COLUMN_NAME_TEMPLATE_TAG, columnName);
+        return template.replace(TemplateTags.PHP.COLUMN_NAME_TEMPLATE_TAG, columnName)
+                .replace(TemplateTags.PHP.OBJECT, NativeUtils.toJavaBeansVariable(columnName));
     }
 
     /**
