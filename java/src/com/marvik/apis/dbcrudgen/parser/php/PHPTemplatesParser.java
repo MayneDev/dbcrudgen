@@ -450,11 +450,17 @@ public class PHPTemplatesParser extends TemplatesParser {
         // Generate crud functions for other database columns
         for (TableColumn tableColumn : columns) {
 
-            if (tableColumn.getColumnName().equals(table.getPrimaryKey().getColumnName())) {
-                continue;
-            }
+            if (table.getPrimaryKey() != null) {
+                if (tableColumn.getColumnName().equals(table.getPrimaryKey().getColumnName())) {
+                    continue;
+                }
 
-            columnsCrudFunction += generateColumnCrudFunctions(table.getPrimaryKey(), tableColumn);
+                columnsCrudFunction += generateColumnCrudFunctions(table.getPrimaryKey(), tableColumn);
+
+            } else {
+                columnsCrudFunction += generateColumnSupportCrudFunctions(table.getColumns(), tableColumn);
+
+            }
         }
         return columnsCrudFunction;
     }
@@ -466,33 +472,37 @@ public class PHPTemplatesParser extends TemplatesParser {
     private String generatePrimaryKeyCrudFunctions(Table table) {
 
         String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
+        try {
+            String primaryKeyColumnName = table.getPrimaryKey().getColumnName();
 
-        String primaryKeyColumnName = table.getPrimaryKey().getColumnName();
+            String functionParams = "";
+            String functionParamsValues = "";
 
-        String functionParams = "";
-        String functionParamsValues = "";
+            TableColumn[] tableColumns = table.getColumns();
 
-        TableColumn[] tableColumns = table.getColumns();
+            for (int i = 0; i < tableColumns.length; i++) {
+                String columnName = tableColumns[i].getColumnName();
+                functionParams += "'" + columnName + "'";
+                functionParamsValues += PHPGrammar.Variables.PHP_VARIABLE_PREFIX + columnName;
 
-        for (int i = 0; i < tableColumns.length; i++) {
-            String columnName = tableColumns[i].getColumnName();
-            functionParams += "'" + columnName + "'";
-            functionParamsValues += PHPGrammar.Variables.PHP_VARIABLE_PREFIX + columnName;
-
-            if (i < (tableColumns.length - 1)) {
-                functionParams += ",";
-                functionParamsValues += ",";
+                if (i < (tableColumns.length - 1)) {
+                    functionParams += ",";
+                    functionParamsValues += ",";
+                }
             }
+            return parseColumnQueryFunction(primaryKeyColumnName, functionParams, functionParamsValues,
+                    columnsCrudTemplate);
+        } catch (NullPointerException e) {
+            NativeUtils.printError(e.getMessage());
         }
-        return parseColumnQueryFunction(primaryKeyColumnName, functionParams, functionParamsValues,
-                columnsCrudTemplate);
+        return "";
     }
 
     /**
      * Generate the crud to get the foreign keys for the table
      */
     /*
-	 * private String generateForeignKeysCrudFunctions(ForeignKeys []
+     * private String generateForeignKeysCrudFunctions(ForeignKeys []
 	 * foreignKeys, TableColumn[] columns) { return
 	 * generateColumnKeysCrudFunctions(foreignKeys, columns); }
 	 */
@@ -500,14 +510,14 @@ public class PHPTemplatesParser extends TemplatesParser {
     /**
      * Generate the crud to get the unique keys for the table
      */
-	/*
-	 * private String generateUniqueKeysCrudFunctions(UniqueKeys [] uniqueKeys,
+    /*
+     * private String generateUniqueKeysCrudFunctions(UniqueKeys [] uniqueKeys,
 	 * TableColumn[] columns) { return
 	 * generateColumnKeysCrudFunctions(uniqueKeys, columns); }
 	 */
 
 	/*
-	 * private String generateColumnKeysCrudFunctions(KeyColumn [] keyColumn,
+     * private String generateColumnKeysCrudFunctions(KeyColumn [] keyColumn,
 	 * TableColumn[] columns) { if (keyColumn == null) { return ""; }
 	 * 
 	 * SWAP THE COLUMNKEY AND THE COLUMNS, AND PASS THEM TO THIS METHOD
@@ -525,8 +535,8 @@ public class PHPTemplatesParser extends TemplatesParser {
      * Generates crud functions for columns that hold keys for the database
      * table
      */
-	/*
-	 * private final String generateColumnKeysCrudFunction(String
+    /*
+     * private final String generateColumnKeysCrudFunction(String
 	 * columnKey,String dataType, TableColumn[] columns) {
 	 * 
 	 * String[] columnKeys = new String[columns.length];
@@ -555,6 +565,35 @@ public class PHPTemplatesParser extends TemplatesParser {
         String functionParams = "'" + primaryKeyColumn + "'";
 
         String functionParamsValues = phpPrimaryKeyColumnVariable;
+
+        return parseColumnQueryFunction(columnName, functionParams, functionParamsValues, columnsCrudTemplate);
+    }
+
+    /**
+     * Generates column crud functions from a template
+     * This method is used for tables without a primary key
+     */
+    private String generateColumnSupportCrudFunctions(TableColumn[] tableColumns, TableColumn tableColumn) {
+
+        String columnsCrudTemplate = getPhpColumnsCrudTemplate().getTemplate();
+
+        String columnName = tableColumn.getColumnName();
+
+        String functionParams = "";
+        String functionParamsValues = "";
+
+        for (int i = 0; i < tableColumns.length; i++) {
+            if (tableColumns[i].getColumnName().equals(columnName)) {
+                continue;
+            }
+            String column = tableColumns[i].getColumnName();
+            functionParams += "'" + column + "'";
+            functionParamsValues = PHPGrammar.Variables.PHP_VARIABLE_PREFIX + column;
+            if (i < tableColumns.length) {
+                functionParams += ",";
+                functionParamsValues += ",";
+            }
+        }
 
         return parseColumnQueryFunction(columnName, functionParams, functionParamsValues, columnsCrudTemplate);
     }
