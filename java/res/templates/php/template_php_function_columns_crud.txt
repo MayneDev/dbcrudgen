@@ -6,7 +6,7 @@
      * @param ${FUNCTION_PARAMS_VALUES}
      * @return object (${QUERIED_COLUMN})| null
      */
-	public function get${QUERIED_COLUMN}(${FUNCTION_PARAMS_VALUES}) {
+	public function get${OBJECT}(${FUNCTION_PARAMS_VALUES}) {
 		$columns = array (${FUNCTION_PARAMS_KEYS});
 		$records = array (${FUNCTION_PARAMS_VALUES});
 		$${QUERY_RESULTS} = $this->query_from_${TABLE_NAME} ( $columns, $records );

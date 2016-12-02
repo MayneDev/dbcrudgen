@@ -1,6 +1,6 @@
 	
 	/**
-	* private class variable $${COLUMN_NAME}
+	* private class variable $_${OBJECT}
 	*/
 	private $_${OBJECT};
 	
