@@ -588,13 +588,13 @@ public class PHPTemplatesParser extends TemplatesParser {
             }
             String column = tableColumns[i].getColumnName();
             functionParams += "'" + column + "'";
-            functionParamsValues = PHPGrammar.Variables.PHP_VARIABLE_PREFIX + column;
+            functionParamsValues += PHPGrammar.Variables.PHP_VARIABLE_PREFIX + column;
             if (i < tableColumns.length) {
                 functionParams += ",";
                 functionParamsValues += ",";
             }
         }
-
+        NativeUtils.printError(functionParams + "\n" + functionParamsValues);
         return parseColumnQueryFunction(columnName, functionParams, functionParamsValues, columnsCrudTemplate);
     }
 
