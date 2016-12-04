@@ -253,4 +253,13 @@ public final class NativeUtils {
         }
         return dataType;
     }
+
+    /**
+     * Print an error message
+     *
+     * @param message
+     */
+    public static void printError(String message) {
+        System.err.println(message);
+    }
 }
