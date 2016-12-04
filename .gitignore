@@ -44,4 +44,4 @@ Temporary Items
 /bin/
 
 #Ignore idea files
-*.idea/workspace.xml
+/.idea
