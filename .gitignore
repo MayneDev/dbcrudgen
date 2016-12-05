@@ -46,6 +46,7 @@ Temporary Items
 #Ignore idea files
 /.idea
 
+
 #Ignore idea outputs
 /out
 java/*.iml

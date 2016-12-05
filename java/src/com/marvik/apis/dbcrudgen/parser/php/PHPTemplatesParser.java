@@ -593,7 +593,6 @@ public class PHPTemplatesParser extends TemplatesParser {
                 functionParamsValues += ",";
             }
         }
-        NativeUtils.printError(functionParams + "\n" + functionParamsValues);
         return parseColumnQueryFunction(columnName, functionParams, functionParamsValues, columnsCrudTemplate);
     }
 
