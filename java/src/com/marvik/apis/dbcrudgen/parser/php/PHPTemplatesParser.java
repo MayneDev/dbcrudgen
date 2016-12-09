@@ -28,6 +28,9 @@ import com.marvik.apis.dbcrudgen.templates.sql.SQLTableFilenameTemplate;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags.DatabaseConnection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PHPTemplatesParser extends TemplatesParser {
 
     private PHPLowLevelTableClassCrudTemplate phpTableClassCrudTemplate;
@@ -420,8 +423,6 @@ public class PHPTemplatesParser extends TemplatesParser {
 
     private String generateTableKeysColumnsCrudFunctions(Table table) {
 
-        TableColumn[] columns = table.getColumns();
-
         String columnsCrudFunction = "";
 
         // Generate crud functions for primary key columns
@@ -480,7 +481,11 @@ public class PHPTemplatesParser extends TemplatesParser {
             TableColumn[] tableColumns = table.getColumns();
 
             for (int i = 0; i < tableColumns.length; i++) {
+
                 String columnName = tableColumns[i].getColumnName();
+                if (columnName.equals(primaryKeyColumnName)) {
+                    continue;
+                }
                 functionParams += "'" + columnName + "'";
                 functionParamsValues += PHPGrammar.Variables.PHP_VARIABLE_PREFIX + columnName;
 
@@ -488,6 +493,7 @@ public class PHPTemplatesParser extends TemplatesParser {
                     functionParams += ",";
                     functionParamsValues += ",";
                 }
+
             }
             return parseColumnQueryFunction(primaryKeyColumnName, functionParams, functionParamsValues,
                     columnsCrudTemplate);
@@ -582,18 +588,47 @@ public class PHPTemplatesParser extends TemplatesParser {
         String functionParamsValues = "";
 
         for (int i = 0; i < tableColumns.length; i++) {
-            if (tableColumns[i].getColumnName().equals(columnName)) {
-                continue;
-            }
+
             String column = tableColumns[i].getColumnName();
             functionParams += "'" + column + "'";
             functionParamsValues += PHPGrammar.Variables.PHP_VARIABLE_PREFIX + column;
-            if (i < tableColumns.length) {
+
+            if (i < (tableColumns.length - 1)) {
                 functionParams += ",";
                 functionParamsValues += ",";
             }
         }
         return parseColumnQueryFunction(columnName, functionParams, functionParamsValues, columnsCrudTemplate);
+    }
+
+    /**
+     * Removed the passed table column from the list of table columns
+     *
+     * @param tableColumns columns
+     * @param tableColumn  column
+     * @return table columns
+     */
+    public TableColumn[] removeTableColumn(TableColumn[] tableColumns, TableColumn tableColumn) {
+
+        List<TableColumn> tableColumnList = new ArrayList<>();
+
+        for (TableColumn column : tableColumns) {
+            if (column.getColumnName().equals(tableColumn.getColumnName())) {
+                continue;
+            }
+            tableColumnList.add(column);
+        }
+
+        TableColumn[] columns = new TableColumn[tableColumnList.size()];
+
+        int index = 0;
+
+        for (TableColumn column : tableColumnList) {
+            columns[index] = column;
+            index++;
+
+        }
+        return columns;
     }
 
     /**
@@ -605,7 +640,7 @@ public class PHPTemplatesParser extends TemplatesParser {
 
     private String parseColumnQueryFunction(String columnName, String functionParams, String functionParamsValues,
                                             String template) {
-        return template.replace(TemplateTags.PHP.QUERIED_COLUMN,columnName)
+        return template.replace(TemplateTags.PHP.QUERIED_COLUMN, columnName)
                 .replace(TemplateTags.PHP.OBJECT, NativeUtils.toJavaBeansClass(columnName))
                 .replace(TemplateTags.PHP.QUERY_RESULTS, columnName + "_")
                 .replace(TemplateTags.PHP.FUNCTION_PARAMS_KEYS, functionParams)

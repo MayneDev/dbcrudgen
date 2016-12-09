@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
+import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.android.AndroidCRUDCreator;
 import com.marvik.apis.dbcrudgen.creator.j2se.J2SECrudCreator;
 import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
@@ -24,8 +25,9 @@ import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-        Database database = new TasksExecutor().createDatabaseModel("comphoa2_compho");
-        testPHPCrudGenerator(database,"C:\\xampp\\htdocs\\compho");
+        Database database = new TasksExecutor().createDatabaseModel("eptnew");
+        testPHPCrudGenerator(database,"C:\\xampp\\htdocs\\ePt-Repository","eptadmin","rGQHv]LF*H6(");
+
     }
 
     private static void createAndroidChatModule() {
@@ -63,7 +65,7 @@ public class Main {
         androidCRUDCreator.createProject(database);
     }
 
-    private static void testPHPCrudGenerator(Database database, String storagePath) {
+    private static void testPHPCrudGenerator(Database database, String storagePath, String databaseUser, String userPassword) {
 
         PHPProjectConfiguration phpProjectConfiguration = new PHPProjectConfiguration(database.getDatabaseName());
         phpProjectConfiguration.setProjectStorageDirectory(storagePath);
@@ -77,7 +79,7 @@ public class Main {
                 storagePath + "\\database\\sql\\");
 
         ProjectDatabaseConnectionProperties projectDatabaseConnectionProperties = new ProjectDatabaseConnectionProperties(
-                "localhost", "root", "", database.getDatabaseName());
+                "localhost", databaseUser, userPassword, database.getDatabaseName());
 
         PHPCrudCreator phpCrudCreator = new PHPCrudCreator();
         phpCrudCreator.setProjectConfiguration(phpProjectConfiguration);
