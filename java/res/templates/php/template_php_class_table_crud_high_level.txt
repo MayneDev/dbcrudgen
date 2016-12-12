@@ -1,8 +1,8 @@
 <?php 
 
-	namespace database\modules;
+	namespace common\database\modules;
 
-	use database\crud\${TABLE_CLASS};
+	use common\database\crud\${TABLE_CLASS};
 
 	/**
 	*  

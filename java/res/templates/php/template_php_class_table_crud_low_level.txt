@@ -1,10 +1,10 @@
 <?php
 
-	namespace database\crud;
+	namespace common\database\crud;
  
-	use database\core\mysql\DatabaseUtils;
-    use database\core\mysql\InvalidColumnValueMatchException;
-    use database\core\mysql\NullabilityException;
+	use common\database\coreDatabaseUtils;
+    use common\database\core\InvalidColumnValueMatchException;
+    use common\database\core\NullabilityException;
 
 	${CRUD_GENERATOR_TEMPLATE}
 

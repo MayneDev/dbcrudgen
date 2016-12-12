@@ -1,10 +1,10 @@
 <?php
 
-namespace database\core\mysql;
+namespace common\database\core;
 
 use Exception;
 
-use database\core\mysql\DatabaseConnection;
+use common\database\core\DatabaseConnection;
 
 /**
 * DatabaseException - Thrown whenever an Exception occurs
@@ -42,14 +42,16 @@ class InvalidColumnValuePairMatchException extends DatabaseException {
 * Phone : +254(0)718034449
 */
 class DatabaseUtils {
-	
+
+	private $database_connection;
+
 	private $database_handle;
 
 	public function __destruct() {
 	}
 	public function __construct($host = "$SERVER_HOST", $user = "$DATABASE_USER", $password = "$USER_PASSWORD", $database = "$DATABASE_NAME") {
 
-		$database_connection = new DatabaseConnection ( $host, $user, $password, $database );
+		$this->database_connection = new DatabaseConnection ($host, $user, $password, $database);
 		
 		$this->database_handle = $database_connection->open_database_connection ();
 	}
@@ -663,5 +665,13 @@ class DatabaseUtils {
 		
 		return $this->database_handle->query ( $query );
 	}
+ /**
+     * Get this database connection
+     * @return \common\database\core\DatabaseConnection
+     */
+    public function get_connection()
+    {
+        return $this->database_connection;
+    }
 
 }?>
