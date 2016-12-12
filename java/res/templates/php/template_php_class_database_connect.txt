@@ -22,7 +22,8 @@ class DatabaseConnection {
 	private $database_user;
 	private $user_password;
 	private $database_name;
-	
+	 private $connection;
+
 	/**
 	* Initializes everything
 	*/
@@ -37,12 +38,13 @@ class DatabaseConnection {
 	* Open a database connection to the server
 	*/
 	public function open_database_connection() {
-		return new mysqli ( 
-				$this->get_database_host(),
-				$this->get_database_user(),
-				$this->get_user_password(),
-				$this->get_database_name() 
-		);
+		  $this->connection = new mysqli (
+                    $this->get_database_host(),
+                    $this->get_database_user(),
+                    $this->get_user_password(),
+                    $this->get_database_name()
+                );
+                return $this->connection;
 	}
 	
 	
@@ -97,7 +99,14 @@ class DatabaseConnection {
 	* @returns null
 	*/
 	public function set_database_name($database_name){$this->database_name = $database_name;}
-	
+	/**
+         * Get the database connection
+         * @return mixed
+         */
+        public function getConnection()
+        {
+            return $this->connection;
+        }
 	public function __destruct() {
 	
 	}

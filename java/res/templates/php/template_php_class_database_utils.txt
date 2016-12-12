@@ -671,7 +671,7 @@ class DatabaseUtils {
      */
     public function get_connection()
     {
-        return $this->database_connection;
+        return $this->database_connection->getConnection();
     }
 
 }?>
