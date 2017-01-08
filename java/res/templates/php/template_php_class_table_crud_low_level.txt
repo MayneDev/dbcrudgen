@@ -25,7 +25,13 @@ class ${CLASS_NAME} {
 	private $databaseUtils;
 	private $action;
 	private $client;
-	
+
+	/**
+     * ${CLASS_NAME} constructor.
+     * @param $databaseUtils DatabaseUtils
+     * @param string $action the action to perform [delete, insert, query, update]
+     * @param string $client the client sending the HTTP Request web , mobile
+     */
 	public function __construct($databaseUtils, $action = "", $client = "") {
 		$this->init($databaseUtils);
 	}
