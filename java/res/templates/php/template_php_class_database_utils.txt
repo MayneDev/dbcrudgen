@@ -622,7 +622,27 @@ class DatabaseUtils {
 		$this->database_handle->query ( $query );
 	}
 	
-	/**
+    /**
+        * Does a raw delete
+        * @param $query
+        * @return bool|\mysqli_result
+        */
+       public function rawDelete($query)
+       {
+           return $this->rawSQL($query);
+       }
+
+    /**
+     * Does a raw insert
+     * @param $query
+     * @return bool|\mysqli_result
+     */
+    public function rawInsert($query)
+    {
+        return $this->rawSQL($query);
+    }
+
+   /**
      * Performs a raw sql query
      * @param $query
      * @return array
@@ -636,13 +656,35 @@ class DatabaseUtils {
 
         $results = array();
 
-        $exec = $this->database_handle->query($query); // Perform Query
+        $exec = $this->rawSQL($query);
+
         while ($assoc = $exec->fetch_assoc()) {
             $results [count($results)] = $assoc; // Return rows
         }
 
         return $results;
     }
+
+    /**
+     * Does a raw update
+     * @param $query
+     * @return bool|\mysqli_result
+     */
+    public function rawUpdate($query)
+    {
+        return $this->rawSQL($query);
+    }
+
+    /**
+     * Performs a raw SQL
+     * @param $query
+     * @return bool|\mysqli_result
+     */
+    public function rawSQL($query)
+    {
+        return $this->database_handle->query($query); // Perform Raw SQL Query
+    }
+
 	/**
 	 * Renames a database table
 	 * 
