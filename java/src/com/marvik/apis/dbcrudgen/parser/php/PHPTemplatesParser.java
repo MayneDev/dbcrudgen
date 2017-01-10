@@ -4,7 +4,6 @@ import com.marvik.apis.dbcrudgen.core.platforms.php.grammar.PHPGrammar;
 import com.marvik.apis.dbcrudgen.core.templates.DbCrudGeneratorNativeTemplates;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
-import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
 import com.marvik.apis.dbcrudgen.database.connection.project.ProjectDatabaseConnectionProperties;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
@@ -355,8 +354,8 @@ public class PHPTemplatesParser extends TemplatesParser {
      * Parse TableColumn Accessors -> Replaces the column name in the template
      * with the passed column name
      */
-    private String parseColumnAccesssors(String columnName, String template) {
-        return template.replace(TemplateTags.PHP.COLUMN_NAME_TEMPLATE_TAG, columnName)
+    private String parseColumnAccessors(String columnName, String template) {
+        return template.replace(TemplateTags.PHP.COLUMN_NAME_TEMPLATE_TAG, NativeUtils.toJavaBeansClass(columnName))
                 .replace(TemplateTags.PHP.OBJECT, NativeUtils.toJavaBeansVariable(columnName));
     }
 
@@ -367,7 +366,7 @@ public class PHPTemplatesParser extends TemplatesParser {
         String columnsAccessor = "";
         for (TableColumn tableColumn : columns) {
             String columnName = tableColumn.getColumnName();
-            columnsAccessor += parseColumnAccesssors(columnName, getPhpColumnAccessorsTemplate().getTemplate());
+            columnsAccessor += parseColumnAccessors(columnName, getPhpColumnAccessorsTemplate().getTemplate());
         }
         return columnsAccessor;
     }
@@ -606,7 +605,8 @@ public class PHPTemplatesParser extends TemplatesParser {
 
     private String parseColumnQueryFunction(String columnName, String functionParams, String functionParamsValues,
                                             String template) {
-        return template.replace(TemplateTags.PHP.QUERIED_COLUMN, columnName)
+        return template.replace(TemplateTags.PHP.QUERIED_COLUMN,columnName)
+                .replace(TemplateTags.PHP.OBJECT, NativeUtils.toJavaBeansClass(columnName))
                 .replace(TemplateTags.PHP.QUERY_RESULTS, columnName + "_")
                 .replace(TemplateTags.PHP.FUNCTION_PARAMS_KEYS, functionParams)
                 .replace(TemplateTags.PHP.FUNCTION_PARAMS_VALUES, functionParamsValues);

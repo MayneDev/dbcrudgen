@@ -33,7 +33,7 @@ class InvalidColumnValuePairMatchException extends DatabaseException {
 /**
 *  
 *
-*  Database Utilities  - Contains the various database utility functions
+* Database Utilities  - Contains the various database utility functions
 *
 * This source code is auto-generated
 *
@@ -203,8 +203,7 @@ class DatabaseUtils {
 		if (empty ( $table )) {
 			throw new NullabilityException ( "The table name cannot be null" );
 		}
-		
-		// $query = "DELETE FROM `".$table."` WHERE 1;";
+
 		$query = 'TRUNCATE table `' . $table . '`;';
 		
 		if ($printSQL) {
@@ -236,11 +235,7 @@ class DatabaseUtils {
 				throw new NullabilityException ( "The column records cannot be none" );
 			}
 		}
-		
-		/*
-		 * $columns[count($columns)]=PARAM_TIME_ADDED; $records[count($records)]=time(); $columns[count($columns)]=PARAM_COMMITER_ACCOUNT; $records[count($records)]="1";
-		 */
-		
+
 		$query = " INSERT INTO `" . $table . "` (";
 		
 		for($x = 0; $x < count ( $columns ); $x ++) {
