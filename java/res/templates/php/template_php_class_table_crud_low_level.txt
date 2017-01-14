@@ -2,7 +2,7 @@
 
 	namespace common\database\crud;
  
-	use common\database\coreDatabaseUtils;
+	use common\database\core\DatabaseUtils;
     use common\database\core\InvalidColumnValueMatchException;
     use common\database\core\NullabilityException;
 
