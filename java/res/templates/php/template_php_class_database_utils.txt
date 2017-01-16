@@ -735,5 +735,17 @@ class DatabaseUtils {
 
         return $tableNames;
     }
+    /**
+     * Optimize all the tables in a database
+     * @param null $database
+     */
+    public function optimizeDatabaseTables($database = null)
+    {
+        $tables = $this->getDatabaseTables($database);
+
+        foreach ($tables as $table) {
+            $this->rawSQL("OPTIMIZE TABLE " . $table);
+        }
+    }
 
 }?>
