@@ -711,4 +711,29 @@ class DatabaseUtils {
         return $this->database_connection->getConnection();
     }
 
+    /**
+     * Get the list of all tables in the database
+     * @param null $database
+     * @return array
+     */
+    public function getDatabaseTables($database = null)
+    {
+        $tableNames = array();
+
+        $query = "SHOW TABLES ";
+
+        if ($database != null) {
+            $query .= " IN " . $database;
+        }else{
+            $database = $this->database_connection->get_database_name();
+        }
+        $tables = $this->rawQuery($query);
+
+        foreach ($tables as $table) {
+            $tableNames[count($tableNames)] = $table["Tables_in_".$database];
+        }
+
+        return $tableNames;
+    }
+
 }?>
