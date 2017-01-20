@@ -327,7 +327,7 @@ class ${CLASS_NAME} {
          */
         public function prepareQueryOR($columns = null, $options = null, $extraSQL = "", $printSQL = false)
         {
-            return $this->get_database_utils ()->prepareQueryOR( $this->get_table (), $columns, $options, " OR ", $extraSQL, $printSQL);
+            return $this->get_database_utils ()->prepareQueryOR( $this->get_table (), $columns, $options,  $extraSQL, $printSQL);
         }
 
         /**
@@ -340,7 +340,7 @@ class ${CLASS_NAME} {
          */
         public function prepareQueryAND(  Array $columns = null, Array $options = null, $extraSQL = "", $printSQL = false)
         {
-            return $this->get_database_utils ()->prepareQueryAND( $this->get_table (), $columns, $options, " AND ", $extraSQL, $printSQL);
+            return $this->get_database_utils ()->prepareQueryAND( $this->get_table (), $columns, $options, $extraSQL, $printSQL);
         }
     /**
      * Prepare an OR search
@@ -352,7 +352,7 @@ class ${CLASS_NAME} {
      */
     public function prepareSearchOR(  $columns = null, $options = null, $extraSQL = "", $printSQL = false)
     {
-        return $this->get_database_utils ()->prepareSearchOR( $this->get_table (), $columns, $options, " OR ", $extraSQL, $printSQL);
+        return $this->get_database_utils ()->prepareSearchOR( $this->get_table (), $columns, $options, $extraSQL, $printSQL);
     }
 
     /**
@@ -365,7 +365,7 @@ class ${CLASS_NAME} {
      */
     public function prepareSearchAND(  Array $columns = null, Array $options = null, $extraSQL = "", $printSQL = false)
     {
-        return $this->get_database_utils ()->prepareSearchAND( $this->get_table (), $columns, $options, " AND ", $extraSQL, $printSQL);
+        return $this->get_database_utils ()->prepareSearchAND( $this->get_table (), $columns, $options,  $extraSQL, $printSQL);
     }
 
 }
