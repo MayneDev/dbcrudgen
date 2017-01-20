@@ -53,7 +53,7 @@ class DatabaseUtils {
 
 		$this->database_connection = new DatabaseConnection ($host, $user, $password, $database);
 		
-		$this->database_handle = $database_connection->open_database_connection ();
+		$this->database_handle = $this->database_connection->open_database_connection ();
 	}
 	
 	
@@ -830,7 +830,7 @@ class DatabaseUtils {
 
         return $this->rawQuery($query);
     }
-}
+
     /**
      * Prepare an OR query
      * @param $table
