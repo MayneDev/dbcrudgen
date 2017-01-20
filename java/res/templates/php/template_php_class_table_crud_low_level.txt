@@ -317,5 +317,56 @@ class ${CLASS_NAME} {
 	private function search($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
 		return $this->get_database_utils ()->search ( $table, $columns, $records, $extraSQL, $printSQL );
 	}
+	 /**
+         * Prepare an OR query
+         * @param array|null $columns
+         * @param array|null $options
+         * @param string $extraSQL
+         * @param bool $printSQL
+         * @return array
+         */
+        public function prepareQueryOR($columns = null, $options = null, $extraSQL = "", $printSQL = false)
+        {
+            return $this->get_database_utils ()->prepareQueryOR( $this->get_table (), $columns, $options, " OR ", $extraSQL, $printSQL);
+        }
+
+        /**
+         * Prepare an AND query
+         * @param array|null $columns
+         * @param array|null $options
+         * @param string $extraSQL
+         * @param bool $printSQL
+         * @return array
+         */
+        public function prepareQueryAND(  Array $columns = null, Array $options = null, $extraSQL = "", $printSQL = false)
+        {
+            return $this->get_database_utils ()->prepareQueryAND( $this->get_table (), $columns, $options, " AND ", $extraSQL, $printSQL);
+        }
+    /**
+     * Prepare an OR search
+     * @param array|null $columns
+     * @param array|null $options
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array
+     */
+    public function prepareSearchOR(  $columns = null, $options = null, $extraSQL = "", $printSQL = false)
+    {
+        return $this->get_database_utils ()->prepareSearchOR( $this->get_table (), $columns, $options, " OR ", $extraSQL, $printSQL);
+    }
+
+    /**
+     * Prepare an AND search
+     * @param array|null $columns
+     * @param array|null $options
+     * @param string $extraSQL
+     * @param bool $printSQL
+     * @return array
+     */
+    public function prepareSearchAND(  Array $columns = null, Array $options = null, $extraSQL = "", $printSQL = false)
+    {
+        return $this->get_database_utils ()->prepareSearchAND( $this->get_table (), $columns, $options, " AND ", $extraSQL, $printSQL);
+    }
+
 }
 ?>

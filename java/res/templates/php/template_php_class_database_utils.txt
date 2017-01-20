@@ -860,7 +860,7 @@ class DatabaseUtils {
     }
 
     /**
-     * Prepare quer
+     * Prepare query
      *
      * @param $table
      * @param array|null $columns
