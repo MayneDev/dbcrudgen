@@ -134,7 +134,7 @@ public class TasksExecutor {
                 String showTablesResultsKey = MYSQLQueries.ResultsKeys.ShowDatabaseTables.TABLES_IN_DATABASE;
                 showTablesResultsKey = showTablesResultsKey.replace(MYSQLQueries.QueryTags.DATABASE, database);
                 String tableName = databaseTables.getString(showTablesResultsKey);
-                tables.add(parseTableName(tableName));
+                tables.add(tableName);
             }
 
             return tables;
@@ -145,13 +145,7 @@ public class TasksExecutor {
     }
 
     private String parseTableName(String tableName) {
-        String[] tableNames = {"AcademicYear", "ApplicationCerts", "ApplicationPhotos", "ApplicationRequests", "AutoDistribution", "BackupCatsReportForms", "BackupExamsReportForms", "BackupTotalCatsReportForms", "BackupTotalExamsReportForms", "Books", "BooksStock", "CaseCategory", "CashAndBank", "CashAndBankAccounts", "CashBookCredit", "CashBookDebit", "CashBookTotal", "CatAvgReportForms", "CatsReportForms", "CatsSubjectPositions", "ClassTeacher", "Classes", "ClubsAndSocieties", "CommendationPositions", "CommendationTable", "CommitedFunds", "Counter", "CounterMark", "Countries", "CreditorsHistory", "CreditorsReport", "CurrentExamMarks", "CurrentResults", "CurrentSMSReminder", "CurrentYear", "Dates", "DeadLine", "DeductionReport", "Deductions", "Departments", "Designations", "DisciplinePositions", "DisciplineTable", "Employee", "ExamListing", "ExamMarks", "ExamsReportForms", "ExamsSubjectPositions", "ExtraDeduction", "ExtraTransaction", "FarmAccounts", "FarmAccountsReport", "Fees", "FeesBalanceList", "FeesBalanceSheets", "FeesInvoice", "FeesPayments", "FeesPledges", "FeesProformasSelection", "FeesRefunds", "FeesRegisterVotes", "FeesStatement", "FeesStructure", "FeesTable", "FinalAutoDistribution", "FormMaster", "FsdPayment", "FundsTransferReport", "GradingSystem", "GroupedPayments", "Houses", "ImportedFeesPayments", "ImprestHolders", "ImprestReports", "Imprests", "IntermediateTotalCatsReportForms", "IntermediateTotalExamsReportForms", "JobGroupSettings", "KcbMpesaAccount", "KcseMarks", "Kcse_Grades", "LearningMode", "LeaveOuts", "Limits", "Logo", "ManageStock", "ManageStockStatement", "MeanGradeCommendation", "MeanGradeDiscipline", "MeanGradeKcpe", "MeanGradeMarks", "MeanGradePoints", "NHIFSettings", "NbkMpesaAccount", "NetPay", "OpeningBalance", "PaymentVoucher", "PaymentsReport", "Permissions", "Photos", "PocketMoneyStatement", "PrincipalsSignature", "Programmes", "ProgressiveReportTitles", "QMSNos", "RefundsReport", "RegistrationUploads", "Renewals", "ReportFormTitles", "SchoolAccounts", "SchoolLevels", "Schools", "Sections", "SelectedClass", "SelectedSubject", "SelectedValue", "SelectedValuePrint", "SelectedValueRejected", "SemaCallDuration", "SemaContacts", "SemaSMSRequests", "SemaSMSTemplate", "SmsAccount", "SmsFees", "SmsSubjects", "SpecialVotes", "StockStatement", "StoreDepartments", "StoreStock", "StoreSubDepartments", "StoresTeachers", "Streams", "StudentAllocation", "StudentAttendance", "StudentsDetails", "StudentsFeesStatement", "StudentsPocketMoney", "StudentsPocketMoneyStatement", "Subjects", "SubukiaContacts", "SubukiaContributions", "SubukiaSMSRequests", "SubukiaSMSTemplate", "SubukiaSounds", "SubukiaTopContributions", "Suppliers", "SuppliersPayments", "SystemTypes", "Teacher", "TeacherAllocation", "Term", "TotalCatsReportForms", "TotalExamsReportForms", "TransactionLogs", "Transactions", "TransferFunds", "TrialBalance", "TrialBalancePercentage", "TrialBalanceTotal", "UserAccount", "UserLogs", "Votes", "inbox", "mod_kenpesa", "mod_kenpesasms", "tblpbinvoices", "tblpbtransactions", "tempIntermediateTotalCatsReportForms", "tempIntermediateTotalExamsReportForms"};
-        for (String table : tableNames) {
-            if (table.equalsIgnoreCase(tableName)) {
-                return table;
-            }
-        }
-return null;
+        return tableName;
     }
 
     /**
