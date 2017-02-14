@@ -348,11 +348,11 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
         MYSQLDataTypes mysqlDataType = Utils.parseMysqlDatatype(dataType.getDataType());
         String mClass = Utils.generateJavaQueryMethodReturnType(mysqlDataType);
         CrudTemplates crudTemplate = getAndroidColumnQueryCrudTemplate(mClass);
-        return prepareQueriedColumnQueryArtificats(crudTemplate.getTemplate().toString(), table, tableColumn);
+        return prepareQueriedColumnQueryArtifacts(crudTemplate.getTemplate().toString(), table, tableColumn);
 
     }
 
-    private String prepareQueriedColumnQueryArtificats(String template, Table table, TableColumn tableColumn) {
+    private String prepareQueriedColumnQueryArtifacts(String template, Table table, TableColumn tableColumn) {
 
         // Add queried column
         String queriedColumn = tableColumn.getColumnName();
@@ -365,6 +365,9 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
         // Get the table primary key
         PrimaryKey primaryKey = table.getPrimaryKey();
+        if(primaryKey == null){
+            System.err.println("The table "+table.getTableName()+" does not have a primary key column");
+        }
         String primaryKeyColumnName = primaryKey.getColumnName();
 
         // Add primary key column parameters
