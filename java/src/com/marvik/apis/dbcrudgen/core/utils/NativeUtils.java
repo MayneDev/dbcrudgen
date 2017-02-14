@@ -95,6 +95,9 @@ public final class NativeUtils {
         if (dataType.equalsIgnoreCase("INT")) {
             dataType = "int";
         }
+        if (dataType.equalsIgnoreCase("BIGINT")) {
+            dataType = "int";
+        }
         if (dataType.equalsIgnoreCase("INTEGER")) {
             dataType = "int";
         }
@@ -105,6 +108,9 @@ public final class NativeUtils {
             dataType = "String";
         }
         if (dataType.equalsIgnoreCase("TEXT")) {
+            dataType = "String";
+        }
+        if (dataType.equalsIgnoreCase("DATE")) {
             dataType = "String";
         }
         if (dataType.equalsIgnoreCase("VARCHAR")) {
@@ -225,19 +231,31 @@ public final class NativeUtils {
     }
 
     /**
-     * toLetters removes all other characters that are not a letter from a word
+     * Returns alphabetic characters only found in the text
      *
      * @param text
      * @return
      */
+    @Deprecated
     public static String toLetters(String text) {
-        text = text.replace("~", "")
-                .replace("`", "").replace("!", "").replace("@", "").replace("#", "").replace("$", "").replace("%", "")
-                .replace("^", "").replace("&", "").replace("*", "").replace("(", "").replace(")", "").replace("-", "")
-                .replace("=", "").replace("+", "").replace("[", "").replace("]", "").replace("{", "").replace("}", "")
-                .replace("\\", "").replace(";", "").replace(":", "").replace("'", "").replace("\"", "").replace("/", "")
-                .replace("?", "").replace(">", "").replace("<", "").replace(".", "").replace(",", "");
-        return text;
+        return toLettersOnly(text);
+    }
+
+    /**
+     * Returns alphabetic characters only found in the text
+     *
+     * @param text
+     * @return
+     */
+    public static String toLettersOnly(String text) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char character = text.charAt(i);
+            if (Character.isLetter(character)) {
+                builder.append(character);
+            }
+        }
+        return builder.toString();
     }
 
     /**
