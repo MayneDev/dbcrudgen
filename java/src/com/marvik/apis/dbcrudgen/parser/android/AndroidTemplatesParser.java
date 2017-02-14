@@ -421,7 +421,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
      * AndroidTemplatesParser#parsePackageName Formats a package path to a valid
      * package name
      *
-     * @param packagePath
+     * @param packageFilePath
      * @return String Package Name
      */
     public String parseJavaPackage(String packageFilePath) {
@@ -521,8 +521,14 @@ public class AndroidTemplatesParser extends TemplatesParser {
         // Byte
         if (columnDatatype.equalsIgnoreCase("Byte")) {
             return "byte";
+        }// Char
+        if (columnDatatype.equalsIgnoreCase("Char")) {
+            return "String";
         }
-        // Integer
+        // Bit
+        if (columnDatatype.equalsIgnoreCase("Bit")) {
+            return "int";
+        } // Integer
         if (columnDatatype.equalsIgnoreCase("Integer")) {
             return "int";
         }
@@ -531,8 +537,31 @@ public class AndroidTemplatesParser extends TemplatesParser {
             return "int";
 
         }
+        // Integer
+        if (columnDatatype.equalsIgnoreCase("SmallInt")) {
+            return "int";
+
+        }
+        // Integer
+        if (columnDatatype.equalsIgnoreCase("TinyInt")) {
+            return "int";
+
+        }// Integer
+        if (columnDatatype.equalsIgnoreCase("BigInt")) {
+            return "int";
+
+        }
         // Date
         if (columnDatatype.equalsIgnoreCase("Date")) {
+            // TO DO ADD SOURCE CODE
+            return "String";
+        } // Date
+        if (columnDatatype.equalsIgnoreCase("DateTime")) {
+            // TO DO ADD SOURCE CODE
+            return "String";
+        }
+        // Date
+        if (columnDatatype.equalsIgnoreCase("blob")) {
             // TO DO ADD SOURCE CODE
             return "String";
         }
@@ -542,6 +571,9 @@ public class AndroidTemplatesParser extends TemplatesParser {
         }
         // Float
         if (columnDatatype.equalsIgnoreCase("Float")) {
+            return "float";
+        } // Float
+        if (columnDatatype.equalsIgnoreCase("Decimal")) {
             return "float";
         }
         // Long
@@ -584,10 +616,16 @@ public class AndroidTemplatesParser extends TemplatesParser {
         if (dataType.equalsIgnoreCase("INT")) {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
         }
+        if (dataType.equalsIgnoreCase("BIT")) {
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
+        }
         if (dataType.equalsIgnoreCase("SMALLINT")) {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
         }
         if (dataType.equalsIgnoreCase("BIGINT")) {
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
+        }
+        if (dataType.equalsIgnoreCase("TINYINT")) {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
         }
         if (dataType.equalsIgnoreCase("INTEGER")) {
@@ -618,6 +656,9 @@ public class AndroidTemplatesParser extends TemplatesParser {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;
         }
         if (dataType.equalsIgnoreCase("FLOAT")) {
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
+        }
+        if (dataType.equalsIgnoreCase("DECIMAL")) {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
         }
         if (dataType.equalsIgnoreCase("DOUBLE")) {

@@ -212,7 +212,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
     // Create Method to read cursor items
     private String createColumnsCursorItemsGetMethod(String tableName, String dataType, String columnName) {
 
-        String template = getColumnsCursorItemsGetMethodTemplate(dataType);
+        String template = getColumnsCursorItemsGetMethodTemplate(NativeUtils.toLettersOnly(dataType));
         String tablesSchemasClass = AndroidProjectFileNames.TABLE_SCHEMAS_CLASS_NAME;
         String tableClassName = NativeUtils.toJavaBeansClass(tableName);
         String columnObject = NativeUtils.toJavaBeansVariable(columnName);
