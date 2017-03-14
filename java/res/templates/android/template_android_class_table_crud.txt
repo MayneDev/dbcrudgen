@@ -180,7 +180,7 @@ import ${TABLE_MODEL_CLASS};
         */
  		public int update${DATABASE_TABLE_CLASS}(${PRIMARY_KEY_DATATYPE} _${PRIMARY_KEY_OBJECT},${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT}) {
 
-           String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
+            String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
 
             ContentValues values = new ContentValues();
 
@@ -204,7 +204,20 @@ import ${TABLE_MODEL_CLASS};
             
             return update(values,selection,selectionArgs);
         }
-        
+
+        /**
+         * ${DATABASE_TABLE_CLASS}#delete${DATABASE_TABLE_CLASS}
+         * uses the primary key and deletes the row in the table -> ${TABLE_DEFINITION_LINK}
+         * if the row exists
+         *
+         * @param  _${PRIMARY_KEY_OBJECT}
+         * @return the number of deleted rows
+         */
+         public int delete${DATABASE_TABLE_CLASS}(${PRIMARY_KEY_DATATYPE} _${PRIMARY_KEY_OBJECT}) {
+             String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
+             return delete(selection,selectionArgs);
+         }
+
         /**
         * ${DATABASE_TABLE_CLASS}#delete${DATABASE_TABLE_CLASS}
         * uses the selection and deletes the data in the table -> ${TABLE_DEFINITION_LINK}
