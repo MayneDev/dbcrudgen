@@ -182,11 +182,7 @@ import ${TABLE_MODEL_CLASS};
 
             String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
 
-            ContentValues values = new ContentValues();
-
-            ${CONTENT_VALUES_PUT_STATEMENTS}
-
-            return update(values,selection,selectionArgs);
+            return update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_OBJECT}, selection,null);
         }
 
        /**
@@ -215,7 +211,7 @@ import ${TABLE_MODEL_CLASS};
          */
          public int delete${DATABASE_TABLE_CLASS}(${PRIMARY_KEY_DATATYPE} _${PRIMARY_KEY_OBJECT}) {
              String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
-             return delete(selection,selectionArgs);
+             return delete${DATABASE_TABLE_CLASS}(selection,null);
          }
 
         /**
