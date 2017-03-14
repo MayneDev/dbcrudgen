@@ -239,7 +239,6 @@ public class TasksExecutor {
                 boolean isPrimaryKey = false;
 
                 String field = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_FIELD);
-                field = NativeUtils.toLetters(field);
 
                 String type = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TYPE);
                 type = NativeUtils.toMYSQLDataType(type);
