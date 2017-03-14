@@ -168,6 +168,26 @@ import ${TABLE_MODEL_CLASS};
             return insert(values);
         }
 
+        /**
+        * ${DATABASE_TABLE_CLASS}#update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data
+        * in the table -> ${TABLE_DEFINITION_LINK} for the row with the specified primary key
+        *
+        * @param _${PRIMARY_KEY_OBJECT}
+        * @param ${TABLE_MODEL_OBJECT}
+        *
+        * @return the number of updated rows
+        */
+ 		public int update${DATABASE_TABLE_CLASS}(${PRIMARY_KEY_DATATYPE} _${PRIMARY_KEY_OBJECT},${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT}) {
+
+           String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
+
+            ContentValues values = new ContentValues();
+
+            ${CONTENT_VALUES_PUT_STATEMENTS}
+
+            return update(values,selection,selectionArgs);
+        }
 
        /**
         * ${DATABASE_TABLE_CLASS}#update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
