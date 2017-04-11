@@ -56,7 +56,7 @@ import ${TABLE_MODEL_CLASS};
 
 		/**
         * ${DATABASE_TABLE_CLASS}#insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
-        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and inserts the data 
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and inserts the data
         * as a new row in the table -> ${TABLE_DEFINITION_LINK}
         *
         * @return Uri of the inserted item
@@ -93,7 +93,7 @@ import ${TABLE_MODEL_CLASS};
 
 		/**
         * ${DATABASE_TABLE_CLASS}#update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
-        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data 
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data
         * in the table -> ${TABLE_DEFINITION_LINK} if the selection matches
         *
         * @return the number of updated rows
@@ -138,8 +138,8 @@ import ${TABLE_MODEL_CLASS};
 
 		/**
 	     * Performs a blind query where you specify the data to search, the columns to search and the targetColumn
-	     * where you want to get the results from. 
-	     * 
+	     * where you want to get the results from.
+	     *
 	     * The returned results which are the value in the targetColumn is
 	     * the first results of the query. Use this method where there only exists possibility of one result only
 	     *
@@ -151,10 +151,10 @@ import ${TABLE_MODEL_CLASS};
 	    public String getColumnsValues(  String[] index, String[] indexColumn, String targetColumn) {
 	        return super.getColumnsValues(getUri(), index, indexColumn, targetColumn);
 	    }
-	    
+
 		/**
         * ${DATABASE_TABLE_CLASS}#insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
-        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and inserts the data 
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and inserts the data
         * as a new row in the table -> ${TABLE_DEFINITION_LINK}
         *
         * @return Uri of the inserted item
@@ -162,9 +162,9 @@ import ${TABLE_MODEL_CLASS};
         public Uri insert${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT}) {
 
             ContentValues values = new ContentValues();
-            
+
             ${CONTENT_VALUES_PUT_STATEMENTS}
-            
+
             return insert(values);
         }
 
@@ -187,7 +187,7 @@ import ${TABLE_MODEL_CLASS};
 
        /**
         * ${DATABASE_TABLE_CLASS}#update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS}.${TABLE_MODEL_OBJECT})
-        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data 
+        * Mines data from ${TABLE_MODEL_OBJECT}, an object of ${TABLE_MODEL_INFO_CLASS} and updates the data
         * in the table -> ${TABLE_DEFINITION_LINK} if the selection matches
         *
         * @return the number of updated rows
@@ -195,9 +195,9 @@ import ${TABLE_MODEL_CLASS};
  		public int update${DATABASE_TABLE_CLASS}(${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT}, String selection, String[] selectionArgs) {
 
             ContentValues values = new ContentValues();
-            
+
             ${CONTENT_VALUES_PUT_STATEMENTS}
-            
+
             return update(values,selection,selectionArgs);
         }
 
@@ -225,18 +225,18 @@ import ${TABLE_MODEL_CLASS};
 
             return delete(selection,selectionArgs);
         }
-        
+
         /**
         * ${DATABASE_TABLE_CLASS}#query${DATABASE_TABLE_CLASS}
         * uses the selection projection,  selection,  selectionArgs,  sortOrder
         * to query  the data in the table -> ${TABLE_DEFINITION_LINK}
-        * 
+        *
         * @return an iteratable Cursor object of the table -> ${TABLE_DEFINITION_LINK}
         */
         public Cursor query${DATABASE_TABLE_CLASS}(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
             return query(projection,  selection,  selectionArgs,  sortOrder);
         }
-        
+
         /**
         * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}All
         * Returns a list of all the items in the table
@@ -244,39 +244,47 @@ import ${TABLE_MODEL_CLASS};
         * @return List<${TABLE_MODEL_INFO_CLASS}>
         */
         public List<${TABLE_MODEL_INFO_CLASS}> get${TABLE_MODEL_INFO_CLASS}All() {
-        	
-        	Cursor cursor = query${DATABASE_TABLE_CLASS}(null,null,null,null);
-        	
+        	return get${TABLE_MODEL_INFO_CLASS}All(null, null, null, null);
+        }/**
+        * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}All
+        * Returns a list of all the items in the table
+        *
+        * @return List<${TABLE_MODEL_INFO_CLASS}>
+        */
+        public List<${TABLE_MODEL_INFO_CLASS}> get${TABLE_MODEL_INFO_CLASS}All(String [] projection, String selection, String [] selectionArgs, String sortOrder) {
+
+        	Cursor cursor = query${DATABASE_TABLE_CLASS}(projection, selection, selectionArgs, sortOrder);
+
         	int rowsCount = 0;
-        	
+
         	if(cursor!= null){
         		rowsCount = cursor.getCount();
         	}
-			
+
 			List<${TABLE_MODEL_INFO_CLASS}>${TABLE_MODEL_OBJECT} = new ArrayList<${TABLE_MODEL_INFO_CLASS}>(rowsCount);
-			
+
 			//if cursor does not have any items
 			if(rowsCount<1){
 				return ${TABLE_MODEL_OBJECT};
 			}
-            
+
             for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
-            
+
             	${CURSOR_ITEMS_GETTER_METHODS}
-            	
+
             	${TABLE_MODEL_OBJECT}.add(new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS}));
             }
-            
+
             //Close cursor
             if(cursor!= null){
         		if(!cursor.isClosed()){
         			cursor.close();
         		}
         	}
-        	
+
             return ${TABLE_MODEL_OBJECT};
         }
-        
+
         /**
         * ${DATABASE_TABLE_CLASS}#search${TABLE_MODEL_INFO_CLASS}
         * Returns a list of all the items in the table that match the query
@@ -284,38 +292,38 @@ import ${TABLE_MODEL_CLASS};
         * @return List<${TABLE_MODEL_INFO_CLASS}>
         */
         public List<${TABLE_MODEL_INFO_CLASS}> search${TABLE_MODEL_INFO_CLASS}(String searchKey) {
-        	
+
         	String selection = ${ANDROID_SQL_SEARCH_SELECTION_STATEMENT};
-        	
+
         	Cursor cursor = query${DATABASE_TABLE_CLASS}(null,selection,null,null);
-        	
+
         	int rowsCount = 0;
-        	
+
         	if(cursor!= null){
         		rowsCount = cursor.getCount();
         	}
-			
+
 			List<${TABLE_MODEL_INFO_CLASS}>${TABLE_MODEL_OBJECT} = new ArrayList<${TABLE_MODEL_INFO_CLASS}>(rowsCount);
-			
+
 			//if cursor does not have any items
 			if(rowsCount<1){
 				return ${TABLE_MODEL_OBJECT};
 			}
-            
+
             for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
-            
+
             	${CURSOR_ITEMS_GETTER_METHODS}
-            	
+
             	${TABLE_MODEL_OBJECT}.add(new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS}));
             }
-            
+
             //Close cursor
             if(cursor!= null){
         		if(!cursor.isClosed()){
         			cursor.close();
         		}
         	}
-        	
+
             return ${TABLE_MODEL_OBJECT};
         }
 
@@ -361,55 +369,90 @@ import ${TABLE_MODEL_CLASS};
         * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}
         * Returns an object of queried row in the table
         *
+        * @param _${PRIMARY_KEY_OBJECT}
+        *
         * @return ${TABLE_MODEL_INFO_CLASS}
         */
         public ${TABLE_MODEL_INFO_CLASS} get${TABLE_MODEL_INFO_CLASS}(${PRIMARY_KEY_DATATYPE} _${PRIMARY_KEY_OBJECT}) {
-        	
-        	String selection = ${COLUMN_REFERENCE} +"='" +String.valueOf(_${PRIMARY_KEY_OBJECT}) +"'";
-        	
-        	Cursor cursor = query${DATABASE_TABLE_CLASS}(null,selection,null,null);
-        	
-        	int rowsCount = 0;
-        	
-        	if(cursor!= null){
-        		rowsCount = cursor.getCount();
-        	}
-			
-			${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} =  null;
-			
-			//if cursor does not have any items
-			if(rowsCount<1){
-				return ${TABLE_MODEL_OBJECT};
-			}
-            
-            for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
-            
-            	${CURSOR_ITEMS_GETTER_METHODS}
-            	
-            	${TABLE_MODEL_OBJECT} = new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS});
-            }
-            
-             //Close cursor
-            if(cursor!= null){
-        		if(!cursor.isClosed()){
-        			cursor.close();
-        		}
-        	}
-        	
-            return ${TABLE_MODEL_OBJECT};
+
+        	String selection = ${COLUMN_REFERENCE} +"=?"  ;
+        	String [] selectionArgs = {String.valueOf(_${PRIMARY_KEY_OBJECT})};
+        	return get${TABLE_MODEL_INFO_CLASS}(  null,   selection,  selectionArgs,   null) ;
         }
-        
-        
+
+        /**
+        * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}
+        * Returns an object of queried row in the table
+        *
+             * @param _${PRIMARY_KEY_OBJECT}
+             * @param projection
+             * @param sortOrder
+             *
+        * @return ${TABLE_MODEL_INFO_CLASS}
+        */
+        public ${TABLE_MODEL_INFO_CLASS} get${TABLE_MODEL_INFO_CLASS}(${PRIMARY_KEY_DATATYPE} _${PRIMARY_KEY_OBJECT}, String [] projection, String sortOrder) {
+
+        	String selection = ${COLUMN_REFERENCE} +"=?"  ;
+        	String [] selectionArgs = {String.valueOf(_${PRIMARY_KEY_OBJECT})};
+        	return get${TABLE_MODEL_INFO_CLASS}(  projection,   selection,  selectionArgs,   sortOrder) ;
+        }
+
+        /**
+                * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}
+                * Returns an object of queried row in the table
+                *
+                     * @param projection
+                     * @param selection
+                     * @param selectionArgs
+                     * @param sortOrder
+                     *
+                * @return ${TABLE_MODEL_INFO_CLASS}
+                */
+                public ${TABLE_MODEL_INFO_CLASS} get${TABLE_MODEL_INFO_CLASS}(String [] projection, String selection, String [] selectionArgs, String sortOrder) {
+
+
+                	Cursor cursor = query${DATABASE_TABLE_CLASS}(projection,selection,selectionArgs,sortOrder);
+
+                	int rowsCount = 0;
+
+                	if(cursor!= null){
+                		rowsCount = cursor.getCount();
+                	}
+
+        			${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} =  null;
+
+        			//if cursor does not have any items
+        			if(rowsCount<1){
+        				return ${TABLE_MODEL_OBJECT};
+        			}
+
+                    for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+
+                    	${CURSOR_ITEMS_GETTER_METHODS}
+
+                    	${TABLE_MODEL_OBJECT} = new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS});
+                    }
+
+                     //Close cursor
+                    if(cursor!= null){
+                		if(!cursor.isClosed()){
+                			cursor.close();
+                		}
+                	}
+
+                    return ${TABLE_MODEL_OBJECT};
+                }
+
      /**
      * Performs the passed query and returns the first value of the query results
      *
      * @param selection
      * @param queryColumn
-     * @return the first 
+     * @return the first
      */
-    public String performRawQuery(String selection, String queryColumn) {
+    public String performRawQuery( String queryColumn, String selection, String [] selectionArgs, String sortOrder) {
         String data = "";
-        Cursor cursor = query(null, selection, null, null);
+        Cursor cursor = query(new String [] {queryColumn}, selection, selectionArgs, sortOrder);
         if (cursor != null) {
             cursor.moveToFirst();
             data = cursor.getString(cursor.getColumnIndex(queryColumn));
@@ -421,7 +464,7 @@ import ${TABLE_MODEL_CLASS};
         }
         return data;
     }
-    
+
         ${COLUMN_SPECIFIC_QUERY_METHODS}
 
     /**

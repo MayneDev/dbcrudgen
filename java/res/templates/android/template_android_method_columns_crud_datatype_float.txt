@@ -1,13 +1,13 @@
     /**
 	* Performs a database query and returns the value of ${QUERIED_TABLE_COLUMN_NAME} 
-	* based on the value of ${FUNCTION_PARAMS} passed to the function
+	* based on the value of ${FUNCTION_PARAMS_KEYS} passed to the function
 	*/
 	public float get${QUERIED_COLUMN}(${FUNCTION_PARAMS_VARIABLES}) {
 	
 		String _${QUERIED_COLUMN} = getColumnsValues(
                     getUri(),
-                    new String[]{${FUNCTION_PARAMS_VALUES}},
                     new String[]{${FUNCTION_PARAMS_KEYS}},
+                    new String[]{${FUNCTION_PARAMS_VALUES}},
 					${QUERIED_TABLE_COLUMN_REFERENCE}
             );
             
