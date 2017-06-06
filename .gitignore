@@ -49,7 +49,7 @@ Temporary Items
 
 #Ignore idea outputs
 /out
-java/*.iml
+*.iml
 
 #Ignore the .gradle folder
 /.gradle
@@ -58,3 +58,6 @@ java/*.iml
 #Ignore gradle
 gradlew
 gradlew.bat
+
+#Ignore the build folder
+/build
