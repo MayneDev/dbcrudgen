@@ -1,0 +1,20 @@
+package ${PACKAGE_NAME};
+
+/**
+* Table Schemas
+*
+* Contains all the schemas for the tables in the database
+*
+* This source code is auto-generated
+* Victor Mwenda
+* @author vmwenda.vm@gmail.com
+* 
+*/
+public class TableSchemas {
+
+    public static final String[] TABLES_SQL = {
+            ${TABLE_SQL}
+    };
+
+	${DATABASE_TABLES_SCHEMAS}
+}

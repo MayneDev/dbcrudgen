@@ -1,0 +1,26 @@
+package ${TABLES_PACKAGE_DEFINITION};
+
+import android.net.Uri;
+
+import ${CONTENT_PROVIDER_PACKAGE}.${CONTENT_PROVIDER_CLASS};
+
+/**
+* Tables 
+*
+* This class contains all the schemas for all the tables in the database
+*
+* This source code is auto-generated
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
+*
+*/
+public class Tables {
+
+    public static final String[] TABLES_SQL = {
+            ${TABLE_SQL}
+    };
+
+	${DATABASE_TABLES_SCHEMAS}
+}

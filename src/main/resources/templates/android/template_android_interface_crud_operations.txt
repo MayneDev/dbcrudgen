@@ -1,0 +1,259 @@
+package ${CRUD_OPERATIONS_INTERFACE_PACKAGE};
+
+import java.util.Arrays;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.util.Log;
+
+/**
+* DatabaseCRUDOperations
+*
+* Provides an abstract layer of crud operations that each CRUD Class should do
+*
+* This source code is auto-generated
+*
+* @author Victor Mwenda
+* vmwenda.vm@gmail.com
+* Jan - 2016
+*
+*/
+public abstract class DatabaseCRUDOperations {
+
+    private Context context;
+
+    /**
+     * Database crud operation
+     * Provides method for performing crud operations
+     *
+     * @param context
+     */
+    public DatabaseCRUDOperations(Context context) {
+        this.context = context;
+    }
+
+    /**
+     * Get the associated context
+     *
+     * @return context
+     */
+    public Context getContext() {
+        return context;
+    }
+
+    /**
+     * Return the uri of the table
+     *
+     * @return uri
+     */
+    public abstract Uri getUri();
+
+    /**
+     * Insert the content values
+     *
+     * @param values to insert
+     * @return uri of inserted row
+     */
+    public abstract Uri insert(ContentValues values);
+
+    /**
+     * Bulk inserts rows in a relation
+     *
+     * @param contentValues values to insert
+     * @return
+     */
+    public abstract int bulkInsert(ContentValues[] contentValues);
+
+    /**
+     * Query a table
+     *
+     * @param projection
+     * @param selection
+     * @param selectionArgs
+     * @param sortOrder
+     * @return cursor
+     */
+    public abstract Cursor query(String[] projection, String selection, String[] selectionArgs, String sortOrder);
+
+    /**
+     * Updates table columns and rows
+     *
+     * @param values
+     * @param selection
+     * @param selectionArgs
+     * @return number of updated rows
+     */
+    public abstract int update(ContentValues values, String selection, String[] selectionArgs);
+
+    /**
+     * Deletes rows
+     *
+     * @param selection
+     * @param selectionArgs
+     * @return deleted rows
+     */
+    public abstract int delete(String selection, String[] selectionArgs);
+
+
+    /**
+     * Truncates the table
+     *
+     * @param uri to truncate
+     * @return deletedRows
+     */
+    public int truncateTable(Uri uri) {
+        return getContext().getContentResolver().delete(uri, null, null);
+    }
+
+   /**
+        * Check if this row exists in a uri
+        *
+        * @param uri
+        * @param tableColumns
+        * @param columnValues
+        * @return exists
+        */
+       public boolean isExists(Uri uri, String[] tableColumns, String[] columnValues) {
+
+           if (uri == null) {
+               throw new NullPointerException("Uri cannot be null");
+           }
+           if (columnValues == null) {
+               throw new NullPointerException("Column values cannot be null");
+           }
+           if (tableColumns == null) {
+               throw new NullPointerException("Table columns cannot be null");
+           }
+
+
+           String selection = null;
+           String[] selectionArgs = new String[tableColumns.length];
+
+           if (columnValues.length == 0 && tableColumns.length == 0) {
+               selection = null;
+               selectionArgs = null;
+           } else {
+
+               selection = "";
+
+               if (columnValues.length == tableColumns.length) {
+                   for (int i = 0; i < tableColumns.length; i++) {
+
+                       selection += tableColumns[i] + "=?";
+                       selectionArgs[i] = columnValues[i];
+
+                       if (i < (tableColumns.length - 1)) {
+                           selection += " AND ";
+                       }
+                   }
+               } else {
+                   throw new IllegalArgumentException("Missing params for Columns "
+                           + Arrays.deepToString(tableColumns) + ", You provided "
+                           + Arrays.deepToString(columnValues));
+               }
+           }
+
+           Log.i("WHERE_CLAUSE", "getColumnsValues(" + selection + ")");
+
+           Cursor cursor = getContext().getContentResolver().query(uri, tableColumns, selection, selectionArgs, null);
+
+           boolean isExists = false;
+
+           if (cursor != null) {
+               isExists = cursor.getCount() > 0;
+               cursor.close();
+           }
+
+           return isExists;
+       }
+
+       /**
+        * Return the value of the specified column after executing the generated query of the columnValues and the tableColumns
+        *
+        * @param uri
+        * @param tableColumns
+        * @param columnValues
+        * @param targetColumn
+        * @return
+        */
+       public String getColumnsValues(Uri uri, String[] tableColumns, String[] columnValues, String targetColumn) {
+
+           return getColumnsValues(uri, tableColumns, columnValues, targetColumn, null);
+       }
+
+       /**
+        * Return the value of the specified column after executing the generated query of the columnValues and the tableColumns
+        *
+        * @param uri
+        * @param tableColumns
+        * @param columnValues
+        * @param targetColumn
+        * @param sortOrder
+        * @return
+        */
+       public String getColumnsValues(Uri uri, String[] tableColumns, String[] columnValues, String targetColumn, String sortOrder) {
+
+           if (uri == null) {
+               throw new NullPointerException("Uri cannot be null");
+           }
+           if (columnValues == null) {
+               throw new NullPointerException("Column values cannot be null");
+           }
+           if (tableColumns == null) {
+               throw new NullPointerException("Table columns cannot be null");
+           }
+           if (targetColumn == null) {
+               throw new NullPointerException("Target cannot be null");
+           }
+
+           String selection = null;
+           String[] selectionArgs = new String[tableColumns.length];
+
+           if (columnValues.length == 0 && tableColumns.length == 0) {
+               selection = null;
+               selectionArgs = null;
+           } else {
+
+               selection = "";
+
+               if (columnValues.length == tableColumns.length) {
+                   for (int i = 0; i < tableColumns.length; i++) {
+
+                       selection += tableColumns[i] + "=?";
+                       selectionArgs[i] = columnValues[i];
+
+                       if (i < (columnValues.length - 1)) {
+                           selection += " AND ";
+                       }
+                   }
+               } else {
+                   throw new IllegalArgumentException("Missing params for Columns "
+                           + Arrays.deepToString(tableColumns) + ", You provided "
+                           + Arrays.deepToString(columnValues));
+               }
+           }
+
+           Log.i("WHERE_CLAUSE", "getColumnsValues(" + selection + ")");
+
+           Cursor cursor = getContext().getContentResolver().query(uri, new String[]{targetColumn}, selection, selectionArgs, sortOrder);
+
+           if (cursor != null && cursor.getCount() > 0) {
+               String foundValue = null;
+               for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                   foundValue = cursor.getString(cursor.getColumnIndex(targetColumn));
+               }
+
+               cursor.close();
+
+               return foundValue;
+           }
+
+           if (cursor != null) {
+               cursor.close();
+           }
+
+           return null;
+       }
+}

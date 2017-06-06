@@ -1,0 +1,15 @@
+    /**
+    *	Schemas for the table ${TABLE_NAME}
+    *
+    */
+    
+    public static class ${TABLE_JAVA_BEANS_CLASS_NAME} {
+
+        public static final String TABLE_NAME = "${TABLE_NAME}";
+
+        
+        ${TABLE_COLUMNS}
+        
+        ${TABLE_CREATE_SQL}
+
+    }

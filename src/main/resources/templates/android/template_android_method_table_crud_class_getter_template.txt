@@ -1,0 +1,13 @@
+
+//${CLASS_OBJECT} an object of ${TABLE_CRUD_CLASS}
+private ${TABLE_CRUD_CLASS} ${CLASS_OBJECT};
+
+/**
+*
+* ${TABLE_CRUD_CLASS}#get${TABLE_CRUD_CLASS} 
+*
+* @return ${TABLE_CRUD_CLASS}
+*/
+public  ${TABLE_CRUD_CLASS} get${TABLE_CRUD_CLASS}(){
+	return ${CLASS_OBJECT} == null? ${CLASS_OBJECT} = new ${TABLE_CRUD_CLASS}(getContext()) : ${CLASS_OBJECT};
+} 

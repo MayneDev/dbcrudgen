@@ -1,0 +1,34 @@
+	
+	/**
+	* private class variable $_${OBJECT}
+	*/
+	private $_${OBJECT};
+	
+	/**
+	* returns the value of $${OBJECT}
+	*
+	* @return object(int|string) ${OBJECT}
+	*/
+	public function _get${COLUMN_NAME}() {
+		return $this->_${OBJECT};
+	}
+	
+	/**
+	* sets the value of $_${OBJECT}
+	*
+	* @param ${OBJECT}
+	*/
+	public function _set${COLUMN_NAME}($${OBJECT}) {
+		$this->_${OBJECT} = $${OBJECT};
+	}
+	/**
+	* sets the value of $_${OBJECT}
+	*
+	* @param ${OBJECT}
+	* @return object ( this class)
+	*/
+	public function set${COLUMN_NAME}($${OBJECT}) {
+		$this->_set${COLUMN_NAME}($${OBJECT});
+		return $this;
+	}
+	
