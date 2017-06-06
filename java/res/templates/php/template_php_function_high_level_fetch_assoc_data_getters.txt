@@ -1,4 +1,0 @@
-$${COLUMN_NAME} = $${TABLE_NAME}_row_items ['${COLUMN_NAME}'];
-	if ($${COLUMN_NAME}  != null) {
-	$html_export .= $this->parseHtmlExport ( '${COLUMN_NAME}', $${COLUMN_NAME}  );
-}

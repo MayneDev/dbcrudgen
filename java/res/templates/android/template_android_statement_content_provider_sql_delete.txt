@@ -1,2 +1,0 @@
-case ${TABLE_URI_MATCHER_CODE}:
-   return getSqLiteDatabase().delete(${TABLE_DEFINITION_LINK}, selection, selectionArgs);

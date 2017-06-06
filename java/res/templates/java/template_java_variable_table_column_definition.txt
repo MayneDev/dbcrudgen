@@ -1,1 +1,0 @@
-public static final String ${TABLE_COLUMN_DEFINITION} = "${TABLE_COLUMN_REFERENCE}";
