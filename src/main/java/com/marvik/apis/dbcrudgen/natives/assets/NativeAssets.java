@@ -14,7 +14,7 @@ package com.marvik.apis.dbcrudgen.natives.assets;
 public class NativeAssets {
 
     public static class Files {
-        public static final String JDBC_JAR_FILE_PATH = "java/res/libs/jdbc/jdbc.jar";
+        public static final String JDBC_JAR_FILE_PATH = "libs/jdbc/jdbc.jar";
     }
 
     public class FileNames {
