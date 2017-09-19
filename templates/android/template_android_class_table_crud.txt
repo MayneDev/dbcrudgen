@@ -443,6 +443,53 @@ import ${TABLE_MODEL_CLASS};
                     return ${TABLE_MODEL_OBJECT};
                 }
 
+                /**
+                * ${DATABASE_TABLE_CLASS}#get${TABLE_MODEL_INFO_CLASS}
+                * Returns an object of queried row in the table
+                *
+                     * @param uri
+                     * @param projection
+                     * @param selection
+                     * @param selectionArgs
+                     * @param sortOrder
+                     *
+                * @return ${TABLE_MODEL_INFO_CLASS}
+                */
+                public ${TABLE_MODEL_INFO_CLASS} parseUri${TABLE_MODEL_INFO_CLASS}(Uri uri, String [] projection, String selection, String [] selectionArgs, String sortOrder) {
+
+
+                	Cursor cursor = getContext().getContentResolver().query(uri, projection,selection,selectionArgs,sortOrder);
+
+                	int rowsCount = 0;
+
+                	if(cursor!= null){
+                		rowsCount = cursor.getCount();
+                	}
+
+        			${TABLE_MODEL_INFO_CLASS} ${TABLE_MODEL_OBJECT} =  null;
+
+        			//if cursor does not have any items
+        			if(rowsCount<1){
+        				return ${TABLE_MODEL_OBJECT};
+        			}
+
+                    for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()){
+
+                    	${CURSOR_ITEMS_GETTER_METHODS}
+
+                    	${TABLE_MODEL_OBJECT} = new ${TABLE_INFO_CLASS}(${CONTRUCTOR_PARAMS});
+                    }
+
+                     //Close cursor
+                    if(cursor!= null){
+                		if(!cursor.isClosed()){
+                			cursor.close();
+                		}
+                	}
+
+                    return ${TABLE_MODEL_OBJECT};
+                }
+
      /**
      * Performs the passed query and returns the first value of the query results
      *
