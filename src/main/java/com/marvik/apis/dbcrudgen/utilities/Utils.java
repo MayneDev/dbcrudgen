@@ -215,4 +215,13 @@ public class Utils {
         }
 
     }
+
+    /**
+     * Get the operating system of the PC
+     *
+     * @return
+     */
+    public static String getOperatingSystem() {
+        return System.getProperty("os.name");
+    }
 }

@@ -18,6 +18,10 @@ import com.marvik.apis.dbcrudgen.application.views.windows.MainWindow;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDatabaseConnection;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDefaultConnectionProperties;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLQueryExecutor;
+import com.marvik.apis.dbcrudgen.core.os.LinuxOperatingSystem;
+import com.marvik.apis.dbcrudgen.core.os.MacOperatingSystem;
+import com.marvik.apis.dbcrudgen.core.os.UnixOperatingSystem;
+import com.marvik.apis.dbcrudgen.core.os.WindowsOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.grammar.MYSQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.queries.MYSQLQueries;
 import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
@@ -28,6 +32,7 @@ import com.marvik.apis.dbcrudgen.schemamodels.constraints.Constraints;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 import com.marvik.apis.dbcrudgen.schemamodels.datatypes.DataType;
 import com.marvik.apis.dbcrudgen.schemamodels.tables.Table;
+import com.marvik.apis.dbcrudgen.utilities.Utils;
 
 /**
  * Created on Feb 5, 2016-10:40:21 AM by victor
@@ -44,7 +49,7 @@ public class TasksExecutor {
      * Executes all the actions of the main window
      */
     public TasksExecutor() {
-        startXAMPPServer();
+        startHttpServer();
         getMYSQLQueryExecutor();
     }
 
@@ -151,10 +156,33 @@ public class TasksExecutor {
     /**
      *
      */
-    public void startXAMPPServer() {
+    public void startHttpServer() {
+
+        LinuxOperatingSystem linuxOs = new LinuxOperatingSystem();
+        MacOperatingSystem macOs = new MacOperatingSystem();
+        WindowsOperatingSystem winOs = new WindowsOperatingSystem();
+
+        String os = Utils.getOperatingSystem();
+
+        String apachePath = null;
+        String mysqlPath = null;
+
+        if (os.equals(linuxOs.getName())) {
+            apachePath = linuxOs.getApacheStartCommand();
+            mysqlPath = linuxOs.getMysqlStartCommand();
+        }
+        if (os.equals(macOs.getName())) {
+            apachePath = macOs.getApacheStartCommand();
+            mysqlPath = macOs.getMysqlStartCommand();
+        }
+        if (os.equals(winOs.getName())) {
+            apachePath = winOs.getApacheStartCommand();
+            mysqlPath = winOs.getMysqlStartCommand();
+        }
+
         try {
-            Process startApache = Runtime.getRuntime().exec(XAMPP.START_APACHE_PATH);
-            Process startMysql = Runtime.getRuntime().exec(XAMPP.START_MYSQL_PATH);
+            Process startApache = Runtime.getRuntime().exec(apachePath);
+            Process startMysql = Runtime.getRuntime().exec(mysqlPath);
 
             if (startApache.isAlive()) {
                 System.out.println("Apache : Is Alive");
