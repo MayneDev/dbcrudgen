@@ -490,6 +490,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
         if (columnDatatype.equalsIgnoreCase("String")) {
             return new AndroidMethodColumnsCrudDataTypeStringTemplate();
         }
+        // Enum
+        if (columnDatatype.equalsIgnoreCase("ENUM")) {
+            return new AndroidMethodColumnsCrudDataTypeStringTemplate();
+        }
         // String
         if (columnDatatype.equalsIgnoreCase("VARCHAR")) {
             return new AndroidMethodColumnsCrudDataTypeStringTemplate();

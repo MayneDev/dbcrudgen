@@ -159,7 +159,6 @@ public class Utils {
             case CHAR:
             case INT:
             case INTEGER:
-            case ENUM:
             case SET:
             case SMALLINT:
                 return "Integer";
@@ -190,6 +189,7 @@ public class Utils {
                 return "Long";
 
             // String
+            case ENUM:
             case VARCHAR:
             case TEXT:
             case TINYTEXT:
