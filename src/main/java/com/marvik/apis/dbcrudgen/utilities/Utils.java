@@ -18,6 +18,9 @@ public class Utils {
         if (datatype.equalsIgnoreCase("VARCHAR"))
             return MYSQLDataTypes.VARCHAR;
 
+        if (datatype.equalsIgnoreCase("STRING"))
+            return MYSQLDataTypes.TEXT;
+
         if (datatype.equalsIgnoreCase("TEXT"))
             return MYSQLDataTypes.TEXT;
 

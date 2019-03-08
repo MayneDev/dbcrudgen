@@ -1,6 +1,7 @@
 package com.marvik.apis.dbcrudgen.schemamodels.tables;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.marvik.apis.dbcrudgen.parser.android.AndroidTemplatesParser;
@@ -216,8 +217,6 @@ public class Table {
 
         TableColumn[] tableColumns = getColumns();
 
-        List<TableColumn> allTableColumns = new ArrayList<>();
-
         //TODO REMOVE THIS BLOCK IF NO LONGER RELEVANT
         // Add primary key column as the last
         if (getPrimaryKey() != null) {
@@ -226,9 +225,7 @@ public class Table {
             //allTableColumns.add(new TableColumn(primaryKeyColumn, primaryKey.getDataType(),false));
         }
 
-        for (TableColumn tableColumn : tableColumns) {
-            allTableColumns.add(tableColumn);
-        }
+        List<TableColumn> allTableColumns = new ArrayList<>(Arrays.asList(tableColumns));
 
         tableColumns = new TableColumn[allTableColumns.size()];
 

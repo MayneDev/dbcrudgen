@@ -18,12 +18,14 @@ import com.marvik.apis.dbcrudgen.application.views.windows.MainWindow;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDatabaseConnection;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDefaultConnectionProperties;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLQueryExecutor;
+import com.marvik.apis.dbcrudgen.core.databases.sqlite.SQLiteUtils;
 import com.marvik.apis.dbcrudgen.core.os.LinuxOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.os.MacOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.os.UnixOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.os.WindowsOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.grammar.MYSQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.queries.MYSQLQueries;
+import com.marvik.apis.dbcrudgen.core.platforms.sqlite.grammar.SQLiteGrammar;
 import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
@@ -279,23 +281,26 @@ public class TasksExecutor {
                 String field = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_FIELD);
 
                 String type = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TYPE);
-                type = NativeUtils.toMYSQLDataType(type);
+                type = SQLiteUtils.parseAndroidDataType(NativeUtils.toMYSQLDataType(type));
 
                 String _null = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_NULL);
                 String key = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TABLE_KEY);
                 String _default = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_DEFAULT);
                 String extra = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_EXTRA);
 
-                Constraints constraints = new Constraints(_null.equalsIgnoreCase("no") ? " NOT NULL  " : " NULL DEFAULT " + _default);
+                Constraints constraints = new Constraints(_null.equalsIgnoreCase("no") ? extra + " NOT NULL " : " NULL DEFAULT " + _default);
                 DataType dataType = new DataType(type, constraints);
 
                 if (key.equalsIgnoreCase(MYSQLGrammar.Keys.PRIMARY_KEY)) {
                     isPrimaryKey = true;
                     primaryKey = new PrimaryKey(field, dataType);
+                    constraints = new Constraints(_null.equalsIgnoreCase("no") ? " PRIMARY KEY " + extra + " NOT NULL  " : " NULL DEFAULT " + _default);
+                    dataType.setConstraints(constraints);
                 }
 
                 TableColumn tableColumn = new TableColumn(field, dataType, isPrimaryKey);
                 lTableColumns.add(tableColumn);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

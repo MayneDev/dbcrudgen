@@ -1,5 +1,6 @@
 package com.marvik.apis.dbcrudgen.parser.android.tableschemas;
 
+import com.marvik.apis.dbcrudgen.core.databases.sqlite.SQLiteUtils;
 import com.marvik.apis.dbcrudgen.core.platforms.sql.grammar.SQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.sqlite.grammar.SQLiteGrammar;
 import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
@@ -186,8 +187,9 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 
             DataType dataType = columns[i].getDataType();
             String columnName = columns[i].getColumnName();
-            String _datatype = dataType.getDataType();
+            String _datatype = SQLiteUtils.parseAndroidDataType(dataType.getDataType());
             String constraints = dataType.getConstraints().getConstraint();
+
             String qualifiedColumnName = _datatype + PrintingChars.SPACE + constraints;
 
             String tableColumnStatementTemplate = getAndroidStatementSQLTableColumnStatementTemplate().getTemplate();
