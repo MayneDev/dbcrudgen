@@ -603,6 +603,9 @@ public class AndroidTemplatesParser extends TemplatesParser {
         // Timestamp
         if (columnDatatype.equalsIgnoreCase("timestamp")) {
             return "String";
+        }  // Enumerations
+        if (columnDatatype.equalsIgnoreCase("Enum")) {
+            return "String";
         }
 
         System.err.println("ANDROID::COULD NOT GET THE DATATYPE FOR [" + columnDatatype + "]");
