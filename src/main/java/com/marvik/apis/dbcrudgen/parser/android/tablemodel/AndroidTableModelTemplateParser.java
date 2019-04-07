@@ -26,6 +26,8 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
         String classVariablesAccessors = "";
         String classConstructorVariables = "";
 
+        System.out.println("Table Name: " +tableName);
+
         TableColumn[] tableColumn = table.getTableColumnsAll();
 
         for (int i = 0; i < tableColumn.length; i++) {
@@ -41,7 +43,7 @@ public class AndroidTableModelTemplateParser extends AndroidTemplatesParser {
                     objectName, JavaDelimiter.SEMICOLON);
 
             JavaDelimiter classConstructorVariablesJavaDelimeter = JavaDelimiter.COMMA;
-            ;
+
 
             if (i >= (tableColumn.length - 1)) {
                 classConstructorVariablesJavaDelimeter = JavaDelimiter.NONE;

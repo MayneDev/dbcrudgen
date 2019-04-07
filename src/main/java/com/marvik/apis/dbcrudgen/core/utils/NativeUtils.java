@@ -4,6 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.JavaGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.delimeters.JavaDelimiter;
@@ -27,7 +29,7 @@ public final class NativeUtils {
         return System.getProperty(property);
     }
 
-    public static CharSequence getFileSeparator() {
+    public static String getFileSeparator() {
         return getSystemProperty("file.separator") != null ? getSystemProperty("file.separator") : File.separator;
     }
 
@@ -265,19 +267,67 @@ public final class NativeUtils {
      * @return
      */
     public static String toMYSQLDataType(String dataType) {
-        if (dataType.matches("\\w+\\(\\d+\\)")) {
-            String[] parts = dataType.split("\\(\\d+\\)");
-            return parts[0];
+
+        if (dataType.matches("(\\w+)")) { //e.g int
+            Pattern pattern = Pattern.compile("(\\w+)");
+            Matcher matcher = pattern.matcher(dataType);
+
+            if (matcher.find()) {
+                return matcher.group();
+            }
         }
-        return dataType;
+        if (dataType.matches("(\\w+)?\\(\\d+\\)")) { //e.g varchar(255)
+            Pattern pattern = Pattern.compile("(\\w+)?\\(\\d+\\)");
+            Matcher matcher = pattern.matcher(dataType);
+
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        }
+        if (dataType.matches("(\\w+)?\\(\\d+\\)?(\\s)(\\w+)?")) { //e.g int(10) unsigned
+            Pattern pattern = Pattern.compile("(\\w+)?\\(\\d+\\)?(\\s)(\\w+)?");
+            Matcher matcher = pattern.matcher(dataType);
+
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+
+        }
+        if (dataType.matches("(\\w+)?\\(\\d+,\\d+\\)?")) { //e.g double(8,2)
+            Pattern pattern = Pattern.compile("(\\w+)?\\(\\d+,\\d+\\)?");
+            Matcher matcher = pattern.matcher(dataType);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        } else {
+            Pattern pattern = Pattern.compile("(\\w+)?(.*)"); //e.g enum('DAYS','WEEKS','MONTHS')
+            Matcher matcher = pattern.matcher(dataType);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        }
+
+        return null;
     }
 
     /**
-     * Print an error message
+     * Print an error messageF
      *
      * @param message
      */
     public static void printError(String message) {
         System.err.println(message);
+    }
+
+    /**
+     * Transform a path template to a path
+     *
+     * @param placeholder
+     * @param separator
+     * @param pathTemplate
+     * @return
+     */
+    public static String transformPath(String placeholder, String separator, String pathTemplate) {
+        return pathTemplate.replace(placeholder, separator);
     }
 }

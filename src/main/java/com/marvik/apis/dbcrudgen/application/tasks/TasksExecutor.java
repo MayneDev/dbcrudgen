@@ -49,8 +49,8 @@ public class TasksExecutor {
      * Executes all the actions of the main window
      */
     public TasksExecutor() {
-        startHttpServer();
-        getMYSQLQueryExecutor();
+        //startHttpServer();
+        //getMYSQLQueryExecutor();
     }
 
     private MYSQLQueryExecutor queryExecutor;
@@ -84,6 +84,16 @@ public class TasksExecutor {
         }
 
         return databaseConnection;
+    }
+
+    /**
+     * Set MYSQL Database Connection
+     *
+     * @return MYSQLDatabaseConnection
+     */
+    public void setMYSQLDatabaseConnection(MYSQLDatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+
     }
 
     /**

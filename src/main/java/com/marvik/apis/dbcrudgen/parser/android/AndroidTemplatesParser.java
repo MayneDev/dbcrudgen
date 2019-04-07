@@ -516,7 +516,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
      */
     protected String getAndroidObjectDataType(String columnDatatype) {
 
-        columnDatatype = NativeUtils.toLetters(columnDatatype);
+        columnDatatype = NativeUtils.toMYSQLDataType(columnDatatype);
 
         // Boolean
         if (columnDatatype.equalsIgnoreCase("Boolean")) {
@@ -605,7 +605,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
             return "String";
         }
 
-        System.err.println("COULD NOT GET THE DATATYPE FOR [" + columnDatatype + "]");
+        System.err.println("ANDROID::COULD NOT GET THE DATATYPE FOR [" + columnDatatype + "]");
 
         return "Object";
     }

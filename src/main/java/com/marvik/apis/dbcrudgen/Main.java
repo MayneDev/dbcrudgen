@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
+import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDatabaseConnection;
+import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.creator.android.AndroidCRUDCreator;
 import com.marvik.apis.dbcrudgen.creator.j2se.J2SECrudCreator;
 import com.marvik.apis.dbcrudgen.creator.php.PHPCrudCreator;
@@ -24,8 +26,11 @@ import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-        Database database = new TasksExecutor().createDatabaseModel("comphoa2_compho");
-        testPHPCrudGenerator(database,"C:\\xampp\\htdocs\\compho");
+        MYSQLDatabaseConnection connection = new MYSQLDatabaseConnection("localhost", "root", "root3358");
+        TasksExecutor tasksExecutor = new TasksExecutor();
+        tasksExecutor.setMYSQLDatabaseConnection(connection);
+        Database database = tasksExecutor.createDatabaseModel("pesarika");
+        testAndroidCrudGenerator(database, "/home/victor/Workspace/Android", "Pesarika", "com.pesarika.android", "app");
     }
 
     private static void createAndroidChatModule() {
@@ -38,15 +43,15 @@ public class Main {
                                                  String moduleName) {
 
         AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
-                database.getDatabaseName(), 1, "DatabaseManager", "database\\sqliteopenhelper",
-                "database\\tableschemas", "database\\tablescrud", "database\\tablemodels");
+                database.getDatabaseName(), 1, "DatabaseManager", "database.sqliteopenhelper",
+                "database.tableschemas", "database.tablescrud", "database.tablemodels");
 
-        String contentProviderPackage = "database\\contentprovider";
+        String contentProviderPackage = "database.contentprovider";
         String contentProviderClass = "DataProvider";
         ProviderConfiguration providerConfiguration = new ProviderConfiguration(contentProviderClass,
                 contentProviderPackage);
 
-        String transactionManagerPackage = "database\\transactions";
+        String transactionManagerPackage = "database.transactions";
         String transactionManagerClass = "TransactionsManager";
         TransactionManagerConfiguration transactionManagerConfiguration = new TransactionManagerConfiguration(
                 transactionManagerPackage, transactionManagerClass);
@@ -54,8 +59,10 @@ public class Main {
         AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
                 providerConfiguration, transactionManagerConfiguration, androidDatabaseConfiguration);
 
+        String javaSrcDir = "src.main.java";
         AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
-                projectStorageDir + "\\" + projectName, moduleName + "\\src\\main\\java", packageName,
+                projectStorageDir + NativeUtils.getFileSeparator() + projectName,
+                moduleName + NativeUtils.getFileSeparator() + javaSrcDir, packageName,
                 androidContentProviderConfiguration);
 
         AndroidCRUDCreator androidCRUDCreator = new AndroidCRUDCreator();

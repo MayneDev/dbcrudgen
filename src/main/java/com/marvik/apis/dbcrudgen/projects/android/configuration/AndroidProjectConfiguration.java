@@ -2,13 +2,14 @@ package com.marvik.apis.dbcrudgen.projects.android.configuration;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
+import org.omg.IOP.TAG_JAVA_CODEBASE;
 
 /**
- * 
+ *
  * AndroidProjectConfiguration
- * 
+ *
  * Used for setting up all the configuration for an android project
- * 
+ *
  * @author victor
  *
  */
@@ -24,7 +25,7 @@ public class AndroidProjectConfiguration {
 
 	/**
 	 * Android Project Configuration
-	 * 
+	 *
 	 * @param projectStorageDir
 	 * @param javaSrcDir
 	 * @param packageName
@@ -33,9 +34,9 @@ public class AndroidProjectConfiguration {
 	public AndroidProjectConfiguration(String projectStorageDir, String javaSrcDir, String packageName,
 			AndroidContentProviderConfiguration androidContentProviderConfiguration) {
 		this.androidContentProviderConfiguration = androidContentProviderConfiguration;
-		this.projectStorageDir = projectStorageDir;
+		this.projectStorageDir = NativeUtils.transformPath( ".", NativeUtils.getFileSeparator(), projectStorageDir) ;
 		this.packageName = packageName;
-		this.javaSrcDir = javaSrcDir;
+		this.javaSrcDir =   NativeUtils.transformPath( ".", NativeUtils.getFileSeparator(),javaSrcDir ) ;
 
 		// ActualPath Where Java Files are saved
 		_setJavaFilesStorageLocation();
@@ -114,7 +115,7 @@ public class AndroidProjectConfiguration {
 
 	/**
 	 * The path of the java files storage location
-	 * 
+	 *
 	 * @return _javaFilesStorageLocation
 	 */
 	public String _getJavaFilesStorageLocation() {
