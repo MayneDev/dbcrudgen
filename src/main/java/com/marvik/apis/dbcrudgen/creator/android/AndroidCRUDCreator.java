@@ -155,7 +155,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 
         // create tables model info classes
         String columnsModelInfoPackage = getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage();
-        createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + columnsModelInfoPackage);
+        String columnsModelPath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(), columnsModelInfoPackage);
+        createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + columnsModelPath);
         createTableModelInfoClassesSourceFiles(database, projectFilesDefaultStorageDirectory, packageName,
                 columnsModelInfoPackage);
 
@@ -174,9 +175,11 @@ public class AndroidCRUDCreator extends CrudCreator {
         String transactionManagerPackage = transactionManagerConfiguration.getTransactionManagerPackage();
         String transactionManagerClass = transactionManagerConfiguration.getTransactionManagerClass();
 
-        String transactionManagerPackageLocation = projectStorageDirectory + NativeUtils.getFileSeparator()
+        String transactionManagerPackagePath = projectStorageDirectory + NativeUtils.getFileSeparator()
                 + transactionManagerPackage;
-        createDirectory(transactionManagerPackageLocation);
+        transactionManagerPackagePath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(),
+                transactionManagerPackagePath);
+        createDirectory(transactionManagerPackagePath);
 
         AndroidDatabaseTransactionsParser transactionsParser = new AndroidDatabaseTransactionsParser();
         String transactionManagerSourceCode = transactionsParser.createSourceCode(packageName,
@@ -184,8 +187,8 @@ public class AndroidCRUDCreator extends CrudCreator {
 
         String customTransactionManageClass = transactionManagerConfiguration.getTransactionManagerClass();
 
-        String transactionManagerSourceFile = projectStorageDirectory + NativeUtils.getFileSeparator()
-                + transactionManagerPackage + NativeUtils.getFileSeparator() + customTransactionManageClass
+
+        String transactionManagerSourceFile = transactionManagerPackagePath + NativeUtils.getFileSeparator() + customTransactionManageClass
                 + AndroidProjectFileNames.JAVA_FILE_EXTENSION;
 
         createSourceFile(transactionManagerSourceFile, transactionManagerSourceCode);
@@ -206,6 +209,8 @@ public class AndroidCRUDCreator extends CrudCreator {
             // package where this table model info class will be saved
             String tableModelSourceFilePackageFilePath = tablesModelInfoPackage + NativeUtils.getFileSeparator()
                     + tableClassName.toLowerCase();
+            tableModelSourceFilePackageFilePath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(),
+                    tableModelSourceFilePackageFilePath);
 
             // the table model source file
             String tableModelSourceFile = projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator()
