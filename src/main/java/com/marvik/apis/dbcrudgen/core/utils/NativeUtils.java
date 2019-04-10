@@ -1,12 +1,5 @@
 package com.marvik.apis.dbcrudgen.core.utils;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLUtils;
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.JavaGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.java.grammar.delimeters.JavaDelimiter;
@@ -15,6 +8,11 @@ import com.marvik.apis.dbcrudgen.core.templates.tags.NativeTemplateTags;
 import com.marvik.apis.dbcrudgen.natives.syntax.Syntax.PrintingChars;
 import com.marvik.apis.dbcrudgen.templates.simple.SimpleTemplates;
 import com.marvik.apis.dbcrudgen.templates.tags.TemplateTags;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public final class NativeUtils {
 
@@ -99,7 +97,7 @@ public final class NativeUtils {
             dataType = "int";
         }
         if (dataType.equalsIgnoreCase("BIGINT")) {
-            dataType = "int";
+            dataType = "long";
         }
         if (dataType.equalsIgnoreCase("INTEGER")) {
             dataType = "int";
@@ -126,7 +124,7 @@ public final class NativeUtils {
             dataType = "double";
         }
         if (dataType.equalsIgnoreCase("BYTE")) {
-            dataType = "byte";
+            dataType = "byte [] ";
         }
 
         javaVariable += dataType + JavaGrammar.SPACE + toJavaBeansVariable(objectName);

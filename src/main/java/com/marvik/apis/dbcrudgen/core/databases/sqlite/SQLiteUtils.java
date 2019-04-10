@@ -16,14 +16,16 @@ public class SQLiteUtils {
         // Byte
         if (mysqlDataType.equalsIgnoreCase("Byte")) {
             return "byte";
-        }// Char
+        }
+        // Char
         if (mysqlDataType.equalsIgnoreCase("Char")) {
             return "TEXT";
         }
         // Bit
         if (mysqlDataType.equalsIgnoreCase("Bit")) {
             return "INTEGER";
-        } // Integer
+        }
+        // Integer
         if (mysqlDataType.equalsIgnoreCase("Integer")) {
             return "INTEGER";
         }
@@ -41,7 +43,8 @@ public class SQLiteUtils {
         if (mysqlDataType.equalsIgnoreCase("TinyInt")) {
             return "INTEGER";
 
-        }// Integer
+        }
+        // Integer
         if (mysqlDataType.equalsIgnoreCase("BigInt")) {
             return "INTEGER";
 
@@ -49,15 +52,16 @@ public class SQLiteUtils {
         // Date
         if (mysqlDataType.equalsIgnoreCase("Date")) {
             return "TEXT";
-        } // Date
+        }
+        // Date
         if (mysqlDataType.equalsIgnoreCase("DateTime")) {
             // TO DO ADD SOURCE CODE
             return "TEXT";
         }
-        // Date
+        // Blob
         if (mysqlDataType.equalsIgnoreCase("blob")) {
             // TO DO ADD SOURCE CODE
-            return "TEXT";
+            return "BLOB";
         }
         // Double
         if (mysqlDataType.equalsIgnoreCase("Double")) {

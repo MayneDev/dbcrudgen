@@ -524,7 +524,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
         }
         // Byte
         if (columnDatatype.equalsIgnoreCase("Byte")) {
-            return "byte";
+            return "byte [] ";
         }// Char
         if (columnDatatype.equalsIgnoreCase("Char")) {
             return "String";
@@ -552,7 +552,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
 
         }// Integer
         if (columnDatatype.equalsIgnoreCase("BigInt")) {
-            return "int";
+            return "long";
 
         }
         // Date
@@ -567,7 +567,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
         // Date
         if (columnDatatype.equalsIgnoreCase("blob")) {
             // TO DO ADD SOURCE CODE
-            return "String";
+            return "byte [] ";
         }
         // Double
         if (columnDatatype.equalsIgnoreCase("Double")) {
@@ -630,7 +630,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
         }
         if (dataType.equalsIgnoreCase("BIGINT")) {
-            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_LONG;
         }
         if (dataType.equalsIgnoreCase("TINYINT")) {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
@@ -672,7 +672,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
         }
         if (dataType.equalsIgnoreCase("BYTE")) {
-            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_INT;
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_BLOB;
+        }
+        if (dataType.equalsIgnoreCase("BLOB")) {
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_BLOB;
         }
 
         return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_STRING;

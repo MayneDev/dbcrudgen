@@ -53,7 +53,7 @@ public class TemplatesParser {
 		}
 		// Byte
 		if (columnDatatype.equalsIgnoreCase("Byte")) {
-			return "byte";
+			return "byte [] ";
 		}
 		// Integer
 		if (columnDatatype.equalsIgnoreCase("Integer")) {
