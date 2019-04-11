@@ -240,7 +240,7 @@ public class AndroidCRUDCreator extends CrudCreator {
 
             String tableModelsPackage = packageName + NativeTemplateTags.DOT
                     + getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage() + NativeTemplateTags.DOT
-                    + table.getTableName();
+                    + table.getTableName().toLowerCase();
             String tableCrudSourceFilePackage = packageName + NativeTemplateTags.DOT + tableCRUDPackage;
             String tableCRUDSourceCode = androidTableCRUDTemplateParser.createSourceCode(tableCrudSourceFilePackage,
                     tablesSchemasPackage, tableModelsPackage, table);
