@@ -7,8 +7,8 @@ public class PrimaryKey extends KeyColumn {
     /**
      * Defines a primary key column
      */
-    public PrimaryKey(String primaryKey, DataType dataType) {
-        super(primaryKey, dataType, true);
+    public PrimaryKey(String primaryKey, DataType dataType, boolean nullable, boolean isPrimaryKey, String defaultValue, String extra) {
+        super(primaryKey, dataType, nullable, isPrimaryKey, defaultValue, extra);
     }
 
     /*

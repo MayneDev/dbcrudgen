@@ -8,8 +8,8 @@ public class KeyColumn extends TableColumn {
     /**
      * Sets table key column
      */
-    public KeyColumn(String keyColumnName, DataType dataType, boolean isPrimaryKey) {
-        super(keyColumnName, dataType, isPrimaryKey);
+    public KeyColumn(String keyColumnName, DataType dataType, boolean nullable, boolean isPrimaryKey, String defaultValue, String extra) {
+        super(keyColumnName, dataType, nullable, isPrimaryKey, defaultValue, extra);
 
     }
 

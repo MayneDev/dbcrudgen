@@ -6,21 +6,42 @@ public class TableColumn {
 
     private String columnName;
     private DataType dataType;
-    private String[] columnNames;
+    private boolean nullable;
     private boolean isPrimaryKey;
+    private String defaultValue;
+    private String extra;
 
-    public TableColumn(String columnName, DataType dataType, boolean isPrimaryKey) {
+    public TableColumn(String columnName, DataType dataType, boolean nullable, boolean isPrimaryKey, String defaultValue, String extra) {
         this.columnName = columnName;
         this.dataType = dataType;
+        this.nullable = nullable;
         this.isPrimaryKey = isPrimaryKey;
+        this.defaultValue = defaultValue;
+        this.extra = extra;
     }
 
-    /*
-     * This constructor should be improved in future
-     */
-    public TableColumn(String[] columnNames) {
-        this.columnNames = columnNames;
+    public boolean isNullable() {
+        return nullable;
+    }
 
+    public void setNullable(boolean nullable) {
+        this.nullable = nullable;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 
     /**
@@ -35,20 +56,6 @@ public class TableColumn {
      */
     public DataType getDataType() {
         return dataType;
-    }
-
-    /**
-     * @return the columnNames
-     */
-    public String[] getColumnNames() {
-        return columnNames;
-    }
-
-    /**
-     * @param columnNames the columnNames to set
-     */
-    public void setColumnNames(String[] columnNames) {
-        this.columnNames = columnNames;
     }
 
     /**

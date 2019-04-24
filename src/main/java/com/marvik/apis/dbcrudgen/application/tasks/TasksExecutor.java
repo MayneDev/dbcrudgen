@@ -288,17 +288,20 @@ public class TasksExecutor {
                 String _default = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_DEFAULT);
                 String extra = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_EXTRA);
 
+                boolean nullable = _null.equalsIgnoreCase("YES");
+
                 Constraints constraints = new Constraints(_null.equalsIgnoreCase("no") ? extra + " NOT NULL " : " NULL DEFAULT " + _default);
                 DataType dataType = new DataType(type, constraints);
 
                 if (key.equalsIgnoreCase(MYSQLGrammar.Keys.PRIMARY_KEY)) {
                     isPrimaryKey = true;
-                    primaryKey = new PrimaryKey(field, dataType);
+                    primaryKey = new PrimaryKey(field, dataType, nullable, true, _default, extra);
                     constraints = new Constraints(_null.equalsIgnoreCase("no") ? " PRIMARY KEY " + extra + " NOT NULL  " : " NULL DEFAULT " + _default);
                     dataType.setConstraints(constraints);
                 }
 
-                TableColumn tableColumn = new TableColumn(field, dataType, isPrimaryKey);
+
+                TableColumn tableColumn = new TableColumn(field, dataType, nullable, isPrimaryKey, _default, extra);
                 lTableColumns.add(tableColumn);
 
             }
