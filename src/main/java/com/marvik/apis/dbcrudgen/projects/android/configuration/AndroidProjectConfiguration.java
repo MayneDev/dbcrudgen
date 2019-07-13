@@ -2,7 +2,7 @@ package com.marvik.apis.dbcrudgen.projects.android.configuration;
 
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.platforms.android.configuration.AndroidContentProviderConfiguration;
-import org.omg.IOP.TAG_JAVA_CODEBASE;
+
 
 /**
  *
