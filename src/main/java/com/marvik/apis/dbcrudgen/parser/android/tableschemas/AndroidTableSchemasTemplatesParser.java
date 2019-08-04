@@ -185,13 +185,19 @@ public class AndroidTableSchemasTemplatesParser extends AndroidTemplatesParser {
 
         for (int i = 0; i < columns.length; i++) {
 
-            DataType dataType = columns[i].getDataType();
-            String columnName = columns[i].getColumnName();
+            TableColumn column = columns[i];
+
+            DataType dataType = column.getDataType();
+            String columnName = column.getColumnName();
             String _datatype = SQLiteUtils.parseAndroidDataType(dataType.getDataType());
 
-            String defaultValue = columns[i].getDefaultValue();
+            String defaultValue = column.getDefaultValue();
 
             String qualifiedColumnName = _datatype + PrintingChars.SPACE + " DEFAULT " + defaultValue;
+
+            if (column.isPrimaryKey()) {
+                qualifiedColumnName = _datatype + PrintingChars.SPACE + " PRIMARY KEY " + column.getExtra();
+            }
 
             String tableColumnStatementTemplate = getAndroidStatementSQLTableColumnStatementTemplate().getTemplate();
 

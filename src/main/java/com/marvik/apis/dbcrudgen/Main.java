@@ -26,7 +26,7 @@ import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-        MYSQLDatabaseConnection connection = new MYSQLDatabaseConnection("localhost", "root", "root3358");
+       MYSQLDatabaseConnection connection = new MYSQLDatabaseConnection("localhost", "root", "root3358");
         TasksExecutor tasksExecutor = new TasksExecutor();
         tasksExecutor.setMYSQLDatabaseConnection(connection);
         Database database = tasksExecutor.createDatabaseModel("givewatts");
