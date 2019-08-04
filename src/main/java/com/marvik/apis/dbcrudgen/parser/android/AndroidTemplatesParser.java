@@ -578,7 +578,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
             return "float";
         } // Float
         if (columnDatatype.equalsIgnoreCase("Decimal")) {
-            return "float";
+            return "double";
         }
         // Long
         if (columnDatatype.equalsIgnoreCase("Long")) {
@@ -666,10 +666,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
         }
         if (dataType.equalsIgnoreCase("DECIMAL")) {
-            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_DOUBLE;
         }
         if (dataType.equalsIgnoreCase("DOUBLE")) {
-            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT;
+            return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_DOUBLE;
         }
         if (dataType.equalsIgnoreCase("BYTE")) {
             return SimpleTemplates.Android.ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_BLOB;

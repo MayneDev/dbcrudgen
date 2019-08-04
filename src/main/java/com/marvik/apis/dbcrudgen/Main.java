@@ -29,8 +29,8 @@ public class Main {
         MYSQLDatabaseConnection connection = new MYSQLDatabaseConnection("localhost", "root", "root3358");
         TasksExecutor tasksExecutor = new TasksExecutor();
         tasksExecutor.setMYSQLDatabaseConnection(connection);
-        Database database = tasksExecutor.createDatabaseModel("compho_android");
-        testAndroidCrudGenerator(database, "/home/victor/Workspace/Android", "compho-bio", "com.compho.android", "app");
+        Database database = tasksExecutor.createDatabaseModel("givewatts");
+        testAndroidCrudGenerator(database, "/opt/victor/workspace/android", "givewatts", "com.givewatts.marketforce", "app");
     }
 
     private static void createAndroidChatModule() {

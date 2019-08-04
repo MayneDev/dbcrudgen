@@ -72,7 +72,7 @@ public class SQLiteUtils {
             return "FLOAT";
         } // Float
         if (mysqlDataType.equalsIgnoreCase("Decimal")) {
-            return "FLOAT";
+            return "DOUBLE";
         }
         // Long
         if (mysqlDataType.equalsIgnoreCase("Long")) {

@@ -40,6 +40,11 @@ public class SimpleTemplates {
          * ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT
          */
         public static final String ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT = "float ${COLUMN_OBJECT} = cursor.getFloat(cursor.getColumnIndex(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME}));";
+
+        /**
+         * ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_FLOAT
+         */
+        public static final String ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_DOUBLE = "double ${COLUMN_OBJECT} = cursor.getDouble(cursor.getColumnIndex(${TABLES_SCHEMAS_CLASS}.${TABLE_NAME}.${COLUMN_NAME}));";
         /**
          * ANDROID_TABLE_COLUMNS_CURSOR_ITEMS_GETTER_METHOD_BLOB
          */
