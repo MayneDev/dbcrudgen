@@ -26,7 +26,7 @@ public class MYSQLQueries {
 	/**
 	 * MYSQL Query to show all tables in a database
 	 */
-	public static final String MYSQL_QUERY_SHOW_TABLES = "SHOW TABLES;";
+	public static final String MYSQL_QUERY_SHOW_TABLES = "SHOW FULL TABLES WHERE TABLE_TYPE = 'BASE TABLE';";
 
 	public static final String MYSQL_QUERY_SHOW_TABLE_COLUMNS = "SHOW COLUMNS IN $TABLE IN $DATABASE;";
 
