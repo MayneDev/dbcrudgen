@@ -25,6 +25,7 @@ import com.marvik.apis.dbcrudgen.core.os.UnixOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.os.WindowsOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.grammar.MYSQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.queries.MYSQLQueries;
+import com.marvik.apis.dbcrudgen.core.platforms.sql.grammar.SQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.sqlite.grammar.SQLiteGrammar;
 import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
@@ -278,7 +279,13 @@ public class TasksExecutor {
 
                 boolean isPrimaryKey = false;
 
-                String field = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_FIELD);
+                StringBuilder field = new StringBuilder(tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_FIELD));
+
+                for (String keyword : SQLiteGrammar.Keywords.all()) {
+                    if (field.toString().equalsIgnoreCase(keyword)) {
+                        field = new StringBuilder(field.append("_"));
+                    }
+                }
 
                 String type = tableColumns.getString(MYSQLQueries.ResultsKeys.ShowTableColumns.KEY_TYPE);
                 type = SQLiteUtils.parseAndroidDataType(NativeUtils.toMYSQLDataType(type));
@@ -295,13 +302,13 @@ public class TasksExecutor {
 
                 if (key.equalsIgnoreCase(MYSQLGrammar.Keys.PRIMARY_KEY)) {
                     isPrimaryKey = true;
-                    primaryKey = new PrimaryKey(field, dataType, nullable, true, _default, extra);
+                    primaryKey = new PrimaryKey(field.toString(), dataType, nullable, true, _default, extra);
                     constraints = new Constraints(_null.equalsIgnoreCase("no") ? " PRIMARY KEY " + extra + " NOT NULL  " : " NULL DEFAULT " + _default);
                     dataType.setConstraints(constraints);
                 }
 
 
-                TableColumn tableColumn = new TableColumn(field, dataType, nullable, isPrimaryKey, _default, extra);
+                TableColumn tableColumn = new TableColumn(field.toString(), dataType, nullable, isPrimaryKey, _default, extra);
                 lTableColumns.add(tableColumn);
 
             }
