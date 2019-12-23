@@ -1,2 +1,2 @@
 case ${TABLE_URI_MATCHER_CODE}:
-     return getSqLiteDatabase().update(${TABLE_DEFINITION_LINK}, values, selection, selectionArgs);
+    return getSqLiteDatabase().update(${TABLE_DEFINITION_LINK}, values, selection, selectionArgs);

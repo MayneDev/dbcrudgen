@@ -170,7 +170,7 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
             if (i < tableColumns.length - 1) {
                 sqlSearchSelection += Syntax.ArithmeticChars.ADD + Syntax.PrintingChars.ESCAPED_DOUBLE_QUOTES
-                        + SQLGrammar.Keywords.OR + Syntax.PrintingChars.ESCAPED_DOUBLE_QUOTES
+                        + PrintingChars.SPACE + SQLGrammar.Keywords.OR + PrintingChars.SPACE + Syntax.PrintingChars.ESCAPED_DOUBLE_QUOTES
                         + Syntax.ArithmeticChars.ADD;
             }
         }
@@ -365,8 +365,8 @@ public class AndroidTableCRUDTemplateParser extends AndroidTemplatesParser {
 
         // Get the table primary key
         PrimaryKey primaryKey = table.getPrimaryKey();
-        if(primaryKey == null){
-            System.err.println("The table "+table.getTableName()+" does not have a primary key column");
+        if (primaryKey == null) {
+            System.err.println("The table " + table.getTableName() + " does not have a primary key column");
         }
         String primaryKeyColumnName = primaryKey.getColumnName();
 
