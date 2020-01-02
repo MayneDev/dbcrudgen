@@ -14,6 +14,8 @@ public class AndroidDatabaseConfiguration {
 
 	private String tablesInfosModelClassesPackage;
 
+	private String tablesHttpResponsesPackage;
+
 	/**
 	 * AndroidDatabaseConfiguration - Android database configuration
 	 * 
@@ -27,7 +29,7 @@ public class AndroidDatabaseConfiguration {
 	 */
 	public AndroidDatabaseConfiguration(String databaseName, int databaseVersion, String sqliteOpenHelperClass,
 			String sqliteOpenHelperClassPackage, String tablesSchemasPackage, String tablesCRUDPackage,
-			String tablesInfosModelClassesPackage) {
+			String tablesInfosModelClassesPackage, String tablesHttpResponsesPackage) {
 		this.databaseName = databaseName;
 		this.databaseVersion = databaseVersion;
 		this.sqliteOpenHelperClass = sqliteOpenHelperClass;
@@ -35,6 +37,7 @@ public class AndroidDatabaseConfiguration {
 		this.tablesSchemasPackage = tablesSchemasPackage;
 		this.tablesCRUDPackage = tablesCRUDPackage;
 		this.tablesInfosModelClassesPackage = tablesInfosModelClassesPackage;
+		this.tablesHttpResponsesPackage = tablesHttpResponsesPackage;
 	}
 
 	/**
@@ -166,5 +169,13 @@ public class AndroidDatabaseConfiguration {
 	 */
 	public void setTablesInfosModelClassesPackage(String tablesInfosModelClassesPackage) {
 		this.tablesInfosModelClassesPackage = tablesInfosModelClassesPackage;
+	}
+
+	public String getTablesHttpResponsesPackage() {
+		return tablesHttpResponsesPackage;
+	}
+
+	public void setTablesHttpResponsesPackage(String tablesHttpResponsesPackage) {
+		this.tablesHttpResponsesPackage = tablesHttpResponsesPackage;
 	}
 }

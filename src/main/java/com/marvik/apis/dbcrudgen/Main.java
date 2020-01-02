@@ -26,11 +26,11 @@ import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
-       MYSQLDatabaseConnection connection = new MYSQLDatabaseConnection("localhost", "root", "root3358");
+        MYSQLDatabaseConnection connection = new MYSQLDatabaseConnection("localhost", "root", "root3358");
         TasksExecutor tasksExecutor = new TasksExecutor();
         tasksExecutor.setMYSQLDatabaseConnection(connection);
         Database database = tasksExecutor.createDatabaseModel("givewatts");
-        testAndroidCrudGenerator(database, "/opt/victor/workspace/android", "givewatts", "com.givewatts.marketforce", "app");
+        testAndroidCrudGenerator(database, "/opt/victor/workspace/android", "givewatts", "com.eqtr.android", "app");
     }
 
     private static void createAndroidChatModule() {
@@ -44,7 +44,8 @@ public class Main {
 
         AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
                 database.getDatabaseName(), 1, "DatabaseManager", "database.sqliteopenhelper",
-                "database.tableschemas", "database.tablescrud", "database.tablemodels");
+                "database.tableschemas", "database.tablescrud", "database.tablemodels",
+                "database.httpresponses");
 
         String contentProviderPackage = "database.contentprovider";
         String contentProviderClass = "DataProvider";

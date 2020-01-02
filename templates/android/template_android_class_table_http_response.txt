@@ -1,0 +1,31 @@
+package ${PACKAGE_NAME};
+
+import ${TABLE_MODEL_INFO_CLASS};
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * ${CLASS_NAME}HttpResponse
+ * <p>
+ * Table Http Response Class that contains all the attributes of a table.
+ * Additional getTableModel method that returns a Model class of the table for quick inserts
+ * <p>
+ * This source code is auto-generated
+ *
+ * @author Victor Mwenda
+ * vmwenda.vm@gmail.com
+ * Jan - 2020
+ */
+public class ${CLASS_NAME}HttpResponse{
+
+    ${TABLE_COLUMNS_SERIALIZED}
+
+    ${TABLE_COLUMN_CLASS_VARIABLES}
+
+    /**
+    * Create Table Model Instance
+    */
+    public ${CLASS_NAME}Info getTableModel() {
+        return new ${CLASS_NAME}Info (${CONSTRUCTOR_OBJECTS});
+    }
+
+}

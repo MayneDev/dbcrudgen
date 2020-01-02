@@ -4,12 +4,7 @@ import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.parser.TemplatesParser;
 import com.marvik.apis.dbcrudgen.projects.android.filenames.AndroidProjectFileNames;
 import com.marvik.apis.dbcrudgen.templates.CrudTemplates;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassContentProviderTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassDatabaseTablesTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassSQLTableTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassSQLiteOpenHelperTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableCrudTemplate;
-import com.marvik.apis.dbcrudgen.templates.android.crud.classes.AndroidClassTableModelTemplate;
+import com.marvik.apis.dbcrudgen.templates.android.crud.classes.*;
 import com.marvik.apis.dbcrudgen.templates.android.crud.interfaces.AndroidInterfaceCrudOperationsTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeFloatTemplate;
 import com.marvik.apis.dbcrudgen.templates.android.crud.methods.AndroidMethodColumnsCrudDataTypeGenericTemplate;
@@ -50,6 +45,10 @@ public class AndroidTemplatesParser extends TemplatesParser {
      * AndroidClassTableModelTemplate
      */
     private AndroidClassTableModelTemplate androidClassTableModelTemplate;
+    /**
+     * AndroidClassTableHttpResponseTemplate
+     */
+    private AndroidClassTableHttpResponseTemplate androidClassTableHttpResponseTemplate;
 
     /**
      * AndroidClassSQLiteOpenHelperTemplate
@@ -183,6 +182,7 @@ public class AndroidTemplatesParser extends TemplatesParser {
         androidClassSQLTableTemplate = new AndroidClassSQLTableTemplate();
         androidClassTableCrudTemplate = new AndroidClassTableCrudTemplate();
         androidClassTableModelTemplate = new AndroidClassTableModelTemplate();
+        androidClassTableHttpResponseTemplate = new AndroidClassTableHttpResponseTemplate();
         androidJavaObjectDefaultEncapsulationTemplate = new AndroidJavaObjectDefaultEncapsulationTemplate();
         androidJavaObjectGetterEncapsulationTemplate = new AndroidJavaObjectGetterEncapsulationTemplate();
         androidJavaObjectSetterEncapsulationTemplate = new AndroidJavaObjectSetterEncapsulationTemplate();
@@ -247,6 +247,13 @@ public class AndroidTemplatesParser extends TemplatesParser {
      */
     public AndroidClassTableModelTemplate getAndroidClassTableModelTemplate() {
         return androidClassTableModelTemplate;
+    }
+
+    /**
+     * @return the AndroidClassTableModelTemplate
+     */
+    public AndroidClassTableHttpResponseTemplate getAndroidClassTableHttpResponseTemplate() {
+        return androidClassTableHttpResponseTemplate;
     }
 
     /**

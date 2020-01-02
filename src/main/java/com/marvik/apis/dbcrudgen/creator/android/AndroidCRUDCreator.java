@@ -6,6 +6,7 @@ import com.marvik.apis.dbcrudgen.creator.CrudCreator;
 import com.marvik.apis.dbcrudgen.parser.android.contentprovider.AndroidContentProvidersTemplatesParser;
 import com.marvik.apis.dbcrudgen.parser.android.crudoperations.AndroidCrudOperationsTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.database.transactions.AndroidDatabaseTransactionsParser;
+import com.marvik.apis.dbcrudgen.parser.android.httpresponse.AndroidTableHttpResponseTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.javaobjects.AndroidJavaObjectDefaultEncapsulationTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.sqliteopenhelper.AndroidSQLiteOpenHelperTemplateParser;
 import com.marvik.apis.dbcrudgen.parser.android.tablecrud.AndroidTableCRUDTemplateParser;
@@ -110,7 +111,7 @@ public class AndroidCRUDCreator extends CrudCreator {
         createDirectory(projectFilesDefaultStorageDirectory);
 
         // Content provider class package
-        String contentProviderPackage = getAndroidContentProviderConfiguration().getProviderConfiguration()
+       /* String contentProviderPackage = getAndroidContentProviderConfiguration().getProviderConfiguration()
                 .getContentProviderPackage();
         String contentProviderPath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(), contentProviderPackage);
         String contentProvidersPath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(), contentProviderPath);
@@ -152,7 +153,7 @@ public class AndroidCRUDCreator extends CrudCreator {
                 + NativeUtils.parseJavaPackage(tablesSchemasStorageLocation);
         createTableCRUDClassSourceFile(database, projectFilesDefaultStorageDirectory, packageName, tablesSchemasPackage,
                 tablesCRUDStorageLocation);
-
+*/
         // create tables model info classes
         String columnsModelInfoPackage = getAndroidDatabaseConfiguration().getTablesInfosModelClassesPackage();
         String columnsModelPath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(), columnsModelInfoPackage);
@@ -160,11 +161,17 @@ public class AndroidCRUDCreator extends CrudCreator {
         createTableModelInfoClassesSourceFiles(database, projectFilesDefaultStorageDirectory, packageName,
                 columnsModelInfoPackage);
 
-        // create transactions manager class
+        // create tables http responses model info classes
+        String tablesHttpResponsesPackage = getAndroidDatabaseConfiguration().getTablesHttpResponsesPackage();
+        String tablesHttpResponsesPath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(), tablesHttpResponsesPackage);
+        createDirectory(projectFilesDefaultStorageDirectory + NativeUtils.getFileSeparator() + tablesHttpResponsesPath);
+        createHttpResponsesClassesSourceFiles(database, projectFilesDefaultStorageDirectory, packageName, tablesHttpResponsesPackage);
+
+       /* // create transactions manager class
         TransactionManagerConfiguration transactionManagerConfiguration = getAndroidContentProviderConfiguration()
                 .getTransactionManagerConfiguration();
         createTransactionManagerClass(packageName, transactionManagerConfiguration, projectFilesDefaultStorageDirectory,
-                tablesCRUDStorageLocation, database.getTables());
+                tablesCRUDStorageLocation, database.getTables());*/
     }
 
     // create transactions manager class
@@ -207,8 +214,8 @@ public class AndroidCRUDCreator extends CrudCreator {
             String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
 
             // package where this table model info class will be saved
-            String tableModelSourceFilePackageFilePath = tablesModelInfoPackage + NativeUtils.getFileSeparator()
-                    + tableClassName.toLowerCase();
+            String tableModelSourceFilePackageFilePath = tablesModelInfoPackage;
+
             tableModelSourceFilePackageFilePath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(),
                     tableModelSourceFilePackageFilePath);
 
@@ -225,9 +232,42 @@ public class AndroidCRUDCreator extends CrudCreator {
                     table);
 
             createSourceFile(tableModelSourceFile, tableModelSourceCode);
-
         }
     }
+
+
+    private void createHttpResponsesClassesSourceFiles(Database database, String filesStorageDir, String packageName, String tablesHttpResponsesPackage) {
+
+        AndroidTableHttpResponseTemplateParser androidHttpResponseTemplateParser = new AndroidTableHttpResponseTemplateParser();
+
+        AndroidJavaObjectDefaultEncapsulationTemplateParser androidJavaObjectDefaultEncapsulationTemplateParser = new AndroidJavaObjectDefaultEncapsulationTemplateParser();
+
+        for (Table table : database.getTables()) {
+
+            String tableClassName = NativeUtils.toJavaBeansClass(table.getTableName());
+
+
+            // package where this table model info class will be saved
+            String httpResponseSourceFilePath = tablesHttpResponsesPackage;
+            httpResponseSourceFilePath = NativeUtils.transformPath(NativeTemplateTags.DOT, NativeUtils.getFileSeparator(),
+                    httpResponseSourceFilePath);
+
+            // the table model source file
+            String tableModelSourceFile = filesStorageDir + NativeUtils.getFileSeparator()
+                    + httpResponseSourceFilePath + NativeUtils.getFileSeparator() + tableClassName
+                    + TemplateTags.Android.HTTP_RESPONSE + AndroidProjectFileNames.JAVA_FILE_EXTENSION;
+
+            String tableModelSourceCode = androidHttpResponseTemplateParser.createSourceCode(androidProjectConfiguration,
+                    androidJavaObjectDefaultEncapsulationTemplateParser,
+                    packageName + NativeTemplateTags.DOT
+                            + NativeUtils.parseJavaPackage(httpResponseSourceFilePath), // Package
+                    // name
+                    table);
+            System.out.println(tableModelSourceCode);
+            createSourceFile(tableModelSourceFile, tableModelSourceCode);
+        }
+    }
+
 
     private void createTableCRUDClassSourceFile(Database database, String projectFilesDefaultStorageDirectory,
                                                 String packageName, String tablesSchemasPackage, String tableCRUDPackage) {

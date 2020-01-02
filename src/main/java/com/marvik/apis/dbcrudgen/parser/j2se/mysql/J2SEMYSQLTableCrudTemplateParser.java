@@ -110,9 +110,11 @@ public class J2SEMYSQLTableCrudTemplateParser extends J2SETemplatesParser {
 	}
 
 	/**
+	 * Add column value getters
 	 * @param template
-	 * @param columns
-	 * @return template
+	 * @param table
+	 * @param includePrimaryKeyColumn
+	 * @return
 	 */
 	private String addColumnValueGetters(String template, Table table, boolean includePrimaryKeyColumn) {
 

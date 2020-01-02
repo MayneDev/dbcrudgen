@@ -64,6 +64,10 @@ public class SimpleTemplates {
          * COLUMN_SELECTION_TEMPLATE
          */
         public static final String COLUMN_SELECTION_TEMPLATE = "${COLUMN_OBJECT} +\"='\" +String.valueOf(${PRIMARY_KEY_OBJECT}) +\"'\" ";
+        /**
+         * COLUMN_SERIALIZER
+         */
+        public static final String COLUMN_SERIALIZER = "\n@SerializedName(\"${COLUMN_NAME}\") private ${DATATYPE} ${OBJECT_NAME};";
     }
 
     public static final class Java {

@@ -373,13 +373,14 @@ public class AndroidProjectConfigurationContainer extends ProjectConfigurationCo
 		String tablesSchemasPackage = tfTablesSchemasPackage.getText().toString();
 		String tablesCRUDPackage = tfTablesCrudPackage.getText().toString();
 		String tablesInfosModelClassesPackage = tfTableModelsPackage.getText().toString();
+		String httpResponsesClassesPackage = tfTableModelsPackage.getText().toString();
 
 		TasksExecutor tasksExecutor = new TasksExecutor();
 		Database database = tasksExecutor.createDatabaseModel(databaseName);
 
 		AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(databaseName,
 				databaseVersion, sqliteOpenHelperClass, sqliteOpenHelperClassPackage, tablesSchemasPackage,
-				tablesCRUDPackage, tablesInfosModelClassesPackage);
+				tablesCRUDPackage, tablesInfosModelClassesPackage,httpResponsesClassesPackage);
 
 		String contentProviderPackage = tfContentProviderPackage.getText();
 		String contentProviderClass = tfContentProviderClass.getText();
