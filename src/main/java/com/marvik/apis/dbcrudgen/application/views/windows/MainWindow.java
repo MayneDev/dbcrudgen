@@ -16,93 +16,93 @@ import javafx.stage.Stage;
 
 public class MainWindow extends Application {
 
-	private List<Database> mysqlDatabases;
+    private List<Database> mysqlDatabases;
 
-	private TasksExecutor tasksExecutor;
+    private TasksExecutor tasksExecutor;
 
-	public static String databaseName;
+    public static String databaseName;
 
-	/**
-	 * This is the main GUI for the application where all the action take place
-	 */
-	public MainWindow() {
-		tasksExecutor = new TasksExecutor();
-	}
+    /**
+     * This is the main GUI for the application where all the action take place
+     */
+    public MainWindow() {
+        tasksExecutor = new TasksExecutor();
+    }
 
-	/**
-	 * Main method called when launching the application
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		launch(args);
+    /**
+     * Main method called when launching the application
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        launch(args);
 
-	}
+    }
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
 
-		//new Thread( () -> {getAllLocalHostDatabaseSchemas();}).start(); :: this thread seems slow
-		
-		getAllLocalHostDatabaseSchemas();
-		
-		// Initialize the main stage
-		initStage(primaryStage);
+        //new Thread( () -> {getAllLocalHostDatabaseSchemas();}).start(); :: this thread seems slow
 
-	}
+        getAllLocalHostDatabaseSchemas();
 
-	/**
-	 * 
-	 */
-	private void getAllLocalHostDatabaseSchemas() {
-	
-		mysqlDatabases = tasksExecutor.getDatabases();
-	}
+        // Initialize the main stage
+        initStage(primaryStage);
 
-	private void initStage(Stage primaryStage) {
+    }
 
-		BorderPane mainWindow = new BorderPane();
-		addRightPane(mainWindow);
-		addLeftPane(mainWindow);
-		addBottomPane(mainWindow);
-		addCenterPane(mainWindow);
-		Scene mainScene = new Scene(mainWindow, WindowProperties.DEFAULT_SCREEN_WIDTH,
-				WindowProperties.DEFAULT_SCREEN_HEIGHT);
-		primaryStage.setTitle("Database CRUD Code Generator");
-		primaryStage.getIcons().add(new Image("http://127.0.0.1/dbcrudgen/favico.png"));
-		primaryStage.setScene(mainScene);
-		primaryStage.show();
-	}
+    /**
+     *
+     */
+    private void getAllLocalHostDatabaseSchemas() {
 
-	private void addRightPane(BorderPane mainWindow) {
-		ProjectsConfigurationWidget projectsConfigurationContainer = new ProjectsConfigurationWidget(mysqlDatabases);
-		mainWindow.setRight(projectsConfigurationContainer);
-	}
+        mysqlDatabases = tasksExecutor.getDatabases();
+    }
 
-	// Adds the left pane that originally contains all the MYSQL databases
-	private void addLeftPane(BorderPane mainWindow) {
+    private void initStage(Stage primaryStage) {
 
-	}
+        BorderPane mainWindow = new BorderPane();
+        addRightPane(mainWindow);
+        addLeftPane(mainWindow);
+        addBottomPane(mainWindow);
+        addCenterPane(mainWindow);
+        Scene mainScene = new Scene(mainWindow, WindowProperties.DEFAULT_SCREEN_WIDTH,
+                WindowProperties.DEFAULT_SCREEN_HEIGHT);
+        primaryStage.setTitle("Database CRUD Code Generator");
+        primaryStage.getIcons().add(new Image("http://127.0.0.1/dbcrudgen/favico.png"));
+        primaryStage.setScene(mainScene);
+        primaryStage.show();
+    }
 
-	public void addBottomPane(BorderPane mainWindow) {
+    private void addRightPane(BorderPane mainWindow) {
+        ProjectsConfigurationWidget projectsConfigurationContainer = new ProjectsConfigurationWidget(mysqlDatabases);
+        mainWindow.setRight(projectsConfigurationContainer);
+    }
 
-	}
+    // Adds the left pane that originally contains all the MYSQL databases
+    private void addLeftPane(BorderPane mainWindow) {
 
-	private MYSQLDatabaseConnectionConfigurationContainer mysqlDatabaseConnectionConfigurationContainer;
+    }
 
-	public void addCenterPane(BorderPane mainWindow) {
-		mysqlDatabaseConnectionConfigurationContainer = new MYSQLDatabaseConnectionConfigurationContainer();
-		mysqlDatabaseConnectionConfigurationContainer.setTasksExecutor(tasksExecutor);
-		mysqlDatabaseConnectionConfigurationContainer.addDatabasesListView(mysqlDatabases);
-		mainWindow.setCenter(mysqlDatabaseConnectionConfigurationContainer);
+    public void addBottomPane(BorderPane mainWindow) {
 
-	}
+    }
 
-	public static String getSelectedDatabase() {
-		return databaseName;
-	}
+    private MYSQLDatabaseConnectionConfigurationContainer mysqlDatabaseConnectionConfigurationContainer;
 
-	public static void setSelectedDatabase(String databaseName) {
-		MainWindow.databaseName = databaseName;
-	}
+    public void addCenterPane(BorderPane mainWindow) {
+        mysqlDatabaseConnectionConfigurationContainer = new MYSQLDatabaseConnectionConfigurationContainer();
+        mysqlDatabaseConnectionConfigurationContainer.setTasksExecutor(tasksExecutor);
+        mysqlDatabaseConnectionConfigurationContainer.addDatabasesListView(mysqlDatabases);
+        mainWindow.setCenter(mysqlDatabaseConnectionConfigurationContainer);
+
+    }
+
+    public static String getSelectedDatabase() {
+        return databaseName;
+    }
+
+    public static void setSelectedDatabase(String databaseName) {
+        MainWindow.databaseName = databaseName;
+    }
 }

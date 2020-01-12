@@ -1,8 +1,6 @@
 package com.marvik.apis.dbcrudgen;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import com.marvik.apis.dbcrudgen.application.tasks.TasksExecutor;
 import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLDatabaseConnection;
@@ -22,25 +20,31 @@ import com.marvik.apis.dbcrudgen.projects.j2se.configuration.J2SEProjectMYSQLDat
 import com.marvik.apis.dbcrudgen.projects.php.configuration.PHPProjectConfiguration;
 import com.marvik.apis.dbcrudgen.schemamodels.database.Database;
 
-import javax.xml.crypto.Data;
-
 public class Main {
     public static void main(String[] args) {
         MYSQLDatabaseConnection connection = new MYSQLDatabaseConnection("localhost", "root", "root3358");
         TasksExecutor tasksExecutor = new TasksExecutor();
         tasksExecutor.setMYSQLDatabaseConnection(connection);
-        Database database = tasksExecutor.createDatabaseModel("givewatts");
-        testAndroidCrudGenerator(database, "/opt/victor/workspace/android", "givewatts", "com.eqtr.android", "app");
+        String[] skipTables = {"access_logs", "accountants", "admins", "agent_managers", "auditors", "audit_logs", "country",
+                "country", "customers_firebase_notifications", "customer_support", "developers", "failed_jobs", "firebase_notifications",
+                "http_requests", "inventory_clerks", "jobs", "migrations", "mpesa_access_tokens", "mpesa_requests", "mpesa_stk_callbacks", "mpesa_stk_process",
+                "mpesa_stk_query", "oauth_access_tokens", "oauth_auth_codes", "oauth_clients", "oauth_personal_access_clients", "oauth_refresh_tokens",
+                "organizations", "organization_addresses", "organization_banks", "organization_contacts", "organization_details", "organization_mpesa_accounts",
+                "organization_offices", "organization_social_medias", "password_resets", "payment_reminders", "payment_reminder_candidates", "sales_managers",
+                "sms_http_requests", "special_reminders", "special_reminder_candidates", "stk_push_process", "stk_push_query", "stock_register", "tasks"};
+        Database database = tasksExecutor.createDatabaseModel("givewatts", skipTables);
+        testAndroidCrudGenerator(database, "/opt/victor/workspace/android", "givewatts", "com.eqtr.android.agent", "app", "src.agent.java");
+        testAndroidCrudGenerator(database, "/opt/victor/workspace/android", "givewatts", "com.eqtr.android.customer", "app", "src.customer.java");
     }
 
     private static void createAndroidChatModule() {
-        Database database = new TasksExecutor().createDatabaseModel("wifihacker");
-        testAndroidCrudGenerator(database, "F:\\Android\\NerdyGeekApps", "HackersWifi", "marvik.libs.wifihacker", "marvik-libs-wifihacker");
+        Database database = new TasksExecutor().createDatabaseModel("wifihacker", new String[]{});
+        testAndroidCrudGenerator(database, "F:\\Android\\NerdyGeekApps", "HackersWifi", "marvik.libs.wifihacker", "marvik-libs-wifihacker", "src.main.java");
     }
 
     private static void testAndroidCrudGenerator(Database database, String projectStorageDir, String projectName,
                                                  String packageName,
-                                                 String moduleName) {
+                                                 String moduleName, String javaSrcDir) {
 
         AndroidDatabaseConfiguration androidDatabaseConfiguration = new AndroidDatabaseConfiguration(
                 database.getDatabaseName(), 1, "DatabaseManager", "database.sqliteopenhelper",
@@ -60,7 +64,6 @@ public class Main {
         AndroidContentProviderConfiguration androidContentProviderConfiguration = new AndroidContentProviderConfiguration(
                 providerConfiguration, transactionManagerConfiguration, androidDatabaseConfiguration);
 
-        String javaSrcDir = "src.main.java";
         AndroidProjectConfiguration androidProjectConfiguration = new AndroidProjectConfiguration(
                 projectStorageDir + NativeUtils.getFileSeparator() + projectName,
                 moduleName + NativeUtils.getFileSeparator() + javaSrcDir, packageName,

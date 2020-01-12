@@ -12,6 +12,7 @@ import java.net.SocketException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.marvik.apis.dbcrudgen.application.views.windows.MainWindow;
@@ -21,13 +22,10 @@ import com.marvik.apis.dbcrudgen.core.databases.mysql.MYSQLQueryExecutor;
 import com.marvik.apis.dbcrudgen.core.databases.sqlite.SQLiteUtils;
 import com.marvik.apis.dbcrudgen.core.os.LinuxOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.os.MacOperatingSystem;
-import com.marvik.apis.dbcrudgen.core.os.UnixOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.os.WindowsOperatingSystem;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.grammar.MYSQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.mysql.queries.MYSQLQueries;
-import com.marvik.apis.dbcrudgen.core.platforms.sql.grammar.SQLGrammar;
 import com.marvik.apis.dbcrudgen.core.platforms.sqlite.grammar.SQLiteGrammar;
-import com.marvik.apis.dbcrudgen.core.toolchains.xampp.XAMPP;
 import com.marvik.apis.dbcrudgen.core.utils.NativeUtils;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.TableColumn;
 import com.marvik.apis.dbcrudgen.schemamodels.columns.keys.PrimaryKey;
@@ -45,6 +43,7 @@ import com.marvik.apis.dbcrudgen.utilities.Utils;
  * @author victor
  */
 public class TasksExecutor {
+
 
     /**
      * Tasks Executor
@@ -115,7 +114,7 @@ public class TasksExecutor {
         try {
             for (mysqlDatabases.first(); !mysqlDatabases.isAfterLast(); mysqlDatabases.next()) {
                 String databaseName = mysqlDatabases.getString(MYSQLQueries.ResultsKeys.ShowDatabases.KEY_DATABASE);
-                Table[] databaseTables = createDatabaseTables(databaseName);
+                Table[] databaseTables = createDatabaseTables(databaseName, new String[]{});
                 databases.add(new Database(databaseName, databaseTables));
             }
         } catch (SQLException e) {
@@ -234,10 +233,11 @@ public class TasksExecutor {
      * Creates an object of the selected database
      *
      * @param databaseName
+     * @param skipTables
      * @return Database
      */
-    public Database createDatabaseModel(String databaseName) {
-        Table[] tables = createDatabaseTables(databaseName);
+    public Database createDatabaseModel(String databaseName, String[] skipTables) {
+        Table[] tables = createDatabaseTables(databaseName, skipTables);
 
         return new Database(databaseName, tables);
     }
@@ -246,14 +246,22 @@ public class TasksExecutor {
      * Creates all the tables in a database
      *
      * @param databaseName
+     * @param skipTables
      * @return array of tables in a database
      */
-    private Table[] createDatabaseTables(String databaseName) {
+    private Table[] createDatabaseTables(String databaseName, String[] skipTables) {
         List<String> databaseTables = getDatabaseTablesNames(databaseName);
+
+        System.out.println("Initial tables : " + databaseTables.size());
+        databaseTables.removeAll(Arrays.asList(skipTables));
+        System.out.println("New tables tables : " + databaseTables.size());
+
         Table[] tables = new Table[databaseTables.size()];
+
         for (int i = 0; i < databaseTables.size(); i++) {
             tables[i] = getDatabaseTable(databaseTables.get(i), databaseName);
         }
+
         return tables;
     }
 
